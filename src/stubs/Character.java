@@ -21,9 +21,7 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	public abstract void move();
 	
 	
-	public void onTick(){
-		
-	}
+	public abstract void onTick();
 	
 	
 	public double getX(){

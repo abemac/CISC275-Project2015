@@ -9,7 +9,7 @@ public abstract class Game implements Runnable{
 	}
 	
 	
-	public abstract void init();
+	public void init(){}
 	
 	
 	
@@ -22,7 +22,7 @@ public abstract class Game implements Runnable{
 	public void run(){}
 	
 	
-	private void onTick(){};
+	public abstract void onTick();
 	
 	private void render(){};
 	
