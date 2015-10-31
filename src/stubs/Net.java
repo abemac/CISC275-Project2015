@@ -7,7 +7,8 @@ public class Net extends Enemy {
 	public static int BIGNET = 0;
 	public static int LILNET = 1;
 	
-	private int type;
+	private int type; 
+	// Use this method to select type of net enemy we want to launch
 	public Net(int type){
 		this.type = type;
 	}
