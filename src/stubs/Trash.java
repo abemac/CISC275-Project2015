@@ -1,7 +1,7 @@
 package stubs;
 
 public class Trash extends Enemy {
-
+	// Different Trash that will need to be picked up to clean Estuary 
 	public static final int BANANA =0;
 	public static final int TIRE =0;
 	public static final int SODA_CAN =0;
