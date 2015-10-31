@@ -8,21 +8,22 @@ public abstract class Game implements Runnable{
 		init();
 	} //Game()
 	
-	
-	public void init(){}	// Initializes the game
-	
-	
+	// Initializes the game
+	public void init(){}
 	
 	
-	public synchronized void start(){};	// sart game
 	
-	public synchronized void stop(){};	//stop game
+	// start game
+	public synchronized void start(){};
 	
+	//stop game
+	public synchronized void stop(){};
 	
+	// run games
 	public void run(){}
 	
-	
-	public abstract void onTick();	// updates changes to the game
+	// updates changes to the game
+	public abstract void onTick();
 	
 	
 	

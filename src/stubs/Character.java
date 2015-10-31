@@ -13,25 +13,32 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	private double xPos,yPos;	// the x and y position of the Character on the screen
 	private int health;			// health of the character represented in int
 	
-	public Character(){			// Character constructor
+	// Character constructor, enter xPos and yPos
+	public Character(){			
 		
 	} // Character()
 	
 	
-	public abstract void move();	// change xPos and yPos
+	// change xPos and yPos
+	public abstract void move();
 	
 	
-	public abstract void onTick();	// controls updates to the game
+	// controls updates to the game
+	public abstract void onTick();
 	
 	
-	public double getX(){			// returns the xPos double value of the Character
+	// returns the xPos double value of the Character
+	public double getX(){		
 		return xPos;
 	} //getX()
-	public double getY(){			// returns the yPos double value of the Character
+	
+	// returns the yPos double value of the Character
+	public double getY(){
 		return yPos;
 	} //getY()
 	
-	public int getHealth(){			// returns the health int value of the Character 
+	// returns the health int value of the Character 
+	public int getHealth(){	
 		return health;
 	} //getHealth()
 	
