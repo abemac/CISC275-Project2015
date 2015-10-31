@@ -18,7 +18,7 @@ public class Hook extends Enemy {
 	
 	private void moveRandomly(){}
 	
-	}
+	
 	
 	
 }
