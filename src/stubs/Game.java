@@ -1,5 +1,27 @@
 package stubs;
 
-public class Game {
+public abstract class Game implements Runnable{
 
+	
+	
+	public Game(){
+		init();
+	}
+	
+	
+	public abstract void init();
+	
+	
+	
+	
+	public synchronized void start(){};
+	
+	public synchronized void stop(){};
+	
+	
+	public void run(){}
+	
+	
 }
+
+
