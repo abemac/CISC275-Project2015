@@ -17,13 +17,13 @@ public class Pollutant extends Enemy {
 		this.type = type;
 	}
 	
-	
+	// When called, this method will cause the pollutants to flow down the screen 
 	@Override
 	public void act() {
 		floatDown();
 		
 	}
-	
+	// Get position and set logic for how pollutants will move on the screen
 	public void floatDown(){
 		
 	}
