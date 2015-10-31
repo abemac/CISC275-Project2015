@@ -14,14 +14,15 @@ public class OverfishingGame extends Game {
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	
-	
-	public OverfishingGame(){			// OverfishingGame constructor
+	// OverfishingGame constructor
+	public OverfishingGame(){	
 		
 	} //OverfishingGame()
 
 
+	// generates changes to the game
 	@Override
-	public void onTick() {				// generates changes to the game
+	public void onTick() {				
 		
 
 		randomlyMoveNetsAndHooks();
@@ -29,9 +30,11 @@ public class OverfishingGame extends Game {
 		
 	}
 	
+	// changes enemy position in random directions and distances
+	private void randomlyMoveNetsAndHooks(){};	
 	
-	private void randomlyMoveNetsAndHooks(){};	// changes enemy position in random directions and distances
-	private void checkAndRemoveFish(){};		// checks for a collision between fish and enemy and adds 1 to numFishLost if true
+	// checks for a collision between fish and enemy and adds 1 to numFishLost if true
+	private void checkAndRemoveFish(){};		
 	
 	
 

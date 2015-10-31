@@ -8,13 +8,14 @@ public class Fish extends Character {
 	
 	private boolean hasCollided;	// returns true if Fish position intersects Enemy position, else false
 	
-	public Fish(){					// Fish constructor	
+	// Fish constructor
+	public Fish(){						
 		
 	} //Fish()
 	
 	
-	
-	public void onTick(){			// updates changes to the game
+	// updates changes to the game
+	public void onTick(){			
 		
 	}
 	
@@ -78,9 +79,11 @@ public class Fish extends Character {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
+	// updates Fish position
 	@Override
-	public void move() {			// updates Fish position
+	public void move() {			
 		// TODO Auto-generated method stub
 		
 	} //move()
