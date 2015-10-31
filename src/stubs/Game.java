@@ -22,6 +22,13 @@ public abstract class Game implements Runnable{
 	public void run(){}
 	
 	
+	private void onTick(){};
+	
+	private void render(){};
+	
+	
+	
+	
 }
 
 
