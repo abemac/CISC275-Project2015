@@ -25,8 +25,6 @@ public class GameTests extends TestCase{
 		assertEquals(game.isRunning(),false);
 		
 		
-		
-		
 	}
 	
 	
