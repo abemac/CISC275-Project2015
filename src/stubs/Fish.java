@@ -6,15 +6,15 @@ import java.awt.event.MouseEvent;
 public class Fish extends Character {
 
 	
-	private boolean hasCollided;
+	private boolean hasCollided;	// returns true if Fish position intersects Enemy position, else false
 	
-	public Fish(){
+	public Fish(){					// Fish constructor	
 		
-	}
+	} //Fish()
 	
 	
 	
-	public void onTick(){
+	public void onTick(){			// updates changes to the game
 		
 	}
 	
@@ -80,9 +80,9 @@ public class Fish extends Character {
 	}
 
 	@Override
-	public void move() {
+	public void move() {			// updates Fish position
 		// TODO Auto-generated method stub
 		
-	}
+	} //move()
 	
 }
