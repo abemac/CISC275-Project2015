@@ -3,7 +3,6 @@ package stubs;
 public class Hook extends Enemy {
 	
 	
-	a;woeiebuwevruwoi;bevr;awube;ueswaoi;;
 	
 	private int size;
 	
