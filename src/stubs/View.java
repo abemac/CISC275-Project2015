@@ -17,7 +17,7 @@ public class View extends Canvas{
 	public static final int SHOW_STATS=7;
 	
 	
-	private int state = MENU_SCREEN;
+	private int state = MENU_SCREEN; //first state is the menu screen
 	
 	
 	private BufferStrategy bs;
