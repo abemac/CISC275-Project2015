@@ -5,15 +5,15 @@ import java.awt.event.MouseEvent;
 
 public class Crab extends Character{
 
-	private int angriness;
+	private int angriness;		//anger level of crab
 	
 	public Crab(){
-		
+		//makes a Character Crab which has xPos, yPos, health, and angriness
 	}
 	
 	
 	public void onTick(){
-		
+		//update what crab does 60 times/sec
 	}
 	
 	
@@ -21,11 +21,11 @@ public class Crab extends Character{
 	
 	
 	public void throwTrash(){
-		
+		//implement Crab throwing object trash
 	}
 	
 	public void pinchHumanToGetFish(){
-		
+		//Crab attacks Human, when Human health reaches 0, Crab saves Fish
 	}
 	
 	
