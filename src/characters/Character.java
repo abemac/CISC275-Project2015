@@ -1,4 +1,4 @@
-package stubs;
+package characters;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;

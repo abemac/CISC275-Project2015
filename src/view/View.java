@@ -1,4 +1,4 @@
-package stubs;
+package view;
 
 import java.awt.Canvas;
 import java.awt.Graphics;

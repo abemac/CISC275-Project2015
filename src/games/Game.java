@@ -1,4 +1,4 @@
-package stubs;
+package games;
 
 public abstract class Game implements Runnable{
 

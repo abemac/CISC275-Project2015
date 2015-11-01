@@ -1,4 +1,4 @@
-package stubs;
+package enemies;
 
 public class TheHuman extends Enemy{
 	

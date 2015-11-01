@@ -1,6 +1,9 @@
-package stubs;
+package games;
 
 import java.util.ArrayList;
+
+import characters.Fish;
+import enemies.Enemy;
 
 /*
  * The first game played.  Demonstrates the effects of over-fishing.  Very educational.
@@ -18,7 +21,8 @@ public class OverfishingGame extends Game {
 	public OverfishingGame(){	
 		
 	} //OverfishingGame()
-
+	
+	
 
 	// generates changes to the game
 	@Override
@@ -34,7 +38,33 @@ public class OverfishingGame extends Game {
 	private void randomlyMoveNetsAndHooks(){};	
 	
 	// checks for a collision between fish and enemy and adds 1 to numFishLost if true
-	private void checkAndRemoveFish(){};		
+	private void checkAndRemoveFish(){}
+
+
+
+	public int getNumFishLost() {
+		return numFishLost;
+	}
+
+
+
+	public int getDistance() {
+		return distance;
+	}
+
+
+
+	public ArrayList<Fish> getSchoolofFish() {
+		return school;
+	}
+
+
+
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	};		
+	
+	
 	
 	
 

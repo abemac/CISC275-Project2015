@@ -1,25 +1,45 @@
-package stubs;
+package characters;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class Fish extends Character {
+public class Crab extends Character{
 
+	private int angriness;		//anger level of crab
 	
-	private boolean hasCollided;	// returns true if Fish position intersects Enemy position, else false
-	
-	// Fish constructor
-	public Fish(){						
-		
-	} //Fish()
-	
-	
-	// updates changes to the game
-	public void onTick(){			
-		
+	public Crab(){
+		//makes a Character Crab which has xPos, yPos, health, and angriness
 	}
 	
-	/////*** listeners ***///////
+	
+	public void onTick(){
+		//update what crab does 60 times/sec
+	}
+	
+	
+	
+	
+	
+	public void throwTrash(){
+		//implement Crab throwing object trash
+	}
+	
+	public void pinchHumanToGetFish(){
+		//Crab attacks Human, when Human health reaches 0, Crab saves Fish
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -79,13 +99,11 @@ public class Fish extends Character {
 		// TODO Auto-generated method stub
 		
 	}
-	
 
-	// updates Fish position
 	@Override
-	public void move() {			
+	public void move() {
 		// TODO Auto-generated method stub
 		
-	} //move()
-	
+	}
+
 }

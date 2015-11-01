@@ -1,6 +1,9 @@
-package stubs;
+package games;
 
 import java.util.ArrayList;
+
+import enemies.TheHuman;
+import enemies.Trash;
 
 public class CrabSaveGame extends Game {
 
@@ -25,6 +28,27 @@ public class CrabSaveGame extends Game {
 	
 	
 	public void moveHuman(){};
-	public void removeTrash(){};
+	public void removeTrash(){}
+
+
+
+	public int getNumTrashPickedup() {
+		return numTrashPickedup;
+	}
+
+
+
+	public ArrayList<Trash> getTrash() {
+		return trash;
+	}
+
+
+
+	public TheHuman getTheHuman() {
+		return theHuman;
+	};
+	
+	
+	
 	
 }

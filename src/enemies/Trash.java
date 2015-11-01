@@ -1,4 +1,4 @@
-package stubs;
+package enemies;
 
 public class Trash extends Enemy {
 	// Different Trash that will need to be picked up to clean Estuary 

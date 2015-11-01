@@ -1,6 +1,8 @@
-package stubs;
+package games;
 
 import java.util.ArrayList;
+
+import enemies.Pollutant;
 
 public class PollutionGame extends Game {
 	
@@ -16,14 +18,26 @@ public class PollutionGame extends Game {
 
 	@Override
 	public void onTick() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
 	
 	
 	public void startPollutionFlow(){};
-	public void stopPollutionFlow(){};
+	public void stopPollutionFlow(){}
+
+	public int getNumCollided() {
+		return numCollided;
+	}
+
+	public int getNumRemoved() {
+		return numRemoved;
+	}
+
+	public ArrayList<Pollutant> getPollutants() {
+		return pollutants;
+	};
 	
 	
 

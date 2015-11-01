@@ -1,4 +1,4 @@
-package stubs;
+package enemies;
 
 public class Pollutant extends Enemy {
 
