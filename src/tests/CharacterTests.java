@@ -1,5 +1,6 @@
 package tests;
 
+import characters.Crab;
 import characters.Fish;
 import junit.framework.TestCase;
 
@@ -25,6 +26,15 @@ public class CharacterTests extends TestCase {
 	
 	
 	public void testCrab(){
+		Crab crab = new Crab();
+		int h = crab.getHealth();
+		crab.decreaseHealth(5);
+		assertEquals(crab.getHealth(),h-5);
+		double x =crab.getX();
+		crab.move(10, 0);
+		double y = crab.getY();
+		crab.move(0, 10);
+		assertEquals(crab.getY(),y+10);
 		
 	}
 	
