@@ -19,6 +19,12 @@ public class Fish extends Character {
 		
 	}
 	
+	@Override
+	public void move(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/////*** listeners ***///////
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -81,11 +87,8 @@ public class Fish extends Character {
 	}
 	
 
-	// updates Fish position
-	@Override
-	public void move() {			
-		// TODO Auto-generated method stub
-		
-	} //move()
+
+
+	
 	
 }

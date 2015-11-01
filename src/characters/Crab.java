@@ -28,7 +28,11 @@ public class Crab extends Character{
 		//Crab attacks Human, when Human health reaches 0, Crab saves Fish
 	}
 	
-	
+	@Override
+	public void move(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
@@ -100,10 +104,8 @@ public class Crab extends Character{
 		
 	}
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
+
+
+	
 
 }

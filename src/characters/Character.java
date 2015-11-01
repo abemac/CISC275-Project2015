@@ -20,11 +20,13 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	
 	
 	// change xPos and yPos
-	public abstract void move();
+	public abstract void move(double dx,double dy);
 	
 	
 	// controls updates to the game
 	public abstract void onTick();
+	
+	
 	
 	
 	// returns the xPos double value of the Character
@@ -41,5 +43,10 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	public int getHealth(){	
 		return health;
 	} //getHealth()
+	
+	
+	public void decreaseHealth(int h){
+		health-=h;
+	}
 	
 }
