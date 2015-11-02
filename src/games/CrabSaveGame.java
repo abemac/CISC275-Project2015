@@ -7,6 +7,10 @@ import enemies.Trash;
 
 public class CrabSaveGame extends Game {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1609844265788718695L;
 	private int numTrashPickedup;
 	private ArrayList<Trash> trash;
 	private TheHuman theHuman;
