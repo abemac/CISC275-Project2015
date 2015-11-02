@@ -1,4 +1,4 @@
-package stubs;
+package enemies;
 
 public abstract class Enemy {
 
@@ -31,6 +31,10 @@ public abstract class Enemy {
 	public int getHealth(){
 		//return health of Enemy
 		return health;
+	}
+	
+	public void decreaseHealth(int h){
+		health-=h;
 	}
 	
 	

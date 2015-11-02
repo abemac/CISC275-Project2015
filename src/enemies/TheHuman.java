@@ -1,15 +1,17 @@
-package stubs;
+package enemies;
 
 public class TheHuman extends Enemy{
 	
 	
-	public TheHuman(){
+	// Human constructor
+	public TheHuman(){	
 		
 		
 	}
 
+	// gets called on tick
 	@Override
-	public void act() {
+	public void act() {		
 		walk();
 		letGoOfFishIfAttackedByCrab();
 		
@@ -17,10 +19,12 @@ public class TheHuman extends Enemy{
 	}
 	
 	
+	// ends the game
 	public void letGoOfFishIfAttackedByCrab(){
 		
 	}
 	
+	// changes the position of the human;
 	public void walk(){
 		
 	}

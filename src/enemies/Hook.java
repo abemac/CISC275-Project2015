@@ -1,4 +1,4 @@
-package stubs;
+package enemies;
 
 public class Hook extends Enemy {
 	
@@ -18,6 +18,10 @@ public class Hook extends Enemy {
 	private void moveRandomly(){}
 	
 	
+	
+	public int getSize(){
+		return size;
+	}
 	
 	
 }

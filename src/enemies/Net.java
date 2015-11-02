@@ -1,4 +1,4 @@
-package stubs;
+package enemies;
 
 public class Net extends Enemy {
 
@@ -22,6 +22,10 @@ public class Net extends Enemy {
 	
 	public void moveRandomly(){
 		
+	}
+	
+	public int getType(){
+		return type;
 	}
 
 	
