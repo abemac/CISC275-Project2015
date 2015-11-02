@@ -5,6 +5,10 @@ import java.awt.event.MouseEvent;
 
 public class Crab extends Character{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2918553662290310728L;
 	private int angriness;		//anger level of crab
 	
 	public Crab(){

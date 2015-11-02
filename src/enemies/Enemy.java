@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public abstract class Enemy implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7282749495474164940L;
 	private double xPos,yPos;	//Enemy has location
 	private int health;			//Enemy has health
 	

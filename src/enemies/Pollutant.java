@@ -2,6 +2,10 @@ package enemies;
 
 public class Pollutant extends Enemy {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7101253794644730026L;
 	// Forms of Pollutants
 	public static final int OIL = 0;
 	public static final int SEWAGE = 1;

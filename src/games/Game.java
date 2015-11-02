@@ -5,6 +5,10 @@ import java.io.Serializable;
 public abstract class Game implements Runnable,Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7877285904741522154L;
 	private boolean running= false;
 	public Game(){			// Game constructor with initializer
 		init();

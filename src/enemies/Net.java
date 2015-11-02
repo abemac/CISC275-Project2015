@@ -2,6 +2,10 @@ package enemies;
 
 public class Net extends Enemy {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4749836762438935190L;
 	// Two types of nets will be used to capture the fish in OverfishingGame
 	// Fish will avoid both - Big net can capture more fish in one try
 	public static int BIGNET = 0;

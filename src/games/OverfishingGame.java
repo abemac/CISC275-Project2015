@@ -12,6 +12,10 @@ import enemies.Enemy;
 public class OverfishingGame extends Game {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6483515886892518982L;
 	private int numFishLost;			//how many fish have been captured
 	private int distance;				// how far the player reached in the level
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level

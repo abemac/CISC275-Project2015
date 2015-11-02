@@ -1,6 +1,10 @@
 package enemies;
 
 public class Trash extends Enemy {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2923480295498027702L;
 	// Different Trash that will need to be picked up to clean Estuary 
 	public static final int BANANA =0;
 	public static final int TIRE =1;

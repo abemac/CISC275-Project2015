@@ -11,6 +11,10 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6777058852530701862L;
 	private double xPos,yPos;	// the x and y position of the Character on the screen
 	private int health;			// health of the character represented in int
 	
