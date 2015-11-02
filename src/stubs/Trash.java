@@ -12,7 +12,7 @@ public class Trash extends Enemy {
 	
 	
 	
-	
+	// define logic for trash
 	public Trash(){
 		
 	}
