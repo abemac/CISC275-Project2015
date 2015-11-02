@@ -1,16 +1,5 @@
 package tests;
 
-<<<<<<< HEAD
-public class GameTests {
-	// hello world
-	// Testing this
-=======
-import games.CrabSaveGame;
-import games.OverfishingGame;
-import games.PollutionGame;
-import junit.framework.TestCase;
-
-
 /**
  * Tests all subclasses of Game
  * @author abraham
@@ -64,5 +53,5 @@ public class GameTests extends TestCase{
 	
 	
 	
->>>>>>> 35f9d32085705824b46914fb1959f16a51ad903c
+
 }
