@@ -1,6 +1,8 @@
 package games;
 
-public abstract class Game implements Runnable{
+import java.io.Serializable;
+
+public abstract class Game implements Runnable,Serializable{
 
 	
 	private boolean running= false;

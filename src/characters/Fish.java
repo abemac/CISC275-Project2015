@@ -4,7 +4,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class Fish extends Character {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1015644809982634515L;
+	
+	
 	
 	private boolean hasCollided;	// returns true if Fish position intersects Enemy position, else false
 	

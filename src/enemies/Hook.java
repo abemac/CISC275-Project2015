@@ -3,6 +3,7 @@ package enemies;
 public class Hook extends Enemy {
 	
 	
+
 	private int size;
 	
 	public Hook(int size){

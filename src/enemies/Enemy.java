@@ -1,6 +1,8 @@
 package enemies;
 
-public abstract class Enemy {
+import java.io.Serializable;
+
+public abstract class Enemy implements Serializable {
 
 	private double xPos,yPos;	//Enemy has location
 	private int health;			//Enemy has health
