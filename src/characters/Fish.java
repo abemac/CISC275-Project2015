@@ -13,20 +13,21 @@ public class Fish extends Character {
 	
 	private boolean hasCollided;	// returns true if Fish position intersects Enemy position, else false
 	
-	// Fish constructor
+	/**
+	 * Fish default constructor
+	 */
+	
 	public Fish(){						
 		
-	} //Fish()
+	} 
 	
-	
-	// updates changes to the game
-	public void onTick(){			
-		
-	}
-	
+	/**
+	 * implements move according to how a fish moves
+	 * @param dx,dy
+	 */
 	@Override
 	public void move(double dx, double dy) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

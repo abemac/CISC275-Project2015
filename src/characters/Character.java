@@ -6,10 +6,14 @@ import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 
 
+/**
+ * Character is an abstract class that provides basic implementation for all characters to be contolled by
+ * the user. 
+ * It implements listener interfaces.
+ * @author abraham
+ * 
+ */
 public abstract class Character implements KeyListener,MouseListener,MouseMotionListener,Serializable {
-
-	
-	
 	
 	/**
 	 * 
@@ -18,38 +22,56 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	private double xPos,yPos;	// the x and y position of the Character on the screen
 	private int health;			// health of the character represented in int
 	
-	// Character constructor, enter xPos and yPos
+	/**
+	 * default constructor for Character
+	 * @param none
+	 */
 	public Character(){			
 		
-	} // Character()
+	} 
 	
-	
-	// change xPos and yPos
+	/** move the character a certain amount dx and a certain amount dy
+	 * @param dx
+	 * @param dy
+	 */
 	public abstract void move(double dx,double dy);
 	
 	
-	// controls updates to the game
-	public abstract void onTick();
+	/**
+	 * called 60 times/second in the main Game loop.  This is where all updates that occur based 
+	 * on time will go. For Characters, it may not be used. Updates that occur as a result of user action should be put in the listener 
+	 * methods. 
+	 */
+	public void onTick(){};
 	
 	
 	
-	
-	// returns the xPos double value of the Character
+	/** returns the xPos double value of the Character
+	 * @return x Position
+	 */
 	public double getX(){		
 		return xPos;
-	} //getX()
+	}
 	
-	// returns the yPos double value of the Character
+	/**
+	 * returns the yPos double value of the Character
+	 * @return y Position
+	 */
 	public double getY(){
 		return yPos;
-	} //getY()
+	} 
 	
-	// returns the health int value of the Character 
+	/** returns the health int value of the Character 
+	 * @return health
+	 */
 	public int getHealth(){	
 		return health;
-	} //getHealth()
+	}
 	
-	
+	/**
+	 * decreases the health by amount h
+	 * @param h
+	 */
 	public void decreaseHealth(int h){
 		health-=h;
 	}

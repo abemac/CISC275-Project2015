@@ -3,6 +3,9 @@ package characters;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import enemies.TheHuman;
+import enemies.Trash;
+
 public class Crab extends Character{
 
 	/**
@@ -11,32 +14,39 @@ public class Crab extends Character{
 	private static final long serialVersionUID = 2918553662290310728L;
 	private int angriness;		//anger level of crab
 	
+	/**
+	 * makes a Character Crab which has xPos, yPos, health, and angriness
+	 */
 	public Crab(){
-		//makes a Character Crab which has xPos, yPos, health, and angriness
-	}
-	
-	
-	public void onTick(){
-		//update what crab does 60 times/sec
-	}
-	
-	
-	
-	
-	
-	public void throwTrash(){
-		//implement Crab throwing object trash
-	}
-	
-	public void pinchHumanToGetFish(){
-		//Crab attacks Human, when Human health reaches 0, Crab saves Fish
-	}
-	
-	@Override
-	public void move(double dx, double dy) {
-		// TODO Auto-generated method stub
 		
 	}	
+	
+	/**
+	 * implements Crab throwing object trash
+	 * @param t
+	 */
+	public void throwTrash(Trash t){
+		
+	}
+	
+	/**
+	 * moves the crab according to how a crab moves
+	 * @param dx,dy
+	 */
+	@Override
+	public void move(double dx,double dy){
+		
+	}
+	
+	
+	/**
+	 * Crab attacks Human, when Human health reaches 0, Crab saves Fish
+	 * @param human
+	 */
+	public void pinchHumanToGetFish(TheHuman human){
+		
+	}
+	
 	
 	
 	
