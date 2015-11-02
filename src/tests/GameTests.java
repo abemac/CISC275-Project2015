@@ -1,5 +1,10 @@
 package tests;
 
+import games.CrabSaveGame;
+import games.OverfishingGame;
+import games.PollutionGame;
+import junit.framework.TestCase;
+
 /**
  * Tests all subclasses of Game
  * @author abraham
