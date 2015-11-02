@@ -31,8 +31,8 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	} 
 	
 	/** move the character a certain amount dx and a certain amount dy
-	 * @param dx
-	 * @param dy
+	 * @param dx the amount to move in the x direction
+	 * @param dy the amount to move in the y direction
 	 */
 	public abstract void move(double dx,double dy);
 	
