@@ -12,10 +12,6 @@ import junit.framework.TestCase;
  */
 public class GameTests extends TestCase{
 	
-	
-	
-	
-	
 	//Overfishing game tests
 	public void testStartStop(){
 		OverfishingGame game = new OverfishingGame();//this test is general and is sufficiant for all Games
