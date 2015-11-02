@@ -10,16 +10,21 @@ public class Trash extends Enemy {
 	public static final int SHOPPING_CART =0;
 	
 	
+	private int type;
 	
 	
-	
-	public Trash(){
-		
+	public Trash(int type){
+		this.type = type;
 	}
 
 	@Override
 	public void act() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	public int getType(){
+		return type;
 	}
 }

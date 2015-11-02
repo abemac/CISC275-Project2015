@@ -32,7 +32,7 @@ public class Crab extends Character{
 	public void move(double dx, double dy) {
 		// TODO Auto-generated method stub
 		
-	}
+	}	
 	
 	
 	

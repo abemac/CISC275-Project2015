@@ -19,5 +19,9 @@ public class Hook extends Enemy {
 	
 	
 	
+	public int getSize(){
+		return size;
+	}
+	
 	
 }

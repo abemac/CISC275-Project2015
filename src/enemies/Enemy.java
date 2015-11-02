@@ -33,6 +33,10 @@ public abstract class Enemy {
 		return health;
 	}
 	
+	public void decreaseHealth(int h){
+		health-=h;
+	}
+	
 	
 	
 	

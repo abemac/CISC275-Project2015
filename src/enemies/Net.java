@@ -23,6 +23,10 @@ public class Net extends Enemy {
 	public void moveRandomly(){
 		
 	}
+	
+	public int getType(){
+		return type;
+	}
 
 	
 	
