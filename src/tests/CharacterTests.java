@@ -4,6 +4,7 @@ import characters.Bubble;
 import characters.Crab;
 import characters.Fish;
 import enemies.Hook;
+import enemies.Pollutant;
 import enemies.TheHuman;
 import enemies.Trash;
 import games.OverfishingGame;
@@ -82,6 +83,15 @@ public class CharacterTests extends TestCase {
 	 */
 	public void testBubble(){
 		Bubble b = new Bubble(0,0);
+		Pollutant p = new Pollutant(0,0,0);
+		b.shootFromFish(p);
+		double y = b.getY();
+		assertEquals(b.getY(),y+2);
+		double x = b.getX();
+		assertEquals(b.getX(),x-1);
+		b.pop();
+		assertEquals(b.getX(),0);
+		assertEquals(b.getY(),0);
 		
 		
 		
