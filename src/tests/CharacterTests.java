@@ -49,5 +49,12 @@ public class CharacterTests extends TestCase {
 		
 	}
 	
+	
+	/**
+	 * tests the basic functions of the Bubble class
+	 */
+	public void testBubble(){
+		
+	}
 
 }
