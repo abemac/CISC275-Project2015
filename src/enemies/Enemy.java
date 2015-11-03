@@ -52,21 +52,33 @@ public abstract class Enemy implements Serializable,Tickable {
 		act();
 	}
 	
-	
+	/**
+	 * 
+	 * @return the current x position of the Enemy
+	 */
 	public double getX(){
-		//returns X position of Enemy
 		return xPos;
 	}
+	/**
+	 * 
+	 * @return the current y position of the Enemy
+	 */
 	public double getY(){
-		//returns Y position of Enemy
 		return yPos;
 	}
 	
+	/**
+	 * 
+	 * @return the Enemy's current health
+	 */
 	public int getHealth(){
-		//return health of Enemy
 		return health;
 	}
 	
+	/**
+	 * decreases the Enemy's health by amount h
+	 * @param h the amount to decrease health by
+	 */
 	public void decreaseHealth(int h){
 		health-=h;
 	}
