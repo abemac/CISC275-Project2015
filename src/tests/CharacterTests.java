@@ -1,5 +1,6 @@
 package tests;
 
+import characters.Bubble;
 import characters.Crab;
 import characters.Fish;
 import junit.framework.TestCase;
@@ -54,7 +55,7 @@ public class CharacterTests extends TestCase {
 	 * tests the basic functions of the Bubble class
 	 */
 	public void testBubble(){
-		
+		Bubble b = new Bubble(0,0);
 	}
 
 }
