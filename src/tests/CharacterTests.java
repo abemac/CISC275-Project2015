@@ -3,6 +3,7 @@ package tests;
 import characters.Bubble;
 import characters.Crab;
 import characters.Fish;
+import enemies.Trash;
 import junit.framework.TestCase;
 
 /**
@@ -32,6 +33,7 @@ public class CharacterTests extends TestCase {
 		
 		
 		
+		
 	}
 	
 	/**
@@ -44,9 +46,18 @@ public class CharacterTests extends TestCase {
 		assertEquals(crab.getHealth(),h-5);
 		double x =crab.getX();
 		crab.move(10, 0);
+		assertEquals(crab.getX(),10);
 		double y = crab.getY();
 		crab.move(0, 10);
 		assertEquals(crab.getY(),y+10);
+		
+		Trash t = new Trash(0,0,Trash.BANANA);
+		double x2 = t.getX();
+		double y2 = t.getY();
+		crab.throwTrash(t);
+		assertFalse(x2==t.getX() && y2 == t.getY());
+		
+		
 		
 	}
 	
@@ -56,6 +67,8 @@ public class CharacterTests extends TestCase {
 	 */
 	public void testBubble(){
 		Bubble b = new Bubble(0,0);
+		
+		
 		
 	}
 
