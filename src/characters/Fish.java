@@ -51,6 +51,10 @@ public class Fish extends Character {
 		
 	}
 	
+	public boolean hasCollided(){
+		return hasCollided;
+	}
+	
 	
 
 	/////*** listeners ***///////

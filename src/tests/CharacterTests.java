@@ -3,7 +3,10 @@ package tests;
 import characters.Bubble;
 import characters.Crab;
 import characters.Fish;
+import enemies.Hook;
+import enemies.TheHuman;
 import enemies.Trash;
+import games.OverfishingGame;
 import junit.framework.TestCase;
 
 /**
@@ -28,6 +31,15 @@ public class CharacterTests extends TestCase {
 		double y = fish.getY();
 		fish.move(0, 10);
 		assertEquals(fish.getY(),y+10);
+		
+		Fish fish2 = new Fish(0,0);
+		Hook hook = new Hook(0,0,3);
+		OverfishingGame game = new OverfishingGame();
+		game.getEnemies().add(hook);
+		game.getSchoolofFish().add(fish2);
+		game.onTick();
+		assertTrue(fish2.hasCollided());
+		
 		
 		
 		
@@ -56,6 +68,10 @@ public class CharacterTests extends TestCase {
 		crab.throwTrash(t);
 		assertFalse(x2==t.getX() && y2 == t.getY());
 		
+		TheHuman human = new TheHuman(0, 0);
+		boolean b = human.hasFish();
+		crab.pinchHumanToGetFish(human);
+		assertFalse(human.hasFish());
 		
 		
 	}
