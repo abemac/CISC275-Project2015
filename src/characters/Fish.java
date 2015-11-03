@@ -3,6 +3,11 @@ package characters;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+/**
+ * Fish is a model class for the fish that the player controls
+ * @author abraham
+ *
+ */
 public class Fish extends Character {
 	/**
 	 * 
@@ -11,19 +16,34 @@ public class Fish extends Character {
 	
 	
 	
-	private boolean hasCollided;	// returns true if Fish position intersects Enemy position, else false
+	private boolean hasCollided;
 	
 	/**
-	 * Fish default constructor
+	 * Creates a fish with initial x,y, and health
+	 * @param xPos the initial x position
+	 * @param yPos the initial y position
+	 * @param health the initial health
 	 */
 	
-	public Fish(){						
-		
-	} 
+	public Fish(double xPos, double yPos, int health) {
+		super(xPos, yPos, health);
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Creates a fish with initial x,y and default health value
+	 * @param xPos the initial x position
+	 * @param yPos the initial y position
+	 */
+	public Fish(double xPos, double yPos) {
+		super(xPos, yPos);
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * implements move according to how a fish moves
-	 * @param dx,dy
+	 * @param dx the change in x 
+	 * @param dy the change in y
 	 */
 	@Override
 	public void move(double dx, double dy) {
@@ -31,6 +51,8 @@ public class Fish extends Character {
 		
 	}
 	
+	
+
 	/////*** listeners ***///////
 	@Override
 	public void keyTyped(KeyEvent e) {

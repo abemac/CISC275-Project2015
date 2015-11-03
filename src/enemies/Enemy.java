@@ -2,7 +2,15 @@ package enemies;
 
 import java.io.Serializable;
 
-public abstract class Enemy implements Serializable {
+import misc.Tickable;
+
+/**
+ * Enemy is the overarching abstract class that defines the behavior of enemies in the game.  
+ * An Enemy can be non moving, like a banana, or active, like a human.   
+ * @author abraham
+ *
+ */
+public abstract class Enemy implements Serializable,Tickable {
 
 	/**
 	 * 
@@ -11,16 +19,36 @@ public abstract class Enemy implements Serializable {
 	private double xPos,yPos;	//Enemy has location
 	private int health;			//Enemy has health
 	
-	public Enemy(){
-		//create enemies with x and y position and health level
+	/**
+	 * Creates an Enemy with initial x,y and health
+	 * 
+	 * @param xPos the initial x position 
+	 * @param yPos the initial y position
+	 * @param health the health level of the enemy
+	 */
+	public Enemy(double xPos, double yPos, int health){
+		
 	}
 	
+	/**
+	 * Creates and enemy with initial x,y and a default health level
+	 * 
+	 * @param xPos the initial x position
+	 * @param yPos the initial y position
+	 */
+	public Enemy(double xPos, double yPos){
+		
+	}
 	
+	/**
+	 * defines the update behavior of the Enemy.  This method gets called in onTick.
+	 */
+	public abstract void act(); 
 	
-	public abstract void act(); //enemies will do something to attack Character
-	
+	/**
+	 * gets called in the main game loop, 60 times per second
+	 */
 	public void onTick(){
-		//this will update act 60 times/sec
 		act();
 	}
 	

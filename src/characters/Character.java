@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 
+import misc.Tickable;
+
 
 /**
  * Character is an abstract class that provides basic implementation for all characters to be contolled by
@@ -13,7 +15,7 @@ import java.io.Serializable;
  * @author abraham
  * 
  */
-public abstract class Character implements KeyListener,MouseListener,MouseMotionListener,Serializable {
+public abstract class Character implements KeyListener,MouseListener,MouseMotionListener,Serializable,Tickable {
 	
 	/**
 	 * 
@@ -23,12 +25,22 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	private int health;			// health of the character represented in int
 	
 	/**
-	 * default constructor for Character
-	 * @param none
+	 * Creates a character with initial x,y and health
+	 * @param xPos the initial x position
+	 * @param yPos the initial y position
+	 * @param health the initial health
 	 */
-	public Character(){			
+	public Character(double xPos,double yPos,int health){			
 		
 	} 
+	/**
+	 * Creates a character with initial x,y and default health
+	 * @param xPos the initial x position
+	 * @param yPos the initial y position
+	 */
+	public Character(double xPos,double yPos){
+		
+	}
 	
 	/** move the character a certain amount dx and a certain amount dy
 	 * @param dx the amount to move in the x direction

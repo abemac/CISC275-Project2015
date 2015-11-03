@@ -17,7 +17,8 @@ public class Pollutant extends Enemy {
 	private double sourcePos; // Position of the pollutant
 	
 	// call to decide type of pollutant
-	public Pollutant(int type){
+	public Pollutant(double xPos,double yPos,int type){
+		super(xPos,yPos);
 		this.type = type;
 	}
 	

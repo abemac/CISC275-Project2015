@@ -6,6 +6,12 @@ import java.awt.event.MouseEvent;
 import enemies.TheHuman;
 import enemies.Trash;
 
+/**
+ * Crab is a model class for the crab character that the player controls
+ * @author abraham
+ *
+ */
+
 public class Crab extends Character{
 
 	/**
@@ -16,22 +22,41 @@ public class Crab extends Character{
 	
 	/**
 	 * makes a Character Crab which has xPos, yPos, health, and angriness
+	 * @param xPos the initial x position
+	 * @param yPos the initial y position
+	 * @param angriness the initial angriness
 	 */
-	public Crab(){
-		
-	}	
+	public Crab(double xPos, double yPos, int health,int angriness) {
+		super(xPos, yPos, health);
+		this.angriness = angriness;
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * creates a Crab with initial x,y and angriness, with default health value
+	 * @param xPos the initial x position
+	 * @param yPos this initial y posistion
+	 * @param angriness the initial angriness
+	 */
+	public Crab(double xPos, double yPos,int angriness) {
+		super(xPos, yPos);
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * implements Crab throwing object trash
-	 * @param t
+	 * @param t the thrash object to throw
 	 */
 	public void throwTrash(Trash t){
 		
 	}
 	
+	
+
 	/**
 	 * moves the crab according to how a crab moves
-	 * @param dx,dy
+	 * @param dx the change in x
+	 * @param dy the change in y
 	 */
 	@Override
 	public void move(double dx,double dy){

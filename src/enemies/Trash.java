@@ -17,7 +17,8 @@ public class Trash extends Enemy {
 	private int type;
 	
 	
-	public Trash(int type){
+	public Trash(double xPos,double yPos,int type){
+		super(xPos,yPos);
 		this.type = type;
 	}
 

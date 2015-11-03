@@ -2,7 +2,9 @@ package games;
 
 import java.io.Serializable;
 
-public abstract class Game implements Runnable,Serializable{
+import misc.Tickable;
+
+public abstract class Game implements Runnable,Serializable,Tickable{
 
 	
 	/**
@@ -27,10 +29,6 @@ public abstract class Game implements Runnable,Serializable{
 	
 	// run game
 	public void run(){}
-	
-	// updates changes to the game
-	public abstract void onTick();
-	
 	
 	
 	public boolean isRunning(){

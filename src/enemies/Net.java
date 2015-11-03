@@ -13,7 +13,8 @@ public class Net extends Enemy {
 	
 	private int type; 
 	// Use this method to select type of net enemy we want to launch
-	public Net(int type){
+	public Net(double xPos, double yPos,int type){
+		super(xPos,yPos);
 		this.type = type;
 	}
 	

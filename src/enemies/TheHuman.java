@@ -9,8 +9,8 @@ public class TheHuman extends Enemy{
 	private static final long serialVersionUID = -410465131603543966L;
 
 	// Human constructor
-	public TheHuman(){	
-		
+	public TheHuman(double xPos,double yPos){
+		super(xPos,yPos);
 		
 	}
 

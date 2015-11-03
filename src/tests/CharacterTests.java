@@ -9,7 +9,7 @@ public class CharacterTests extends TestCase {
 	//cant test character class iteself because its abstract
 	
 	public void testFish(){
-		Fish fish = new Fish();
+		Fish fish = new Fish(0,0);
 		int h = fish.getHealth();
 		fish.decreaseHealth(5);
 		assertEquals(fish.getHealth(),h-5);
@@ -26,7 +26,7 @@ public class CharacterTests extends TestCase {
 	
 	
 	public void testCrab(){
-		Crab crab = new Crab();
+		Crab crab = new Crab(0,0,0);
 		int h = crab.getHealth();
 		crab.decreaseHealth(5);
 		assertEquals(crab.getHealth(),h-5);

@@ -14,7 +14,7 @@ public class EnemyTests extends TestCase{
 	//cant test enemy itself because its abstract
 	
 	public void testHook(){
-		Hook hook = new Hook(50);
+		Hook hook = new Hook(0,0,50);
 		assertEquals(hook.getSize(),50);
 		double y = hook.getY();
 		hook.act();
@@ -24,7 +24,7 @@ public class EnemyTests extends TestCase{
 	}
 	
 	public void testNet(){
-		Net net = new Net(Net.BIGNET);
+		Net net = new Net(0,0,Net.BIGNET);
 		assertEquals(net.getType(),Net.BIGNET);
 		double y = net.getY();
 		net.act();
@@ -33,7 +33,7 @@ public class EnemyTests extends TestCase{
 	
 	
 	public void testPollutant(){
-		Pollutant p = new Pollutant(Pollutant.FERTILIZER);
+		Pollutant p = new Pollutant(0,0,Pollutant.FERTILIZER);
 		assertEquals(p.getType(),Pollutant.FERTILIZER);
 		double y = p.getY();
 		p.act();
@@ -42,7 +42,7 @@ public class EnemyTests extends TestCase{
 	
 	
 	public void testTheHuman(){
-		TheHuman h = new TheHuman();
+		TheHuman h = new TheHuman(0,0);
 		double x = h.getX();
 		h.act();
 		assertFalse(x==h.getX());
@@ -53,7 +53,7 @@ public class EnemyTests extends TestCase{
 	}
 	
 	public void testTrash(){
-		Trash trash = new Trash(Trash.BANANA);
+		Trash trash = new Trash(0,0,Trash.BANANA);
 		assertEquals(trash.getType(),Trash.BANANA);
 		
 		//no other tests for trash.  Trash is a passive object. 
