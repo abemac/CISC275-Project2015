@@ -4,10 +4,18 @@ import characters.Crab;
 import characters.Fish;
 import junit.framework.TestCase;
 
+/**
+ * This class tests all subclasses of the abstract class Character.  Therfore, it also tests character itself, without directly 
+ * instantiating Character, since that can't be done.
+ * @author abraham
+ *
+ */
 public class CharacterTests extends TestCase {
 	
-	//cant test character class iteself because its abstract
 	
+	/**
+	 * tests the basic functions of Fish, such as decreasing its health and updating its x and y position
+	 */
 	public void testFish(){
 		Fish fish = new Fish(0,0);
 		int h = fish.getHealth();
@@ -25,7 +33,9 @@ public class CharacterTests extends TestCase {
 		
 	}
 	
-	
+	/**
+	 * tests the basic functions of Fish, such as decreasing its health and updating its x and y position
+	 */
 	public void testCrab(){
 		Crab crab = new Crab(0,0,0);
 		int h = crab.getHealth();

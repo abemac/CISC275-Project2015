@@ -12,7 +12,10 @@ import junit.framework.TestCase;
  */
 public class GameTests extends TestCase{
 	
-	//Overfishing game tests
+	/**
+	 * tests the start and stopping mechanism of the Game class, and other aspects specifically related to the
+	 * Overfishing Game.
+	 */
 	public void testStartStop(){
 		OverfishingGame game = new OverfishingGame();//this test is general and is sufficiant for all Games
 		assertEquals(game.isRunning(),false);
@@ -23,7 +26,9 @@ public class GameTests extends TestCase{
 		
 		
 	}
-	
+	/**
+	 * makes sure that the tick method accurately updates the position of elements in the game
+	 */
 	public void testOnTick(){
 		OverfishingGame game = new OverfishingGame();
 		double x = game.getSchoolofFish().get(0).getX();
@@ -31,8 +36,10 @@ public class GameTests extends TestCase{
 		assertTrue(x!=game.getSchoolofFish().get(0).getX());
 	}
 	
-	//Crab Save Game tests
 	
+	/**
+	 * tests the on tick method of the CrabSaveGame
+	 */
 	
 	public void testOnTick2(){
 		CrabSaveGame game = new CrabSaveGame();
@@ -42,7 +49,9 @@ public class GameTests extends TestCase{
 		
 	}
 	
-	//Pullution Game tests
+	/**
+	 * tests the on tick function of the Pollution Game
+	 */
 	
 	public void testonTick3(){
 		PollutionGame game = new PollutionGame();
