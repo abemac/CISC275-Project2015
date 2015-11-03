@@ -13,7 +13,6 @@ import junit.framework.TestCase;
  */
 public class CharacterTests extends TestCase {
 	
-	
 	/**
 	 * tests the basic functions of Fish, such as decreasing its health and updating its x and y position
 	 */
