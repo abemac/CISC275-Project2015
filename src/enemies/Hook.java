@@ -6,9 +6,6 @@ package enemies;
  *
  */
 public class Hook extends Enemy {
-	
-	
-
 	/**
 	 * 
 	 */
@@ -27,7 +24,9 @@ public class Hook extends Enemy {
 		this.size = size;
 	}
 
-	
+	/**
+	 * implements the act() method from Enemy
+	 */
 	@Override
 	public void act() {
 		moveRandomly();

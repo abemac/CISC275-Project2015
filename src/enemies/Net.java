@@ -1,34 +1,62 @@
 package enemies;
 
+/**
+ * The Net class is used to model nets
+ * @author abraham
+ *
+ */
 public class Net extends Enemy {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4749836762438935190L;
-	// Two types of nets will be used to capture the fish in OverfishingGame
-	// Fish will avoid both - Big net can capture more fish in one try
+	/**
+	 * BIGNET is a big, commercial fisherman type of net
+	 */
 	public static int BIGNET = 0;
+	/**
+	 * LILNET is a small, single person sized net
+	 */
 	public static int LILNET = 1;
 	
+	/**
+	 * stores which type the Net is, either BIGNET or LILNET
+	 */
 	private int type; 
-	// Use this method to select type of net enemy we want to launch
+	
+	/**
+	 * The constructor for net must accept and initial x,y and type
+	 * If the type is not Net.BIGNET or Net.LILNET, it will default to Net.LILNET
+	 * @param xPos the initial x position of the Net
+	 * @param yPos the initial y position of the Net
+	 * @param type the type of the Net
+	 */
 	public Net(double xPos, double yPos,int type){
 		super(xPos,yPos);
 		this.type = type;
 	}
 	
-	// Movement of the fishnet will be random as fish try to avoid them
+	/**
+	 * implements act() from enemy
+	 */
 	@Override
 	public void act() {
 		moveRandomly();
 		
 	}
 	
+	/**
+	 * causes the net to move randomly in the y direction on the screen
+	 */
 	public void moveRandomly(){
 		
 	}
 	
+	/**
+	 * 
+	 * @return the type of the net.  Either Net.BIGNET or Net.LILNET
+	 */
 	public int getType(){
 		return type;
 	}
