@@ -1,5 +1,6 @@
 package tests;
 
+import characters.Crab;
 import enemies.Hook;
 import enemies.Net;
 import enemies.Pollutant;
@@ -59,8 +60,9 @@ public class EnemyTests extends TestCase{
 		Pollutant p = new Pollutant(0,0,Pollutant.FERTILIZER);
 		assertEquals(p.getType(),Pollutant.FERTILIZER);
 		double y = p.getY();
-		p.act();
+		p.act(); // tests float down also, since float down is called in act()
 		assertFalse(y<p.getY());//pollutant should float down the screen
+		
 		
 		
 	}
@@ -78,6 +80,15 @@ public class EnemyTests extends TestCase{
 		double health = h.getHealth();
 		h.decreaseHealth(-4);;
 		assertEquals(health+4,h.getHealth());
+		
+		Crab crab = new Crab(0,0,0);
+		TheHuman human = new TheHuman(0, 0);
+		boolean b = human.hasFish();
+		crab.pinchHumanToGetFish(human);
+		assertFalse(human.hasFish());
+		
+		
+		
 	}
 	/**
 	 * tests basic functions of trash
