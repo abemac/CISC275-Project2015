@@ -29,7 +29,7 @@ public class GameTests extends TestCase{
 	/**
 	 * makes sure that the tick method accurately updates the position of elements in the game
 	 */
-	public void testOnTick(){
+	public void testOverfishing(){
 		OverfishingGame game = new OverfishingGame();
 		double x = game.getSchoolofFish().get(0).getX();
 		game.onTick();
@@ -41,7 +41,7 @@ public class GameTests extends TestCase{
 	 * tests the on tick method of the CrabSaveGame
 	 */
 	
-	public void testOnTick2(){
+	public void testCrabSave(){
 		CrabSaveGame game = new CrabSaveGame();
 		double x = game.getTheHuman().getX();
 		game.onTick();
@@ -53,7 +53,7 @@ public class GameTests extends TestCase{
 	 * tests the on tick function of the Pollution Game
 	 */
 	
-	public void testonTick3(){
+	public void testPollutionGame(){
 		PollutionGame game = new PollutionGame();
 		double x = game.getPollutants().get(0).getX();
 		game.onTick();

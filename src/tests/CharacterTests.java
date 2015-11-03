@@ -56,6 +56,7 @@ public class CharacterTests extends TestCase {
 	 */
 	public void testBubble(){
 		Bubble b = new Bubble(0,0);
+		
 	}
 
 }
