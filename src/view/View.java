@@ -3,7 +3,11 @@ package view;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-
+/**
+ * Handles rendering the View for all games
+ * @author abraham
+ *
+ */
 public class View extends Canvas{
 	
 	//state nums
@@ -21,7 +25,9 @@ public class View extends Canvas{
 	
 	
 	private BufferStrategy bs;
-	
+	/**
+	 * implements a triple buffer strategry for rendering the view
+	 */
 	private void render(){
 		bs = this.getBufferStrategy(); //creates triple buffer
 		if(bs == null){

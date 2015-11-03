@@ -9,6 +9,11 @@ import enemies.Enemy;
  * The first game played.  Demonstrates the effects of over-fishing.  Very educational.
  */
 
+/**
+ * main control class for the Overfishing game. Most functionality is implemented in the superclass.
+ * @author abraham
+ *
+ */
 public class OverfishingGame extends Game {
 
 	
@@ -21,14 +26,18 @@ public class OverfishingGame extends Game {
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	
-	// OverfishingGame constructor
+	/**
+	 * Constructor for the overfishing game. calls the super constructor
+	 */
 	public OverfishingGame(){	
-		
-	} //OverfishingGame()
+		super();
+	}
 	
 	
 
-	// generates changes to the game
+	/**
+	 * gets called at 60Hz to generate changes to the game
+	 */
 	@Override
 	public void onTick() {				
 		
@@ -38,32 +47,48 @@ public class OverfishingGame extends Game {
 		
 	}
 	
-	// changes enemy position in random directions and distances
+	/**
+	 * changes enemy position in random directions and distances
+	 */
 	private void randomlyMoveNetsAndHooks(){};	
 	
-	// checks for a collision between fish and enemy and adds 1 to numFishLost if true
+	/**
+	 * checks for a collision between fish and enemy and adds 1 to numFishLost if true
+	 */
 	private void checkAndRemoveFish(){}
 
 
-
+	/**
+	 * 
+	 * @return the number of fish lost
+	 */
 	public int getNumFishLost() {
 		return numFishLost;
 	}
 
 
-
+	/**
+	 * 
+	 * @return the distance traveled
+	 */
 	public int getDistance() {
 		return distance;
 	}
 
 
-
+	/**
+	 * 
+	 * @return the school of fish being controlled by the user
+	 */
 	public ArrayList<Fish> getSchoolofFish() {
 		return school;
 	}
 
 
-
+	/**
+	 * 
+	 * @return all the enemies present in the game
+	 */
 	public ArrayList<Enemy> getEnemies() {
 		return enemies;
 	};		
