@@ -1,5 +1,6 @@
 package characters;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -35,6 +36,11 @@ public class Bubble extends Character{
 	 */
 	@Override
 	public void onTick() {	
+		
+	}
+	
+	@Override
+	public void render(Graphics g){
 		
 	}
 	

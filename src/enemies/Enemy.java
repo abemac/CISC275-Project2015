@@ -1,7 +1,9 @@
 package enemies;
 
+import java.awt.Graphics;
 import java.io.Serializable;
 
+import misc.Renderable;
 import misc.Tickable;
 
 /**
@@ -10,7 +12,7 @@ import misc.Tickable;
  * @author abraham
  *
  */
-public abstract class Enemy implements Serializable,Tickable {
+public abstract class Enemy implements Serializable,Tickable,Renderable{
 
 	/**
 	 * 
@@ -51,6 +53,8 @@ public abstract class Enemy implements Serializable,Tickable {
 	public void onTick(){
 		act();
 	}
+	
+	public abstract void render(Graphics g);
 	
 	/**
 	 * 

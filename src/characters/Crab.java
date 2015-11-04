@@ -1,5 +1,6 @@
 package characters;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -41,6 +42,12 @@ public class Crab extends Character{
 	public Crab(double xPos, double yPos,int angriness) {
 		super(xPos, yPos);
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	@Override
+	public void render(Graphics g){
+		
 	}
 	
 	/**

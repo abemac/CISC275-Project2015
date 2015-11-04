@@ -1,5 +1,6 @@
 package games;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import enemies.Pollutant;
@@ -37,6 +38,9 @@ public class PollutionGame extends Game {
 		
 	}
 	
+	public void render(Graphics g){
+		
+	}
 	
 	/**
 	 * starts the pollution flow

@@ -1,10 +1,12 @@
 package characters;
 
+import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 
+import misc.Renderable;
 import misc.Tickable;
 
 
@@ -15,7 +17,7 @@ import misc.Tickable;
  * @author abraham
  * 
  */
-public abstract class Character implements KeyListener,MouseListener,MouseMotionListener,Serializable,Tickable {
+public abstract class Character implements KeyListener,MouseListener,MouseMotionListener,Serializable,Tickable,Renderable {
 	
 	/**
 	 * 
@@ -55,7 +57,7 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * methods. 
 	 */
 	public void onTick(){};
-	
+	public abstract void render(Graphics g);
 	
 	
 	/** returns the xPos double value of the Character

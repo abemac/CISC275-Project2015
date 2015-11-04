@@ -1,5 +1,7 @@
 package enemies;
 
+import java.awt.Graphics;
+
 /**
  * The Net class is used to model nets
  * @author abraham
@@ -43,6 +45,10 @@ public class Net extends Enemy {
 	@Override
 	public void act() {
 		moveRandomly();
+		
+	}
+	
+	public void render(Graphics g){
 		
 	}
 	

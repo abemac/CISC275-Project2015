@@ -1,5 +1,6 @@
 package games;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import enemies.TheHuman;
@@ -34,6 +35,10 @@ public class CrabSaveGame extends Game {
 	@Override
 	public void onTick() {
 		moveHuman();
+		
+	}
+	
+	public void render(Graphics g){
 		
 	}
 	

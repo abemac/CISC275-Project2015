@@ -1,5 +1,7 @@
 package enemies;
 
+import java.awt.Graphics;
+
 /**
  * The Pollutant class is used to model different types of pollutants
  * @author abraham
@@ -52,6 +54,11 @@ public class Pollutant extends Enemy {
 		floatDown();
 		
 	}
+	
+	public void render(Graphics g){
+		
+	}
+	
 	/**
 	 *  defines the the way in which the pollutant floats down from the top of the screen
 	 * 

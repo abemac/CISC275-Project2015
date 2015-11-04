@@ -1,5 +1,7 @@
 package enemies;
 
+import java.awt.Graphics;
+
 /**
  * the Hook class is used to model hooks
  * @author abraham
@@ -30,6 +32,11 @@ public class Hook extends Enemy {
 	@Override
 	public void act() {
 		moveRandomly();
+		
+	}
+	
+	@Override
+	public void render(Graphics g){
 		
 	}
 	

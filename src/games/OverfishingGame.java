@@ -1,5 +1,6 @@
 package games;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import characters.Fish;
@@ -47,6 +48,9 @@ public class OverfishingGame extends Game {
 		
 	}
 	
+	public void render(Graphics g){
+		
+	}
 	/**
 	 * changes enemy position in random directions and distances
 	 */

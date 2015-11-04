@@ -1,5 +1,6 @@
 package characters;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -38,6 +39,12 @@ public class Fish extends Character {
 	public Fish(double xPos, double yPos) {
 		super(xPos, yPos);
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	@Override
+	public void render(Graphics g){
+		
 	}
 	
 	/**

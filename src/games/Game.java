@@ -1,6 +1,8 @@
 package games;
 
 import java.io.Serializable;
+
+import misc.Renderable;
 import misc.Tickable;
 
 /**
@@ -9,14 +11,19 @@ import misc.Tickable;
  * @author abraham
  *
  */
-public abstract class Game implements Runnable,Serializable,Tickable{
+public abstract class Game implements Serializable,Tickable,Renderable{
 
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7877285904741522154L;
-	private boolean running= false;
+	
+	
+	
+	
+	/////////////////
+	
 	/**
 	 * creates a game, calling the initializer (init()) method
 	 */
@@ -27,38 +34,19 @@ public abstract class Game implements Runnable,Serializable,Tickable{
 	/**
 	 * used to do any initialation required by the game
 	 */
-	public void init(){}
-	
-	
-	
-	/**
-	 * starts the main game loop on its own thread
-	 */
-	public synchronized void start(){};
-	
-	/**
-	 * stops the main game loop
-	 */
-	public synchronized void stop(){};
-	
-	/**
-	 * implements run() from Runnable.  gets called in start
-	 */
-	public void run(){}
-	
-	
-	/**
-	 * 
-	 * @return whether or not the game is currently running
-	 */
-	public boolean isRunning(){
-		return running;
+	public void init(){
+		
 	}
+	
+	
+	
+	
 	
 	/**
 	 * saves the current game state to a file
 	 */
 	public void saveGameState(){};
+	
 	
 }
 

@@ -1,5 +1,7 @@
 package enemies;
 
+import java.awt.Graphics;
+
 /**
  * Trash is a class that models many different trash types
  * @author abraham
@@ -61,6 +63,9 @@ public class Trash extends Enemy {
 		
 	}
 	
+	public void render(Graphics g){
+		
+	}
 
 	 /**
 	  * 
