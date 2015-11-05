@@ -98,6 +98,10 @@ public class OverfishingGame extends Game {
 	};		
 	
 	
+	public boolean isFinished(){
+		return true;
+	}
+	
 	
 	
 

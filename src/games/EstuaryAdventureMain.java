@@ -1,22 +1,48 @@
 package games;
 
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import misc.GameState;
 import misc.Tickable;
 import view.View;
 
-public class EstuaryAdventureMain implements Runnable,Tickable {
+public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4347325551128251031L;
+
+	private static final Dimension PREFERRED_SIZE = new Dimension(500, 500);
 	
 	private boolean running= false;
 	private Thread thread;
 	private View view;
+	private GameState state;
 	
 	//Variables used to control updating frequency in run()
-	
 	private long lastTime,now;
 	private final double ticksPerSecond = 60.0;
 	private double nanosPerTick = 1000000000.0 / ticksPerSecond;
 	private double deltaNs = 0;
+	
+	
+	public EstuaryAdventureMain(){
+		init();
+	}
+	
+	
+	private void init(){
+		view = new View();
+		state = GameState.MENU_SCREEN;
+		view.setPreferredSize(PREFERRED_SIZE);
+		
+	}
 	
 	/**
 	 * starts the main game loop on its own thread
@@ -54,7 +80,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable {
 	public void run() {
 		view.requestFocus();
 		lastTime = System.nanoTime();
-
+		//view.render(state);
 		while (running) {
 			now = System.nanoTime();
 			deltaNs += (now - lastTime);
@@ -62,10 +88,10 @@ public class EstuaryAdventureMain implements Runnable,Tickable {
 			if (deltaNs > nanosPerTick) {
 				onTick();
 				deltaNs -= nanosPerTick; // possible set it to 0 alternatively,
-											// depending on certain factors
+				view.render(state);							// depending on certain factors
 			}
 
-			view.render();
+			
 
 		}
 
@@ -86,5 +112,29 @@ public class EstuaryAdventureMain implements Runnable,Tickable {
 	public boolean isRunning() {
 		return running;
 	}
+	
+	
+	/////MAIN FUNCTION//////
+	
+	private static JFrame frame;
+	
+	public static void main (String[]args){
+		EstuaryAdventureMain game = new EstuaryAdventureMain();
+		frame = new JFrame("Estuary Adventure!");
+		frame.add(game.view);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		frame.setVisible(true);
+		game.start();
+		
+		
+		
+	}
+	
+	
+	
+	
 
 }

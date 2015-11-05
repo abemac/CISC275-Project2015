@@ -82,5 +82,8 @@ public class CrabSaveGame extends Game {
 	
 	
 	
+	public boolean isFinished(){
+		return true;
+	}
 	
 }

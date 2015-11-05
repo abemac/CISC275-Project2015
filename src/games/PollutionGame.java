@@ -73,6 +73,8 @@ public class PollutionGame extends Game {
 		return pollutants;
 	};
 	
-	
+	public boolean isFinished(){
+		return true;
+	}
 
 }

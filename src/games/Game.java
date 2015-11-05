@@ -40,6 +40,7 @@ public abstract class Game implements Serializable,Tickable,Renderable{
 	
 	
 	
+	public abstract boolean isFinished();
 	
 	
 	/**

@@ -13,15 +13,11 @@ import misc.GameState;
 public class View extends Canvas{
 	
 	
-	
-	private GameState state = GameState.MENU_SCREEN; //first state is the menu screen
-	
-	
-	private BufferStrategy bs;
+	private static BufferStrategy bs;
 	/**
 	 * implements a triple buffer strategry for rendering the view
 	 */
-	public void render(){
+	public void render(GameState state){
 		bs = this.getBufferStrategy(); //creates triple buffer
 		if(bs == null){
 			createBufferStrategy(3);
@@ -31,7 +27,7 @@ public class View extends Canvas{
 		////// DO RENDERING HERE///////
 		
 		
-		
+		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		
 		///////////////////////////////
@@ -45,7 +41,5 @@ public class View extends Canvas{
 	
 	}
 	
-	public void setState(GameState state){
-		this.state = state;
-	}
+	
 }
