@@ -1,6 +1,6 @@
 package enemies;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * The Pollutant class is used to model different types of pollutants
@@ -55,7 +55,7 @@ public class Pollutant extends Enemy {
 		
 	}
 	
-	public void render(Graphics g){
+	public void render(Graphics2D g){
 		
 	}
 	

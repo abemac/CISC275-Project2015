@@ -1,6 +1,6 @@
 package enemies;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * The Net class is used to model nets
@@ -48,7 +48,7 @@ public class Net extends Enemy {
 		
 	}
 	
-	public void render(Graphics g){
+	public void render(Graphics2D g){
 		
 	}
 	

@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import misc.GameState;
 import misc.Tickable;
-import view.View;
+import view.EstuaryView;
 
 public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 
@@ -22,7 +22,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	
 	private boolean running= false;
 	private Thread thread;
-	private View view;
+	private EstuaryView view;
 	private GameState state;
 	
 	//Variables used to control updating frequency in run()
@@ -38,7 +38,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	
 	
 	private void init(){
-		view = new View();
+		view = new EstuaryView();
 		state = GameState.MENU_SCREEN;
 		view.setPreferredSize(PREFERRED_SIZE);
 		
@@ -88,9 +88,9 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 			if (deltaNs > nanosPerTick) {
 				onTick();
 				deltaNs -= nanosPerTick; // possible set it to 0 alternatively,
-				view.render(state);							// depending on certain factors
+				updateView();							// depending on certain factors
 			}
-
+			
 			
 
 		}
@@ -102,6 +102,11 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	
 	@Override
 	public void onTick(){
+		
+	}
+	
+	private void updateView(){
+		view.render(new OverfishingGame());
 		
 	}
 

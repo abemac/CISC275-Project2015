@@ -1,6 +1,6 @@
 package enemies;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * TheHuman is a class for modeling the human in the Crab Save game. It is called "TheHuman" for reasons
@@ -38,7 +38,7 @@ public class TheHuman extends Enemy{
 		
 	}
 	
-	public void render(Graphics g){
+	public void render(Graphics2D g){
 		
 	}
 	/**

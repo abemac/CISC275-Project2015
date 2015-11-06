@@ -1,6 +1,6 @@
 package characters;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -57,7 +57,7 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * methods. 
 	 */
 	public void onTick(){};
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics2D g);
 	
 	
 	/** returns the xPos double value of the Character

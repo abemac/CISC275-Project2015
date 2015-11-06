@@ -1,6 +1,6 @@
 package characters;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -40,7 +40,7 @@ public class Bubble extends Character{
 	}
 	
 	@Override
-	public void render(Graphics g){
+	public void render(Graphics2D g){
 		
 	}
 	

@@ -1,6 +1,6 @@
 package enemies;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.Serializable;
 
 import misc.Renderable;
@@ -54,7 +54,7 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 		act();
 	}
 	
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics2D g);
 	
 	/**
 	 * 
