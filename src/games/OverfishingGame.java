@@ -109,6 +109,9 @@ public class OverfishingGame extends Game {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+			System.exit(0);
+		}
 		
 	}
 
