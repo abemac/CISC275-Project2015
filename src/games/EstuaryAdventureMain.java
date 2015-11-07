@@ -2,16 +2,14 @@ package games;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import misc.GameState;
+import misc.MenuScreen;
 import misc.Tickable;
 import view.EstuaryView;
 
@@ -38,6 +36,11 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	private double deltaNs = 0;
 	
 	
+	///////
+	private MenuScreen menu;
+	
+	////////
+	
 	public EstuaryAdventureMain(){
 		init();
 	}
@@ -47,7 +50,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		view = new EstuaryView();
 		state = GameState.MENU_SCREEN;
 		view.setPreferredSize(PREFERRED_SIZE);
-		
+		state = GameState.MENU_SCREEN;
 		view.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -124,7 +127,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 			now = System.nanoTime();
 			deltaNs += (now - lastTime);
 			lastTime = now;
-			if (deltaNs > nanosPerTick) {
+			if (deltaNs >= nanosPerTick) {
 				onTick();
 				deltaNs -= nanosPerTick; // possible set it to 0 alternatively,
 				updateView();							// depending on certain factors
@@ -141,11 +144,24 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	
 	@Override
 	public void onTick(){
-		
+		if(state == GameState.MENU_SCREEN){
+			if(menu == null){
+				menu = new MenuScreen();
+				view.addMouseListener(menu);
+				view.addKeyListener(menu);
+			}
+			menu.onTick();
+			
+		}
+		else if (state == GameState.OVERFISHING_GAME_ANIMATION){
+			
+		}
 	}
 	
 	private void updateView(){
-		view.render(new OverfishingGame());
+		if(state==GameState.MENU_SCREEN){
+			view.render(menu);	
+		}
 		
 	}
 
