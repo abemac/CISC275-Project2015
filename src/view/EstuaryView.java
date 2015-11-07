@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
 import misc.Renderable;
+import misc.Util;
 /**
  * Handles rendering the View for all games
  * @author abraham
@@ -37,8 +38,14 @@ public class EstuaryView extends Canvas{
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if(distanceToEdge==-1)
 			distanceToEdge= (int) (( (double)(getWidth()) / (double)(getHeight()) )*1000.0);
+		
+		Util.setCanvasHeight(getHeight());
+		Util.setCanvasWidth(getWidth());
+		Util.setCurrentScaleFactor(getHeight()/2000.0);
+		
 		g.translate(getWidth()/2.0,getHeight()/2.0);
 		g.scale(getHeight()/(2000.0), getHeight()/2000.0);
+		
 		
 		////// DO RENDERING HERE///////
 		//g.rotate(45);
@@ -72,5 +79,7 @@ public class EstuaryView extends Canvas{
 	public static int getExtraDistance(){
 		return distanceToEdge -1000;
 	}
+	
+	
 	
 }

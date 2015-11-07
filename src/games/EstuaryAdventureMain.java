@@ -51,38 +51,6 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		state = GameState.MENU_SCREEN;
 		view.setPreferredSize(PREFERRED_SIZE);
 		state = GameState.MENU_SCREEN;
-		view.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.exit(0);
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		
 	}
 	

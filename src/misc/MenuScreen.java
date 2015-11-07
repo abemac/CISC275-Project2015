@@ -1,6 +1,7 @@
 package misc;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.PaintContext;
@@ -27,8 +28,13 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(Color.ORANGE);
-		g.drawString("Estuary Adventure", -500, -500);
+		g.setFont(new Font("default",Font.BOLD,200)); //change size later
+		g.drawString("Estuary Adventure", -900, -500);//change loc later
 		
+		g.setColor(Color.GREEN);
+		g.fillRect(-300, -200, 600, 400);
+		g.setColor(Color.WHITE);
+		g.drawString("Start!", -250, 50);
 		
 	}
 
@@ -43,6 +49,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		System.exit(0);
 		
 	}
 
@@ -60,6 +67,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 
@@ -67,6 +75,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println(e.getX());
 		
 	}
 
