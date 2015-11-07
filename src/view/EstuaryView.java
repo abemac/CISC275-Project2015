@@ -14,6 +14,7 @@ import misc.Renderable;
  */
 public class EstuaryView extends Canvas{
 	
+	private static int distanceToEdge=-1;
 	
 	/**
 	 * 
@@ -34,16 +35,14 @@ public class EstuaryView extends Canvas{
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.fillRect(0, 0, getWidth(), getHeight());
-		int edgeLoc = (int) (( (double)(getWidth()) / (double)(getHeight()) )*1000.0);
-		System.out.println(edgeLoc);
+		if(distanceToEdge==-1)
+			distanceToEdge= (int) (( (double)(getWidth()) / (double)(getHeight()) )*1000.0);
 		g.translate(getWidth()/2.0,getHeight()/2.0);
 		g.scale(getHeight()/(2000.0), getHeight()/2000.0);
 		
 		////// DO RENDERING HERE///////
-		g.setColor(Color.BLACK);
 		//g.rotate(45);
 		
-		g.fillRect(-edgeLoc+10, -1000, 2000, 2000);
 		r.render(g);
 		
 		///////////////////////////////
@@ -57,5 +56,21 @@ public class EstuaryView extends Canvas{
 	
 	}
 	
+	
+	/**
+	 * 
+	 * @return the distance from the center (0,0) to a horizontal edge.  
+	 */
+	public static int getDistanceToEdge(){
+		return distanceToEdge;
+	}
+	
+	/**
+	 * 
+	 * @return the extra Distance to add to 1000 to get to the edge of the horizontal screen
+	 */
+	public static int getExtraDistance(){
+		return distanceToEdge -1000;
+	}
 	
 }
