@@ -34,8 +34,8 @@ public class EstuaryView extends Canvas{
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.fillRect(0, 0, getWidth(), getHeight());
-		int distanceToEdge = (int) (( (double)(getHeight()) / (double)(getWidth()) )*1000.0);
-		System.out.println(distanceToEdge);
+		int edgeLoc = (int) (( (double)(getWidth()) / (double)(getHeight()) )*1000.0);
+		System.out.println(edgeLoc);
 		g.translate(getWidth()/2.0,getHeight()/2.0);
 		g.scale(getHeight()/(2000.0), getHeight()/2000.0);
 		
@@ -43,7 +43,7 @@ public class EstuaryView extends Canvas{
 		g.setColor(Color.BLACK);
 		//g.rotate(45);
 		
-		g.fillRect(-1000-distanceToEdge, -1000, 2000, 2000);
+		g.fillRect(-edgeLoc+10, -1000, 2000, 2000);
 		r.render(g);
 		
 		///////////////////////////////
