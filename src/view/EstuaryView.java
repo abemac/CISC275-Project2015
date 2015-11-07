@@ -39,7 +39,7 @@ public class EstuaryView extends Canvas{
 		////// DO RENDERING HERE///////
 		g.setColor(Color.BLACK);
 		//g.rotate(45);
-		g.fillRect(-500, -500, 1000, 1000);
+		g.fillRect(-2000, -2000, 2000, 2000);
 		r.render(g);
 		
 		///////////////////////////////
