@@ -1,6 +1,7 @@
 package games;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,7 +19,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	 */
 	private static final long serialVersionUID = -4347325551128251031L;
 
-	private static final Dimension PREFERRED_SIZE = new Dimension(500, 500);
+	private static final Dimension PREFERRED_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	private boolean running= false;
 	private Thread thread;
@@ -127,10 +128,11 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		EstuaryAdventureMain game = new EstuaryAdventureMain();
 		frame = new JFrame("Estuary Adventure!");
 		frame.add(game.view);
-		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		//frame.setUndecorated(true);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		game.start();
 		
