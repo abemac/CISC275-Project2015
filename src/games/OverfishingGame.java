@@ -28,12 +28,14 @@ public class OverfishingGame extends Game {
 	private int distance;				// how far the player reached in the level
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
+	private boolean isDone;
 	
 	/**
 	 * Constructor for the overfishing game. calls the super constructor
 	 */
 	public OverfishingGame(){	
 		super();
+		isDone = false;
 	}
 	
 	
@@ -100,8 +102,8 @@ public class OverfishingGame extends Game {
 	};		
 	
 	
-	public boolean isFinished(){
-		return true;
+	public boolean isDone(){
+		return isDone;
 	}
 
 

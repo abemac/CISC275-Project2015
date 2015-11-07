@@ -129,16 +129,26 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		else if (state == GameState.OVERFISHING_GAME){
 			if(overfishingGame==null){
 				overfishingGame = new OverfishingGame();
-				view.addMouseListener(menu);
-				view.addKeyListener(menu);
+				view.addMouseListener(overfishingGame);
+				view.addKeyListener(overfishingGame);
 			}
+			overfishingGame.onTick();
+			if(overfishingGame.isDone()){
+				state = GameState.CRAB_SAVE_GAME;
+				//view.removeKeyListener(overfishingGame);
+				//view.removeMouseListener(overfishingGame);
+			}
+			
 			
 		}
 	}
 	
 	private void updateView(){
-		if(state==GameState.MENU_SCREEN){
+		if(state==GameState.MENU_SCREEN && menu!=null){
 			view.render(menu);	
+		}
+		else if (state == GameState.OVERFISHING_GAME && overfishingGame!=null){
+			view.render(overfishingGame);
 		}
 		
 	}

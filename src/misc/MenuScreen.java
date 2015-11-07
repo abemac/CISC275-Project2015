@@ -51,8 +51,9 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.exit(0);
+		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+			System.exit(0);
+		}
 		
 	}
 

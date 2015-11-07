@@ -43,7 +43,7 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	
 	
 	
-	public abstract boolean isFinished();
+	public abstract boolean isDone();
 	
 	
 	/**
