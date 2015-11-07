@@ -1,5 +1,7 @@
 package misc;
 
+import java.awt.event.MouseEvent;
+
 public class Util {
 
 	public static double scaleFactor =-1;
@@ -9,7 +11,11 @@ public class Util {
 	
 	
 	
-	public boolean isInBox(int absX,int absY,int scaleSizeX,int scaleSizeY){
+	public boolean isInBox(MouseEvent e,int scaleSizeX,int scaleSizeY){
+		int scaleX = (int) ((e.getX()-canvasWidth/2.0)/scaleFactor);
+		int scaleY = (int) ((e.getY() - canvasHeight/2.0)/scaleFactor);
+		
+		
 		
 		
 	}
