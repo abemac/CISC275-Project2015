@@ -17,10 +17,10 @@ import java.awt.image.ColorModel;
 
 public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener{
 
-
+	private boolean isDone;
 	
 	public MenuScreen(){
-	
+		isDone = false;
 	}
 	
 	
@@ -45,6 +45,9 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	}
 
 
+	public boolean isDone(){
+		return isDone;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -75,7 +78,9 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getX());
+		if(Util.isInBox(e, new RectBounds(-300, -200, 600, 400))){
+			isDone = true;
+		}
 		
 	}
 

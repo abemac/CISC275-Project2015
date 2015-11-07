@@ -2,8 +2,6 @@ package games;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,6 +36,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	
 	///////
 	private MenuScreen menu;
+	private OverfishingGame overfishingGame;
 	
 	////////
 	
@@ -119,9 +118,18 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 				view.addKeyListener(menu);
 			}
 			menu.onTick();
+			if(menu.isDone()){
+				state = GameState.OVERFISHING_GAME;
+				//view.removeKeyListener(menu);
+				//view.removeMouseListener(menu);
+			}
 			
 		}
-		else if (state == GameState.OVERFISHING_GAME_ANIMATION){
+		else if (state == GameState.OVERFISHING_GAME){
+			if(overfishingGame==null){
+				overfishingGame = new OverfishingGame();
+				
+			}
 			
 		}
 	}

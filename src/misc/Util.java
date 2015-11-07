@@ -11,13 +11,13 @@ public class Util {
 	
 	
 	
-	public boolean isInBox(MouseEvent e,int scaleSizeX,int scaleSizeY){
-		int scaleX = (int) ((e.getX()-canvasWidth/2.0)/scaleFactor);
-		int scaleY = (int) ((e.getY() - canvasHeight/2.0)/scaleFactor);
+	public static boolean isInBox(MouseEvent e,RectBounds rb){
+		int x = (int) ((e.getX()-canvasWidth/2.0)/scaleFactor);
+		int y = (int) ((e.getY() - canvasHeight/2.0)/scaleFactor);
 		
-		
-		
-		
+		return (x >= rb.getX() && x<=rb.getX()+rb.getXLength() &&
+				y>=rb.getY() && y <=rb.getY() + rb.getYLength());
+			
 	}
 	
 	
