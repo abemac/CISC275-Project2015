@@ -2,7 +2,12 @@ package games;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -42,6 +47,39 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		view = new EstuaryView();
 		state = GameState.MENU_SCREEN;
 		view.setPreferredSize(PREFERRED_SIZE);
+		
+		view.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.exit(0);
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 	}
 	
@@ -130,9 +168,9 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		frame.add(game.view);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		//frame.setUndecorated(true);
+		frame.setUndecorated(true);
 		frame.pack();
-		frame.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(null);		
 		frame.setVisible(true);
 		game.start();
 		

@@ -3,6 +3,7 @@ package view;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
 import misc.Renderable;
@@ -32,14 +33,13 @@ public class EstuaryView extends Canvas{
 			return;
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-		////// DO RENDERING HERE///////
-		
-		
 		g.fillRect(0, 0, getWidth(), getHeight());
+		g.translate(getWidth()/2.0,getHeight()/2.0);
+		g.scale(getHeight()/2000.0, getHeight()/2000.0);
+		////// DO RENDERING HERE///////
 		g.setColor(Color.BLACK);
-		g.translate(100, 100);
-		g.rotate(45);
-		g.fillRect(0, 0, 100, 100);
+		//g.rotate(45);
+		g.fillRect(0, 0, 500, 500);
 		r.render(g);
 		
 		///////////////////////////////
