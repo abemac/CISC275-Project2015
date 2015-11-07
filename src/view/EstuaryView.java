@@ -35,7 +35,7 @@ public class EstuaryView extends Canvas{
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.translate(getWidth()/2.0,getHeight()/2.0);
-		g.scale(getHeight()/2000.0, getHeight()/2000.0);
+		g.scale(getWidth()/(2000.0+getWidth()-getHeight()), getHeight()/2000.0);
 		////// DO RENDERING HERE///////
 		g.setColor(Color.BLACK);
 		//g.rotate(45);
