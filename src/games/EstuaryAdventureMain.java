@@ -2,6 +2,8 @@ package games;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +13,7 @@ import misc.MenuScreen;
 import misc.Tickable;
 import view.EstuaryView;
 
-public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
+public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable,KeyListener {
 
 	
 	
@@ -50,6 +52,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		state = GameState.MENU_SCREEN;
 		view.setPreferredSize(PREFERRED_SIZE);
 		state = GameState.MENU_SCREEN;
+		view.addKeyListener(this);
 		
 	}
 	
@@ -135,8 +138,8 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 			overfishingGame.onTick();
 			if(overfishingGame.isDone()){
 				state = GameState.CRAB_SAVE_GAME;
-				//view.removeKeyListener(overfishingGame);
-				//view.removeMouseListener(overfishingGame);
+				view.removeKeyListener(overfishingGame);
+				view.removeMouseListener(overfishingGame);
 			}
 			
 			
@@ -153,6 +156,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @return whether or not the game is currently running
@@ -179,6 +183,30 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		game.start();
 		
 		
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+			System.exit(0);
+		}
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

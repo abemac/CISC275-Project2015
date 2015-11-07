@@ -4,16 +4,16 @@ import java.awt.event.MouseEvent;
 
 public class Util {
 
-	public static double scaleFactor =-1;
-	public static double canvasWidth=-1;
-	public static double canvasHeight=-1;
-	
+	public static double SCALE_FACTOR =-1;
+	public static double CANVAS_WIDTH=-1;
+	public static double CANVAS_HEIGHT=-1;
+	public static int DISTANCE_TO_EDGE=-1;
 	
 	
 	
 	public static boolean isInBox(MouseEvent e,RectBounds rb){
-		int x = (int) ((e.getX()-canvasWidth/2.0)/scaleFactor);
-		int y = (int) ((e.getY() - canvasHeight/2.0)/scaleFactor);
+		int x = (int) ((e.getX()-CANVAS_WIDTH/2.0)/SCALE_FACTOR);
+		int y = (int) ((e.getY() - CANVAS_HEIGHT/2.0)/SCALE_FACTOR);
 		
 		return (x >= rb.getX() && x<=rb.getX()+rb.getXLength() &&
 				y>=rb.getY() && y <=rb.getY() + rb.getYLength());
@@ -30,20 +30,35 @@ public class Util {
 	
 	
 	public static void setCanvasWidth(int width){
-		if(canvasWidth==-1){
-			canvasWidth = width;
+		if(CANVAS_WIDTH==-1){
+			CANVAS_WIDTH = width;
 		}
 	}
 	public static void setCanvasHeight(int height){
-		if(canvasHeight==-1)
-			canvasHeight=height;
+		if(CANVAS_HEIGHT==-1)
+			CANVAS_HEIGHT=height;
 	}
 	
 	
 	public static void setCurrentScaleFactor(double sf){
-		if(scaleFactor ==-1){
-			scaleFactor =sf;
+		if(SCALE_FACTOR ==-1){
+			SCALE_FACTOR =sf;
 		}
+	}
+	
+	public static void setDistanceToEdge(int width,int height){
+		if(DISTANCE_TO_EDGE==-1)
+			DISTANCE_TO_EDGE= (int) (( (double)(width) / (double)(height) )*1000.0);
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @return the extra Distance to add to 1000 to get to the edge of the horizontal screen
+	 */
+	public static int getExtraDistance(){
+		return DISTANCE_TO_EDGE -1000;
 	}
 	
 }

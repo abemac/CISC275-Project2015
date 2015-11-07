@@ -1,5 +1,6 @@
 package games;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 
 import characters.Fish;
 import enemies.Enemy;
+import misc.Util;
 
 /*
  * The first game played.  Demonstrates the effects of over-fishing.  Very educational.
@@ -53,11 +55,15 @@ public class OverfishingGame extends Game {
 	}
 	
 	public void render(Graphics2D g){
+		g.setColor(Color.CYAN);
+		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
 		
 	}
 	/**
 	 * changes enemy position in random directions and distances
 	 */
+	
+	
 	private void randomlyMoveNetsAndHooks(){};	
 	
 	/**
@@ -111,9 +117,7 @@ public class OverfishingGame extends Game {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
-			System.exit(0);
-		}
+		
 		
 	}
 

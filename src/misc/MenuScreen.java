@@ -51,9 +51,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
-			System.exit(0);
-		}
+		
 		
 	}
 
@@ -79,9 +77,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(Util.isInBox(e, new RectBounds(-300, -200, 600, 400))){
-			isDone = true;
-		}
+		
 		
 	}
 
@@ -106,6 +102,9 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if(Util.isInBox(e, new RectBounds(-300, -200, 600, 400))){
+			isDone = true;
+		}
 		
 	}
 
