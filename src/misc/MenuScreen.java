@@ -29,15 +29,16 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	
 	@Override
 	public void render(Graphics2D g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
 		g.setColor(Color.ORANGE);
 		g.setFont(titleFont); //change size later
-		g.drawString("Estuary Adventure", -900, -500);//change loc later
+		Util.drawCenteredString("Estuary Adventure!", 0, -500, g);
 		
 		g.setColor(Color.GREEN);
 		g.fillRect(startButton.getX(),startButton.getY(),startButton.getXLength(),startButton.getYLength());
 		g.setColor(Color.WHITE);
-		g.setFont(startFont);
-		g.drawString("Start!", -250, 50);
+		Util.drawCenteredString("Start!", 0, 50, g);
 		
 	}
 

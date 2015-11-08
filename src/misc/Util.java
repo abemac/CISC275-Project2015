@@ -1,5 +1,6 @@
 package misc;
 
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 public class Util {
@@ -19,15 +20,6 @@ public class Util {
 				y>=rb.getY() && y <=rb.getY() + rb.getYLength());
 			
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static void setCanvasWidth(int width){
 		if(CANVAS_WIDTH==-1){
@@ -60,5 +52,20 @@ public class Util {
 	public static int getExtraDistance(){
 		return DISTANCE_TO_EDGE -1000;
 	}
+	
+	
+	///////////////
+	private static int len;
+	public static void drawCenteredString(String s, int xPos, int yPos,Graphics2D g2d){
+		len = (int) g2d.getFontMetrics().stringWidth(s);
+		g2d.drawString(s, xPos-len/2, yPos);
+	}
+	
+
+	
+	
+	
+	
+	
 	
 }
