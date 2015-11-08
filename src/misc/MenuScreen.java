@@ -18,7 +18,9 @@ import java.awt.image.ColorModel;
 public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener{
 
 	private boolean isDone;
-	
+	private final RectBounds startButton = new RectBounds(-300, -200, 600, 400);
+	private final Font titleFont = new Font("default",Font.BOLD,200);
+	private final Font startFont =new Font("default",Font.BOLD,150);
 	public MenuScreen(){
 		isDone = false;
 	}
@@ -28,12 +30,13 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(Color.ORANGE);
-		g.setFont(new Font("default",Font.BOLD,200)); //change size later
+		g.setFont(titleFont); //change size later
 		g.drawString("Estuary Adventure", -900, -500);//change loc later
 		
 		g.setColor(Color.GREEN);
-		g.fillRect(-300, -200, 600, 400);
+		g.fillRect(startButton.getX(),startButton.getY(),startButton.getXLength(),startButton.getYLength());
 		g.setColor(Color.WHITE);
+		g.setFont(startFont);
 		g.drawString("Start!", -250, 50);
 		
 	}
@@ -102,7 +105,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(Util.isInBox(e, new RectBounds(-300, -200, 600, 400))){
+		if(Util.isInBox(e, startButton)){
 			isDone = true;
 		}
 		

@@ -1,19 +1,19 @@
 package games;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.DisplayMode;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
 import view.EstuaryView;
 
-public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable,KeyListener {
+public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 
 	
 	
@@ -21,8 +21,6 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable,Ke
 	 * 
 	 */
 	private static final long serialVersionUID = -4347325551128251031L;
-
-	private static final Dimension PREFERRED_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	private boolean running= false;
 	private Thread thread;
@@ -50,7 +48,8 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable,Ke
 	private void init(){
 		view = new EstuaryView();
 		state = GameState.MENU_SCREEN;
-		view.setPreferredSize(PREFERRED_SIZE);
+		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
+		view.setPreferredSize(new Dimension(dm.getWidth(), dm.getHeight()));
 		state = GameState.MENU_SCREEN;
 		view.addKeyListener(this);
 		
@@ -171,8 +170,8 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable,Ke
 	private static JFrame frame;
 	
 	public static void main (String[]args){
-		EstuaryAdventureMain game = new EstuaryAdventureMain();
 		frame = new JFrame("Estuary Adventure!");
+		EstuaryAdventureMain game = new EstuaryAdventureMain();
 		frame.add(game.view);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
