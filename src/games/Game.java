@@ -1,5 +1,8 @@
 package games;
 
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 
 import misc.Renderable;
@@ -11,7 +14,7 @@ import misc.Tickable;
  * @author abraham
  *
  */
-public abstract class Game implements Serializable,Tickable,Renderable{
+public abstract class Game implements Serializable,Tickable,Renderable,KeyListener,MouseListener,MouseMotionListener{
 
 	
 	/**
@@ -40,7 +43,7 @@ public abstract class Game implements Serializable,Tickable,Renderable{
 	
 	
 	
-	public abstract boolean isFinished();
+	public abstract boolean isDone();
 	
 	
 	/**

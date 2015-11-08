@@ -2,8 +2,8 @@ package games;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +13,7 @@ import misc.MenuScreen;
 import misc.Tickable;
 import view.EstuaryView;
 
-public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
+public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable,KeyListener {
 
 	
 	
@@ -38,6 +38,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 	
 	///////
 	private MenuScreen menu;
+	private OverfishingGame overfishingGame;
 	
 	////////
 	
@@ -51,38 +52,7 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		state = GameState.MENU_SCREEN;
 		view.setPreferredSize(PREFERRED_SIZE);
 		state = GameState.MENU_SCREEN;
-		view.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.exit(0);
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		view.addKeyListener(this);
 		
 	}
 	
@@ -151,20 +121,42 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 				view.addKeyListener(menu);
 			}
 			menu.onTick();
+			if(menu.isDone()){
+				state = GameState.OVERFISHING_GAME;
+				view.removeKeyListener(menu);
+				view.removeMouseListener(menu);
+				menu = null;
+			}
 			
 		}
-		else if (state == GameState.OVERFISHING_GAME_ANIMATION){
+		else if (state == GameState.OVERFISHING_GAME){
+			if(overfishingGame==null){
+				overfishingGame = new OverfishingGame();
+				view.addMouseListener(overfishingGame);
+				view.addKeyListener(overfishingGame);
+			}
+			overfishingGame.onTick();
+			if(overfishingGame.isDone()){
+				state = GameState.CRAB_SAVE_GAME;
+				view.removeKeyListener(overfishingGame);
+				view.removeMouseListener(overfishingGame);
+			}
+			
 			
 		}
 	}
 	
 	private void updateView(){
-		if(state==GameState.MENU_SCREEN){
+		if(state==GameState.MENU_SCREEN && menu!=null){
 			view.render(menu);	
+		}
+		else if (state == GameState.OVERFISHING_GAME && overfishingGame!=null){
+			view.render(overfishingGame);
 		}
 		
 	}
 
+	
 	/**
 	 * 
 	 * @return whether or not the game is currently running
@@ -191,6 +183,30 @@ public class EstuaryAdventureMain extends JPanel implements Runnable,Tickable {
 		game.start();
 		
 		
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+			System.exit(0);
+		}
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
