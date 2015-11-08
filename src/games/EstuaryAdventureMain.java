@@ -139,6 +139,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				state = GameState.CRAB_SAVE_GAME;
 				view.removeKeyListener(overfishingGame);
 				view.removeMouseListener(overfishingGame);
+				overfishingGame=null;
 			}
 			
 			
@@ -177,7 +178,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		frame.setResizable(false);
 		frame.setUndecorated(true);
 		frame.pack();
-		frame.setLocationRelativeTo(null);		
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		game.start();
 		
