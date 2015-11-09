@@ -3,6 +3,10 @@ package characters;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import misc.Util;
 
 /**
  * Fish is a model class for the fish that the player controls
@@ -15,9 +19,12 @@ public class Fish extends Character {
 	 */
 	private static final long serialVersionUID = -1015644809982634515L;
 	
-	
+	private static BufferedImage fish;
 	
 	private boolean hasCollided;
+	
+	
+	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	
 	/**
 	 * Creates a fish with initial x,y, and health
@@ -28,7 +35,7 @@ public class Fish extends Character {
 	
 	public Fish(double xPos, double yPos, int health) {
 		super(xPos, yPos, health);
-		// TODO Auto-generated constructor stub
+		loadRes();
 	}
 	
 	/**
@@ -38,13 +45,38 @@ public class Fish extends Character {
 	 */
 	public Fish(double xPos, double yPos) {
 		super(xPos, yPos);
-		// TODO Auto-generated constructor stub
+		loadRes();
 	}
 	
 	
+	public void loadRes(){
+		try {
+			if(fish==null)
+				fish = Util.loadImage("/goldfish.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void onTick(){
+		if(leftPressed){
+			xPos-=15;
+		}
+		if(rightPressed){
+			xPos+=15;
+		}
+		if(upPressed){
+			yPos-=5;
+		}
+		if(downPressed){
+			yPos+=5;
+		}
+	}
+	
 	@Override
 	public void render(Graphics2D g){
-		
+		g.drawImage(fish,getXInt(),getYInt(),200,200,null);
 	}
 	
 	/**
@@ -54,7 +86,8 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void move(double dx, double dy) {
-		
+		xPos+=dx;
+		yPos+=dy;
 		
 	}
 	
@@ -73,13 +106,39 @@ public class Fish extends Character {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			leftPressed = true;
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			rightPressed = true;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP){
+			upPressed = true;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN){
+			downPressed= true;
+		}
+		
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			leftPressed = false;
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			rightPressed = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP){
+			upPressed = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN){
+			downPressed= false;;
+		}
+		
 		
 	}
 

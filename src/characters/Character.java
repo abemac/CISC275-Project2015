@@ -23,8 +23,8 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * 
 	 */
 	private static final long serialVersionUID = -6777058852530701862L;
-	private double xPos,yPos;	// the x and y position of the Character on the screen
-	private int health;			// health of the character represented in int
+	protected double xPos,yPos;	// the x and y position of the Character on the screen
+	protected int health;			// health of the character represented in int
 	
 	/**
 	 * Creates a character with initial x,y and health
@@ -33,7 +33,9 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * @param health the initial health
 	 */
 	public Character(double xPos,double yPos,int health){			
-		
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.health = health;
 	} 
 	/**
 	 * Creates a character with initial x,y and default health
@@ -41,7 +43,8 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * @param yPos the initial y position
 	 */
 	public Character(double xPos,double yPos){
-		
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 	
 	/** move the character a certain amount dx and a certain amount dy
@@ -75,6 +78,14 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 		return yPos;
 	} 
 	
+	
+	public int getXInt(){
+		return (int)xPos;
+	}
+	
+	public int getYInt(){
+		return (int)yPos;
+	}
 	/** returns the health int value of the Character 
 	 * @return health
 	 */
