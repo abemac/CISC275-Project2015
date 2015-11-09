@@ -2,6 +2,10 @@ package misc;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Util {
 
@@ -20,7 +24,7 @@ public class Util {
 				y>=rb.getY() && y <=rb.getY() + rb.getYLength());
 			
 	}
-	
+	////////////////////////////////////////////////////////////////////////////////////////////
 	public static void setCanvasWidth(int width){
 		if(CANVAS_WIDTH==-1){
 			CANVAS_WIDTH = width;
@@ -54,16 +58,18 @@ public class Util {
 	}
 	
 	
-	///////////////
+	//////////////////////////////////////////////////////////
 	private static int len;
 	public static void drawCenteredString(String s, int xPos, int yPos,Graphics2D g2d){
 		len = (int) g2d.getFontMetrics().stringWidth(s);
 		g2d.drawString(s, xPos-len/2, yPos);
 	}
 	
-
+	/////////////////////////////////////////////////////////
 	
-	
+	public static BufferedImage loadImage(String path,Object host) throws IOException{
+		return ImageIO.read(host.getClass().getResource(path));
+	}
 	
 	
 	

@@ -3,17 +3,12 @@ package misc;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.PaintContext;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener{
 
@@ -21,11 +16,19 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	private final RectBounds startButton = new RectBounds(-300, -200, 600, 400);
 	private final Font titleFont = new Font("default",Font.BOLD,200);
 	private final Font startFont =new Font("default",Font.BOLD,150);
+	private BufferedImage fish;
 	public MenuScreen(){
 		isDone = false;
+		loadRes();
 	}
 	
-	
+	public void loadRes(){
+		try {
+			fish = Util.loadImage("/goldfish.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void render(Graphics2D g) {
@@ -39,6 +42,8 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 		g.fillRect(startButton.getX(),startButton.getY(),startButton.getXLength(),startButton.getYLength());
 		g.setColor(Color.BLUE);
 		Util.drawCenteredString("Start!", 0, 50, g);
+		
+		g.drawImage(fish,-500,0,1000,1000,null);
 		
 	}
 
