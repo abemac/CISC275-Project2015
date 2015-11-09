@@ -1,6 +1,10 @@
 package enemies;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import misc.Util;
 
 /**
  * The Net class is used to model nets
@@ -27,6 +31,9 @@ public class Net extends Enemy {
 	 */
 	private int type; 
 	
+	private boolean up,down;
+	
+	private static BufferedImage lilNet;
 	/**
 	 * The constructor for net must accept and initial x,y and type
 	 * If the type is not Net.BIGNET or Net.LILNET, it will default to Net.LILNET
@@ -37,6 +44,18 @@ public class Net extends Enemy {
 	public Net(double xPos, double yPos,int type){
 		super(xPos,yPos);
 		this.type = type;
+		loadRes();
+		up=false;
+		down=true;
+	}
+	
+	
+	public void loadRes(){
+		try {
+			lilNet = Util.loadImage("/net.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -44,19 +63,33 @@ public class Net extends Enemy {
 	 */
 	@Override
 	public void act() {
-		moveRandomly();
+		moveUpAndDown();
 		
 	}
 	
 	public void render(Graphics2D g){
-		
+		g.drawImage(lilNet, (int)xPos,(int) yPos,600,1300, null);
 	}
 	
 	/**
 	 * causes the net to move randomly in the y direction on the screen
 	 */
-	public void moveRandomly(){
+	public void moveUpAndDown(){
+		if(yPos<-2000){
+			up = false;
+			down = true;
+		}
+		else if(yPos>-300){
+			up=true;
+			down=false;
+		}
 		
+		if(up){
+			yPos-=8;
+		}
+		else if(down){
+			yPos+=8;
+		}
 	}
 	
 	/**

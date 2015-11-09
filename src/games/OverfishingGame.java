@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import characters.Fish;
 import enemies.Enemy;
+import enemies.Net;
 import misc.Util;
 
 /*
@@ -49,6 +50,10 @@ public class OverfishingGame extends Game {
 		school.add(new Fish(-150,150));
 		school.add(new Fish(100,100));
 		school.add(new Fish(0,100));
+		
+		enemies = new ArrayList<Enemy>();
+		enemies.add(new Net(0,-1000,Net.LILNET));
+		enemies.add(new Net(1000,-500,Net.LILNET));
 	}
 	
 	
@@ -57,12 +62,13 @@ public class OverfishingGame extends Game {
 	 */
 	@Override
 	public void onTick() {				
-		randomlyMoveNetsAndHooks();
-		checkAndRemoveFish();
-		
+		for(Enemy e : enemies){
+			e.onTick();
+		}
 		for(Fish f : school){
 			f.onTick();
 		}
+		
 		
 	}
 	
@@ -70,6 +76,11 @@ public class OverfishingGame extends Game {
 		g.setColor(blue);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
 		
+		
+		
+		for(Enemy e : enemies){
+			e.render(g);
+		}
 		for(Fish f : school){
 			f.render(g);
 		}

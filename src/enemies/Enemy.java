@@ -18,8 +18,9 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7282749495474164940L;
-	private double xPos,yPos;	//Enemy has location
-	private int health;			//Enemy has health
+	protected double xPos;	//Enemy has location
+	protected double yPos;
+	protected int health;			//Enemy has health
 	
 	/**
 	 * Creates an Enemy with initial x,y and health
@@ -29,7 +30,9 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	 * @param health the health level of the enemy
 	 */
 	public Enemy(double xPos, double yPos, int health){
-		
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.health = health;
 	}
 	
 	/**
@@ -39,7 +42,8 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	 * @param yPos the initial y position
 	 */
 	public Enemy(double xPos, double yPos){
-		
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 	
 	/**
