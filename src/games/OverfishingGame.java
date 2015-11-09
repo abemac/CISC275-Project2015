@@ -42,7 +42,8 @@ public class OverfishingGame extends Game {
 	}
 	
 	public void init(){
-		school.add(new Fish(-500, 500));
+		school = new ArrayList<Fish>();
+		school.add(new Fish(0, 0));
 	}
 	
 	
@@ -60,7 +61,7 @@ public class OverfishingGame extends Game {
 		g.setColor(blue);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
 		
-		for(Fish f: school){
+		for(Fish f : school){
 			f.render(g);
 		}
 		
@@ -120,7 +121,9 @@ public class OverfishingGame extends Game {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		for(Fish f : school){
+			f.keyPressed(e);
+		}
 		
 		
 	}

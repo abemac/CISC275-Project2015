@@ -75,6 +75,14 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 		return yPos;
 	} 
 	
+	
+	public int getXInt(){
+		return (int)xPos;
+	}
+	
+	public int getYInt(){
+		return (int)yPos;
+	}
 	/** returns the health int value of the Character 
 	 * @return health
 	 */
