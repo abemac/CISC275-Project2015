@@ -31,6 +31,7 @@ public class OverfishingGame extends Game {
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	private boolean isDone;
+	private final Color blue = new Color(114,145,215);
 	
 	/**
 	 * Constructor for the overfishing game. calls the super constructor
@@ -40,30 +41,33 @@ public class OverfishingGame extends Game {
 		isDone = false;
 	}
 	
+	public void init(){
+		school.add(new Fish(-500, 500));
+	}
 	
-
+	
 	/**
 	 * gets called at 60Hz to generate changes to the game
 	 */
 	@Override
 	public void onTick() {				
-		
-
 		randomlyMoveNetsAndHooks();
 		checkAndRemoveFish();
 		
 	}
 	
 	public void render(Graphics2D g){
-		g.setColor(Color.CYAN);
+		g.setColor(blue);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
+		
+		for(Fish f: school){
+			f.render(g);
+		}
 		
 	}
 	/**
 	 * changes enemy position in random directions and distances
 	 */
-	
-	
 	private void randomlyMoveNetsAndHooks(){};	
 	
 	/**
