@@ -37,7 +37,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 		
 		g.setColor(Color.GREEN);
 		g.fillRect(startButton.getX(),startButton.getY(),startButton.getXLength(),startButton.getYLength());
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLUE);
 		Util.drawCenteredString("Start!", 0, 50, g);
 		
 	}
