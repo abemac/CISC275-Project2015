@@ -33,7 +33,9 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * @param health the initial health
 	 */
 	public Character(double xPos,double yPos,int health){			
-		
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.health = health;
 	} 
 	/**
 	 * Creates a character with initial x,y and default health
@@ -41,7 +43,8 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * @param yPos the initial y position
 	 */
 	public Character(double xPos,double yPos){
-		
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 	
 	/** move the character a certain amount dx and a certain amount dy

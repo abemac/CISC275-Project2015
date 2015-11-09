@@ -51,7 +51,8 @@ public class Fish extends Character {
 	
 	public void loadRes(){
 		try {
-			fish = Util.loadImage("/goldfish.png", this);
+			if(fish==null)
+				fish = Util.loadImage("/goldfish.png", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -60,10 +61,16 @@ public class Fish extends Character {
 	@Override
 	public void onTick(){
 		if(leftPressed){
-			move(-50,0);
+			xPos-=15;
 		}
 		if(rightPressed){
-			move(50,0);
+			xPos+=15;
+		}
+		if(upPressed){
+			yPos-=5;
+		}
+		if(downPressed){
+			yPos+=5;
 		}
 	}
 	
@@ -106,6 +113,13 @@ public class Fish extends Character {
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed = true;
 		}
+		if(e.getKeyCode()==KeyEvent.VK_UP){
+			upPressed = true;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN){
+			downPressed= true;
+		}
+		
 		
 	}
 
@@ -117,6 +131,12 @@ public class Fish extends Character {
 		
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP){
+			upPressed = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN){
+			downPressed= false;;
 		}
 		
 		

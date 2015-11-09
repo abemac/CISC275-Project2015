@@ -44,6 +44,11 @@ public class OverfishingGame extends Game {
 	public void init(){
 		school = new ArrayList<Fish>();
 		school.add(new Fish(0, 0));
+		school.add(new Fish(-100,25));
+		school.add(new Fish(-200,100));
+		school.add(new Fish(-150,150));
+		school.add(new Fish(100,100));
+		school.add(new Fish(0,100));
 	}
 	
 	
@@ -137,6 +142,9 @@ public class OverfishingGame extends Game {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		for(Fish f : school){
+			f.keyReleased(e);
+		}
 		
 	}
 
