@@ -23,6 +23,9 @@ public class Fish extends Character {
 	
 	private boolean hasCollided;
 	
+	
+	private boolean leftPressed,rightPressed,upPressed,downPressed;
+	
 	/**
 	 * Creates a fish with initial x,y, and health
 	 * @param xPos the initial x position
@@ -54,10 +57,19 @@ public class Fish extends Character {
 		}
 	}
 	
+	@Override
+	public void onTick(){
+		if(leftPressed){
+			move(-50,0);
+		}
+		if(rightPressed){
+			move(50,0);
+		}
+	}
 	
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(fish,getXInt(),getYInt(),100,100,null);
+		g.drawImage(fish,getXInt(),getYInt(),200,200,null);
 	}
 	
 	/**
@@ -67,7 +79,8 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void move(double dx, double dy) {
-		
+		xPos+=dx;
+		yPos+=dy;
 		
 	}
 	
@@ -87,14 +100,25 @@ public class Fish extends Character {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			
+			leftPressed = true;
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			rightPressed = true;
 		}
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			leftPressed = false;
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			rightPressed = false;
+		}
+		
 		
 	}
 

@@ -55,6 +55,10 @@ public class OverfishingGame extends Game {
 		randomlyMoveNetsAndHooks();
 		checkAndRemoveFish();
 		
+		for(Fish f : school){
+			f.onTick();
+		}
+		
 	}
 	
 	public void render(Graphics2D g){

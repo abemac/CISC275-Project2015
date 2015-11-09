@@ -87,7 +87,6 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	/**
 	 * implements run() from Runnable. gets called in start
 	 */
-
 	public void run() {
 		view.requestFocus();
 		lastTime = System.nanoTime();
@@ -99,7 +98,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			if (deltaNs >= nanosPerTick) {
 				onTick();
 				deltaNs -= nanosPerTick; // possible set it to 0 alternatively,
-				updateView();							// depending on certain factors
+				updateView();			// depending on certain factors
 			}
 			
 			
