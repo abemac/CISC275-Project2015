@@ -71,6 +71,10 @@ public class Net extends Enemy {
 		g.drawImage(lilNet, (int)xPos,(int) yPos,600,1300, null);
 	}
 	
+	public void render2(Graphics2D g) {
+		g.drawImage(lilNet, (int)xPos,(int) yPos,600,1300, null);
+	}
+	
 	/**
 	 * causes the net to move randomly in the y direction on the screen
 	 */
