@@ -31,7 +31,7 @@ public class EstuaryView extends Canvas{
 	public void render(Renderable r){
 		bs = this.getBufferStrategy(); //creates triple buffer
 		if(bs == null){
-			createBufferStrategy(3);
+			createBufferStrategy(5);
 			return;
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
