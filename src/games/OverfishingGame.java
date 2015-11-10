@@ -72,6 +72,7 @@ public class OverfishingGame extends Game {
 		for(Fish f : school){
 			f.onTick();
 		}
+		seaBottom.onTick();
 		
 		
 	}
@@ -79,7 +80,7 @@ public class OverfishingGame extends Game {
 	public void render(Graphics2D g){
 		g.setColor(blue);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
-		
+		seaBottom.render(g);
 		
 		
 		for(Enemy e : enemies){
@@ -90,7 +91,7 @@ public class OverfishingGame extends Game {
 		}
 		
 		
-		seaBottom.render(g);
+		
 	}
 	/**
 	 * changes enemy position in random directions and distances
