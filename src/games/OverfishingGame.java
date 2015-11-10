@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import characters.Fish;
 import enemies.Enemy;
 import enemies.Net;
+import misc.SeaBottom;
 import misc.Util;
 
 /*
@@ -31,6 +32,7 @@ public class OverfishingGame extends Game {
 	private int distance;				// how far the player reached in the level
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
+	private SeaBottom seaBottom;
 	private boolean isDone;
 	private final Color blue = new Color(114,145,215);
 	
@@ -54,6 +56,8 @@ public class OverfishingGame extends Game {
 		enemies = new ArrayList<Enemy>();
 		enemies.add(new Net(0,-1000,Net.LILNET));
 		enemies.add(new Net(1000,-500,Net.LILNET));
+		
+		seaBottom = new SeaBottom(500, 1000);
 	}
 	
 	
@@ -85,6 +89,8 @@ public class OverfishingGame extends Game {
 			f.render(g);
 		}
 		
+		
+		seaBottom.render(g);
 	}
 	/**
 	 * changes enemy position in random directions and distances
