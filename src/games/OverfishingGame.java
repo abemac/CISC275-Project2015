@@ -83,6 +83,7 @@ public class OverfishingGame extends Game {
 		seaBottom.render(g);
 		
 		
+
 		for(Enemy e : enemies){
 			e.render(g);
 		}
@@ -90,6 +91,11 @@ public class OverfishingGame extends Game {
 			f.render(g);
 		}
 		
+		for(Enemy e : enemies){
+			if(e instanceof Net){
+				((Net) e).render2(g);
+			}
+		}
 		
 		
 	}

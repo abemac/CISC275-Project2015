@@ -34,6 +34,7 @@ public class Net extends Enemy {
 	private boolean up,down;
 	
 	private static BufferedImage lilNet;
+	private static BufferedImage lilNetOverlay;
 	/**
 	 * The constructor for net must accept and initial x,y and type
 	 * If the type is not Net.BIGNET or Net.LILNET, it will default to Net.LILNET
@@ -53,6 +54,7 @@ public class Net extends Enemy {
 	public void loadRes(){
 		try {
 			lilNet = Util.loadImage("/net.png", this);
+			lilNetOverlay = Util.loadImage("/netoverlay.png", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -72,7 +74,7 @@ public class Net extends Enemy {
 	}
 	
 	public void render2(Graphics2D g) {
-		g.drawImage(lilNet, (int)xPos,(int) yPos,600,1300, null);
+		g.drawImage(lilNetOverlay, (int)xPos,(int) yPos,600,1300, null);
 	}
 	
 	/**
