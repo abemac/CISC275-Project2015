@@ -23,7 +23,13 @@ public class Fish extends Character {
 	
 	private boolean hasCollided;
 	
+	private double lag;
 	
+	private double lagC;
+	
+	private double xVel;
+	
+	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	
 	/**
@@ -43,9 +49,11 @@ public class Fish extends Character {
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
 	 */
-	public Fish(double xPos, double yPos) {
+	public Fish(double xPos, double yPos,int health,double lag) {
 		super(xPos, yPos);
 		loadRes();
+		this.lag = lag;
+		lagC=lag;
 	}
 	
 	
@@ -61,17 +69,38 @@ public class Fish extends Character {
 	@Override
 	public void onTick(){
 		if(leftPressed){
-			xPos-=7;
+			xVel=-7+lagC;
+			lostGround-=lagC;
 		}
-		if(rightPressed){
-			xPos+=7;
+		else if(rightPressed){
+			xVel=7-lagC;
+			lostGround+=lagC;
+		}else{
+			if(lostGround>7){
+				xVel=7;
+				lostGround-=7;
+			}
+			else if(lostGround<-7){
+				xVel=-7;
+				lostGround+=7;
+			}else
+				lostGround=0;
 		}
 		if(upPressed){
 			yPos-=5;
 		}
-		if(downPressed){
+		else if(downPressed){
 			yPos+=5;
 		}
+		
+		xPos+=xVel;
+		if(xVel>.15){
+			xVel-=.15;
+		}else if(xVel<-.15){
+			xVel+=.15;
+		}else
+			xVel=0;
+		lagC=lagC>0.05? lagC-0.05:0;
 	}
 	
 	@Override
@@ -127,17 +156,22 @@ public class Fish extends Character {
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			leftPressed = false;
+			lagC=lag;
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed = false;
+			lagC=lag;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upPressed = false;
+			lagC=lag;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
-			downPressed= false;;
+			downPressed= false;
+			lagC=lag;
 		}
+		
 		
 		
 	}
