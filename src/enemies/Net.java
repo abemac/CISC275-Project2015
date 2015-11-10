@@ -1,5 +1,6 @@
 package enemies;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -70,7 +71,9 @@ public class Net extends Enemy {
 	}
 	
 	public void render(Graphics2D g){
-		g.drawImage(lilNetUnderlay, (int)xPos,(int) yPos,600,1300, null);
+		g.drawImage(lilNetUnderlay, (int)xPos,(int) yPos+10,600,1300, null);
+		g.setColor(Color.YELLOW);
+		g.fillRect((int)xPos+113, -1000, 30, (int) (1955+yPos));
 	}
 	
 	public void render2(Graphics2D g) {
