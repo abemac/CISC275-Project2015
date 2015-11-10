@@ -61,10 +61,10 @@ public class Fish extends Character {
 	@Override
 	public void onTick(){
 		if(leftPressed){
-			xPos-=15;
+			xPos-=7;
 		}
 		if(rightPressed){
-			xPos+=15;
+			xPos+=7;
 		}
 		if(upPressed){
 			yPos-=5;
