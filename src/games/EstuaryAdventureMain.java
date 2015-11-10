@@ -12,6 +12,7 @@ import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
 import view.EstuaryView;
+import view.EstuaryView2;
 
 public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 
@@ -26,7 +27,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private Thread thread;
 	private EstuaryView view;
 	private GameState state;
-	
+		
 	//Variables used to control updating frequency in run()
 	private long lastTime,now;
 	private final double ticksPerSecond = 60.0;
@@ -52,6 +53,8 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		view.setPreferredSize(new Dimension(dm.getWidth(), dm.getHeight()));
 		state = GameState.MENU_SCREEN;
 		view.addKeyListener(this);
+		
+		
 		
 	}
 	
@@ -148,9 +151,11 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private void updateView(){
 		if(state==GameState.MENU_SCREEN && menu!=null){
 			view.render(menu);	
+			
 		}
 		else if (state == GameState.OVERFISHING_GAME && overfishingGame!=null){
 			view.render(overfishingGame);
+			
 		}
 		
 	}
@@ -172,7 +177,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	public static void main (String[]args){
 		frame = new JFrame("Estuary Adventure!");
 		EstuaryAdventureMain game = new EstuaryAdventureMain();
-		frame.add(game.view);
+		frame.getContentPane().add(game.view);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setUndecorated(true);
