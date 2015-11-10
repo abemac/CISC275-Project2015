@@ -57,7 +57,7 @@ public class OverfishingGame extends Game {
 		enemies.add(new Net(0,-1000,Net.LILNET));
 		enemies.add(new Net(1000,-500,Net.LILNET));
 		
-		
+		seaBottom = new SeaBottom(500, 1000);
 	}
 	
 	
