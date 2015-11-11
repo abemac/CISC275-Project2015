@@ -71,20 +71,20 @@ public class Fish extends Character {
 	@Override
 	public void onTick(){
 		if(leftPressed){
-			xVel=-7+lagC;
+			xVel=-5+lagC;
 			lostGround-=lagC;
 		}
 		else if(rightPressed){
-			xVel=7-lagC;
+			xVel=5-lagC;
 			lostGround+=lagC;
 		}else{
-			if(lostGround>4){
-				xVel=7;
-				lostGround-=7;
+			if(lostGround>3){
+				xVel=5;
+				lostGround-=5;
 			}
-			else if(lostGround<-4){
-				xVel=-7;
-				lostGround+=7;
+			else if(lostGround<-3){
+				xVel=-5;
+				lostGround+=5;
 			}
 				
 		}
@@ -94,7 +94,7 @@ public class Fish extends Character {
 				angleVel=-.01;
 		}
 		else if(downPressed){
-			yVel=5;
+			yVel=6;
 			if(angle<Math.PI/10.0f)
 				angleVel=.01;
 		}
