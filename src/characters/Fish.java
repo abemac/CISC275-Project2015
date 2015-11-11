@@ -32,6 +32,8 @@ public class Fish extends Character {
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	
+	private double angle,angleVel;
+	
 	/**
 	 * Creates a fish with initial x,y, and health
 	 * @param xPos the initial x position
@@ -88,9 +90,13 @@ public class Fish extends Character {
 		}
 		if(upPressed){
 			yPos-=5;
+			if(angle>-Math.PI/16.0f)
+				angleVel=-.01;
 		}
 		else if(downPressed){
 			yPos+=5;
+			if(angle<Math.PI/16.0f)
+				angleVel=.01;
 		}
 		
 		xPos+=xVel;
@@ -101,11 +107,29 @@ public class Fish extends Character {
 		}else
 			xVel=0;
 		lagC=lagC>0.05? lagC-0.05:0;
+		
+		
+		angle+=angleVel;
+		
+		if(angle<-0.01){
+			angleVel=.005;
+		}
+		else if(angle>0.01){
+			angleVel=-.005;
+		}else{
+			angleVel=0;
+			
+		}
+		
 	}
 	
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(fish,getXInt(),getYInt(),200,200,null);
+		g.translate(getX(), getY());
+		g.rotate(angle);
+		g.drawImage(fish,0,0,200,200,null);
+		g.rotate(-angle);
+		g.translate(-getX(), -getY());
 	}
 	
 	/**
