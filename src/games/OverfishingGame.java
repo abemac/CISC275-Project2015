@@ -46,12 +46,12 @@ public class OverfishingGame extends Game {
 	
 	public void init(){
 		school = new ArrayList<Fish>();
-		school.add(new Fish(0, 0,100,5));
+		school.add(new Fish(0, 0,100,5.5));
 		school.add(new Fish(-100,25,100,5));
 		school.add(new Fish(-200,100,100,7));
 		school.add(new Fish(-150,150,100,6));
 		school.add(new Fish(100,100,100,3));
-		school.add(new Fish(0,100,100,5));
+		school.add(new Fish(0,100,100,4.5));
 		
 		enemies = new ArrayList<Enemy>();
 		enemies.add(new Net(0,-1000,Net.LILNET));
