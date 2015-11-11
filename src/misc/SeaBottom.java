@@ -33,8 +33,8 @@ public class SeaBottom implements Renderable,Tickable {
 	
 	@Override
 	public void onTick() {
-		xPos-=10;
-		xPos2-=10;
+		xPos-=6;
+		xPos2-=6;
 		if(xPos<=-5*Util.DISTANCE_TO_EDGE){
 			xPos=xPos2+(Util.DISTANCE_TO_EDGE*4-30);
 			

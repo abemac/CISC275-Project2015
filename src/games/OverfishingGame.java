@@ -85,7 +85,7 @@ public class OverfishingGame extends Game {
 		
 
 		for(Enemy e : enemies){
-			e.render(g);
+			//e.render(g);
 		}
 		for(Fish f : school){
 			f.render(g);
@@ -93,7 +93,7 @@ public class OverfishingGame extends Game {
 		
 		for(Enemy e : enemies){
 			if(e instanceof Net){
-				((Net) e).render2(g);
+			//	((Net) e).render2(g);
 			}
 		}
 		

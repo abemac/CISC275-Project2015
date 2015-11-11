@@ -27,7 +27,7 @@ public class Fish extends Character {
 	
 	private double lagC;
 	
-	private double xVel;
+	private double xVel,yVel;
 	
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
@@ -78,24 +78,24 @@ public class Fish extends Character {
 			xVel=7-lagC;
 			lostGround+=lagC;
 		}else{
-			if(lostGround>7){
+			if(lostGround>4){
 				xVel=7;
 				lostGround-=7;
 			}
-			else if(lostGround<-7){
+			else if(lostGround<-4){
 				xVel=-7;
 				lostGround+=7;
-			}else
-				lostGround=0;
+			}
+				
 		}
 		if(upPressed){
-			yPos-=5;
-			if(angle>-Math.PI/16.0f)
+			yVel=-5;
+			if(angle>-Math.PI/10.0f)
 				angleVel=-.01;
 		}
 		else if(downPressed){
-			yPos+=5;
-			if(angle<Math.PI/16.0f)
+			yVel=5;
+			if(angle<Math.PI/10.0f)
 				angleVel=.01;
 		}
 		
@@ -108,6 +108,14 @@ public class Fish extends Character {
 			xVel=0;
 		lagC=lagC>0.05? lagC-0.05:0;
 		
+		
+		yPos+=yVel;
+		if(yVel>.15){
+			yVel-=.15;
+		}else if(yVel<-.15){
+			yVel+=.15;
+		}else
+			yVel=0;
 		
 		angle+=angleVel;
 		
