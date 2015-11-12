@@ -192,20 +192,20 @@ public class Fish extends Character {
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			leftPressed = false;
-			lagC=lag;
+			if(!rightPressed)
+				lagC=lag;
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed = false;
-			lagC=lag;
+			if(!leftPressed)
+				lagC=lag;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upPressed = false;
-			lagC=lag;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downPressed= false;
-			lagC=lag;
 		}
 		
 		
