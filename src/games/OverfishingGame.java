@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import characters.Fish;
 import enemies.Enemy;
@@ -37,12 +38,18 @@ public class OverfishingGame extends Game {
 	private boolean isDone;
 	private final Color blue = new Color(114,145,215);
 	
+	private ArrayList<Enemy> enemyBank;
+	private ArrayList<Integer> enemiesAvailable;
+
+	
 	/**
 	 * Constructor for the overfishing game. calls the super constructor
 	 */
 	public OverfishingGame(){	
 		super();
 		isDone = false;
+		
+		
 	}
 	
 	public void init(){
@@ -62,7 +69,7 @@ public class OverfishingGame extends Game {
 		school.add(new Fish(0,300,100,4));
 		
 		enemies = new ArrayList<Enemy>();
-		generateEnemiesIfNeeded();
+		generatInitialEnemies();
 		
 		seaBottom = new SeaBottom();
 	}
@@ -81,9 +88,15 @@ public class OverfishingGame extends Game {
 		}
 		seaBottom.onTick();
 		
-		
+		limiter++;
+		if(limiter>60){
+			//System.out.println(enemies.size());  GOOD
+			removeNotNeeded();
+			limiter=0;
+		}
 	}
 	
+	private long limiter=0;
 	public void render(Graphics2D g){
 		g.setColor(blue);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
@@ -108,29 +121,63 @@ public class OverfishingGame extends Game {
 	}
 	
 	
-	private void generateEnemiesIfNeeded(){
-		if(enemies.isEmpty()){
-			enemies.add(new Net(1.5*Util.DISTANCE_TO_EDGE,-1000,Net.LILNET));
+	
+	private void generatInitialEnemies(){
+		enemyBank = new ArrayList<Enemy>(20);
+		enemiesAvailable =new ArrayList<Integer>(20);
+		for(int k=0;k<20;k++){
+			enemiesAvailable.add(k);
 		}
+		int i =0;
 		int choose;
-		while(enemies.size()<8){
+		while(i<20){
 			choose = (int)Math.random()*4;
 			switch(choose){
 				case 0:
-					enemies.add(new Net(enemies.get(enemies.size()-1).getX()+1000,-1000,Net.LILNET));
+					enemyBank.add(new Net(0,-1000,Net.LILNET));
 				case 1:
-					enemies.add(new Hook(enemies.get(enemies.size()-1).getX()+1000,-1000,Hook.SINGLE));
+					enemyBank.add(new Hook(0,-1000,Hook.SINGLE));
 				case 2:
-					enemies.add(new Hook(enemies.get(enemies.size()-1).getX()+1000,-1000,Hook.DOUBLE_1));
+					enemyBank.add(new Hook(0,-1000,Hook.DOUBLE_1));
 				case 4:
-					enemies.add(new Hook(enemies.get(enemies.size()-1).getX()+1000,-1000,Hook.DOUBLE_2));
-					
+					enemyBank.add(new Hook(0,-1000,Hook.DOUBLE_2));
 			}
+			
+			i++;
+		}
+		int choose2;
+		choose = (int)Math.random()*enemiesAvailable.size();
+		choose2 = enemiesAvailable.get(choose);
+		enemiesAvailable.remove(choose);
+		enemyBank.get(choose2).setX(Util.DISTANCE_TO_EDGE*1.5);
+		enemies.add(enemyBank.get(choose2));
+		
+		while(enemies.size()<8){
+			choose = (int)Math.random()*enemiesAvailable.size();
+			choose2 = enemiesAvailable.get(choose);
+			enemiesAvailable.remove(choose);
+			enemyBank.get(choose2).setX(enemies.get(enemies.size()-1).getX()+1000);
+			enemies.add(enemyBank.get(choose2));
+			
 		}
 	}
 	
-	private void removePastEnemies(){
+	private void removeNotNeeded(){
+		if(enemies.get(0).getX()<-2*Util.DISTANCE_TO_EDGE){
+			enemiesAvailable.add(enemyBank.indexOf(enemies.get(0)));
+			enemies.remove(0);
+			generateNewEnemy();
+		}
 		
+		
+	}
+	
+	private void generateNewEnemy(){
+		int choose = (int)Math.random()*enemiesAvailable.size();
+		int choose2 = enemiesAvailable.get(choose);
+		enemiesAvailable.remove(choose);
+		enemyBank.get(choose2).setX(enemies.get(enemies.size()-1).getX()+1000);
+		enemies.add(enemyBank.get(choose2));
 	}
 	
 	

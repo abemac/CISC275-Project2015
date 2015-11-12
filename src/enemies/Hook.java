@@ -21,7 +21,7 @@ public class Hook extends Enemy {
 	public static final int DOUBLE_1=1;
 	public static final int DOUBLE_2=2;
 	
-	private static SpriteSheet hooks;
+	private static SpriteSheet hooks=null;
 	
 	private boolean up,down;
 	
@@ -42,16 +42,17 @@ public class Hook extends Enemy {
 	}
 
 	private void loadRes(){
-		BufferedImage hooks_tmp=null;
-		try {
-			hooks_tmp = Util.loadImage("/hooks-sprite(3)(250x700).png",this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(hooks==null){
+			BufferedImage hooks_tmp=null;
+			try {
+				hooks_tmp = Util.loadImage("/hooks-sprite(3)(250x700).png",this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			hooks = new SpriteSheet(hooks_tmp, 1, 3, 750, 250);
 		}
-		
-		hooks = new SpriteSheet(hooks_tmp, 1, 3, 750, 250);
-		
 	}
 	
 	
@@ -68,12 +69,12 @@ public class Hook extends Enemy {
 	@Override
 	public void render(Graphics2D g){
 		if(type==SINGLE){
-			g.drawImage(hooks.getSprite(1, 1),(int)xPos,(int)yPos,600,1300,null);
+			g.drawImage(hooks.getSprite(1, 1),(int)xPos,(int)yPos,800,1500,null);
 		}
 		else if (type==DOUBLE_1){
-			g.drawImage(hooks.getSprite(1, 2),(int)xPos,(int)yPos,600,1300,null);
+			g.drawImage(hooks.getSprite(1, 2),(int)xPos,(int)yPos,800,1500,null);
 		}else if (type==DOUBLE_2){
-			g.drawImage(hooks.getSprite(1, 3),(int)xPos,(int)yPos,600,1300,null);
+			g.drawImage(hooks.getSprite(1, 3),(int)xPos,(int)yPos,800,1500,null);
 		}
 	}
 	
@@ -85,7 +86,7 @@ public class Hook extends Enemy {
 			up = false;
 			down = true;
 		}
-		else if(yPos>-300){
+		else if(yPos>-1000){
 			up=true;
 			down=false;
 		}

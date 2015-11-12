@@ -91,8 +91,13 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 		health-=h;
 	}
 	
+	public void setX(double x){
+		this.xPos=x;
+	}
 	
-	
+	public void setY(double y){
+		this.yPos=y;
+	}
 	
 	
 	
