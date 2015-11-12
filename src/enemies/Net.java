@@ -99,6 +99,8 @@ public class Net extends Enemy {
 		else if(down){
 			yPos+=8;
 		}
+		
+		xPos-=6;
 	}
 	
 	/**

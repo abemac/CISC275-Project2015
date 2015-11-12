@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import characters.Fish;
 import enemies.Enemy;
+import enemies.Hook;
 import enemies.Net;
 import misc.SeaBottom;
 import misc.Util;
@@ -61,10 +62,9 @@ public class OverfishingGame extends Game {
 		school.add(new Fish(0,300,100,4));
 		
 		enemies = new ArrayList<Enemy>();
-		enemies.add(new Net(0,-1000,Net.LILNET));
-		enemies.add(new Net(1000,-500,Net.LILNET));
+		generateEnemiesIfNeeded();
 		
-		seaBottom = new SeaBottom(500, 1000);
+		seaBottom = new SeaBottom();
 	}
 	
 	
@@ -106,10 +106,33 @@ public class OverfishingGame extends Game {
 		
 		
 	}
-	/**
-	 * changes enemy position in random directions and distances
-	 */
-	private void randomlyMoveNetsAndHooks(){};	
+	
+	
+	private void generateEnemiesIfNeeded(){
+		if(enemies.isEmpty()){
+			enemies.add(new Net(1.5*Util.DISTANCE_TO_EDGE,-1000,Net.LILNET));
+		}
+		int choose;
+		while(enemies.size()<8){
+			choose = (int)Math.random()*4;
+			switch(choose){
+				case 0:
+					enemies.add(new Net(enemies.get(enemies.size()-1).getX()+1000,-1000,Net.LILNET));
+				case 1:
+					enemies.add(new Hook(enemies.get(enemies.size()-1).getX()+1000,-1000,Hook.SINGLE));
+				case 2:
+					enemies.add(new Hook(enemies.get(enemies.size()-1).getX()+1000,-1000,Hook.DOUBLE_1));
+				case 4:
+					enemies.add(new Hook(enemies.get(enemies.size()-1).getX()+1000,-1000,Hook.DOUBLE_2));
+					
+			}
+		}
+	}
+	
+	private void removePastEnemies(){
+		
+	}
+	
 	
 	/**
 	 * checks for a collision between fish and enemy and adds 1 to numFishLost if true

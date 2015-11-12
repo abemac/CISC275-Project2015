@@ -9,15 +9,11 @@ public class SeaBottom implements Renderable,Tickable {
 	private int xPos=-Util.DISTANCE_TO_EDGE;;
 	private int xPos2 = Util.DISTANCE_TO_EDGE*3-30;
 	
-	private int topY,botY;
 	
 	private static BufferedImage seaFloor;
 	
 	
-	public SeaBottom(int topY,int botY){
-		this.topY = topY;
-		this.botY = botY;
-
+	public SeaBottom(){
 		loadRes();
 		
 	}

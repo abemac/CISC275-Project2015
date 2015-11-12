@@ -12,8 +12,11 @@ public class Hook extends Enemy {
 	 * 
 	 */
 	private static final long serialVersionUID = -4415134457991027093L;
-	private int size;
+	public static final int SINGLE=0;
+	public static final int DOUBLE_1=1;
+	public static final int DOUBLE_2=2;
 	
+	private int type;
 	
 	/**
 	 * Creates a hook with initial x,y,and size
@@ -21,9 +24,9 @@ public class Hook extends Enemy {
 	 * @param yPos the initial y position
 	 * @param size the size of this hook
 	 */
-	public Hook(double xPos,double yPos,int size){
+	public Hook(double xPos,double yPos,int type){
 		super (xPos,yPos);
-		this.size = size;
+		this.type = type;
 	}
 
 	/**
@@ -49,10 +52,10 @@ public class Hook extends Enemy {
 
 	/**
 	 * 
-	 * @return the size of the hook
+	 * @return the type of the hook
 	 */
-	public int getSize(){
-		return size;
+	public int getType(){
+		return type;
 	}
 	
 	
