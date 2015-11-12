@@ -67,7 +67,7 @@ public class Net extends Enemy {
 	@Override
 	public void act() {
 		moveUpAndDown();
-		
+		xPos-=6;
 	}
 	
 	public void render(Graphics2D g){
@@ -100,7 +100,7 @@ public class Net extends Enemy {
 			yPos+=8;
 		}
 		
-		xPos-=6;
+		
 	}
 	
 	/**
