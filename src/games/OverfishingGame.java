@@ -131,7 +131,7 @@ public class OverfishingGame extends Game {
 		int i =0;
 		int choose;
 		while(i<12){
-			System.out.println(i%4);
+			//System.out.println(i%4);  //GOOD
 			switch(i%4){
 				case 0:
 					enemyBank.add(new Net(0,-1000,Net.LILNET));break;
