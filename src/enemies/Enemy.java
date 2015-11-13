@@ -22,6 +22,8 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	protected double yPos;
 	protected int health;			//Enemy has health
 	
+	private int myIndex;
+	
 	/**
 	 * Creates an Enemy with initial x,y and health
 	 * 
@@ -100,6 +102,11 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	}
 	
 	
-	
+	public void setIndex(int i){
+		this.myIndex=i;
+	}
+	public int getIndex(){
+		return myIndex;
+	}
 		
 }
