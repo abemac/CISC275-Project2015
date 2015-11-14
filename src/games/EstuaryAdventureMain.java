@@ -12,7 +12,7 @@ import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
 import view.EstuaryView;
-import view.EstuaryView2;
+
 /**
  * This main control structure of this game is very similar to an online 
  * tutorial series entitled "Java Game Development"  
@@ -101,7 +101,6 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	public void run() {
 		view.requestFocus();
 		lastTime = System.nanoTime();
-		//view.render(state);
 		while (running) {
 			now = System.nanoTime();
 			deltaNs += (now - lastTime);
