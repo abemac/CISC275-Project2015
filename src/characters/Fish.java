@@ -112,7 +112,6 @@ public class Fish extends Character {
 		if(rightPressed || leftPressed)
 			lagC=lagC>0.1 ? lagC-0.1:0;
 		
-		
 		yPos+=yVel;
 		if(yVel>.15){
 			yVel-=.15;
@@ -172,17 +171,21 @@ public class Fish extends Character {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			leftPressed = true;
+				leftPressed = true;
+				rightPressed=false;
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-			rightPressed = true;
+				rightPressed = true;
+				leftPressed=false;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
-			upPressed = true;
+				upPressed = true;
+				downPressed=false;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
-			downPressed= true;
+				downPressed= true;
+				upPressed=false;
 		}
 		
 		
@@ -192,14 +195,10 @@ public class Fish extends Character {
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			leftPressed = false;
-			if(!rightPressed)
-				lagC=lag;
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed = false;
-			if(!leftPressed)
-				lagC=lag;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upPressed = false;
