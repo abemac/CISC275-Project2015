@@ -1,5 +1,7 @@
 package misc;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class ArbitraryLine {
@@ -21,14 +23,14 @@ public class ArbitraryLine {
 	 * @param xScale
 	 * @param yOffset
 	 */
-	public ArbitraryLine(int[] pts,int xScale,int yOffset){
+	public ArbitraryLine(int[] pts,double xScale,double yScale,double yOffset){
 		points=new ArrayList<Point>();
 		this.xScale=xScale;
 		this.yOffset=yOffset;
 		
 		int i=0;
 		while(i<pts.length-1){
-			points.add(new Point(pts[i]*xScale, pts[i+1]+yOffset));
+			points.add(new Point(pts[i]*xScale, pts[i+1]*yScale+yOffset));
 			i+=2;
 		}
 		calculateSlopes();
@@ -40,8 +42,10 @@ public class ArbitraryLine {
 	 * positive slope is actually downward due to screen coordinates
 	 */
 	private void calculateSlopes(){
+		slopes=new ArrayList<Double>();
 		for(int i=0;i<points.size()-1;i++){
 			slopes.add((points.get(i+1).y-points.get(i).y)/(points.get(i+1).x-points.get(i).x));
+			//System.out.println(slopes.get(i));
 		}
 		
 	}
@@ -56,12 +60,11 @@ public class ArbitraryLine {
 	public boolean isBelowLine(double x, double y){
 		
 		int i=0;
-		if(xPos+points.get(i).x>x || x>points.get(points.size()-1).x){
+		if(xPos+points.get(0).x>=x || x>=xPos+points.get(points.size()-1).x){
 			return false;
 		}
-		while(xPos+points.get(i+1).x<x){i++;}
-	
-		return Util.isBelowSlope(points.get(i), slopes.get(i), x, y);
+		while(xPos+points.get(++i).x<x){}
+		return Util.isBelowSlope(xPos+points.get(i).x,points.get(i).y, slopes.get(i-1), x, y);
 	}
 	
 	
@@ -73,6 +76,16 @@ public class ArbitraryLine {
 	}
 	
 	
+	
+	public void testRender(Graphics2D g){
+		int i=0;
+		while(i<points.size()-1){
+			g.setColor(Color.BLACK);
+			g.drawLine((int)(xPos+points.get(i).x), (int)points.get(i).y, (int)(xPos+points.get(i+1).x), (int)points.get(i+1).y);
+			i++;
+		}
+		
+	}
 	
 	
 	

@@ -101,4 +101,11 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 		health-=h;
 	}
 	
+	public void setX(double x){
+		this.xPos=x;
+	}
+	public void setY(double y){
+		this.yPos=y;
+	}
+	
 }

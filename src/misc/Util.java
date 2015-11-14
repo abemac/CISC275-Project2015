@@ -33,8 +33,8 @@ public class Util {
 	 * @param y
 	 * @return
 	 */;
-	public static boolean isBelowSlope(Point start,double slope,double x,double y){
-		return (y>(start.y+slope*(x-start.x)));
+	public static boolean isBelowSlope(double startx,double starty,double slope,double x,double y){
+		return (y>(starty+slope*(x-startx)));
 	
 	}
 	

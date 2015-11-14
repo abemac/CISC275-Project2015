@@ -32,7 +32,9 @@ public class Fish extends Character {
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	
+	private boolean stopCheating=false;
 	private double angle,angleVel;
+	
 	
 	/**
 	 * Creates a fish with initial x,y, and health
@@ -70,7 +72,6 @@ public class Fish extends Character {
 	
 	@Override
 	public void onTick(){
-		
 		if(leftPressed && !rightPressed){
 			xVel=-5+lagC;
 			lostGround-=lagC;
@@ -96,7 +97,7 @@ public class Fish extends Character {
 			if(angle>-Math.PI/10.0f)
 				angleVel=-.01;
 		}
-		else if(downPressed){
+		else if(downPressed && !stopCheating){
 			yVel=6;
 			if(angle<Math.PI/10.0f)
 				angleVel=.01;
@@ -155,11 +156,14 @@ public class Fish extends Character {
 		
 	}
 	
+	
 	public boolean hasCollided(){
 		return hasCollided;
 	}
 	
-	
+	public void setStopCheating(boolean b){
+		this.stopCheating = b;
+	}
 
 	/////*** listeners ***///////
 	@Override

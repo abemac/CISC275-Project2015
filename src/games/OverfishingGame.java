@@ -78,6 +78,7 @@ public class OverfishingGame extends Game {
 	/**
 	 * gets called at 60Hz to generate changes to the game
 	 */
+	boolean oneFishIn=false;
 	@Override
 	public void onTick() {				
 		for(Enemy e : enemies){
@@ -85,7 +86,23 @@ public class OverfishingGame extends Game {
 		}
 		for(Fish f : school){
 			f.onTick();
+			if(seaBottom.isIn(f)){
+				oneFishIn=true;
+			}
 		}
+		if(oneFishIn){
+			for(Fish f:school){
+				f.setY(f.getY()-6);
+				f.setStopCheating(true);
+			}
+		}else{
+			for(Fish f:school){
+				f.setStopCheating(false);
+			}
+		}
+		
+		oneFishIn=false;
+		
 		seaBottom.onTick();
 		
 		limiter++;
