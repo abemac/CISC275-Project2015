@@ -78,7 +78,7 @@ public class OverfishingGame extends Game {
 	/**
 	 * gets called at 60Hz to generate changes to the game
 	 */
-	boolean oneFishIn=false;
+	boolean oneFishIn,leftEdge,rightEdge,topEdge=false;
 	@Override
 	public void onTick() {				
 		for(Enemy e : enemies){
@@ -89,7 +89,35 @@ public class OverfishingGame extends Game {
 			if(seaBottom.isIn(f)){
 				oneFishIn=true;
 			}
+			if(f.getX()<-Util.DISTANCE_TO_EDGE){
+				leftEdge=true;
+			}
+			if(f.getX()>Util.DISTANCE_TO_EDGE){
+				rightEdge=true;
+			}
+			if(f.getY()<-1000){
+				topEdge=true;
+			}
 		}
+		if(leftEdge){
+			for(Fish f  : school){
+				f.setX(f.getX()+5);
+			}
+		}
+		else if (rightEdge){
+			for(Fish f  : school){
+				f.setX(f.getX()-5);
+			}
+		}
+		
+		if(topEdge){
+			for(Fish f  : school){
+				f.setY(f.getY()+5);
+			}
+		}
+		leftEdge=false;
+		rightEdge=false;
+		topEdge=false;
 		if(oneFishIn){
 			for(Fish f:school){
 				f.setY(f.getY()-6);

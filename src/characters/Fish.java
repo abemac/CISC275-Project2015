@@ -36,6 +36,8 @@ public class Fish extends Character {
 	private double angle,angleVel;
 	
 	
+	
+	
 	/**
 	 * Creates a fish with initial x,y, and health
 	 * @param xPos the initial x position
@@ -58,6 +60,7 @@ public class Fish extends Character {
 		loadRes();
 		this.lag = lag;
 		lagC=lag;
+		
 	}
 	
 	
