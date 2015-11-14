@@ -24,6 +24,21 @@ public class Util {
 				y>=rb.getY() && y <=rb.getY() + rb.getYLength());
 			
 	}
+	
+	/**
+	 * takes SCALED coordinates
+	 * @param start
+	 * @param slope
+	 * @param x
+	 * @param y
+	 * @return
+	 */;
+	public static boolean isBelowSlope(Point start,double slope,double x,double y){
+		return (y>(start.y+slope*(x-start.x)));
+	
+	}
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////
 	public static void setCanvasWidth(int width){
 		if(CANVAS_WIDTH==-1){

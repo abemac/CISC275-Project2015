@@ -138,9 +138,9 @@ public class OverfishingGame extends Game {
 				case 1:
 					enemyBank.add(new Hook(0,-1000,Hook.SINGLE));break;
 				case 2:
-					enemyBank.add(new Hook(0,-1000,Hook.DOUBLE_1));break;
+					enemyBank.add(new Hook(0,-500,Hook.DOUBLE_1));break;
 				case 3:
-					enemyBank.add(new Hook(0,-1000,Hook.DOUBLE_2));break;
+					enemyBank.add(new Hook(0,-1500,Hook.DOUBLE_2));break;
 			}
 			
 			i++;
