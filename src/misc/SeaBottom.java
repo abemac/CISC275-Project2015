@@ -49,5 +49,12 @@ public class SeaBottom implements Renderable,Tickable {
 	}
 	
 	
+	public boolean isIn(characters.Character c){
+		
+		
+		
+		return true;
+	}
+	
 
 }
