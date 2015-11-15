@@ -168,7 +168,8 @@ public class Hook extends Enemy {
 		}
 		
 		if (type==DOUBLE_1){
-			
+			return(fish.getX()>xPos+200 && fish.getX()<xPos+400 &&
+					fish.getY()>yPos+1100 && fish.getY()<yPos+1400);
 		}
 		if(type==DOUBLE_2){
 			
