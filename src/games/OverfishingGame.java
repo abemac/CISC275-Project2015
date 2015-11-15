@@ -239,10 +239,7 @@ public class OverfishingGame extends Game {
 			while(i.hasNext()){
 				Fish f = i.next();
 				if(e.isIn(f)){
-					f.setCaptured(true);
-					if(e instanceof Net){
-						((Net)e).addAttachedFish(f);
-					}
+					e.addAttachedFish(f);
 					i.remove();
 				}
 			}

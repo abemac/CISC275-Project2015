@@ -37,7 +37,8 @@ public class Fish extends Character {
 	
 	private boolean captured=false;
 	
-	
+	private static int next;
+	private final int whichDeath=(++next%4);
 	
 	/**
 	 * Creates a fish with initial x,y, and health
@@ -62,6 +63,10 @@ public class Fish extends Character {
 		this.lag = lag;
 		lagC=lag;
 		
+	}
+	
+	public int getWhichDeath(){
+		return 0;
 	}
 	
 	

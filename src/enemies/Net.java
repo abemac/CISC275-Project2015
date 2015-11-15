@@ -129,7 +129,7 @@ public class Net extends Enemy {
 
 	
 	public boolean isIn(Fish f){
-		return (f.getX()>xPos+100 && f.getX()<xPos+200 &&
+		return (f.getX()>xPos+200 && f.getX()<xPos+300 &&
 				f.getY() > yPos+850 && f.getY()<yPos+1200);
 	}
 	

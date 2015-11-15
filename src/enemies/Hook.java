@@ -3,6 +3,7 @@ package enemies;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import characters.Fish;
 import misc.SpriteSheet;
@@ -26,6 +27,8 @@ public class Hook extends Enemy {
 	
 	private boolean up,down;
 	
+	private ArrayList<Fish> attachedFish;
+	
 	private int type;
 	
 	/**
@@ -40,6 +43,8 @@ public class Hook extends Enemy {
 		up=false;
 		down=true;
 		loadRes();
+		
+		attachedFish=new ArrayList<Fish>();
 	}
 
 	private void loadRes(){
@@ -56,7 +61,6 @@ public class Hook extends Enemy {
 		}
 	}
 	
-	
 	/**
 	 * implements the act() method from Enemy
 	 */
@@ -64,6 +68,57 @@ public class Hook extends Enemy {
 	public void act() {
 		moveUpAndDown();
 		xPos-=6;
+		
+		for(Fish f : attachedFish){
+			if(type==SINGLE){
+				if(f.getWhichDeath()==0){
+					f.setX(xPos+250);
+					f.setY(yPos+1400);
+					f.setAngle(-Math.PI/4f);
+				}if(f.getWhichDeath()==1){
+					f.setX(xPos+450);
+					f.setY(yPos+1650);
+					f.setAngle(-Math.PI/2f-Math.PI/8f);
+				}
+				if(f.getWhichDeath()==2){
+					f.setX(xPos+720);
+					f.setY(yPos+1300);
+					f.setAngle(-Math.PI-Math.PI/7f);
+				}
+				if(f.getWhichDeath()==3){
+					f.setX(xPos+360);
+					f.setY(yPos+1200);
+					f.setAngle(Math.PI/4f);
+				}
+				
+			}
+			if (type==DOUBLE_1){
+				if(f.getWhichDeath()==0){
+					f.setX(xPos+250);
+					f.setY(yPos+1400);
+					f.setAngle(-Math.PI/4f);
+				}if(f.getWhichDeath()==1){
+					f.setX(xPos+450);
+					f.setY(yPos+1650);
+					f.setAngle(-Math.PI/2f-Math.PI/8f);
+				}
+				if(f.getWhichDeath()==2){
+					f.setX(xPos+720);
+					f.setY(yPos+1300);
+					f.setAngle(-Math.PI-Math.PI/7f);
+				}
+				if(f.getWhichDeath()==3){
+					f.setX(xPos+360);
+					f.setY(yPos+1200);
+					f.setAngle(Math.PI/4f);
+				}
+			}
+			if(type==DOUBLE_2){
+				//f.setX(xPos);
+				//f.setY(0);
+			}
+		}
+		
 		
 	}
 	
@@ -77,6 +132,11 @@ public class Hook extends Enemy {
 		}else if (type==DOUBLE_2){
 			g.drawImage(hooks.getSprite(1, 3),(int)xPos,(int)yPos,800,1500,null);
 		}
+		
+		for(Fish f: attachedFish){
+			f.render(g);
+		}
+		
 	}
 	
 	/**
@@ -102,7 +162,27 @@ public class Hook extends Enemy {
 	
 	public boolean isIn(Fish fish){
 		
+		if(type==SINGLE){
+			return(fish.getX()>xPos+200 && fish.getX()<xPos+400 &&
+					fish.getY()>yPos+1100 && fish.getY()<yPos+1400);
+		}
+		
+		if (type==DOUBLE_1){
+			
+		}
+		if(type==DOUBLE_2){
+			
+		}
+		
 		return false;
+	}
+	
+	
+	public void addAttachedFish(Fish f){
+		attachedFish.add(f);
+	}
+	public void removeAttachedFish(){
+		attachedFish.clear();
 	}
 	
 
