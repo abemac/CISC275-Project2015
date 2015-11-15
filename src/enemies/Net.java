@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import characters.Fish;
 import misc.Util;
@@ -33,6 +34,7 @@ public class Net extends Enemy {
 	 */
 	private int type; 
 	
+	private ArrayList<Fish> attachedFish;
 	private boolean up,down;
 	
 	private static BufferedImage lilNet;
@@ -50,6 +52,7 @@ public class Net extends Enemy {
 		loadRes();
 		up=false;
 		down=true;
+		attachedFish = new ArrayList<Fish>();
 	}
 	
 	
@@ -69,12 +72,24 @@ public class Net extends Enemy {
 	public void act() {
 		moveUpAndDown();
 		xPos-=6;
+			
+		for(Fish f: attachedFish){
+			f.setX(xPos+250+Math.random()*200);
+			f.setY(yPos+950+Math.random()*100);
+			//f.setAngle(Math.random()*2*Math.PI);
+		}
+		
 	}
 	
 	public void render(Graphics2D g){
 		g.drawImage(lilNetUnderlay, (int)xPos+200,(int) yPos+10,600,1300, null);
 		g.setColor(Color.YELLOW);
 		g.fillRect((int)xPos+113+200, -1000, 30, (int) (1955+yPos));
+		
+		for(Fish f: attachedFish){
+			f.render(g);
+		}
+		
 	}
 	
 	public void render2(Graphics2D g) {
@@ -114,11 +129,16 @@ public class Net extends Enemy {
 
 	
 	public boolean isIn(Fish f){
-		return (f.getX()>xPos && f.getX()<xPos+600 &&
-				f.getY() > yPos && f.getY()<yPos+1300);
+		return (f.getX()>xPos+100 && f.getX()<xPos+200 &&
+				f.getY() > yPos+850 && f.getY()<yPos+1200);
+	}
+	
+	public void addAttachedFish(Fish f){
+		attachedFish.add(f);
 	}
 	
 	
-	
-	
+	public void removeAttachedFish(){
+		attachedFish.clear();
+	}
 }

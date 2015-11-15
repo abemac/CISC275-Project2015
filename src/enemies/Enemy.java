@@ -111,5 +111,7 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	}
 	
 	public boolean isIn(Fish fish){return false;}
+	public void removeAttachedFish(){}
+	public void addAttachedFish(Fish f){}
 		
 }

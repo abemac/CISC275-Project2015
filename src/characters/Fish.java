@@ -35,6 +35,7 @@ public class Fish extends Character {
 	private boolean stopCheating=false;
 	private double angle,angleVel;
 	
+	private boolean captured=false;
 	
 	
 	
@@ -164,10 +165,25 @@ public class Fish extends Character {
 		return hasCollided;
 	}
 	
+	public void setCaptured(boolean b){
+		this.captured=b;
+	}
+	
+	public boolean isCaptured(){
+		return captured;
+	}
+	
 	public void setStopCheating(boolean b){
 		this.stopCheating = b;
 	}
-
+	
+	public void setAngle(double rad){
+		this.angle=rad;
+	}
+	
+	public void increaseAngle(double rads){
+		angle+=rads;
+	}
 	/////*** listeners ***///////
 	@Override
 	public void keyTyped(KeyEvent e) {

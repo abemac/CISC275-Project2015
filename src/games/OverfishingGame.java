@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Iterator;
 
 import characters.Fish;
 import enemies.Enemy;
@@ -139,6 +139,9 @@ public class OverfishingGame extends Game {
 			removeNotNeeded();
 			limiter=0;
 		}
+		
+		
+		checkAndRemoveFish();
 	}
 	
 	private long limiter=0;
@@ -153,7 +156,7 @@ public class OverfishingGame extends Game {
 			e.render(g);
 		}
 		for(Fish f : school){
-			f.render(g);
+				f.render(g);
 		}
 		
 		for(Enemy e : enemies){
@@ -210,6 +213,7 @@ public class OverfishingGame extends Game {
 	private void removeNotNeeded(){
 		if(enemies.get(0).getX()<-2*Util.DISTANCE_TO_EDGE){
 			enemiesAvailable.add(enemies.get(0).getIndex());
+			enemies.get(0).removeAttachedFish();
 			enemies.remove(0);
 			generateNewEnemy();
 		}
@@ -231,7 +235,17 @@ public class OverfishingGame extends Game {
 	 */
 	private void checkAndRemoveFish(){
 		for(Enemy e : enemies){
-			//for()
+			Iterator<Fish> i = school.iterator();
+			while(i.hasNext()){
+				Fish f = i.next();
+				if(e.isIn(f)){
+					f.setCaptured(true);
+					if(e instanceof Net){
+						((Net)e).addAttachedFish(f);
+					}
+					i.remove();
+				}
+			}
 		}
 		
 	}
