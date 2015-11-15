@@ -3,6 +3,7 @@ package enemies;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 
+import characters.Fish;
 import misc.Renderable;
 import misc.Tickable;
 
@@ -108,5 +109,7 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	public int getIndex(){
 		return myIndex;
 	}
+	
+	public boolean isIn(Fish fish){return false;}
 		
 }

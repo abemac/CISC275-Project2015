@@ -36,7 +36,6 @@ public class EstuaryView extends Canvas{
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
 		Util.setDistanceToEdge(getWidth(), getHeight());
 		Util.setCanvasHeight(getHeight());
 		Util.setCanvasWidth(getWidth());

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import characters.Fish;
 import misc.SpriteSheet;
 import misc.Util;
 
@@ -99,6 +100,10 @@ public class Hook extends Enemy {
 		}
 	}
 	
+	public boolean isIn(Fish fish){
+		
+		return false;
+	}
 	
 
 	/**

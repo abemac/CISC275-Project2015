@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import characters.Fish;
 import misc.Util;
 
 /**
@@ -111,6 +112,11 @@ public class Net extends Enemy {
 		return type;
 	}
 
+	
+	public boolean isIn(Fish f){
+		return (f.getX()>xPos && f.getX()<xPos+600 &&
+				f.getY() > yPos && f.getY()<yPos+1300);
+	}
 	
 	
 	

@@ -229,7 +229,12 @@ public class OverfishingGame extends Game {
 	/**
 	 * checks for a collision between fish and enemy and adds 1 to numFishLost if true
 	 */
-	private void checkAndRemoveFish(){}
+	private void checkAndRemoveFish(){
+		for(Enemy e : enemies){
+			//for()
+		}
+		
+	}
 
 
 	/**
