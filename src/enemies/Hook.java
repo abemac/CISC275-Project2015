@@ -195,11 +195,11 @@ public class Hook extends Enemy {
 		}
 		
 		if (type==DOUBLE_1){
-			return(fish.getX()>xPos+200 && fish.getX()<xPos+700 &&
+			return(fish.getX()>xPos+100 && fish.getX()<xPos+500 &&
 					fish.getY()>yPos+1200 && fish.getY()<yPos+1400);
 		}
 		if(type==DOUBLE_2){
-			return(fish.getX()>xPos+200 && fish.getX()<xPos+700 &&
+			return(fish.getX()>xPos+100 && fish.getX()<xPos+500 &&
 					fish.getY()>yPos+1200 && fish.getY()<yPos+1400);
 		}
 		
