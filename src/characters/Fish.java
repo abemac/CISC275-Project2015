@@ -66,7 +66,7 @@ public class Fish extends Character {
 	}
 	
 	public int getWhichDeath(){
-		return 0;
+		return whichDeath;
 	}
 	
 	

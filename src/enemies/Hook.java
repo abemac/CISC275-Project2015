@@ -93,29 +93,56 @@ public class Hook extends Enemy {
 				
 			}
 			if (type==DOUBLE_1){
-				if(f.getWhichDeath()==0){
-					f.setX(xPos+250);
-					f.setY(yPos+1400);
-					f.setAngle(-Math.PI/4f);
-				}if(f.getWhichDeath()==1){
-					f.setX(xPos+450);
-					f.setY(yPos+1650);
-					f.setAngle(-Math.PI/2f-Math.PI/8f);
+				if(f.getWhichDeath()==0 || f.getWhichDeath()==1){
+					if(f.getX()<xPos+300){
+						f.setX(xPos+250);
+						f.setY(yPos+1400);
+						f.setAngle(-Math.PI/4f);
+					}
+					if(f.getX()>xPos+300){
+						f.setX(xPos+550);
+						f.setY(yPos+1300);
+						f.setAngle(Math.PI/4f);
+					}
 				}
-				if(f.getWhichDeath()==2){
-					f.setX(xPos+720);
-					f.setY(yPos+1300);
-					f.setAngle(-Math.PI-Math.PI/7f);
-				}
-				if(f.getWhichDeath()==3){
-					f.setX(xPos+360);
-					f.setY(yPos+1200);
-					f.setAngle(Math.PI/4f);
+				if(f.getWhichDeath()==2 || f.getWhichDeath()==3){
+					if(f.getX()<xPos+300){
+						f.setX(xPos+220);
+						f.setY(yPos+1150);
+						f.setAngle(Math.PI/4f);
+					}
+					if(f.getX()>xPos+300){
+						f.setX(xPos+750);
+						f.setY(yPos+1275);
+						f.setAngle(-5*Math.PI/4f);
+					}
 				}
 			}
 			if(type==DOUBLE_2){
-				//f.setX(xPos);
-				//f.setY(0);
+				if(f.getWhichDeath()==0 || f.getWhichDeath()==1){
+					if(f.getX()<xPos+300){
+						f.setX(xPos+250);
+						f.setY(yPos+1400);
+						f.setAngle(-Math.PI/4f);
+					}
+					if(f.getX()>xPos+300){
+						f.setX(xPos+550);
+						f.setY(yPos+1300);
+						f.setAngle(Math.PI/4f);
+					}
+				}
+				if(f.getWhichDeath()==2 || f.getWhichDeath()==3){
+					if(f.getX()<xPos+300){
+						f.setX(xPos+220);
+						f.setY(yPos+1150);
+						f.setAngle(Math.PI/4f);
+					}
+					if(f.getX()>xPos+300){
+						f.setX(xPos+750);
+						f.setY(yPos+1275);
+						f.setAngle(-5*Math.PI/4f);
+					}
+				}
 			}
 		}
 		
@@ -164,15 +191,16 @@ public class Hook extends Enemy {
 		
 		if(type==SINGLE){
 			return(fish.getX()>xPos+200 && fish.getX()<xPos+400 &&
-					fish.getY()>yPos+1100 && fish.getY()<yPos+1400);
+					fish.getY()>yPos+1200 && fish.getY()<yPos+1400);
 		}
 		
 		if (type==DOUBLE_1){
-			return(fish.getX()>xPos+200 && fish.getX()<xPos+400 &&
-					fish.getY()>yPos+1100 && fish.getY()<yPos+1400);
+			return(fish.getX()>xPos+200 && fish.getX()<xPos+700 &&
+					fish.getY()>yPos+1200 && fish.getY()<yPos+1400);
 		}
 		if(type==DOUBLE_2){
-			
+			return(fish.getX()>xPos+200 && fish.getX()<xPos+700 &&
+					fish.getY()>yPos+1200 && fish.getY()<yPos+1400);
 		}
 		
 		return false;
