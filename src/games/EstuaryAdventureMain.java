@@ -23,14 +23,11 @@ import view.EstuaryView;
  *
  */
 public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
-
-	
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4347325551128251031L;
-	
+
 	private boolean running= false;
 	private Thread thread;
 	private EstuaryView view;
