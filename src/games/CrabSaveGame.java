@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import enemies.TheHuman;
@@ -27,14 +29,24 @@ public class CrabSaveGame extends Game {
 	private Color sand = new Color(234,208,73);
 	private Color sky = new Color(153,179,211);
 	
+	private BufferedImage sun;
 	
 	/**
 	 * calls the super constructor
 	 */
 	public CrabSaveGame(){
 		super();
+		loadRes();
 	}
 
+	
+	private void loadRes(){
+		try {
+			sun = Util.loadImage("/sun.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * gets called 60 times/sec and handles updates to the game
@@ -50,6 +62,9 @@ public class CrabSaveGame extends Game {
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
 		g.setColor(sky);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 600);
+		
+		g.drawImage(sun, -Util.DISTANCE_TO_EDGE-400,-1600,1000,1300,null);
+		
 	}
 	
 	
