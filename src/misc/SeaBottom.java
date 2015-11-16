@@ -54,8 +54,8 @@ public class SeaBottom implements Renderable,Tickable {
 	public void render(Graphics2D g) {
 		g.drawImage(seaFloor, xPos,250,Util.DISTANCE_TO_EDGE*4,750,null);
 		g.drawImage(seaFloor, xPos2, 250, Util.DISTANCE_TO_EDGE*4, 750, null);
-		//line1.testRender(g);
-		//line2.testRender(g);
+		line1.testRender(g);
+		line2.testRender(g);
 	}
 	
 	

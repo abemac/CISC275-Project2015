@@ -202,6 +202,10 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			System.exit(0);
 		}
 		
+		if(e.getKeyCode()==KeyEvent.VK_2){
+			state=GameState.CRAB_SAVE_GAME;
+		}
+		
 	}
 
 
