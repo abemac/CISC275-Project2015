@@ -15,7 +15,6 @@ public class SeaBottom implements Renderable,Tickable {
 	private static BufferedImage seaFloor;
 	
 	private static final int[] points = {0,250,180,224,292,136,428,144,636,384,912,300,1084,176,1184,180,1300,244,1544,204,1616,172,1732,180,1876,368,2020,376,2372,256,2512,272,2716,340,2880,292,2968,260,3000,250};
-	//private static final int[]points = {0,0,1,0,1,1,2,1};
 	public SeaBottom(){
 		loadRes();
 		line1=new ArbitraryLine(points, Util.DISTANCE_TO_EDGE/750.0,750.0/500.0, 180);

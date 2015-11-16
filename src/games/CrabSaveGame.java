@@ -1,5 +1,6 @@
 package games;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 
 import enemies.TheHuman;
 import enemies.Trash;
+import misc.Util;
 
 /**
  * Models the CrabSaveGame
@@ -22,6 +24,9 @@ public class CrabSaveGame extends Game {
 	private int numTrashPickedup;
 	private ArrayList<Trash> trash;
 	private TheHuman theHuman;
+	private Color sand = new Color(234,208,73);
+	private Color sky = new Color(153,179,211);
+	
 	
 	/**
 	 * calls the super constructor
@@ -41,7 +46,10 @@ public class CrabSaveGame extends Game {
 	}
 	
 	public void render(Graphics2D g){
-		
+		g.setColor(sand);
+		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
+		g.setColor(sky);
+		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 600);
 	}
 	
 	
@@ -85,7 +93,7 @@ public class CrabSaveGame extends Game {
 	
 	
 	public boolean isDone(){
-		return true;
+		return false;
 	}
 
 
