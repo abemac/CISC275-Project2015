@@ -1,10 +1,16 @@
 package misc;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class SpriteSheet {
+public class SpriteSheet implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3078234559033712828L;
+
 	private BufferedImage image;
 	
 	private int rows,cols,rowHeight,colWidth;

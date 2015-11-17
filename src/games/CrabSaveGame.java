@@ -46,7 +46,7 @@ public class CrabSaveGame extends Game {
 		loadRes();
 	}
 	/**
-	 * 
+	 * gets called in the constructor to initialized components of the game
 	 */
 	public void init(){
 		crab=new Crab(0, 0, 100);
@@ -54,6 +54,9 @@ public class CrabSaveGame extends Game {
 	}
 	
 	
+	/**
+	 * loads the resources needed
+	 */
 	private void loadRes(){
 		try {
 			sun = Util.loadImage("/sun.png", this);
@@ -76,7 +79,7 @@ public class CrabSaveGame extends Game {
 	boolean firstDrawn=false;
 	
 	/**
-	 * draws the crabSaveGaem
+	 * draws the crabSaveGame
 	 * @param g the graphcis to draw to
 	 */
 	public void render(Graphics2D g){
@@ -133,7 +136,10 @@ public class CrabSaveGame extends Game {
 	};
 	
 	
-	
+	/**
+	 * returns true if this game isDone
+	 * @return boolean showing whether the game is done or not
+	 */
 	public boolean isDone(){
 		return false;
 	}

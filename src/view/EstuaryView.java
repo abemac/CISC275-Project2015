@@ -15,8 +15,6 @@ import misc.Util;
  */
 public class EstuaryView extends Canvas{
 	
-	
-	
 	/**
 	 * 
 	 */

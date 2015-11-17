@@ -3,9 +3,14 @@ package misc;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class SeaBottom implements Renderable,Tickable {
+public class SeaBottom implements Renderable,Tickable,Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1098311585570336867L;
 	private int xPos=-Util.getDISTANCE_TO_EDGE();;
 	private int xPos2 = Util.getDISTANCE_TO_EDGE()*3-30;
 	
