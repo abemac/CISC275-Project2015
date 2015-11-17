@@ -92,6 +92,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			yPos-=6*(yPos+800)/1500.0;
+			xPos+=-(xPos+200)/250.0;
 		}
 		if(downPressed){
 			if(spriteNum==1){
@@ -103,6 +104,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			yPos+=6*(yPos+1000)/1500.0;
+			xPos+=(xPos+200)/250.0;
 		}
 		
 		if(leftPressed||rightPressed||upPressed||downPressed)
