@@ -56,7 +56,7 @@ public class Crab extends Character{
 		
 	}
 	
-	
+
 	
 	public void onTick(){
 		
@@ -69,7 +69,7 @@ public class Crab extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			xPos-=5;
+			xPos-=10*(yPos+1000)/2000.0;
 		}
 		if(rightPressed){
 			if(spriteNum==1){
@@ -80,7 +80,7 @@ public class Crab extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			xPos+=5;
+			xPos+=10*(yPos+1000)/2000.0;
 		}
 		if(upPressed){
 			if(spriteNum==1){
@@ -91,7 +91,7 @@ public class Crab extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			yPos-=4;
+			yPos-=6*(yPos+800)/1500.0;
 		}
 		if(downPressed){
 			if(spriteNum==1){
@@ -102,7 +102,7 @@ public class Crab extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			yPos+=4;
+			yPos+=6*(yPos+1000)/1500.0;
 		}
 		
 		if(leftPressed||rightPressed||upPressed||downPressed)
@@ -113,7 +113,7 @@ public class Crab extends Character{
 	
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/3.0),(int)( 400+yPos/3.0),null);
+		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/2.5),(int)( 400+yPos/2.5),null);
 	}
 	
 	/**
