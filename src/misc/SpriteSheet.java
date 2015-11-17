@@ -85,7 +85,14 @@ public class SpriteSheet implements Serializable{
 		return img; 
 	}
 	
-	
+	/**
+	 * used to load sprites with a crop in case of raster format exceptions
+	 * @param row the row	
+	 * @param col the columns
+	 * @param xCrop xCrop
+	 * @param yCrop yCrop
+	 * @return
+	 */
 	@SuppressWarnings("unused")
 	private BufferedImage getSubImage(int row, int col,int xCrop, int yCrop){
 	
