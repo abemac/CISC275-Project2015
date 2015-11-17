@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
+import misc.TrashCan;
 import misc.Util;
 
 /**
@@ -28,12 +28,15 @@ public class CrabSaveGame extends Game {
 	private int numTrashPickedup;
 	private ArrayList<Trash> trash;
 	private TheHuman theHuman;
+	private TrashCan trashCan;
 	
 	
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
 	private BufferedImage sun,bg;
+	
+	
 	
 	/**
 	 * calls the super constructor
@@ -45,6 +48,7 @@ public class CrabSaveGame extends Game {
 
 	public void init(){
 		crab=new Crab(0, 0, 100);
+		trashCan=new TrashCan(375, -930);
 	}
 	
 	
@@ -76,6 +80,8 @@ public class CrabSaveGame extends Game {
 		g.drawImage(bg,-Util.getDISTANCE_TO_EDGE(),-1000,null);	
 		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
 		crab.render(g);
+		trashCan.render(g);
+		trashCan.renderOverlay(g);
 		
 	}
 	
