@@ -1,6 +1,7 @@
 package enemies;
 
 import java.awt.Graphics2D;
+
 import java.io.Serializable;
 
 import characters.Fish;
@@ -60,7 +61,9 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	public void onTick(){
 		act();
 	}
-	
+	/**
+	 * 
+	 */
 	public abstract void render(Graphics2D g);
 	
 	/**
@@ -93,25 +96,49 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	public void decreaseHealth(int h){
 		health-=h;
 	}
-	
+	/**
+	 * set the x posintion
+	 * @param x
+	 */
 	public void setX(double x){
 		this.xPos=x;
 	}
-	
+	/**
+	 * set the y position
+	 * @param y
+	 */
 	public void setY(double y){
 		this.yPos=y;
 	}
 	
-	
+	/**
+	 * used for keeping track of available enemies from the enemy  bank
+	 * @param i
+	 */
 	public void setIndex(int i){
 		this.myIndex=i;
 	}
+	/**
+	 * used for keeping track of available enemies from the enemy  bank
+	 * @return
+	 */
 	public int getIndex(){
 		return myIndex;
 	}
-	
+	/**
+	 * detects collision between fish and enemies
+	 * @param fish
+	 * @return
+	 */
 	public boolean isIn(Fish fish){return false;}
+	/**
+	 * removes attached fish
+	 */
 	public void removeAttachedFish(){}
+	/**
+	 * adds an attached fish
+	 * @param f
+	 */
 	public void addAttachedFish(Fish f){}
 		
 }
