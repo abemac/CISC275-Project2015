@@ -5,6 +5,8 @@ package misc;
  *
  */
 public interface Tickable {
-	
+	/**
+	 * implementing interfaces must provide a method for updating at 60Hz
+	 */
 	public void onTick();
 }

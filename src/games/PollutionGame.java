@@ -39,7 +39,9 @@ public class PollutionGame extends Game {
 		
 		
 	}
-	
+	/**
+	 * defines how to draw the pollution game
+	 */
 	public void render(Graphics2D g){
 		
 	}
@@ -67,7 +69,7 @@ public class PollutionGame extends Game {
 	public int getNumRemoved() {
 		return numRemoved;
 	}
-
+	
 	/**
 	 * @return the ArrayList of pollutants
 	 */
@@ -75,6 +77,10 @@ public class PollutionGame extends Game {
 		return pollutants;
 	};
 	
+	/**
+	 * returns whether or not this game is done
+	 * @return boolean whether or not game is done
+	 */
 	public boolean isDone(){
 		return true;
 	}

@@ -3,6 +3,12 @@ package misc;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+/**
+ * SpriteSheet is a helper class for dealing with spriteSheets. 
+ * It loads the image and then can return a sprite at a given row/column
+ * @author abraham
+ *
+ */
 public class SpriteSheet implements Serializable{
 
 	
@@ -18,6 +24,14 @@ public class SpriteSheet implements Serializable{
 	
 	private BufferedImage[][] sprites;
 	
+	/**
+	 * Initialized the sprite sheet
+	 * @param image the entire sprite sheet to get sprite from
+	 * @param rows the number of rows the the sprite sheet
+	 * @param cols the number of columns in the sprite sheet
+	 * @param rowHeight raw row height
+	 * @param colWidth raw row width
+	 */
 	public SpriteSheet(BufferedImage image,int rows,int cols,int rowHeight,int colWidth){
 		this.image=image;
 		this.rows =rows;
@@ -30,11 +44,19 @@ public class SpriteSheet implements Serializable{
 		
 	}
 	
-	
+	/**
+	 * returns a sprite at the given row,column
+	 * @param row the row (starts at 1, not 0!)
+	 * @param col the column (starts at 1, not 0!)
+	 * @return the sprite you wanted
+	 */
 	public BufferedImage getSprite(int row,int col){
 		return sprites[row-1][col-1];
 	}
 	
+	/**
+	 * loads the individuals sprites into the sprites BufferedImage[][]
+	 */
 	private void loadSprites(){
 		int rows2=0;
 		int cols2;
@@ -51,6 +73,12 @@ public class SpriteSheet implements Serializable{
 		
 	}
 	
+	/**
+	 * used in loadSprites() to get subImages
+	 * @param row the row 
+	 * @param col the column
+	 * @return the buffered Image in question
+	 */
 	private BufferedImage getSubImage(int row, int col){
 		
 		BufferedImage img = image.getSubimage((col-1) *(colWidth) , ((row-1) * rowHeight), colWidth, rowHeight);
