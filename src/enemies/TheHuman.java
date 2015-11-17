@@ -37,7 +37,9 @@ public class TheHuman extends Enemy{
 		
 		
 	}
-	
+	/**
+	 * renders graphics
+	 */
 	public void render(Graphics2D g){
 		
 	}

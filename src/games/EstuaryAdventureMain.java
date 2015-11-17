@@ -46,12 +46,16 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private CrabSaveGame crabSaveGame;
 	
 	////////
-	
+	/**
+	 * creates the Main Game by calling init()
+	 */
 	public EstuaryAdventureMain(){
 		init();
 	}
 	
-	
+	/**
+	 * gets called in the constructor to initilize components
+	 */
 	private void init(){
 		view = new EstuaryView();
 		state = GameState.MENU_SCREEN;
@@ -117,7 +121,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 
 	}
 	
-	
+	/**
+	 * gets called at 60Hz in the main game loop
+	 */
 	@Override
 	public void onTick(){
 		if(state == GameState.MENU_SCREEN){
@@ -168,6 +174,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		}
 	}
 	
+	/**
+	 * redraws the screen when an onTick() has occurred.  Gets called right after all tick
+	 */
 	private void updateView(){
 		if(state==GameState.MENU_SCREEN && menu!=null){
 			view.render(menu);	

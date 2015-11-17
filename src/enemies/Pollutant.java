@@ -54,7 +54,9 @@ public class Pollutant extends Enemy {
 		floatDown();
 		
 	}
-	
+	/**
+	 * renders graphics
+	 */
 	public void render(Graphics2D g){
 		
 	}

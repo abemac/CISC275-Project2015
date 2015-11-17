@@ -51,7 +51,9 @@ public class OverfishingGame extends Game {
 		
 		
 	}
-	
+	/**
+	 * gets called in the super constructor and initialize components
+	 */
 	public void init(){
 		school = new ArrayList<Fish>();
 		school.add(new Fish(0, 0,100,2));
@@ -61,7 +63,7 @@ public class OverfishingGame extends Game {
 		school.add(new Fish(100,100,100,1));
 		school.add(new Fish(0,100,100,4));
 		school.add(new Fish(50, 100, 100,2));
-		school.add(new Fish(-250,0,100,3));
+		school.add(new Fish(-200,25,100,3));
 		school.add(new Fish(0, 200,100,2));
 		school.add(new Fish(-100,25,100,4));
 		school.add(new Fish(-250,250,100,5));
@@ -147,6 +149,10 @@ public class OverfishingGame extends Game {
 	}
 	
 	private long limiter=0;
+	/**
+	 * defines how to draw the overfishing game to the screen
+	 * @param g Graphics2D to use to draw
+	 */
 	public void render(Graphics2D g){
 		g.setColor(blue);
 		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
@@ -171,7 +177,10 @@ public class OverfishingGame extends Game {
 	}
 	
 	
-	
+	/**
+	 * generates initial Enemies (12 of them). It does so by choosing from a pre-made 
+	 * enemy bank to avoid deleting and creating ojbects during the game
+	 */
 	private void generatInitialEnemies(){
 		enemyBank = new ArrayList<Enemy>(12);
 		enemiesAvailable =new ArrayList<Integer>(12);
@@ -212,6 +221,10 @@ public class OverfishingGame extends Game {
 		}
 	}
 	
+	/**
+	 * removes enemies off the screen from the list of current enemies, but does not delete them from memory.
+	 * if one is removed, it puts a new enemy on the other end of the screen
+	 */
 	private void removeNotNeeded(){
 		if(enemies.get(0).getX()<-2*Util.getDISTANCE_TO_EDGE()){
 			enemiesAvailable.add(enemies.get(0).getIndex());
@@ -222,7 +235,10 @@ public class OverfishingGame extends Game {
 		
 		
 	}
-	
+	/**
+	 * called in removeNotNeeded() if an enemy has been removed.  Does not
+	 * create a new object in memory, just chooses a new one from the Enemy bank. 
+	 */
 	private void generateNewEnemy(){
 		int choose2 = enemiesAvailable.get(0);
 		enemiesAvailable.remove(0);
@@ -251,7 +267,7 @@ public class OverfishingGame extends Game {
 
 
 	/**
-	 * 
+	 * returns the number of fish lost
 	 * @return the number of fish lost
 	 */
 	public int getNumFishLost() {
@@ -260,7 +276,7 @@ public class OverfishingGame extends Game {
 
 
 	/**
-	 * 
+	 * returns the distance traveled
 	 * @return the distance traveled
 	 */
 	public int getDistance() {
@@ -269,7 +285,7 @@ public class OverfishingGame extends Game {
 
 
 	/**
-	 * 
+	 * returns the current school of fish that are being controlled by the user
 	 * @return the school of fish being controlled by the user
 	 */
 	public ArrayList<Fish> getSchoolofFish() {
@@ -278,14 +294,17 @@ public class OverfishingGame extends Game {
 
 
 	/**
-	 * 
+	 * returns the enemies
 	 * @return all the enemies present in the game
 	 */
 	public ArrayList<Enemy> getEnemies() {
 		return enemies;
 	};		
 	
-	
+	/**
+	 * returns whether or not the game is done
+	 * @return boolean saying whether or not the game is done
+	 */
 	public boolean isDone(){
 		return isDone;
 	}

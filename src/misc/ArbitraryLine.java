@@ -2,13 +2,18 @@ package misc;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ArbitraryLine {
+public class ArbitraryLine implements Serializable{
 
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1316185101345685629L;
 	private ArrayList<Point> points;
 	private ArrayList<Double> slopes;	
 	
