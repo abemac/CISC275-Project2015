@@ -55,7 +55,9 @@ public class Net extends Enemy {
 		attachedFish = new ArrayList<Fish>();
 	}
 	
-	
+	/**
+	 * loads initial net images
+	 */
 	public void loadRes(){
 		try {
 			lilNet = Util.loadImage("/net.png", this);
@@ -80,7 +82,9 @@ public class Net extends Enemy {
 		}
 		
 	}
-	
+	/**
+	 * renders net image
+	 */
 	public void render(Graphics2D g){
 		g.drawImage(lilNetUnderlay, (int)xPos+200,(int) yPos+10,600,1300, null);
 		g.setColor(Color.YELLOW);
@@ -91,7 +95,10 @@ public class Net extends Enemy {
 		}
 		
 	}
-	
+	/**
+	 * renders net image
+	 * @param g
+	 */
 	public void render2(Graphics2D g) {
 		g.drawImage(lilNet, (int)xPos+200,(int) yPos,600,1300, null);
 	}
@@ -127,17 +134,23 @@ public class Net extends Enemy {
 		return type;
 	}
 
-	
+	/**
+	 * detects collison between fish and net
+	 */
 	public boolean isIn(Fish f){
 		return (f.getX()>xPos+200 && f.getX()<xPos+300 &&
 				f.getY() > yPos+850 && f.getY()<yPos+1200);
 	}
-	
+	/**
+	 * add fish to net
+	 */
 	public void addAttachedFish(Fish f){
 		attachedFish.add(f);
 	}
 	
-	
+	/**
+	 * removes fish from net
+	 */
 	public void removeAttachedFish(){
 		attachedFish.clear();
 	}

@@ -13,6 +13,7 @@ import misc.Util;
 
 /**
  * Crab is a model class for the crab character that the player controls
+ * and extends the abstract Character class.
  * @author abraham
  *
  */
@@ -42,7 +43,9 @@ public class Crab extends Character{
 		loadRes();
 	}
 	
-	
+	/**
+	 * loads the crag image used to represent the Crab character
+	 */
 	private void loadRes(){
 		BufferedImage crabs = null;
 		try {
@@ -57,7 +60,9 @@ public class Crab extends Character{
 	}
 	
 
-	
+	/**
+	 * onTick is called 60 times per second and controls the movement of the Crab
+	 */
 	public void onTick(){
 		
 		if(leftPressed){
@@ -113,6 +118,9 @@ public class Crab extends Character{
 			spriteTime=0;
 	}
 	
+	/**
+	 * @param g renders the graphics
+	 */
 	@Override
 	public void render(Graphics2D g){
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/2.5),(int)( 400+yPos/2.5),null);

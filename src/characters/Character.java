@@ -78,11 +78,18 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 		return yPos;
 	} 
 	
-	
+	/**
+	 * returns the X position int value of Character
+	 * @return x Position (int)
+	 */
 	public int getXInt(){
 		return (int)xPos;
 	}
 	
+	/**
+	 * returns the Y position int value of Character
+	 * @return y Position (int)
+	 */
 	public int getYInt(){
 		return (int)yPos;
 	}
@@ -101,9 +108,18 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 		health-=h;
 	}
 	
+	/**
+	 * sets the X position of Character 
+	 * @param x is the initial x position of Character
+	 */
 	public void setX(double x){
 		this.xPos=x;
 	}
+	
+	/**
+	 * sets the Y position of Character
+	 * @param y is the intital y position of Character
+	 */
 	public void setY(double y){
 		this.yPos=y;
 	}

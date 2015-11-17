@@ -62,7 +62,9 @@ public class Trash extends Enemy {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	/**
+	 * renders graphics
+	 */
 	public void render(Graphics2D g){
 		
 	}
