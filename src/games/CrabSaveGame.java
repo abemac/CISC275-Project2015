@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
 import misc.Util;
@@ -26,23 +29,42 @@ public class CrabSaveGame extends Game {
 	private TheHuman theHuman;
 	private Color sand = new Color(234,208,73);
 	private Color sky = new Color(153,179,211);
+	private Color water = new Color(76,90,152);
 	
+	
+	private Crab crab;
+	
+	private BufferedImage sun,pond;
 	
 	/**
 	 * calls the super constructor
 	 */
 	public CrabSaveGame(){
 		super();
+		loadRes();
 	}
 
+	public void init(){
+		crab=new Crab(0, 0, 100);
+	}
+	
+	
+	private void loadRes(){
+		try {
+			sun = Util.loadImage("/sun.png", this);
+			pond = Util.loadImage("/pond.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * gets called 60 times/sec and handles updates to the game
 	 */
 	@Override
 	public void onTick() {
-		moveHuman();
 		
+		crab.onTick();
 	}
 	
 	public void render(Graphics2D g){
@@ -50,6 +72,11 @@ public class CrabSaveGame extends Game {
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
 		g.setColor(sky);
 		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 600);
+		
+		g.drawImage(sun, -Util.DISTANCE_TO_EDGE-400,-1600,1000,1300,null);
+		g.drawImage(pond, -Util.DISTANCE_TO_EDGE, 350, Util.DISTANCE_TO_EDGE*2, 800, null);
+		
+		crab.render(g);
 	}
 	
 	
@@ -99,14 +126,14 @@ public class CrabSaveGame extends Game {
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		crab.keyPressed(arg0);
 		
 	}
 
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		crab.keyReleased(arg0);
 		
 	}
 
