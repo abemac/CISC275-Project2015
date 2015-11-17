@@ -61,7 +61,7 @@ public class OverfishingGame extends Game {
 		school.add(new Fish(100,100,100,1));
 		school.add(new Fish(0,100,100,4));
 		school.add(new Fish(50, 100, 100,2));
-		school.add(new Fish(-250,0,100,3));
+		school.add(new Fish(-200,25,100,3));
 		school.add(new Fish(0, 200,100,2));
 		school.add(new Fish(-100,25,100,4));
 		school.add(new Fish(-250,250,100,5));
