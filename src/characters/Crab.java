@@ -113,7 +113,7 @@ public class Crab extends Character{
 	
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, 400, 400,null);
+		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/3.0),(int)( 400+yPos/3.0),null);
 	}
 	
 	/**
