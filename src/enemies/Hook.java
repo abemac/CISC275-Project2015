@@ -47,6 +47,9 @@ public class Hook extends Enemy {
 		attachedFish=new ArrayList<Fish>();
 	}
 
+	/**
+	 * load hook image
+	 */
 	private void loadRes(){
 		if(hooks==null){
 			BufferedImage hooks_tmp=null;
@@ -148,7 +151,9 @@ public class Hook extends Enemy {
 		
 		
 	}
-	
+	/**
+	 * render graphics
+	 */
 	@Override
 	public void render(Graphics2D g){
 		if(type==SINGLE){
@@ -186,7 +191,9 @@ public class Hook extends Enemy {
 			yPos+=8;
 		}
 	}
-	
+	/**
+	 * collision detection of fish and hook
+	 */
 	public boolean isIn(Fish fish){
 		
 		if(type==SINGLE){
@@ -206,10 +213,15 @@ public class Hook extends Enemy {
 		return false;
 	}
 	
-	
+	/**
+	 * add fish to hook
+	 */
 	public void addAttachedFish(Fish f){
 		attachedFish.add(f);
 	}
+	/**
+	 * remove fish from hook
+	 */
 	public void removeAttachedFish(){
 		attachedFish.clear();
 	}
