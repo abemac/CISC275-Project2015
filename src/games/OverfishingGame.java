@@ -89,10 +89,10 @@ public class OverfishingGame extends Game {
 			if(seaBottom.isIn(f)){
 				oneFishIn=true;
 			}
-			if(f.getX()<-Util.DISTANCE_TO_EDGE){
+			if(f.getX()<-Util.getDISTANCE_TO_EDGE()){
 				leftEdge=true;
 			}
-			if(f.getX()>Util.DISTANCE_TO_EDGE){
+			if(f.getX()>Util.getDISTANCE_TO_EDGE()){
 				rightEdge=true;
 			}
 			if(f.getY()<-1000){
@@ -147,7 +147,7 @@ public class OverfishingGame extends Game {
 	private long limiter=0;
 	public void render(Graphics2D g){
 		g.setColor(blue);
-		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
 		seaBottom.render(g);
 		
 		
@@ -196,7 +196,7 @@ public class OverfishingGame extends Game {
 		
 		choose = enemiesAvailable.get(0);
 		enemiesAvailable.remove(0);
-		enemyBank.get(choose).setX(Util.DISTANCE_TO_EDGE*1.5);
+		enemyBank.get(choose).setX(Util.getDISTANCE_TO_EDGE()*1.5);
 		enemyBank.get(choose).setIndex(choose);
 		enemies.add(enemyBank.get(choose));
 		
@@ -211,7 +211,7 @@ public class OverfishingGame extends Game {
 	}
 	
 	private void removeNotNeeded(){
-		if(enemies.get(0).getX()<-2*Util.DISTANCE_TO_EDGE){
+		if(enemies.get(0).getX()<-2*Util.getDISTANCE_TO_EDGE()){
 			enemiesAvailable.add(enemies.get(0).getIndex());
 			enemies.get(0).removeAttachedFish();
 			enemies.remove(0);
