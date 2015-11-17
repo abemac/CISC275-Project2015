@@ -1,6 +1,8 @@
 package misc;
 
-public enum GameState {
+import java.io.Serializable;
+
+public enum GameState implements Serializable{
 	MENU_SCREEN,
 	OVERFISHING_GAME_ANIMATION,
 	OVERFISHING_GAME,

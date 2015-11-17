@@ -9,9 +9,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener{
+public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener,Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7530214348178987192L;
 	private boolean isDone;
 	private final RectBounds startButton = new RectBounds(-300, -200, 600, 400);
 	private final Font titleFont = new Font("default",Font.BOLD,200);

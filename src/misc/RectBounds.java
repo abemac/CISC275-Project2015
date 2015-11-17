@@ -1,7 +1,13 @@
 package misc;
 
-public class RectBounds {
+import java.io.Serializable;
 
+public class RectBounds implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2844190309772266987L;
 	private int x;
 	private int y;
 	private int xl;

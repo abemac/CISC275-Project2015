@@ -3,10 +3,15 @@ package misc;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class TrashCan implements Tickable,Renderable{
+public class TrashCan implements Tickable,Renderable,Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6648940524863588982L;
 	private double xPos,yPos;
 	private BufferedImage trashCan,trashCanOverlay;
 

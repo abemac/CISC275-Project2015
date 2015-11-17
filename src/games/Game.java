@@ -42,7 +42,10 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	}
 	
 	
-	
+	/**
+	 * returns whether or not the game is Done
+	 * @return boolean representing whether or not the game is done
+	 */
 	public abstract boolean isDone();
 	
 	
