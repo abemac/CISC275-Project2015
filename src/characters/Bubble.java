@@ -39,6 +39,9 @@ public class Bubble extends Character{
 		
 	}
 	
+	/**
+	 * @param g renders the graphics
+	 */
 	@Override
 	public void render(Graphics2D g){
 		

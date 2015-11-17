@@ -65,11 +65,17 @@ public class Fish extends Character {
 		
 	}
 	
+	/**
+	 * How a fish is positioned on a hook when it dies
+	 * @return whichDeath of fish 
+	 */
 	public int getWhichDeath(){
 		return whichDeath;
 	}
 	
-	
+	/*
+	 * loads image of fish
+	 */
 	public void loadRes(){
 		try {
 			if(fish==null)
@@ -79,6 +85,9 @@ public class Fish extends Character {
 		}
 	}
 	
+	/**
+	 * onTick is called 60 times per second and determines how a fish moves
+	 */
 	@Override
 	public void onTick(){
 		if(leftPressed && !rightPressed){
@@ -144,6 +153,9 @@ public class Fish extends Character {
 		
 	}
 	
+	/**
+	 * @param g render 2D graphics of fish
+	 */
 	@Override
 	public void render(Graphics2D g){
 		g.translate(getX(), getY());
@@ -165,27 +177,50 @@ public class Fish extends Character {
 		
 	}
 	
-	
+	/**
+	 * returns if fish has collided with another object 
+	 * @return hasCollided 
+	 */
 	public boolean hasCollided(){
 		return hasCollided;
 	}
 	
+	/**
+	 * sees how a fish has collided, either with net or hook
+	 * @param b sees by which a fish has been captured
+	 */
 	public void setCaptured(boolean b){
 		this.captured=b;
 	}
 	
+	/**
+	 * checks to see if a fish is captured
+	 * @return captured if fish is captured
+	 */
 	public boolean isCaptured(){
 		return captured;
 	}
 	
+	/**
+	 * prevents fish from going below sea floor level
+	 * @param b boolean to set the stopCheating variable
+	 */
 	public void setStopCheating(boolean b){
 		this.stopCheating = b;
 	}
 	
+	/**
+	 * sets the angle of the fish based on the direction that they are moving in
+	 * @param rad double to set the angle of the fish
+	 */
 	public void setAngle(double rad){
 		this.angle=rad;
 	}
 	
+	/**
+	 * increases teh angle of the fish if fish are going in particular direction for extended period of time
+	 * @param rads double to increase the angle of fish
+	 */
 	public void increaseAngle(double rads){
 		angle+=rads;
 	}
