@@ -59,20 +59,56 @@ public class Crab extends Character{
 	
 	
 	public void onTick(){
+		
 		if(leftPressed){
+			if(spriteNum==1){
+				spriteNum=3;
+			}
+			if(spriteTime>=6){
+				spriteTime=0;
+				if(spriteNum==2){spriteNum=3;}
+				else if (spriteNum==3){spriteNum=2;}
+			}
 			xPos-=5;
 		}
 		if(rightPressed){
+			if(spriteNum==1){
+				spriteNum=2;
+			}
+			if(spriteTime>=6){
+				spriteTime=0;
+				if(spriteNum==2){spriteNum=3;}
+				else if (spriteNum==3){spriteNum=2;}
+			}
 			xPos+=5;
 		}
 		if(upPressed){
+			if(spriteNum==1){
+				spriteNum=2;
+			}
+			if(spriteTime>=6){
+				spriteTime=0;
+				if(spriteNum==2){spriteNum=3;}
+				else if (spriteNum==3){spriteNum=2;}
+			}
 			yPos-=4;
 		}
 		if(downPressed){
+			if(spriteNum==1){
+				spriteNum=3;
+			}
+			if(spriteTime>=6){
+				spriteTime=0;
+				if(spriteNum==2){spriteNum=3;}
+				else if (spriteNum==3){spriteNum=2;}
+			}
 			yPos+=4;
 		}
 		
-		
+		if(leftPressed||rightPressed||upPressed||downPressed)
+			spriteTime++;
+		else
+			spriteTime=0;
 	}
 	
 	@Override
@@ -146,15 +182,19 @@ public class Crab extends Character{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			spriteNum=1;
 			leftPressed=false;
 		}if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed=false;
+			spriteNum=1;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upPressed=false;
+			spriteNum=1;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downPressed=false;
+			spriteNum=1;
 		}
 		
 	}
