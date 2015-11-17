@@ -3,9 +3,13 @@ package characters;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import enemies.TheHuman;
 import enemies.Trash;
+import misc.SpriteSheet;
+import misc.Util;
 
 /**
  * Crab is a model class for the crab character that the player controls
@@ -18,36 +22,62 @@ public class Crab extends Character{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2918553662290310728L;
-	private int angriness;		//anger level of crab
+	private static final long serialVersionUID = 2918553662290310728L;	
+	
+	private SpriteSheet sprites;
+	private int spriteNum=1;
+	private int spriteTime=0;
+	
+	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
+	
 	
 	/**
-	 * makes a Character Crab which has xPos, yPos, health, and angriness
+	 * makes a Character Crab which has xPos, yPos, health
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
 	 * @param angriness the initial angriness
 	 */
-	public Crab(double xPos, double yPos, int health,int angriness) {
+	public Crab(double xPos, double yPos, int health) {
 		super(xPos, yPos, health);
-		this.angriness = angriness;
-		// TODO Auto-generated constructor stub
+		loadRes();
 	}
 	
-	/**
-	 * creates a Crab with initial x,y and angriness, with default health value
-	 * @param xPos the initial x position
-	 * @param yPos this initial y posistion
-	 * @param angriness the initial angriness
-	 */
-	public Crab(double xPos, double yPos,int angriness) {
-		super(xPos, yPos);
-		// TODO Auto-generated constructor stub
+	
+	private void loadRes(){
+		BufferedImage crabs = null;
+		try {
+			crabs = Util.loadImage("/crabsprite(150x150).png", this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sprites = new SpriteSheet(crabs, 1, 3, 150, 150);
+		
 	}
 	
+	
+	
+	public void onTick(){
+		if(leftPressed){
+			xPos-=5;
+		}
+		if(rightPressed){
+			xPos+=5;
+		}
+		if(upPressed){
+			yPos-=4;
+		}
+		if(downPressed){
+			yPos+=4;
+		}
+		
+		
+	}
 	
 	@Override
 	public void render(Graphics2D g){
-		
+		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, 400, 400,null);
 	}
 	
 	/**
@@ -99,12 +129,33 @@ public class Crab extends Character{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			leftPressed=true;
+		}if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			rightPressed=true;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP){
+			upPressed=true;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN){
+			downPressed=true;
+		}
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			leftPressed=false;
+		}if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			rightPressed=false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP){
+			upPressed=false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN){
+			downPressed=false;
+		}
 		
 	}
 
