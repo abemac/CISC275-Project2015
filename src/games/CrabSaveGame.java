@@ -31,7 +31,8 @@ public class CrabSaveGame extends Game {
 	
 	
 	private Crab crab;
-	
+	private Color sand = new Color(255,237,108);
+	private Color sky = new Color(130,202,255);
 	private BufferedImage sun,bg;
 	
 	/**
@@ -50,7 +51,7 @@ public class CrabSaveGame extends Game {
 	private void loadRes(){
 		try {
 			sun = Util.loadImage("/sun.png", this);
-			bg= Util.loadImage("/Game2Background.png",Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this);
+			bg= Util.loadImage("/Game2Background(smaller).png",Util.getCANVAS_WIDTH_SCALED(),800, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -68,10 +69,11 @@ public class CrabSaveGame extends Game {
 	boolean firstDrawn=false;
 	public void render(Graphics2D g){
 		
-		//g.setColor(Color.WHITE);
-		//g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
-	
-		g.drawImage(bg,-Util.getDISTANCE_TO_EDGE(),-1000,Util.getCANVAS_WIDTH_SCALED(),2000,null);	
+		g.setColor(sand);
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
+		g.setColor(sky);
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 600);
+		g.drawImage(bg,-Util.getDISTANCE_TO_EDGE(),-1000,null);	
 		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
 		crab.render(g);
 		
