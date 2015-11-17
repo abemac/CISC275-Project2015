@@ -8,7 +8,7 @@ public class TrashCan implements Tickable,Renderable{
 
 	
 	private double xPos,yPos;
-	private BufferedImage trashCan;
+	private BufferedImage trashCan,trashCanOverlay;
 
 	public TrashCan (double xPos,double yPos){
 		this.xPos=xPos;
@@ -19,7 +19,8 @@ public class TrashCan implements Tickable,Renderable{
 	
 	private void loadRes(){
 		try {
-			Util.loadImage("/RubbishBin.png", this);
+			trashCan=Util.loadImage("/RubbishBin.png",400,600, this);
+			trashCanOverlay=Util.loadImage("/RubbishBinOverlay.png",400,600, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -30,6 +31,10 @@ public class TrashCan implements Tickable,Renderable{
 	public void render(Graphics2D g) {
 		g.drawImage(trashCan, (int)xPos, (int)yPos, null);
 		
+	}
+	
+	public void renderOverlay(Graphics2D g){
+		g.drawImage(trashCanOverlay, (int)xPos, (int)yPos, null);
 	}
 
 	@Override

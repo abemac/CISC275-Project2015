@@ -48,7 +48,7 @@ public class CrabSaveGame extends Game {
 
 	public void init(){
 		crab=new Crab(0, 0, 100);
-		trashCan=new TrashCan(0, 0);
+		trashCan=new TrashCan(375, -930);
 	}
 	
 	
@@ -81,6 +81,7 @@ public class CrabSaveGame extends Game {
 		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
 		crab.render(g);
 		trashCan.render(g);
+		trashCan.renderOverlay(g);
 		
 	}
 	
