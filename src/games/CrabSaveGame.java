@@ -45,7 +45,9 @@ public class CrabSaveGame extends Game {
 		super();
 		loadRes();
 	}
-
+	/**
+	 * 
+	 */
 	public void init(){
 		crab=new Crab(0, 0, 100);
 		trashCan=new TrashCan(375, -930);
@@ -72,6 +74,11 @@ public class CrabSaveGame extends Game {
 	}
 	
 	boolean firstDrawn=false;
+	
+	/**
+	 * draws the crabSaveGaem
+	 * @param g the graphcis to draw to
+	 */
 	public void render(Graphics2D g){
 		
 		g.setColor(sand);
