@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
+import misc.TrashCan;
 import misc.Util;
 
 /**
@@ -27,14 +28,15 @@ public class CrabSaveGame extends Game {
 	private int numTrashPickedup;
 	private ArrayList<Trash> trash;
 	private TheHuman theHuman;
-	private Color sand = new Color(234,208,73);
-	private Color sky = new Color(153,179,211);
-	private Color water = new Color(76,90,152);
+	private TrashCan trashCan;
 	
 	
 	private Crab crab;
+	private Color sand = new Color(255,237,108);
+	private Color sky = new Color(130,202,255);
+	private BufferedImage sun,bg;
 	
-	private BufferedImage sun,pond;
+	
 	
 	/**
 	 * calls the super constructor
@@ -46,13 +48,14 @@ public class CrabSaveGame extends Game {
 
 	public void init(){
 		crab=new Crab(0, 0, 100);
+		trashCan=new TrashCan(375, -930);
 	}
 	
 	
 	private void loadRes(){
 		try {
 			sun = Util.loadImage("/sun.png", this);
-			pond = Util.loadImage("/pond.png", this);
+			bg= Util.loadImage("/Game2Background(smaller).png",Util.getCANVAS_WIDTH_SCALED(),800, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,16 +70,19 @@ public class CrabSaveGame extends Game {
 		crab.onTick();
 	}
 	
+	boolean firstDrawn=false;
 	public void render(Graphics2D g){
+		
 		g.setColor(sand);
-		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
 		g.setColor(sky);
-		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 600);
-		
-		g.drawImage(sun, -Util.DISTANCE_TO_EDGE-400,-1600,1000,1300,null);
-		g.drawImage(pond, -Util.DISTANCE_TO_EDGE, 350, Util.DISTANCE_TO_EDGE*2, 800, null);
-		
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 600);
+		g.drawImage(bg,-Util.getDISTANCE_TO_EDGE(),-1000,null);	
+		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
 		crab.render(g);
+		trashCan.render(g);
+		trashCan.renderOverlay(g);
+		
 	}
 	
 	
