@@ -33,7 +33,7 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,KeyListener
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		g.fillRect(-Util.DISTANCE_TO_EDGE, -1000, 2*Util.DISTANCE_TO_EDGE, 2000);
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
 		g.setColor(Color.ORANGE);
 		g.setFont(titleFont); //change size later
 		Util.drawCenteredString("Estuary Adventure!", 0, -500, g);

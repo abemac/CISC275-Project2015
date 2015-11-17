@@ -43,10 +43,7 @@ public class EstuaryView extends Canvas{
 		
 		g.translate(getWidth()/2.0,getHeight()/2.0);
 		g.scale(getHeight()/(2000.0), getHeight()/2000.0);
-		
-		
 		////// DO RENDERING HERE///////
-		//g.rotate(45);
 		
 		r.render(g);
 		
