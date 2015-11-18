@@ -40,17 +40,9 @@ public class Fish extends Character {
 	private static int next;
 	private final int whichDeath=(++next%4);
 	
-	/**
-	 * Creates a fish with initial x,y, and health
-	 * @param xPos the initial x position
-	 * @param yPos the initial y position
-	 * @param health the initial health
-	 */
 	
-	public Fish(double xPos, double yPos, int health) {
-		super(xPos, yPos, health);
-		loadRes();
-	}
+	private double initialX;
+	private static boolean getBack=false;
 	
 	/**
 	 * Creates a fish with initial x,y and default health value
@@ -62,6 +54,7 @@ public class Fish extends Character {
 		loadRes();
 		this.lag = lag;
 		lagC=lag;
+		this.initialX=xPos;
 		
 	}
 	
@@ -90,15 +83,14 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void onTick(){
-		if(leftPressed && !rightPressed){
+		if(leftPressed && !rightPressed && !getBack){
 			xVel=-5+lagC;
 			lostGround-=lagC;
 		}
-		else if(rightPressed && !leftPressed){
+		else if(rightPressed && !leftPressed &&!getBack){
 				xVel=5-lagC;
 				lostGround+=lagC;
 				
-			
 		}else{
 			if(lostGround>3){
 				xVel=5;
@@ -120,6 +112,26 @@ public class Fish extends Character {
 			if(angle<Math.PI/10.0f)
 				angleVel=.01;
 		}
+		
+		if(xPos<-(6f/7f)*Util.getDISTANCE_TO_EDGE()){
+			getBack=true;
+		}
+		if(xPos>(2f/3f)*Util.getDISTANCE_TO_EDGE()){
+			getBack=true;
+		}
+		if(Math.abs(xPos-initialX)<1){
+			getBack=false;
+		}
+		if(getBack){
+			xVel-=(xPos-initialX)/2000.0;
+		}
+		if(xVel<0){
+			if(xVel<-10){xVel=-10;}
+		}else if(xVel>0){
+			if(xVel>10){xVel=10;}
+		}
+		
+		
 		
 		xPos+=xVel;
 		if(xVel>.15){
