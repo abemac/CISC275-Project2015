@@ -31,6 +31,7 @@ public class Fish extends Character {
 	
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
+	private boolean leftReleased,rightReleased=false;
 	
 	private boolean stopCheating=false;
 	private double angle,angleVel;
@@ -43,6 +44,8 @@ public class Fish extends Character {
 	
 	private double initialX;
 	private static boolean getBack=false;
+	private boolean myGetBack=false;
+	private long getBackTimer=0;
 	
 	/**
 	 * Creates a fish with initial x,y and default health value
@@ -66,7 +69,7 @@ public class Fish extends Character {
 		return whichDeath;
 	}
 	
-	/*
+	/**
 	 * loads image of fish
 	 */
 	public void loadRes(){
@@ -83,6 +86,19 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void onTick(){
+		if(leftReleased){
+			leftPressed = false;
+			if(!rightPressed)
+				lagC=lag;
+			leftReleased=false;
+		}
+		if(rightReleased){
+			rightPressed = false;
+			if(!leftPressed)
+				lagC=lag;
+			rightReleased=false;
+		}
+		
 		if(leftPressed && !rightPressed && !getBack){
 			xVel=-5+lagC;
 			lostGround-=lagC;
@@ -115,13 +131,16 @@ public class Fish extends Character {
 		
 		if(xPos<-(6f/7f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
+			
 		}
 		if(xPos>(3f/4f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
+			
 		}
-		if(Math.abs(xPos-initialX)<2 && getBack){
+		if(Math.abs(xPos-initialX)<8 && (getBack )){
 			xPos=initialX;
 			getBack=false;
+			getBackTimer=0;
 		}
 		if(getBack){
 			xVel-=(xPos-initialX)/2000.0;
@@ -270,15 +289,13 @@ public class Fish extends Character {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			leftPressed = false;
-			if(!rightPressed)
-				lagC=lag;
+			leftReleased=true;
+			
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-			rightPressed = false;
-			if(!leftPressed)
-				lagC=lag;
+			rightReleased=true;
+			
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upPressed = false;
