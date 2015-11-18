@@ -116,10 +116,11 @@ public class Fish extends Character {
 		if(xPos<-(6f/7f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
 		}
-		if(xPos>(2f/3f)*Util.getDISTANCE_TO_EDGE()){
+		if(xPos>(3f/4f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
 		}
-		if(Math.abs(xPos-initialX)<1){
+		if(Math.abs(xPos-initialX)<2 && getBack){
+			xPos=initialX;
 			getBack=false;
 		}
 		if(getBack){
