@@ -258,6 +258,7 @@ public class OverfishingGame extends Game {
 				Fish f = i.next();
 				if(e.isIn(f)){
 					e.addAttachedFish(f);
+					f.setCaptured(true);
 					i.remove();
 				}
 			}
