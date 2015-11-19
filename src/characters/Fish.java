@@ -32,6 +32,7 @@ public class Fish extends Character {
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	private boolean leftReleased,rightReleased=false;
+	private static boolean keysReleasedAfterGetBack=true;
 	
 	private boolean stopCheating=false;
 	private double angle,angleVel;
@@ -44,8 +45,8 @@ public class Fish extends Character {
 	
 	private double initialX;
 	private static boolean getBack=false;
-	private boolean myGetBack=false;
-	private long getBackTimer=0;
+	private static boolean controllable=true;
+	private long controlCounter=1000;
 	
 	/**
 	 * Creates a fish with initial x,y and default health value
@@ -86,24 +87,31 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void onTick(){
-		if(leftReleased){
+		if (leftReleased && keysReleasedAfterGetBack==false){
+			keysReleasedAfterGetBack=true;
+		}
+		if (rightReleased && keysReleasedAfterGetBack==false){
+			keysReleasedAfterGetBack=true;
+		}
+		if(leftReleased && controllable){
 			leftPressed = false;
 			if(!rightPressed)
 				lagC=lag;
 			leftReleased=false;
 		}
-		if(rightReleased){
+		
+		if(rightReleased && controllable){
 			rightPressed = false;
 			if(!leftPressed)
 				lagC=lag;
 			rightReleased=false;
 		}
 		
-		if(leftPressed && !rightPressed && !getBack){
+		if(leftPressed && !rightPressed && !getBack && controllable){
 			xVel=-5+lagC;
 			lostGround-=lagC;
 		}
-		else if(rightPressed && !leftPressed &&!getBack){
+		else if(rightPressed && !leftPressed &&!getBack && controllable){
 				xVel=5-lagC;
 				lostGround+=lagC;
 				
@@ -118,12 +126,12 @@ public class Fish extends Character {
 			}
 				
 		}
-		if(upPressed){
+		if(upPressed && !getBack && controllable){
 			yVel=-5;
 			if(angle>-Math.PI/10.0f)
 				angleVel=-.01;
 		}
-		else if(downPressed && !stopCheating){
+		else if(downPressed && !stopCheating && !getBack && controllable){
 			yVel=6;
 			if(angle<Math.PI/10.0f)
 				angleVel=.01;
@@ -131,17 +139,47 @@ public class Fish extends Character {
 		
 		if(xPos<-(6f/7f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
+			leftPressed=false;
+			rightPressed=false;
+			leftReleased=true;;
+			rightReleased=true;
+			controllable=false;
+			controlCounter=0;
+			keysReleasedAfterGetBack=false;
+			
 			
 		}
 		if(xPos>(3f/4f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
+			leftPressed=false;
+			rightPressed=false;
+			rightReleased=true;
+			leftReleased=true;
+			controllable=false;
+			controlCounter=0;
+			keysReleasedAfterGetBack=false;
+		
 			
 		}
-		if(Math.abs(xPos-initialX)<8 && (getBack )){
-			xPos=initialX;
-			getBack=false;
-			getBackTimer=0;
+		if(getBack){
+			controlCounter=0;
+			keysReleasedAfterGetBack=false;
+			
 		}
+		
+		if(Math.abs(xPos-initialX)<8 && (getBack)){
+			xPos=initialX;
+			getBack=false;	
+		}
+		if(controlCounter>90){
+			if(keysReleasedAfterGetBack){
+				controllable=true;
+			}
+				
+		}
+		controlCounter++;
+		
+		
 		if(getBack){
 			xVel-=(xPos-initialX)/2000.0;
 		}
@@ -217,6 +255,10 @@ public class Fish extends Character {
 		return hasCollided;
 	}
 	
+	
+	public boolean isControllable(){
+		return controllable;
+	}
 	/**
 	 * sees how a fish has collided, either with net or hook
 	 * @param b sees by which a fish has been captured
