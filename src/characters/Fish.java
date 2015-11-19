@@ -32,7 +32,7 @@ public class Fish extends Character {
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	private boolean leftReleased,rightReleased=false;
-	private static boolean keysReleasedAfterGetBack=true;
+	private boolean keysReleasedAfterGetBack=true;
 	
 	private boolean stopCheating=false;
 	private double angle,angleVel;
@@ -169,9 +169,7 @@ public class Fish extends Character {
 			getBack=false;	
 		}
 		if(controlCounter>90){
-			if(keysReleasedAfterGetBack){
-				controllable=true;
-			}
+			controllable=true;
 				
 		}
 		controlCounter++;
