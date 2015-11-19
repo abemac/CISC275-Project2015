@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import misc.SpriteSheet;
 import misc.Util;
 
 /**
@@ -19,7 +20,6 @@ public class Fish extends Character {
 	 */
 	private static final long serialVersionUID = -1015644809982634515L;
 	
-	private static BufferedImage fish;
 	
 	private boolean hasCollided;
 	
@@ -32,6 +32,7 @@ public class Fish extends Character {
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	private boolean leftReleased,rightReleased=false;
+	private static boolean keysReleasedAfterGetBack=true;
 	
 	private boolean stopCheating=false;
 	private double angle,angleVel;
@@ -44,8 +45,11 @@ public class Fish extends Character {
 	
 	private double initialX;
 	private static boolean getBack=false;
-	private boolean myGetBack=false;
-	private long getBackTimer=0;
+	private static boolean controllable=true;
+	private long controlCounter=1000;
+	
+	private static SpriteSheet fish;
+	private int spriteNum=(int) (Math.random()*3+1);
 	
 	/**
 	 * Creates a fish with initial x,y and default health value
@@ -58,6 +62,7 @@ public class Fish extends Character {
 		this.lag = lag;
 		lagC=lag;
 		this.initialX=xPos;
+		forward=Math.random()>0.5?true:false;
 		
 	}
 	
@@ -73,12 +78,17 @@ public class Fish extends Character {
 	 * loads image of fish
 	 */
 	public void loadRes(){
+		BufferedImage tmp=null;
 		try {
-			if(fish==null)
-				fish = Util.loadImage("/goldfish.png", this);
+			if(fish==null){
+				tmp = Util.loadImage("/Goldfish5x(150x150).png", this);
+				fish=new SpriteSheet(tmp,1,5,150,150);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	/**
@@ -86,26 +96,33 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void onTick(){
-		if(leftReleased){
+		if(!leftPressed && !rightPressed){
+			keysReleasedAfterGetBack=true;
+		}
+		if(leftReleased && controllable){
 			leftPressed = false;
 			if(!rightPressed)
 				lagC=lag;
 			leftReleased=false;
 		}
-		if(rightReleased){
+		
+		if(rightReleased && controllable){
 			rightPressed = false;
 			if(!leftPressed)
 				lagC=lag;
 			rightReleased=false;
 		}
 		
-		if(leftPressed && !rightPressed && !getBack){
+		if(leftPressed && !rightPressed && !getBack && controllable && keysReleasedAfterGetBack){
 			xVel=-5+lagC;
 			lostGround-=lagC;
+			swimSpeed=12;
+			spriteNum=5;
 		}
-		else if(rightPressed && !leftPressed &&!getBack){
+		else if(rightPressed && !leftPressed &&!getBack && controllable && keysReleasedAfterGetBack){
 				xVel=5-lagC;
 				lostGround+=lagC;
+				swimSpeed=2;
 				
 		}else{
 			if(lostGround>3){
@@ -118,30 +135,61 @@ public class Fish extends Character {
 			}
 				
 		}
-		if(upPressed){
+		if(upPressed && !getBack && controllable){
 			yVel=-5;
 			if(angle>-Math.PI/10.0f)
 				angleVel=-.01;
+			swimSpeed=2;
 		}
-		else if(downPressed && !stopCheating){
+		else if(downPressed && !stopCheating && !getBack && controllable){
 			yVel=6;
 			if(angle<Math.PI/10.0f)
 				angleVel=.01;
+			swimSpeed=3;
+			
 		}
 		
 		if(xPos<-(6f/7f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
+			leftPressed=false;
+			rightPressed=false;
+			leftReleased=true;;
+			rightReleased=true;
+			controllable=false;
+			controlCounter=0;
+			keysReleasedAfterGetBack=false;
+			
 			
 		}
 		if(xPos>(3f/4f)*Util.getDISTANCE_TO_EDGE()){
 			getBack=true;
+			leftPressed=false;
+			rightPressed=false;
+			rightReleased=true;
+			leftReleased=true;
+			controllable=false;
+			controlCounter=0;
+			keysReleasedAfterGetBack=false;
+		
 			
 		}
-		if(Math.abs(xPos-initialX)<8 && (getBack )){
-			xPos=initialX;
-			getBack=false;
-			getBackTimer=0;
+		if(getBack){
+			controlCounter=0;
+			keysReleasedAfterGetBack=false;
+			
 		}
+		
+		if(Math.abs(xPos-initialX)<8 && (getBack)){
+			xPos=initialX;
+			getBack=false;	
+		}
+		if(controlCounter>90){
+			controllable=true;
+				
+		}
+		controlCounter++;
+		
+		
 		if(getBack){
 			xVel-=(xPos-initialX)/2000.0;
 		}
@@ -183,8 +231,38 @@ public class Fish extends Character {
 			
 		}
 		
+		swim();
+		
 	}
 	
+	private boolean forward;
+	private long limitSwim=0;
+	private int swimSpeed=4;
+	private void swim(){
+		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
+			if(spriteNum==1){
+				if(forward){
+					spriteNum=3;
+					forward=false;
+				}else{
+					spriteNum=2;
+					forward=true;
+				}
+			}
+			else if(!leftPressed){
+				spriteNum=1;
+			}
+		}
+		limitSwim++;
+		if(limitSwim%7==0 && swimSpeed!=6){
+			if(swimSpeed>6){
+				swimSpeed-=1;
+			}if(swimSpeed<6){
+				swimSpeed+=1;
+			}
+		}
+		
+	}
 	/**
 	 * @param g render 2D graphics of fish
 	 */
@@ -192,7 +270,7 @@ public class Fish extends Character {
 	public void render(Graphics2D g){
 		g.translate(getX(), getY());
 		g.rotate(angle);
-		g.drawImage(fish,0,0,200,200,null);
+		g.drawImage(fish.getSprite(1, spriteNum),0,0,200,200,null);
 		g.rotate(-angle);
 		g.translate(-getX(), -getY());
 	}
@@ -217,12 +295,19 @@ public class Fish extends Character {
 		return hasCollided;
 	}
 	
+	
+	public boolean isControllable(){
+		return controllable;
+	}
 	/**
 	 * sees how a fish has collided, either with net or hook
 	 * @param b sees by which a fish has been captured
 	 */
 	public void setCaptured(boolean b){
 		this.captured=b;
+		if(b==true){
+			spriteNum=4;
+		}
 	}
 	
 	/**

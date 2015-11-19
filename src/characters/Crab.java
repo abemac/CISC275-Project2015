@@ -75,6 +75,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			xPos-=10*(yPos+1000)/2000.0;
+			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
 		}
 		if(rightPressed){
 			if(spriteNum==1){
@@ -86,6 +87,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			xPos+=10*(yPos+1000)/2000.0;
+			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400?Util.getDISTANCE_TO_EDGE()-400:xPos;
 		}
 		if(upPressed){
 			if(spriteNum==1){
@@ -110,6 +112,7 @@ public class Crab extends Character{
 			}
 			yPos+=6*(yPos+1000)/1500.0;
 			xPos-=.5;
+			
 		}
 		
 		if(leftPressed||rightPressed||upPressed||downPressed)

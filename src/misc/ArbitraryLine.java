@@ -73,9 +73,27 @@ public class ArbitraryLine implements Serializable{
 	}
 	
 	
+	/**
+	 * takes SCALED coordinates.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean isAboveLine(double x,double y){
+		return !isBelowLine(x,y);
+	}
+	
+	/**
+	 * sets the xPosition of this Arbitrary line (for moving lines)
+	 * @param x
+	 */
 	public void setX(double x){
 		this.xPos=x;
 	}
+	/**
+	 * sets the y position of this moving line
+	 * @param y
+	 */
 	public void setY(double y){
 		this.yPos=y;
 	}
