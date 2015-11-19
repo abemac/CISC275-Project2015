@@ -32,7 +32,7 @@ public class Fish extends Character {
 	private double lostGround;
 	private boolean leftPressed,rightPressed,upPressed,downPressed;
 	private boolean leftReleased,rightReleased=false;
-	private boolean keysReleasedAfterGetBack=true;
+	private static boolean keysReleasedAfterGetBack=true;
 	
 	private boolean stopCheating=false;
 	private double angle,angleVel;
