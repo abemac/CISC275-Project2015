@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
+import misc.ArbitraryLine;
 import misc.TrashCan;
 import misc.Util;
 
@@ -36,7 +37,7 @@ public class CrabSaveGame extends Game {
 	private Color sky = new Color(130,202,255);
 	private BufferedImage sun,bg,pond;
 	
-	
+	private ArbitraryLine pondLine,skyLine;
 	
 	/**
 	 * calls the super constructor
@@ -51,6 +52,14 @@ public class CrabSaveGame extends Game {
 	public void init(){
 		crab=new Crab(0, 0, 100);
 		trashCan=new TrashCan(375, -930);
+		int[]pts={0,148,110,80,176,58,374,126,546,164,678,140,822,64,978,64,1176,144,1294,134,1500,224};
+		pondLine=new ArbitraryLine(pts, Util.getDISTANCE_TO_EDGE()/(1500/2f), 500f/330f, 500);
+		pondLine.setX(-Util.getDISTANCE_TO_EDGE());
+		int[]pts2={0,428,232,390,406,390,820,460,990,442,1246,338,1526,382,1826,418,1882,424,2000,406};
+		skyLine=new ArbitraryLine(pts2, Util.getDISTANCE_TO_EDGE()/(2000/2f), 600f/800f, -850);
+		skyLine.setX(-Util.getDISTANCE_TO_EDGE());
+		
+		
 	}
 	
 	
@@ -74,6 +83,16 @@ public class CrabSaveGame extends Game {
 	public void onTick() {
 		
 		crab.onTick();
+		if(pondLine.isBelowLine(crab.getX(), crab.getY()+400)){
+			crab.setY(crab.getY()-6*(crab.getY()+1000)/1500.0);
+			crab.setX(crab.getX()+.5);
+			
+		}
+		if(skyLine.isAboveLine(crab.getX(), crab.getY())){
+			crab.setY(crab.getY()+6*(crab.getY()+1000)/1500.0);
+			crab.setX(crab.getX()-.5);
+		}
+		
 	}
 	
 	boolean firstDrawn=false;
@@ -94,7 +113,8 @@ public class CrabSaveGame extends Game {
 		crab.render(g);
 		trashCan.render(g);
 		trashCan.renderOverlay(g);
-		
+		//pondLine.testRender(g); //GOOD
+		//skyLine.testRender(g);  //GOOD
 	}
 	
 	
