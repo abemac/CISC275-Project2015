@@ -87,10 +87,7 @@ public class Fish extends Character {
 	 */
 	@Override
 	public void onTick(){
-		if (leftReleased && keysReleasedAfterGetBack==false){
-			keysReleasedAfterGetBack=true;
-		}
-		if (rightReleased && keysReleasedAfterGetBack==false){
+		if(!leftPressed && !rightPressed){
 			keysReleasedAfterGetBack=true;
 		}
 		if(leftReleased && controllable){
@@ -107,11 +104,11 @@ public class Fish extends Character {
 			rightReleased=false;
 		}
 		
-		if(leftPressed && !rightPressed && !getBack && controllable){
+		if(leftPressed && !rightPressed && !getBack && controllable && keysReleasedAfterGetBack){
 			xVel=-5+lagC;
 			lostGround-=lagC;
 		}
-		else if(rightPressed && !leftPressed &&!getBack && controllable){
+		else if(rightPressed && !leftPressed &&!getBack && controllable && keysReleasedAfterGetBack){
 				xVel=5-lagC;
 				lostGround+=lagC;
 				
