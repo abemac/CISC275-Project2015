@@ -37,8 +37,8 @@ public class Net extends Enemy {
 	private ArrayList<Fish> attachedFish;
 	private boolean up,down;
 	
-	private static BufferedImage lilNet;
-	private static BufferedImage lilNetUnderlay;
+	private static BufferedImage lilNet=null;
+	private static BufferedImage lilNetUnderlay=null;
 	/**
 	 * The constructor for net must accept and initial x,y and type
 	 * If the type is not Net.BIGNET or Net.LILNET, it will default to Net.LILNET
@@ -60,8 +60,10 @@ public class Net extends Enemy {
 	 */
 	public void loadRes(){
 		try {
-			lilNet = Util.loadImage("/net.png", this);
-			lilNetUnderlay = Util.loadImage("/netoverlay.png", this);
+			if(lilNet==null)
+				lilNet = Util.loadImage("/net.png", this);
+			if(lilNetUnderlay==null)
+				lilNetUnderlay = Util.loadImage("/netoverlay.png", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

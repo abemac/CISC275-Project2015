@@ -59,7 +59,13 @@ public class CrabSaveGame extends Game {
 		skyLine=new ArbitraryLine(pts2, Util.getDISTANCE_TO_EDGE()/(2000/2f), 600f/800f, -850);
 		skyLine.setX(-Util.getDISTANCE_TO_EDGE());
 		
-		
+		trash=new ArrayList<Trash>();
+		trash.add(new Trash(0, 0, Trash.BANANA));
+		trash.add(new Trash(-900,-400,Trash.BOTTLE));
+		trash.add(new Trash(500,0,Trash.ROPE));
+		trash.add(new Trash(-1000,0,Trash.MILK_JUG));
+		trash.add(new Trash(900,-400,Trash.SHOPPING_BAG));
+		trash.add(new Trash(1000,500,Trash.SODA_CAN));
 	}
 	
 	
@@ -93,9 +99,23 @@ public class CrabSaveGame extends Game {
 			crab.setX(crab.getX()-.5);
 		}
 		
+		for(Trash t: trash){
+			t.act();
+		}
+		
+		tellCrabToHoldTrash();
+		
 	}
 	
-	boolean firstDrawn=false;
+	
+	private void tellCrabToHoldTrash(){
+		for(Trash t : trash){
+			if(crab.isTouchingTrash(t) && !crab.isHoldingTrash()){
+				crab.holdTrash(t);
+				crab.setIsHoldingTrash(true);
+			}
+		}
+	}
 	
 	/**
 	 * draws the crabSaveGame
@@ -110,9 +130,18 @@ public class CrabSaveGame extends Game {
 		g.drawImage(bg,-Util.getDISTANCE_TO_EDGE(),-1000,null);	
 		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
 		g.drawImage(pond, -Util.getDISTANCE_TO_EDGE(), 500, null);
-		crab.render(g);
+		
 		trashCan.render(g);
+		
+		for(Trash t: trash){
+			t.render(g);
+		}
+		crab.render(g);
 		trashCan.renderOverlay(g);
+		
+		
+		
+		
 		//pondLine.testRender(g); //GOOD
 		//skyLine.testRender(g);  //GOOD
 	}

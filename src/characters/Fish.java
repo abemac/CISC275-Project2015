@@ -78,16 +78,16 @@ public class Fish extends Character {
 	 * loads image of fish
 	 */
 	public void loadRes(){
-		BufferedImage tmp=null;
-		try {
-			if(fish==null){
-				tmp = Util.loadImage("/Goldfish5x(150x150).png", this);
-				fish=new SpriteSheet(tmp,1,5,150,150);
+		if(fish==null){
+			BufferedImage tmp=null;
+			try {
+					tmp = Util.loadImage("/Goldfish5x(150x150).png", this);
+					fish=new SpriteSheet(tmp,1,5,150,150);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		
 		
 	}
 	
