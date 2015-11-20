@@ -18,7 +18,7 @@ import view.EstuaryView;
  * tutorial series entitled "Java Game Development"  
  * This is because Abraham made a game a couple of years ago using these
  * tutorials for fun, and so our implementation ended up being very similar.
- * However, we made slight optimizations so that the rendering is more efficiant.
+ * However, we made slight optimizations so that the rendering is more efficient.
  * @author Abraham McIlvaine
  *
  */
