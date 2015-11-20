@@ -109,6 +109,7 @@ public class Trash extends Enemy {
 			case ROPE: g.drawImage(rope, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
 		}
 		
+		
 	}
 
 	 /**
