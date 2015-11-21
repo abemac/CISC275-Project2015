@@ -99,12 +99,14 @@ public class Trash extends Enemy {
 		scale = (yPos+1000)/1000f;
 		scale=scale<0.5?0.5:scale;
 		
+		
+		
 	}
 	/**
 	 * renders graphics
 	 */
 	public void render(Graphics2D g){
-		if(beingThrown){
+
 			g.translate(xPos+getWidth()/2f, yPos+getHeight()/2f);
 			g.rotate(angle);
 			switch(type){
@@ -117,22 +119,13 @@ public class Trash extends Enemy {
 			}
 			g.rotate(-angle);
 			g.translate(-xPos-getWidth()/2f, -yPos-getHeight()/2f);
-			if(xPos<575)
-				angle+=.5;
-			if(xPos>575){
-				angle-=.5;
+			if(beingThrown){
+				if(xPos<575)
+					angle+=.5;
+				if(xPos>575){
+					angle-=.5;
+				}
 			}
-		}
-		else{
-			switch(type){
-				case BANANA: g.drawImage(banana, (int)xPos, (int)yPos,(int)(340*scale),(int)(200*scale), null);break;
-				case SODA_CAN: g.drawImage(sodaCan, (int)xPos, (int)yPos,(int)(200*scale),(int)(250*scale), null);break;
-				case BOTTLE: g.drawImage(bottle, (int)xPos, (int)yPos,(int)(200*scale),(int)(375*scale), null);break;
-				case MILK_JUG: g.drawImage(milkJug, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
-				case SHOPPING_BAG: g.drawImage(shoppingBag, (int)xPos, (int)yPos,(int)(395*scale),(int)(450*scale), null);break;
-				case ROPE: g.drawImage(rope, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
-			}
-		}
 		
 		
 	}

@@ -129,6 +129,13 @@ public class Crab extends Character{
 		if(isThrowingTrash){
 			throwAttachedTrash();
 		}
+		
+		for(Trash t : previouslyThrownTrash){
+			if(t.getY()<-600){
+				t.setY(t.getY()+40);
+				t.setX(t.getX()+(565-t.getX()-t.getWidth()/2.0)/10.0 );
+			}
+		}
 	}
 	
 	
@@ -237,6 +244,9 @@ public class Crab extends Character{
 	
 	private double buffer=150;
 	public boolean isTouchingTrash(Trash t){
+		if(isHoldingTrash || isThrowingTrash){
+			return false;
+		}
 		switch(t.getType()){
 			case Trash.BANANA: buffer=150*t.getScale();break;
 			case Trash.SODA_CAN: buffer=200*t.getScale();break;
