@@ -49,6 +49,9 @@ public class Trash extends Enemy {
 	private int type;
 	private double scale=1;
 	
+	private boolean beingThrown=false;
+	private double angle=0;
+	
 	public static int getRandomType(){
 		return (int) (Math.random()*6);
 	}
@@ -101,13 +104,34 @@ public class Trash extends Enemy {
 	 * renders graphics
 	 */
 	public void render(Graphics2D g){
-		switch(type){
-			case BANANA: g.drawImage(banana, (int)xPos, (int)yPos,(int)(340*scale),(int)(200*scale), null);break;
-			case SODA_CAN: g.drawImage(sodaCan, (int)xPos, (int)yPos,(int)(200*scale),(int)(250*scale), null);break;
-			case BOTTLE: g.drawImage(bottle, (int)xPos, (int)yPos,(int)(200*scale),(int)(375*scale), null);break;
-			case MILK_JUG: g.drawImage(milkJug, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
-			case SHOPPING_BAG: g.drawImage(shoppingBag, (int)xPos, (int)yPos,(int)(395*scale),(int)(450*scale), null);break;
-			case ROPE: g.drawImage(rope, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
+		if(beingThrown){
+			g.translate(xPos+getWidth()/2f, yPos+getHeight()/2f);
+			g.rotate(angle);
+			switch(type){
+				case BANANA: g.drawImage(banana, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(340*scale),(int)(200*scale), null);break;
+				case SODA_CAN: g.drawImage(sodaCan,(int)( -getWidth()/2f),(int)( -getHeight()/2f),(int)(200*scale),(int)(250*scale), null);break;
+				case BOTTLE: g.drawImage(bottle, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(200*scale),(int)(375*scale), null);break;
+				case MILK_JUG: g.drawImage(milkJug, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(500*scale),(int)(500*scale), null);break;
+				case SHOPPING_BAG: g.drawImage(shoppingBag, (int)(-getWidth()/2f),(int)( -getHeight()/2f),(int)(395*scale),(int)(450*scale), null);break;
+				case ROPE: g.drawImage(rope, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(500*scale),(int)(500*scale), null);break;
+			}
+			g.rotate(-angle);
+			g.translate(-xPos-getWidth()/2f, -yPos-getHeight()/2f);
+			if(xPos<575)
+				angle+=.5;
+			if(xPos>575){
+				angle-=.5;
+			}
+		}
+		else{
+			switch(type){
+				case BANANA: g.drawImage(banana, (int)xPos, (int)yPos,(int)(340*scale),(int)(200*scale), null);break;
+				case SODA_CAN: g.drawImage(sodaCan, (int)xPos, (int)yPos,(int)(200*scale),(int)(250*scale), null);break;
+				case BOTTLE: g.drawImage(bottle, (int)xPos, (int)yPos,(int)(200*scale),(int)(375*scale), null);break;
+				case MILK_JUG: g.drawImage(milkJug, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
+				case SHOPPING_BAG: g.drawImage(shoppingBag, (int)xPos, (int)yPos,(int)(395*scale),(int)(450*scale), null);break;
+				case ROPE: g.drawImage(rope, (int)xPos, (int)yPos,(int)(500*scale),(int)(500*scale), null);break;
+			}
 		}
 		
 		
@@ -131,6 +155,10 @@ public class Trash extends Enemy {
 			case ROPE: return(500*scale);
 			default: return-1;
 	}
+	}
+	
+	public void setBeingThrown(boolean b){
+		this.beingThrown=b;
 	}
 	
 	public double getHeight(){

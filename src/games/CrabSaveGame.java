@@ -142,7 +142,7 @@ public class CrabSaveGame extends Game {
 		}
 		crab.render(g);
 		trashCan.renderOverlay(g);
-		
+		crab.renderThrownTrash(g);
 		
 		
 		
