@@ -119,4 +119,34 @@ public class Trash extends Enemy {
 	public int getType(){
 		return type;
 	}
+	
+	public double getWidth(){
+		switch(type){
+			case BANANA: return(340*scale);
+			case SODA_CAN: return (200*scale);
+			case BOTTLE: return(200*scale);
+			case MILK_JUG: return(500*scale);
+			case SHOPPING_BAG:return(395*scale);
+			case ROPE: return(500*scale);
+			default: return-1;
+	}
+	}
+	
+	public double getHeight(){
+		switch(type){
+			case BANANA: return(200*scale);
+			case SODA_CAN: return(250*scale);
+			case BOTTLE: return(375*scale);
+			case MILK_JUG: return(500*scale);
+			case SHOPPING_BAG: return(450*scale);
+			case ROPE: return(500*scale);
+			default:return -1;
+	}
+	}
+	
+	public double getScale(){
+		return scale;
+	}
+	
+	
 }

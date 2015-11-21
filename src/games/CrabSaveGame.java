@@ -60,7 +60,7 @@ public class CrabSaveGame extends Game {
 		skyLine.setX(-Util.getDISTANCE_TO_EDGE());
 		
 		trash=new ArrayList<Trash>();
-		trash.add(new Trash(0, 0, Trash.BANANA));
+		trash.add(new Trash(0, -300, Trash.BANANA));
 		trash.add(new Trash(-900,-400,Trash.BOTTLE));
 		trash.add(new Trash(500,0,Trash.ROPE));
 		trash.add(new Trash(-1000,0,Trash.MILK_JUG));

@@ -132,7 +132,7 @@ public class Crab extends Character{
 	private void holdTrash(){
 		if(isHoldingTrash && attachedTrash!=null){
 			if(attachedTrash.getType()==Trash.SODA_CAN ){
-				attachedTrash.setX(xPos+100+yPos/12.0);
+				attachedTrash.setX(xPos+110+yPos/12.0);
 				attachedTrash.setY(yPos-100-yPos/12.0);
 			}
 			if(attachedTrash.getType()==Trash.BANANA ){
@@ -140,20 +140,20 @@ public class Crab extends Character{
 				attachedTrash.setY(yPos-50-yPos/12.0);
 			}
 			if(attachedTrash.getType()==Trash.ROPE ){
-				attachedTrash.setX(xPos+25+yPos/12.0);
-				attachedTrash.setY(yPos-200-yPos/12.0);
+				attachedTrash.setX(xPos+30+yPos/9.0);
+				attachedTrash.setY(yPos-240-yPos/4.0);
 			}
 			if(attachedTrash.getType()==Trash.MILK_JUG ){
-				attachedTrash.setX(xPos+yPos/12.0);
-				attachedTrash.setY(yPos-230-yPos/12.0);
+				attachedTrash.setX(xPos+yPos/25.0);
+				attachedTrash.setY(yPos-230-yPos/4.0);
 			}
 			if(attachedTrash.getType()==Trash.BOTTLE ){
-				attachedTrash.setX(xPos+100+yPos/12.0);
-				attachedTrash.setY(yPos-160-yPos/12.0);
+				attachedTrash.setX(xPos+110+yPos/10.0);
+				attachedTrash.setY(yPos-180-yPos/6.0);
 			}
 			if(attachedTrash.getType()==Trash.SHOPPING_BAG ){
-				attachedTrash.setX(xPos+50+yPos/12.0);
-				attachedTrash.setY(yPos-240-yPos/12.0);
+				attachedTrash.setX(xPos+50+yPos/20.0);
+				attachedTrash.setY(yPos-240-yPos/4.5);
 			}
 		
 		}
@@ -174,16 +174,33 @@ public class Crab extends Character{
 	
 	/**
 	 * implements Crab throwing object trash
-	 * @param t the thrash object to throw
 	 */
-	public void throwTrash(Trash t){
+	public void throwAttachedTrash(){
 		
 	}
 	
 	
+	private void calculateTrajectory(){
+		
+	}
+	
+	
+	
+	private double buffer=150;
 	public boolean isTouchingTrash(Trash t){
-		return(t.getX()>xPos && t.getX()<xPos+(400+yPos/2.5) &&
-				t.getY()>yPos && t.getY()<yPos+400+yPos/2.5);
+		switch(t.getType()){
+			case Trash.BANANA: buffer=150*t.getScale();break;
+			case Trash.SODA_CAN: buffer=200*t.getScale();break;
+			case Trash.BOTTLE:buffer=180*t.getScale();break;
+			case Trash.MILK_JUG: buffer=300*t.getScale();break;
+			case Trash.SHOPPING_BAG:buffer=250*t.getScale();break;
+			case Trash.ROPE: buffer=300*t.getScale();break;
+			default: buffer=150;
+		}
+		return(xPos+400+yPos/2.5-buffer>t.getX() && yPos+400+yPos/2-buffer>t.getY()
+				&& xPos+buffer<t.getX()+t.getWidth() && yPos+buffer<t.getY()+t.getHeight());
+
+		
 	}
 	
 

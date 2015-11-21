@@ -66,7 +66,7 @@ public class CharacterTests extends TestCase {
 		Trash t = new Trash(0,0,Trash.BANANA);
 		double x2 = t.getX();
 		double y2 = t.getY();
-		crab.throwTrash(t);
+		//crab.throwTrash(t);
 		assertFalse(x2==t.getX() && y2 == t.getY());
 		
 		TheHuman human = new TheHuman(0, 0);
