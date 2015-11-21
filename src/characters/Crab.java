@@ -126,6 +126,9 @@ public class Crab extends Character{
 			spriteTime=0;
 		
 		holdTrash();
+		if(isThrowingTrash){
+			throwAttachedTrash();
+		}
 	}
 	
 	
@@ -155,7 +158,7 @@ public class Crab extends Character{
 				attachedTrash.setX(xPos+50+yPos/20.0);
 				attachedTrash.setY(yPos-240-yPos/4.5);
 			}
-		
+			attachedTrash.act();
 		}
 	}
 	
@@ -166,21 +169,55 @@ public class Crab extends Character{
 	public void render(Graphics2D g){
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/2.5),(int)( 400+yPos/2.5),null);
 		
-		if(isHoldingTrash && attachedTrash!=null){
+		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
 			attachedTrash.render(g);
+		}
+		
+		for(Trash t: previouslyThrownTrash){
+			t.render(g);
 		}
 		
 	}
 	
+	
+	private boolean isThrowingTrash=false;
+	private boolean calculatedTrajecory=false;
+	private ArrayList<Trash> previouslyThrownTrash = new ArrayList<Trash>();
 	/**
 	 * implements Crab throwing object trash
 	 */
 	public void throwAttachedTrash(){
 		
+		if(!calculatedTrajecory)
+			calculateTrajectory();
+		attachedTrash.setX(attachedTrash.getX()+Vx);
+		attachedTrash.setY(attachedTrash.getY()-Vy);
+		Vy-=gravity;
+		attachedTrash.act();
+		if(attachedTrash.getX()>trashX-200 && attachedTrash.getX()+attachedTrash.getWidth()<trashX+250 &&
+				attachedTrash.getY()+attachedTrash.getHeight()>trashY && attachedTrash.getY()<trashY+600){
+			isThrowingTrash=false;
+			calculatedTrajecory=false;
+			previouslyThrownTrash.add(attachedTrash);
+			attachedTrash=null;
+		}
+		
 	}
 	
 	
+	private int gravity=3;
+	private double trashX=575;
+	private double trashY=-800;
+	private double Vy;
+	private double Vx;
 	private void calculateTrajectory(){
+		double Xinit=attachedTrash.getX();
+		double Yinit=attachedTrash.getY();
+		Vy=Math.sqrt(2*gravity*(Yinit+1100));
+		double Tt = (Vy/gravity)+(Math.sqrt((2200+2*trashY)/gravity));
+		Vx = (trashX-Xinit)/Tt;
+		calculatedTrajecory=true;
+		isHoldingTrash=false;
 		
 	}
 	
@@ -264,6 +301,11 @@ public class Crab extends Character{
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downPressed=true;
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			if(isHoldingTrash)
+				isThrowingTrash=true;
 		}
 		
 	}

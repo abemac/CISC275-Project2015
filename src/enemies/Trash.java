@@ -94,6 +94,7 @@ public class Trash extends Enemy {
 	public void act() {
 		// TODO Auto-generated method stub
 		scale = (yPos+1000)/1000f;
+		scale=scale<0.5?0.5:scale;
 		
 	}
 	/**

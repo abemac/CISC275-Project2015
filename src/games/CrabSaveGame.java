@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import characters.Crab;
 import enemies.TheHuman;
@@ -109,10 +110,13 @@ public class CrabSaveGame extends Game {
 	
 	
 	private void tellCrabToHoldTrash(){
-		for(Trash t : trash){
+		Iterator<Trash> i = trash.iterator();
+		while(i.hasNext()){
+			Trash t = i.next();
 			if(crab.isTouchingTrash(t) && !crab.isHoldingTrash()){
 				crab.holdTrash(t);
 				crab.setIsHoldingTrash(true);
+				i.remove();
 			}
 		}
 	}
