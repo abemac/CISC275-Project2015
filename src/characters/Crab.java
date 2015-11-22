@@ -77,7 +77,7 @@ public class Crab extends Character{
 			e.printStackTrace();
 		}
 		
-		sprites = new SpriteSheet(crabs, 1, 3, 150, 150);
+		sprites = new SpriteSheet(crabs, 1, 4, 150, 150);
 		
 	}
 	
@@ -286,6 +286,7 @@ public class Crab extends Character{
 		if(!calculatedTrajecory)
 			calculateTrajectory();
 		
+		spriteNum=4;
 		attachedTrash.setX(attachedTrash.getX()+Vx);
 		attachedTrash.setY(attachedTrash.getY()-Vy);
 		Vy-=gravity;
@@ -307,9 +308,12 @@ public class Crab extends Character{
 			attachedTrash.setBeingThrown(false);
 			csg.addBackTrash(attachedTrash);
 			isHoldingTrash=false;
+			attachedTrash.setAngle(0);
 			attachedTrash=null;
 			reachedVertex=false;
 			aboveCan=false;
+			spriteNum=1;
+			
 		}
 		
 		else if(aboveCan && attachedTrash.getX()>trashX-200 && attachedTrash.getX()+attachedTrash.getWidth()<trashX+250 &&
@@ -319,9 +323,12 @@ public class Crab extends Character{
 			calculatedTrajecory=false;
 			attachedTrash.setBeingThrown(false);
 			previouslyThrownTrash.add(attachedTrash);
+			attachedTrash.setAngle(0);
 			attachedTrash=null;
 			reachedVertex=false;
 			aboveCan=false;
+			spriteNum=1;
+		
 		}
 		
 	}

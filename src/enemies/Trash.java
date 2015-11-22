@@ -170,5 +170,9 @@ public class Trash extends Enemy {
 		return scale;
 	}
 	
+	public void setAngle(double rads){
+		this.angle=rads;
+	}
+	
 	
 }
