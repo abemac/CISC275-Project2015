@@ -1,6 +1,9 @@
 package characters;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -35,15 +38,19 @@ public class Crab extends Character{
 	
 	private Trash attachedTrash;
 	private boolean isHoldingTrash;
-	
+	private boolean drawPowerBar=false;
 	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
 	
-	
+	private Color barColor=Color.GREEN;
 	private Point trashPoint= new Point(575,-320);
 	private double lowestYThrowingTrash=0.0;
 	
 	private ArbitraryLine throwLine;
 	private CrabSaveGame csg;
+	private int barLength;
+	
+	private Stroke optimalStroke= new BasicStroke(10f);
+	
 	
 	/**
 	 * makes a Character Crab which has xPos, yPos, health
@@ -147,8 +154,52 @@ public class Crab extends Character{
 				t.setX(t.getX()+(565-t.getX()-t.getWidth()/2.0)/10.0 );
 			}
 		}
+		
+		if(drawPowerBar){
+			calculateBarLength();
+		}
+		
+		if(spacePressed && isHoldingTrash){
+			accumulateTime();
+		}
 	}
 	
+	
+	private void accumulateTime(){
+		
+			if(timeSpacePressed==-1){
+				timeSpacePressed=System.nanoTime();
+				lastTime=timeSpacePressed;
+				drawPowerBar=true;
+				spaceReleased=false;
+			}else{
+				if(up && timeHeld>NANOS_MAX){
+					up=false;
+				}else if (!up && timeHeld<=200000000){//5th of a second
+					up=true;
+				}
+				if(up)
+					timeHeld+=(System.nanoTime()-lastTime);
+				else
+					timeHeld-=(System.nanoTime()-lastTime);
+				lastTime=System.nanoTime();
+				
+			}
+			if(spaceReleased){
+				spacePressed=false;
+				if(isHoldingTrash){
+					setPowerByTimePressed();
+					isThrowingTrash=true;
+					spacePressed=false;
+					spaceReleased=true;
+					drawPowerBar=false;
+					timeSpacePressed=-1;
+					timeHeld=0;
+					
+				}
+			}
+		
+	}
 	
 	private void holdTrash(){
 		if(isHoldingTrash && attachedTrash!=null){
@@ -180,6 +231,12 @@ public class Crab extends Character{
 		}
 	}
 	
+	
+	private void calculateBarLength(){
+		barLength=(int)((400+yPos/2.5)*
+				(timeHeld/NANOS_MAX));
+	}
+	
 	/**
 	 * @param g renders the graphics
 	 */
@@ -188,6 +245,14 @@ public class Crab extends Character{
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/2.5),(int)( 400+yPos/2.5),null);
 		for(Trash t: previouslyThrownTrash){
 			t.render(g);
+		}
+		
+		if(drawPowerBar){
+			g.setColor(barColor);
+			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+50),barLength, 10, 5, 5);
+			g.setColor(Color.BLACK);
+			g.setStroke(optimalStroke);
+			g.drawRect((int)(xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+45), (int)((400+yPos/2.5)*0.2),20);
 		}
 		
 		//throwLine.testRender(g);
@@ -264,7 +329,7 @@ public class Crab extends Character{
 	private double trashY=-800;
 	private double Vy;
 	private double Vx;
-	private double power=1.0;//1.0 is optimal
+	private double power=0.5;//1.0 is optimal
 	private void calculateTrajectory(){
 		double Xinit=attachedTrash.getX();
 		double Yinit=attachedTrash.getY();
@@ -284,6 +349,35 @@ public class Crab extends Character{
 		
 	}
 	
+	private boolean up=true;
+	private long timeHeld=0;
+	private boolean spacePressed,spaceReleased=false;
+	private long timeSpacePressed,lastTime;
+	private static final double NANOS_MAX=1000000000;
+	private static final double POWER_MAX=1.2;
+	
+	/**
+	 * sets the power of the throw according to time space bar is pressed
+	 */
+	private void setPowerByTimePressed(){
+		
+		double percetange = timeHeld/NANOS_MAX;
+		if(percetange>.8){
+			power=POWER_MAX;
+		}else if (percetange>.6){
+			power=1.0;//Optimal
+		}else if (percetange > .4){
+			power=0.8;
+		}
+		else if (percetange > .2){
+			power=0.6;
+		}
+		else if (percetange > 0){
+			power=0.4;
+		}
+			
+		
+	}
 	
 	
 	private double buffer=150;
@@ -370,8 +464,7 @@ public class Crab extends Character{
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE){
-			if(isHoldingTrash)
-				isThrowingTrash=true;
+			spacePressed=true;
 		}
 		
 	}
@@ -394,6 +487,9 @@ public class Crab extends Character{
 			spriteNum=1;
 		}
 		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			spaceReleased=true;
+		}
 	}
 
 	@Override
