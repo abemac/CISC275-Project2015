@@ -147,6 +147,14 @@ public class Crab extends Character{
 		if(isThrowingTrash){
 			throwAttachedTrash();
 		}
+		if(spacePressed && isHoldingTrash){
+			accumulateTime();
+		}
+		if(drawPowerBar){
+			calculateBarLength();
+		}
+		
+		
 		
 		for(Trash t : previouslyThrownTrash){
 			if(t.getY()<-600){
@@ -155,13 +163,7 @@ public class Crab extends Character{
 			}
 		}
 		
-		if(drawPowerBar){
-			calculateBarLength();
-		}
 		
-		if(spacePressed && isHoldingTrash){
-			accumulateTime();
-		}
 	}
 	
 	
@@ -170,10 +172,10 @@ public class Crab extends Character{
 			if(timeSpacePressed==-1){
 				timeSpacePressed=System.nanoTime();
 				lastTime=timeSpacePressed;
-				drawPowerBar=false;
 				spaceReleased=false;
-			}else{
 				drawPowerBar=true;
+				timeHeld=0;
+			}else{
 				if(up && timeHeld>NANOS_MAX){
 					up=false;
 				}else if (!up && timeHeld<=200000000){//5th of a second
