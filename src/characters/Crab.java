@@ -170,9 +170,10 @@ public class Crab extends Character{
 			if(timeSpacePressed==-1){
 				timeSpacePressed=System.nanoTime();
 				lastTime=timeSpacePressed;
-				drawPowerBar=true;
+				drawPowerBar=false;
 				spaceReleased=false;
 			}else{
+				drawPowerBar=true;
 				if(up && timeHeld>NANOS_MAX){
 					up=false;
 				}else if (!up && timeHeld<=200000000){//5th of a second
@@ -191,10 +192,11 @@ public class Crab extends Character{
 					setPowerByTimePressed();
 					isThrowingTrash=true;
 					spacePressed=false;
-					spaceReleased=true;
+					spaceReleased=false;
 					drawPowerBar=false;
 					timeSpacePressed=-1;
 					timeHeld=0;
+					up=true;
 					
 				}
 			}
@@ -352,7 +354,8 @@ public class Crab extends Character{
 	private boolean up=true;
 	private long timeHeld=0;
 	private boolean spacePressed,spaceReleased=false;
-	private long timeSpacePressed,lastTime;
+	private long lastTime;
+	private long timeSpacePressed=-1;
 	private static final double NANOS_MAX=1000000000;
 	private static final double POWER_MAX=1.2;
 	
@@ -464,7 +467,10 @@ public class Crab extends Character{
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE){
-			spacePressed=true;
+			if(isHoldingTrash){
+				spacePressed=true;
+			}
+			
 		}
 		
 	}
