@@ -49,7 +49,6 @@ public class Crab extends Character{
 	private CrabSaveGame csg;
 	private int barLength;
 	
-	private Stroke optimalStroke= new BasicStroke(10f);
 	
 	
 	/**
@@ -178,7 +177,7 @@ public class Crab extends Character{
 			}else{
 				if(up && timeHeld>NANOS_MAX){
 					up=false;
-				}else if (!up && timeHeld<=200000000){//5th of a second
+				}else if (!up && timeHeld<=NANOS_MAX/5.0){
 					up=true;
 				}
 				if(up)
@@ -253,10 +252,10 @@ public class Crab extends Character{
 		
 		if(drawPowerBar){
 			g.setColor(barColor);
-			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+50),barLength, 10, 5, 5);
+			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength,(int)( 10*(1+(yPos+500)/500)), 5, 5);
 			g.setColor(Color.BLACK);
-			g.setStroke(optimalStroke);
-			g.drawRect((int)(xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+45), (int)((400+yPos/2.5)*0.2),20);
+			g.setStroke(new BasicStroke((float) (8*(1+(yPos+500)/500))));
+			g.drawRect((int)(xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+5), (int)((400+yPos/2.5)*0.2),(int)(18*(1+(yPos+500)/500)));
 		}
 		
 		//throwLine.testRender(g);
@@ -333,7 +332,7 @@ public class Crab extends Character{
 	private double trashY=-800;
 	private double Vy;
 	private double Vx;
-	private double power=0.5;//1.0 is optimal
+	private double power=1.0;//1.0 is optimal
 	private void calculateTrajectory(){
 		double Xinit=attachedTrash.getX();
 		double Yinit=attachedTrash.getY();
@@ -358,7 +357,7 @@ public class Crab extends Character{
 	private boolean spacePressed,spaceReleased=false;
 	private long lastTime;
 	private long timeSpacePressed=-1;
-	private static final double NANOS_MAX=1000000000;
+	private static final double NANOS_MAX=500000000;
 	private static final double POWER_MAX=1.2;
 	
 	/**
