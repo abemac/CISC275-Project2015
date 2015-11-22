@@ -19,7 +19,6 @@ public class Game3Crab extends Character{
 	private int spriteTime=0;
 	private ArbitraryLine seaFloor;
 	private double angle=0;
-	private double angleVel=.015;
 	private double slope=0;
 	/**
 	 * 
