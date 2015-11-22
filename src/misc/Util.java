@@ -136,9 +136,10 @@ public class Util {
 	 * @param width
 	 */
 	public static void setDistanceToEdge(int width,int height){
-		if(DISTANCE_TO_EDGE==-1)
+		if(DISTANCE_TO_EDGE==-1){
 			DISTANCE_TO_EDGE= (int) (( (double)(width) / (double)(height) )*1000.0);
 			CANVAS_WIDTH_SCALED=2*DISTANCE_TO_EDGE;
+		}
 	}
 	
 	

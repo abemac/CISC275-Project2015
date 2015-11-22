@@ -44,6 +44,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private MenuScreen menu;
 	private OverfishingGame overfishingGame;
 	private CrabSaveGame crabSaveGame;
+	private PollutionGame pollutionGame;
 	
 	////////
 	/**
@@ -172,6 +173,20 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				crabSaveGame=null;
 			}
 		}
+		else if (state==GameState.POLLUTION_GAME){
+			if(pollutionGame==null){
+				pollutionGame = new PollutionGame();
+				view.addMouseListener(pollutionGame);
+				view.addKeyListener(pollutionGame);
+			}
+			pollutionGame.onTick();
+			if(pollutionGame.isDone()){
+				state = GameState.SHOW_STATS;
+				view.removeKeyListener(pollutionGame);
+				view.removeMouseListener(pollutionGame);
+				pollutionGame=null;
+			}
+		}
 	}
 	
 	/**
@@ -188,6 +203,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		}
 		else if (state==GameState.CRAB_SAVE_GAME && crabSaveGame!=null){
 			view.render(crabSaveGame);
+		}
+		else if (state==GameState.POLLUTION_GAME && pollutionGame!=null){
+			view.render(pollutionGame);
 		}
 		
 	}
@@ -230,8 +248,14 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			System.exit(0);
 		}
 		
+		if(e.getKeyCode()==KeyEvent.VK_1){
+			state=GameState.OVERFISHING_GAME;
+		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
 			state=GameState.CRAB_SAVE_GAME;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_3){
+			state=GameState.POLLUTION_GAME;
 		}
 		
 	}
