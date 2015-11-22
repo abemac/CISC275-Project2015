@@ -18,13 +18,16 @@ public class Game3Crab extends Character{
 	private int spriteNum=1;
 	private int spriteTime=0;
 	private ArbitraryLine seaFloor;
+	private double angle=0;
+	private double angleVel=.015;
+	private double slope=0;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8431818079245300953L;
 
-	public Game3Crab(double xPos, double yPos, int health,ArbitraryLine seaFloor) {
-		super(xPos, yPos, health);
+	public Game3Crab(double xPos, int health,ArbitraryLine seaFloor) {
+		super(xPos, seaFloor.getYatXPos(xPos+150)-200, health);
 		loadRes();
 		this.seaFloor=seaFloor;
 	}
@@ -45,6 +48,8 @@ public class Game3Crab extends Character{
 	}
 	
 	public void onTick(){
+		slope=seaFloor.getSlopeAt(xPos+150)/1.5;
+		//System.out.println(slope);
 		if(leftPressed){
 			if(spriteNum==1){
 				spriteNum=3;
@@ -54,9 +59,12 @@ public class Game3Crab extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			xPos-=10*(yPos+1000)/2000.0;
+			if(slope>.5)
+				xPos-=3;
+			else
+				xPos-=5;
 			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
-			yPos=seaFloor.getYatXPos(xPos);
+			yPos=seaFloor.getYatXPos(xPos+150)-200;
 		}
 		if(rightPressed){
 			if(spriteNum==1){
@@ -67,9 +75,12 @@ public class Game3Crab extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			xPos+=10*(yPos+1000)/2000.0;
+			if(slope>.5)
+				xPos+=3;
+			else
+				xPos+=5;
 			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400?Util.getDISTANCE_TO_EDGE()-400:xPos;
-			yPos=seaFloor.getYatXPos(xPos);
+			yPos=seaFloor.getYatXPos(xPos+150)-200;
 		}
 		
 		if(leftPressed||rightPressed)
@@ -78,11 +89,20 @@ public class Game3Crab extends Character{
 			spriteTime=0;
 		
 		
+		angle+=(slope-angle)/6f;
+		
+		
+		
 	}
 	
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/2.5),(int)( 400+yPos/2.5),null);
+		g.translate(xPos+150,yPos+150);
+		g.rotate(angle);
+		g.drawImage(sprites.getSprite(1, spriteNum),-150, -150,300,300,null);
+		
+		g.rotate(-angle);
+		g.translate(-xPos-150, -yPos-150);
 		
 	}
 

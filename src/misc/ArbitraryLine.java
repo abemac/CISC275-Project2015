@@ -42,6 +42,26 @@ public class ArbitraryLine implements Serializable{
 		
 		
 	}
+	/**
+	 * xscale = Util*Distancetoedge/(picsize/4)
+	 * @param pts
+	 * @param xScale
+	 * @param yOffset
+	 */
+	public ArbitraryLine(double[] pts,double xScale,double yScale,double yOffset){
+		points=new ArrayList<Point>();
+		this.xScale=xScale;
+		this.yOffset=yOffset;
+		
+		int i=0;
+		while(i<pts.length-1){
+			points.add(new Point(pts[i]*xScale, pts[i+1]*yScale+yOffset));
+			i+=2;
+		}
+		calculateSlopes();
+		
+		
+	}
 	
 	/**
 	 * simple contructor for a simple line
@@ -115,16 +135,17 @@ public class ArbitraryLine implements Serializable{
 	
 	/**
 	 * returns the y position at a certain x on this arbitrary line
-	 * @param xPos
+	 * @param x
 	 * @return
 	 */
-	public int getYatXPos(double xPos){
+	public int getYatXPos(double x){
+		
 		int i=0;
-		if(xPos+points.get(0).x>=xPos || xPos>=xPos+points.get(points.size()-1).x){
+		if(xPos+points.get(0).x>=x || x>=xPos+points.get(points.size()-1).x){
 			return 0;
 		}
-		while(xPos+points.get(++i).x<xPos){}
-		return YAtX(xPos+points.get(i).x,points.get(i).y, slopes.get(i-1), xPos);
+		while(xPos+points.get(++i).x<x){}
+		return YAtX(xPos+points.get(i).x,points.get(i).y, slopes.get(i-1), x);
 	}
 	/**
 	 * sets the xPosition of this Arbitrary line (for moving lines)
@@ -132,6 +153,19 @@ public class ArbitraryLine implements Serializable{
 	 */
 	public void setX(double x){
 		this.xPos=x;
+	}
+	/**
+	 * returns the slope at an x location
+	 * @param x
+	 * @return
+	 */
+	public double getSlopeAt(double x){
+		int i=0;
+		if(xPos+points.get(0).x>=x || x>=xPos+points.get(points.size()-1).x){
+			return 0;
+		}
+		while(xPos+points.get(++i).x<x){}
+		return slopes.get(i-1);
 	}
 	/**
 	 * sets the y position of this moving line
