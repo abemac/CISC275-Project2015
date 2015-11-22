@@ -109,14 +109,27 @@ public class ArbitraryLine implements Serializable{
 	
 	}
 	
+	private int YAtX(double startx,double starty,double slope,double x){
+		return (int) (starty+slope*(x-startx));
+	}
+	
 	/**
 	 * returns the y position at a certain x on this arbitrary line
 	 * @param xPos
 	 * @return
 	 */
 	public int getYatXPos(double xPos){
+<<<<<<< HEAD
 		return 0;
 		
+=======
+		int i=0;
+		if(xPos+points.get(0).x>=xPos || xPos>=xPos+points.get(points.size()-1).x){
+			return 0;
+		}
+		while(xPos+points.get(++i).x<xPos){}
+		return YAtX(xPos+points.get(i).x,points.get(i).y, slopes.get(i-1), xPos);
+>>>>>>> 050e76389eb9712f359f49ad2adf78845075df96
 	}
 	/**
 	 * sets the xPosition of this Arbitrary line (for moving lines)
