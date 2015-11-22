@@ -115,6 +115,7 @@ public class ArbitraryLine implements Serializable{
 	 * @return
 	 */
 	public int getYatXPos(double xPos){
+		return 0;
 		
 	}
 	/**
