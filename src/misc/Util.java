@@ -83,19 +83,7 @@ public class Util {
 			
 	}
 	
-	/**
-	 * takes SCALED coordinates.  Returns true if the given x and y are below an arbitrary line with given slope
-	 * @param startx the start x of this slope section
-	 * @param starty the start y of this slope section
-	 * @param slope the slope 
-	 * @param x	the x pos in question
-	 * @param y the y pos in question
-	 * @return true or false
-	 */;
-	public static boolean isBelowSlope(double startx,double starty,double slope,double x,double y){
-		return (y>(starty+slope*(x-startx)));
 	
-	}
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////

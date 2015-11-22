@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import characters.Game3Crab;
 import enemies.Pollutant;
+import misc.ArbitraryLine;
 import misc.Util;
 
 /**
@@ -29,6 +30,7 @@ public class PollutionGame extends Game {
 	private ArrayList<Pollutant> pollutants;
 	private Color water = new Color(114,145,215);
 	private BufferedImage seaFloor;
+	private ArbitraryLine seaFloorLine;
 	
 	private Game3Crab crab;
 	
@@ -43,7 +45,10 @@ public class PollutionGame extends Game {
 
 	
 	public void init(){
-		crab=new Game3Crab(0, 0, 100);
+		
+		
+		
+		crab=new Game3Crab(0, 0, 100,seaFloorLine);
 	}
 	
 	private void loadRes(){

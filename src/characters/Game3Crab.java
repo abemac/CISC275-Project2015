@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import enemies.Trash;
+import misc.ArbitraryLine;
 import misc.SpriteSheet;
 import misc.Util;
 
@@ -17,14 +17,16 @@ public class Game3Crab extends Character{
 	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
 	private int spriteNum=1;
 	private int spriteTime=0;
+	private ArbitraryLine seaFloor;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8431818079245300953L;
 
-	public Game3Crab(double xPos, double yPos, int health) {
+	public Game3Crab(double xPos, double yPos, int health,ArbitraryLine seaFloor) {
 		super(xPos, yPos, health);
 		loadRes();
+		this.seaFloor=seaFloor;
 	}
 	/**
 	 * loads the crag image used to represent the Crab character

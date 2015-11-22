@@ -80,7 +80,7 @@ public class ArbitraryLine implements Serializable{
 			return false;
 		}
 		while(xPos+points.get(++i).x<x){}
-		return Util.isBelowSlope(xPos+points.get(i).x,points.get(i).y, slopes.get(i-1), x, y);
+		return isBelowSlope(xPos+points.get(i).x,points.get(i).y, slopes.get(i-1), x, y);
 	}
 	
 	
@@ -94,6 +94,29 @@ public class ArbitraryLine implements Serializable{
 		return !isBelowLine(x,y);
 	}
 	
+	
+	/**
+	 * takes SCALED coordinates.  Returns true if the given x and y are below an arbitrary line with given slope
+	 * @param startx the start x of this slope section
+	 * @param starty the start y of this slope section
+	 * @param slope the slope 
+	 * @param x	the x pos in question
+	 * @param y the y pos in question
+	 * @return true or false
+	 */;
+	private boolean isBelowSlope(double startx,double starty,double slope,double x,double y){
+		return (y>(starty+slope*(x-startx)));
+	
+	}
+	
+	/**
+	 * returns the y position at a certain x on this arbitrary line
+	 * @param xPos
+	 * @return
+	 */
+	public int getYatXPos(double xPos){
+		
+	}
 	/**
 	 * sets the xPosition of this Arbitrary line (for moving lines)
 	 * @param x
