@@ -83,19 +83,7 @@ public class Util {
 			
 	}
 	
-	/**
-	 * takes SCALED coordinates.  Returns true if the given x and y are below an arbitrary line with given slope
-	 * @param startx the start x of this slope section
-	 * @param starty the start y of this slope section
-	 * @param slope the slope 
-	 * @param x	the x pos in question
-	 * @param y the y pos in question
-	 * @return true or false
-	 */;
-	public static boolean isBelowSlope(double startx,double starty,double slope,double x,double y){
-		return (y>(starty+slope*(x-startx)));
 	
-	}
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,9 +124,10 @@ public class Util {
 	 * @param width
 	 */
 	public static void setDistanceToEdge(int width,int height){
-		if(DISTANCE_TO_EDGE==-1)
+		if(DISTANCE_TO_EDGE==-1){
 			DISTANCE_TO_EDGE= (int) (( (double)(width) / (double)(height) )*1000.0);
 			CANVAS_WIDTH_SCALED=2*DISTANCE_TO_EDGE;
+		}
 	}
 	
 	

@@ -1,11 +1,17 @@
 package games;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import characters.Game3Crab;
 import enemies.Pollutant;
+import misc.ArbitraryLine;
+import misc.Util;
 
 /**
  * Models the Pollution Game
@@ -22,28 +28,54 @@ public class PollutionGame extends Game {
 	private int numCollided;
 	private int numRemoved;
 	private ArrayList<Pollutant> pollutants;
+	private Color water = new Color(114,145,215);
+	private BufferedImage seaFloor;
+	private ArbitraryLine seaFloorLine;
+	
+	private Game3Crab crab;
 	
 	/**
 	 * calls the super constructor
 	 */
 	public PollutionGame(){
 		super();
+		loadRes();
 		
 	}
 
+	
+	public void init(){
+		
+		
+		
+		crab=new Game3Crab(0, 0, 100,seaFloorLine);
+	}
+	
+	private void loadRes(){
+		
+		try {
+			seaFloor=Util.loadImage("/sea floor (smaller-forgame3).png",Util.getCANVAS_WIDTH_SCALED(),750, this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * gets called 60 times per second.  Handles updating
 	 */
 	@Override
 	public void onTick() {
 		
-		
+		crab.onTick();
 	}
 	/**
 	 * defines how to draw the pollution game
 	 */
 	public void render(Graphics2D g){
-		
+		g.setColor(water);
+		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
+		g.drawImage(seaFloor, -Util.getDISTANCE_TO_EDGE(), 250, null);
+		crab.render(g);
 	}
 	
 	/**
@@ -82,18 +114,20 @@ public class PollutionGame extends Game {
 	 * @return boolean whether or not game is done
 	 */
 	public boolean isDone(){
-		return true;
+		return false;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		crab.keyPressed(e);
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		crab.keyReleased(e);
 		
 	}
 
