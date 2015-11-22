@@ -51,7 +51,7 @@ public class CrabSaveGame extends Game {
 	 * gets called in the constructor to initialized components of the game
 	 */
 	public void init(){
-		crab=new Crab(0, 0, 100);
+		crab=new Crab(0, 0, 100,this);
 		trashCan=new TrashCan(375, -930);
 		int[]pts={0,148,110,80,176,58,374,126,546,164,678,140,822,64,978,64,1176,144,1294,134,1500,224};
 		pondLine=new ArbitraryLine(pts, Util.getDISTANCE_TO_EDGE()/(1500/2f), 500f/330f, 500);
@@ -106,6 +106,14 @@ public class CrabSaveGame extends Game {
 		
 		tellCrabToHoldTrash();
 		
+	}
+	
+	/**
+	 * adds trash back if crab missed the throw
+	 * @param t
+	 */
+	public void addBackTrash(Trash t){
+		trash.add(t);
 	}
 	
 	

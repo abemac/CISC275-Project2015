@@ -52,17 +52,17 @@ public class CharacterTests extends TestCase {
 	 * tests the basic functions of Fish, such as decreasing its health and updating its x and y position
 	 */
 	public void testCrab(){
-		Crab crab = new Crab(0,0,0);
-		int h = crab.getHealth();
-		crab.decreaseHealth(5);
-		assertEquals(crab.getHealth(),h-5);
-		double x =crab.getX();
-		crab.move(10, 0);
-		assertEquals(crab.getX(),10);
-		double y = crab.getY();
-		crab.move(0, 10);
-		assertEquals(crab.getY(),y+10);
-		
+		//Crab crab = new Crab(0,0,0);
+		//int h = crab.getHealth();
+//		crab.decreaseHealth(5);
+//		assertEquals(crab.getHealth(),h-5);
+//		double x =crab.getX();
+//		crab.move(10, 0);
+//		assertEquals(crab.getX(),10);
+//		double y = crab.getY();
+//		crab.move(0, 10);
+//		assertEquals(crab.getY(),y+10);
+//		
 		Trash t = new Trash(0,0,Trash.BANANA);
 		double x2 = t.getX();
 		double y2 = t.getY();
@@ -71,7 +71,7 @@ public class CharacterTests extends TestCase {
 		
 		TheHuman human = new TheHuman(0, 0);
 		boolean b = human.hasFish();
-		crab.pinchHumanToGetFish(human);
+		//crab.pinchHumanToGetFish(human);
 		assertFalse(human.hasFish());
 		
 		

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import enemies.TheHuman;
 import enemies.Trash;
+import games.CrabSaveGame;
+import misc.ArbitraryLine;
+import misc.Point;
 import misc.SpriteSheet;
 import misc.Util;
 
@@ -36,15 +39,23 @@ public class Crab extends Character{
 	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
 	
 	
+	private Point trashPoint= new Point(575,-320);
+	private double lowestYThrowingTrash=0.0;
+	
+	private ArbitraryLine throwLine;
+	private CrabSaveGame csg;
+	
 	/**
 	 * makes a Character Crab which has xPos, yPos, health
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
 	 * @param angriness the initial angriness
 	 */
-	public Crab(double xPos, double yPos, int health) {
+	public Crab(double xPos, double yPos, int health,CrabSaveGame csg) {
 		super(xPos, yPos, health);
 		loadRes();
+		this.csg=csg;
+		throwLine=new ArbitraryLine(new Point(-1000,1000), new Point(1000,1000));
 		
 	}
 	
@@ -70,7 +81,7 @@ public class Crab extends Character{
 	 */
 	public void onTick(){
 		
-		if(leftPressed /*&& !isHoldingTrash*/){
+		if(leftPressed){
 			if(spriteNum==1){
 				spriteNum=3;
 			}
@@ -82,7 +93,7 @@ public class Crab extends Character{
 			xPos-=10*(yPos+1000)/2000.0;
 			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
 		}
-		if(rightPressed /*&& !isHoldingTrash*/){
+		if(rightPressed){
 			if(spriteNum==1){
 				spriteNum=2;
 			}
@@ -94,7 +105,7 @@ public class Crab extends Character{
 			xPos+=10*(yPos+1000)/2000.0;
 			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400?Util.getDISTANCE_TO_EDGE()-400:xPos;
 		}
-		if(upPressed /*&& !isHoldingTrash*/){
+		if(upPressed){
 			if(spriteNum==1){
 				spriteNum=2;
 			}
@@ -106,7 +117,7 @@ public class Crab extends Character{
 			yPos-=6*(yPos+800)/1500.0;
 			xPos+=.5;
 		}
-		if(downPressed /*&& !isHoldingTrash*/){
+		if(downPressed){
 			if(spriteNum==1){
 				spriteNum=3;
 			}
@@ -179,12 +190,15 @@ public class Crab extends Character{
 			t.render(g);
 		}
 		
+		//throwLine.testRender(g);
 	}
 	
 	public void renderThrownTrash(Graphics2D g){
 		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
 			attachedTrash.render(g);
 		}
+		
+		//g.drawLine(-1000, (int)lowestYThrowingTrash, 1000,(int)lowestYThrowingTrash);
 		
 		
 		
@@ -193,6 +207,7 @@ public class Crab extends Character{
 	
 	private boolean isThrowingTrash=false;
 	private boolean calculatedTrajecory=false;
+	private boolean reachedVertex=false;
 	private boolean aboveCan=false;
 	private ArrayList<Trash> previouslyThrownTrash = new ArrayList<Trash>();
 	/**
@@ -207,16 +222,37 @@ public class Crab extends Character{
 		attachedTrash.setY(attachedTrash.getY()-Vy);
 		Vy-=gravity;
 		attachedTrash.act();
-		if(attachedTrash.getY()<-950){//should always get to at least -100
+		if(attachedTrash.getY()<-900){
 			aboveCan=true;
 		}
-		if(attachedTrash.getX()>trashX-200 && attachedTrash.getX()+attachedTrash.getWidth()<trashX+250 &&
-				attachedTrash.getY()+attachedTrash.getHeight()>trashY && aboveCan){
+		if(reachedVertex==false && Math.abs(Math.abs(Vy)-gravity)<=gravity){
+			reachedVertex=true;
+		}
+		
+		
+		if(reachedVertex && (attachedTrash.getY()>lowestYThrowingTrash||
+				throwLine.isBelowLine(attachedTrash.getX()+attachedTrash.getWidth()/2f,
+						attachedTrash.getY()+attachedTrash.getHeight()/2f))){
+			
 			isThrowingTrash=false;
+			calculatedTrajecory=false;
+			attachedTrash.setBeingThrown(false);
+			csg.addBackTrash(attachedTrash);
+			isHoldingTrash=false;
+			attachedTrash=null;
+			reachedVertex=false;
+			aboveCan=false;
+		}
+		
+		else if(aboveCan && attachedTrash.getX()>trashX-200 && attachedTrash.getX()+attachedTrash.getWidth()<trashX+250 &&
+				attachedTrash.getY()+attachedTrash.getHeight()>trashY && reachedVertex){
+			isThrowingTrash=false;
+			isHoldingTrash=false;
 			calculatedTrajecory=false;
 			attachedTrash.setBeingThrown(false);
 			previouslyThrownTrash.add(attachedTrash);
 			attachedTrash=null;
+			reachedVertex=false;
 			aboveCan=false;
 		}
 		
@@ -228,15 +264,23 @@ public class Crab extends Character{
 	private double trashY=-800;
 	private double Vy;
 	private double Vx;
+	private double power=1.0;//1.0 is optimal
 	private void calculateTrajectory(){
 		double Xinit=attachedTrash.getX();
 		double Yinit=attachedTrash.getY();
-		Vy=Math.sqrt(2*gravity*(Yinit+1100));
-		double Tt = (Vy/gravity)+(Math.sqrt((2200+2*trashY)/gravity));
-		Vx = (trashX-Xinit)/Tt;
+		Vy=power*Math.sqrt(2*gravity*(Yinit+1100));
+		double Tt = ((Vy/gravity)+(Math.sqrt((2200+2*trashY)/gravity)));
+		Vx = power*(trashX-Xinit)/Tt;
+		if(power<=1.0)
+			lowestYThrowingTrash=-power*300;
+		else
+			lowestYThrowingTrash=-300;
+		throwLine.setPoints(new Point(xPos+(400+yPos/2.5)/2f,yPos+(400+yPos/2.5)), trashPoint);
 		calculatedTrajecory=true;
 		isHoldingTrash=false;
 		attachedTrash.setBeingThrown(true);
+		
+		
 		
 	}
 	

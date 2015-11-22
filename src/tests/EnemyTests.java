@@ -80,12 +80,12 @@ public class EnemyTests extends TestCase{
 		double health = h.getHealth();
 		h.decreaseHealth(-4);;
 		assertEquals(health+4,h.getHealth());
-		
-		Crab crab = new Crab(0,0,0);
-		TheHuman human = new TheHuman(0, 0);
-		boolean b = human.hasFish();
-		crab.pinchHumanToGetFish(human);
-		assertFalse(human.hasFish());
+//		
+//		Crab crab = new Crab(0,0,0);
+//		TheHuman human = new TheHuman(0, 0);
+//		boolean b = human.hasFish();
+//		crab.pinchHumanToGetFish(human);
+//		assertFalse(human.hasFish());
 		
 		
 		

@@ -44,6 +44,18 @@ public class ArbitraryLine implements Serializable{
 	}
 	
 	/**
+	 * simple contructor for a simple line
+	 * @param p1
+	 * @param p2
+	 */
+	public ArbitraryLine(Point p1,Point p2){
+		points=new ArrayList<Point>();
+		points.add(p1);
+		points.add(p2);
+		calculateSlopes();
+	}
+	
+	/**
 	 * positive slope is actually downward due to screen coordinates
 	 */
 	private void calculateSlopes(){
@@ -63,7 +75,6 @@ public class ArbitraryLine implements Serializable{
 	 * @return
 	 */
 	public boolean isBelowLine(double x, double y){
-		
 		int i=0;
 		if(xPos+points.get(0).x>=x || x>=xPos+points.get(points.size()-1).x){
 			return false;
@@ -98,6 +109,22 @@ public class ArbitraryLine implements Serializable{
 		this.yPos=y;
 	}
 	
+	/**
+	 * can be used for two point lines
+	 * @param p1
+	 * @param p2
+	 */
+	public void setPoints(Point p1,Point p2){
+		points.clear();
+		if(p1.x<p2.x){
+			points.add(p1);
+			points.add(p2);
+		}else{
+			points.add(p2);
+			points.add(p1);
+		}
+		calculateSlopes();
+	}
 	
 	
 	public void testRender(Graphics2D g){
