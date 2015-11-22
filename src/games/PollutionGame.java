@@ -46,8 +46,9 @@ public class PollutionGame extends Game {
 	
 	public void init(){
 		
-		
-		
+		int[]pts={0,218,30,214,117,156,184,156,276,225,346,346,398,372,488,372,622,312,735,296,837,252,900,242,1006,266,1185,334,1294,332,1380,274,1450,254,1500,254};
+		seaFloorLine = new ArbitraryLine(pts, Util.getDISTANCE_TO_EDGE()/750.0,750.0/500.0, 250);
+		seaFloorLine.setX(-Util.getDISTANCE_TO_EDGE());
 		crab=new Game3Crab(0, 0, 100,seaFloorLine);
 	}
 	
@@ -76,6 +77,7 @@ public class PollutionGame extends Game {
 		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
 		g.drawImage(seaFloor, -Util.getDISTANCE_TO_EDGE(), 250, null);
 		crab.render(g);
+		seaFloorLine.testRender(g);
 	}
 	
 	/**
