@@ -109,6 +109,10 @@ public class Game3Crab extends Character{
 	public double getAngle(){
 		return angle;
 	}
+	public ArbitraryLine getSeaFloor(){
+		return seaFloor;
+		
+	}
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

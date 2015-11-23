@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import misc.ArbitraryLine;
 import misc.SpriteSheet;
 import misc.Util;
 
@@ -45,30 +46,51 @@ public class Game3Fish extends Character {
 		
 	}
 	
+	private double slope;
+	
 	public void onTick(){
 		xPos+=( (crab.getX()+50)-xPos)/30.0;
 		yPos+=((crab.getY()-200)-yPos)/30.0;
 		
+
 		
 		if(crab.getX()+50<xPos){
 			swimLeft=true;
 			swimRight=false;
-		}else{
+		}else if (crab.getX()+50>xPos){
 			swimRight=true;
+			swimLeft=false;
+			
+		}
+		else{
+			swimRight=false;
 			swimLeft=false;
 		}
 		
-		if(swimRight)
+		swimSpeed=8-(int)(Math.abs( (crab.getX()+50)-xPos)/7.0);
+		
+		
+		slope=(8-swimSpeed)*(crab.getSeaFloor().getSlopeAt(xPos+1)/(1.5*15));
+		slope=slope>.2?.2:slope;
+		swimSpeed=swimSpeed<2?2:swimSpeed;
+		if(swimRight){
+			angle+=(slope-angle)/15f;
 			swimRight();
-		if(swimLeft)
+		}
+		else if(swimLeft){
+			angle+=(slope-angle)/15f;
 			swimLeft();
+		}
+		
+		
+		
 		
 	}
 	
 	private boolean forward;
 	private boolean swimRight,swimLeft;
 	private long limitSwim=0;
-	private int swimSpeed=7;
+	private int swimSpeed=8;
 	private void swimRight(){
 		spriteRow=1;
 		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
@@ -86,13 +108,6 @@ public class Game3Fish extends Character {
 			}
 		}
 		limitSwim++;
-		if(limitSwim%7==0 && swimSpeed!=6){
-			if(swimSpeed>6){
-				swimSpeed-=1;
-			}if(swimSpeed<6){
-				swimSpeed+=1;
-			}
-		}
 		
 	}
 	private void swimLeft(){
@@ -112,19 +127,18 @@ public class Game3Fish extends Character {
 			}
 		}
 		limitSwim++;
-		if(limitSwim%7==0 && swimSpeed!=6){
-			if(swimSpeed>6){
-				swimSpeed-=1;
-			}if(swimSpeed<6){
-				swimSpeed+=1;
-			}
-		}
 		
 	}
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(fish.getSprite(spriteRow, spriteCol),(int)xPos,(int)yPos,200,200,null);
+		g.translate(xPos+100, yPos+100);
+		g.rotate(angle);
+		g.drawImage(fish.getSprite(spriteRow, spriteCol),-100,-100,200,200,null);
+		g.rotate(-angle);
+		g.translate(-xPos-100, -yPos-100);
 	}
+	
+	
 	
 	
 	
