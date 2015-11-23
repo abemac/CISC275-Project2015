@@ -67,7 +67,7 @@ public class Game3Fish extends Character {
 			swimLeft=false;
 		}
 		
-		swimSpeed=8-(int)(Math.abs( (crab.getX()+50)-xPos)/7.0);
+		swimSpeed=8-(int)(Math.abs( (crab.getX()+50)-xPos)/10.0);
 		
 		
 		slope=(8-swimSpeed)*(crab.getSeaFloor().getSlopeAt(xPos+1)/(1.5*15));
