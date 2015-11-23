@@ -62,7 +62,7 @@ public class Game3Crab extends Character{
 				xPos-=3;
 			else
 				xPos-=5;
-			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
+			xPos=xPos<-Util.getDISTANCE_TO_EDGE()-30?-Util.getDISTANCE_TO_EDGE()-30:xPos;
 			yPos=seaFloor.getYatXPos(xPos+150)-200;
 		}
 		if(rightPressed){
@@ -78,7 +78,7 @@ public class Game3Crab extends Character{
 				xPos+=3;
 			else
 				xPos+=5;
-			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400?Util.getDISTANCE_TO_EDGE()-400:xPos;
+			xPos=xPos>Util.getDISTANCE_TO_EDGE()-250?Util.getDISTANCE_TO_EDGE()-250:xPos;
 			yPos=seaFloor.getYatXPos(xPos+150)-200;
 		}
 		
