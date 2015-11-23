@@ -45,15 +45,15 @@ public class Game3Fish extends Character {
 	}
 	
 	public void onTick(){
-		xPos=crab.getX()+50;
-		yPos=crab.getY()-200;
+		xPos+=( (crab.getX()+50)-xPos)/40.0;
+		yPos+=((crab.getY()-200)-yPos)/40.0;
 		swim();
 		
 	}
 	
 	private boolean forward;
 	private long limitSwim=0;
-	private int swimSpeed=4;
+	private int swimSpeed=7;
 	private void swim(){
 		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
 			if(spriteNum==1){
@@ -65,9 +65,9 @@ public class Game3Fish extends Character {
 					forward=true;
 				}
 			}
-			//else if(!leftPressed){
-			//	spriteNum=1;
-			//}
+			else{
+				spriteNum=1;
+			}
 		}
 		limitSwim++;
 		if(limitSwim%7==0 && swimSpeed!=6){
