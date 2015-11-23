@@ -17,7 +17,8 @@ public class Game3Fish extends Character {
 	private static final long serialVersionUID = 7090938780360351384L;
 
 	private static SpriteSheet fish;
-	private int spriteNum=1;
+	private int spriteCol=1;
+	private int spriteRow=1;
 	private double angle=0;
 	private Game3Crab crab;
 	
@@ -34,8 +35,8 @@ public class Game3Fish extends Character {
 		if(fish==null){
 			BufferedImage tmp=null;
 			try {
-					tmp = Util.loadImage("/Goldfish5x(150x150).png", this);
-					fish=new SpriteSheet(tmp,1,5,150,150);
+					tmp = Util.loadImage("/Goldfish(game3).png", this);
+					fish=new SpriteSheet(tmp,2,3,150,150);
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -45,28 +46,69 @@ public class Game3Fish extends Character {
 	}
 	
 	public void onTick(){
-		xPos+=( (crab.getX()+50)-xPos)/40.0;
-		yPos+=((crab.getY()-200)-yPos)/40.0;
-		swim();
+		xPos+=( (crab.getX()+50)-xPos)/30.0;
+		yPos+=((crab.getY()-200)-yPos)/30.0;
+		
+		
+		if(crab.getX()+50<xPos){
+			swimLeft=true;
+			swimRight=false;
+		}else{
+			swimRight=true;
+			swimLeft=false;
+		}
+		
+		if(swimRight)
+			swimRight();
+		if(swimLeft)
+			swimLeft();
 		
 	}
 	
 	private boolean forward;
+	private boolean swimRight,swimLeft;
 	private long limitSwim=0;
 	private int swimSpeed=7;
-	private void swim(){
+	private void swimRight(){
+		spriteRow=1;
 		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
-			if(spriteNum==1){
+			if(spriteCol==1){
 				if(forward){
-					spriteNum=3;
+					spriteCol=3;
 					forward=false;
 				}else{
-					spriteNum=2;
+					spriteCol=2;
 					forward=true;
 				}
 			}
 			else{
-				spriteNum=1;
+				spriteCol=1;
+			}
+		}
+		limitSwim++;
+		if(limitSwim%7==0 && swimSpeed!=6){
+			if(swimSpeed>6){
+				swimSpeed-=1;
+			}if(swimSpeed<6){
+				swimSpeed+=1;
+			}
+		}
+		
+	}
+	private void swimLeft(){
+		spriteRow=2;
+		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
+			if(spriteCol==1){
+				if(forward){
+					spriteCol=3;
+					forward=false;
+				}else{
+					spriteCol=2;
+					forward=true;
+				}
+			}
+			else{
+				spriteCol=1;
 			}
 		}
 		limitSwim++;
@@ -81,7 +123,7 @@ public class Game3Fish extends Character {
 	}
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(fish.getSprite(1, spriteNum),(int)xPos,(int)yPos,200,200,null);
+		g.drawImage(fish.getSprite(spriteRow, spriteCol),(int)xPos,(int)yPos,200,200,null);
 	}
 	
 	
