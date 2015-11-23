@@ -105,6 +105,10 @@ public class Game3Crab extends Character{
 		
 	}
 
+	
+	public double getAngle(){
+		return angle;
+	}
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
