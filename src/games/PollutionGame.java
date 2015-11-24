@@ -213,7 +213,7 @@ public class PollutionGame extends Game {
 		Bubble b = bubbleBank.get(availableBubbles.get(0));
 		b.setIndex(availableBubbles.get(0));
 		availableBubbles.remove(0);
-		b.shootFromFish((fish.getX()-20), (fish.getY()+50), crab.getAngle());
+		b.shootFromFish((fish.getX()+150), (fish.getY()+55), crab.getAngle(),crab.getX()+150,crab.getY()+150);
 		bubbles.add(b);
 		
 	}

@@ -23,7 +23,7 @@ public class Bubble extends Character{
 	private static BufferedImage bubble;
 	private double xVel,yVel;
 	private double scale=1.0;
-	
+	private double angle=0.0;
 	private boolean hasPollutant;
 	
 	private int index;
@@ -58,7 +58,7 @@ public class Bubble extends Character{
 		yPos+=yVel;
 		
 		if(scale<1.0){
-			scale+=.04;
+			scale+=.03;
 		}
 	}
 	
@@ -67,8 +67,12 @@ public class Bubble extends Character{
 	 */
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(bubble,(int) (xPos+(1.0-scale)*100),(int) yPos,(int)(200*scale),-(int)(200*scale), null);
+		g.translate((xPos), yPos);
+		g.rotate(angle);
+		g.drawImage(bubble,0,0,-(int)(200*scale),-(int)(200*scale), null);
 		
+		g.rotate(-angle);
+		g.translate(-xPos, -yPos);
 	}
 	
 	
@@ -76,11 +80,15 @@ public class Bubble extends Character{
 	 * causes this bubble to go from the fish
 	 * 
 	 */
-	public void shootFromFish(double xPos,double yPos,double angle){
-		this.xVel=6*Math.cos(angle-Math.PI/2f-.2);
+	public void shootFromFish(double xPos,double yPos,double angle,double crabX,double crabY){
+		this.xVel=2*Math.cos(angle-Math.PI/2f-.2);
 		this.yVel=1*Math.sin(angle-Math.PI/2f);
-		this.xPos=xPos;
-		this.yPos=yPos;
+		this.angle=angle;
+		double dx=xPos-(crabX);
+		double dy=yPos-(crabY);
+		double polarR=Math.sqrt(dx*dx+dy*dy)+20;
+		this.xPos=crabX+polarR*Math.cos(Math.PI/2f-angle);
+		this.yPos=crabY-polarR*Math.sin(Math.PI/2f-angle);
 		scale=0.2;
 	}
 	
