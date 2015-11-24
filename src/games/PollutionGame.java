@@ -34,12 +34,16 @@ public class PollutionGame extends Game {
 	private ArrayList<Bubble> bubbles;
 	private ArrayList<Pollutant> pollutantBank;
 	private ArrayList<Bubble> bubbleBank;
+	private ArrayList<Integer> availablePollutants;
+	private ArrayList<Integer> availableBubbles;
 	private Color water = new Color(114,145,215);
 	private BufferedImage seaFloor;
 	private ArbitraryLine seaFloorLine;
 	
 	private Game3Crab crab;
 	private Game3Fish fish;
+	
+	private long newPollutantTimer=0;
 	
 	/**
 	 * calls the super constructor
@@ -122,8 +126,14 @@ public class PollutionGame extends Game {
 		pollutantBank= new ArrayList<Pollutant>();
 		bubbleBank=new ArrayList<Bubble>();
 		
+		availablePollutants= new ArrayList<Integer>();
+		for(int i=0;i<30;i++){availablePollutants.add(i);}
+		availableBubbles=new ArrayList<Integer>();
+		for(int i=0;i<20;i++){availableBubbles.add(i);}
+		
 		producePollutants();
 		produceBubbles();
+		addInitialPollutants();
 		
 		
 		
@@ -154,6 +164,12 @@ public class PollutionGame extends Game {
 		for(Bubble b: bubbles){
 			b.onTick();
 		}
+		
+		
+		if(newPollutantTimer%500==0){
+			addAnotherPollutantIfPossible();
+		}
+		newPollutantTimer++;
 	}
 	/**
 	 * defines how to draw the pollution game
@@ -176,6 +192,29 @@ public class PollutionGame extends Game {
 	}
 	
 	
+	private void addInitialPollutants(){
+		int i=0;
+		while (i<10){
+			int choose = (int) (Math.random()*availablePollutants.size());
+			int index = availablePollutants.get(choose);
+			pollutantBank.get(index).setIndex(index);
+			pollutants.add(pollutantBank.get(index));
+			i++;
+		}
+		
+	}
+	
+	private void addAnotherPollutantIfPossible(){
+		if(availablePollutants.size()==0){
+			return;
+		}
+		int choose = (int) (Math.random()*availablePollutants.size());
+		int index = availablePollutants.get(choose);
+		pollutantBank.get(index).setIndex(index);
+		pollutants.add(pollutantBank.get(index));
+	
+	}
+	
 	/**
 	 * produces pollutants for the pollutant bank;
 	 */
@@ -183,19 +222,19 @@ public class PollutionGame extends Game {
 		int i=0;
 		while(i<30){
 			switch(i%6){
-				case 0:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, -1150),
-						new Vector(3,1), .01, Pollutant.FERTILIZER,seaFloorLine));break;
-				case 1:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, 250),
-						new Vector(2,-1), .01, Pollutant.FERTILIZER,seaFloorLine));break;
+				case 0:pollutantBank.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, -1150),
+						new Vector(3,1), .01, Pollutant.FERTILIZER));break;
+				case 1:pollutantBank.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, 250),
+						new Vector(2,-1), .01, Pollutant.FERTILIZER));break;
 				
-				case 2: pollutants.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE()+150, 0),
-						new Vector(-5,-1), .01, Pollutant.OIL,seaFloorLine));break;
-				case 3:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, 250),
-						new Vector(5,-1), .01, Pollutant.OIL,seaFloorLine));break;
-				case 4: pollutants.add(new Pollutant(new Vector(500,-1150),
-						new Vector(-2,1), .01, Pollutant.SEWAGE,seaFloorLine));break;
-				case 5: pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, -500),
-						new Vector(4,0), .01, Pollutant.SEWAGE,seaFloorLine));break;
+				case 2: pollutantBank.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE()+150, 0),
+						new Vector(-5,-1), .01, Pollutant.OIL));break;
+				case 3:pollutantBank.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, 250),
+						new Vector(5,-1), .01, Pollutant.OIL));break;
+				case 4: pollutantBank.add(new Pollutant(new Vector(500,-1150),
+						new Vector(-2,1), .01, Pollutant.SEWAGE));break;
+				case 5: pollutantBank.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, -500),
+						new Vector(4,0), .01, Pollutant.SEWAGE));break;
 				default:break;
 			}
 			i++;

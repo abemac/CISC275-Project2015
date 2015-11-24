@@ -43,9 +43,10 @@ public class Pollutant extends Enemy {
 	private double angle;
 	private double rotationSpeed;
 	private double initX,initY;
-	private static ArbitraryLine seaFloor;
 	private static BufferedImage fertilizer,sewage,oil;
 	private boolean out=false;
+	
+	private int index;
 	
 	/**
 	 * Creates a pollutant with initial x,y,and type. The nastiness of the Pollutant is determined by the type
@@ -53,13 +54,12 @@ public class Pollutant extends Enemy {
 	 * @param yPos the initial y position
 	 * @param type the type.  One of the static constants defined in Pollutant
 	 */
-	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type,ArbitraryLine seaFloor){
+	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type){
 		super(initialPosition.getX(),initialPosition.getY());
 		this.type = type;
 		this.position = initialPosition;
 		this.velocity = velocity;
 		this.rotationSpeed=rotationSpeed;
-		this.seaFloor=seaFloor;
 		loadRes();
 	}
 	
@@ -156,5 +156,12 @@ public class Pollutant extends Enemy {
 	public int getType(){
 		return type;
 	}
+	
+	public int getIndex(){
+		return index;
+	}
 
+	public void setIndex(int i){
+		this.index = i;
+	}
 }
