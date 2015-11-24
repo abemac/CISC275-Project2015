@@ -40,6 +40,9 @@ public class PollutionGame extends Game {
 	private BufferedImage seaFloor;
 	private ArbitraryLine seaFloorLine;
 	
+	public boolean spacePressed=false;
+	public boolean spaceReleased=true;
+	
 	private Game3Crab crab;
 	private Game3Fish fish;
 	
@@ -170,6 +173,14 @@ public class PollutionGame extends Game {
 			addAnotherPollutantIfPossible();
 		}
 		newPollutantTimer++;
+		
+		
+		if(crab.isHoldingFish()){
+			if(spacePressed && spaceReleased){
+				spaceReleased=false;
+				shootBubbleFromFish();
+			}
+		}
 	}
 	/**
 	 * defines how to draw the pollution game
@@ -191,6 +202,14 @@ public class PollutionGame extends Game {
 		
 	}
 	
+	
+	private void shootBubbleFromFish(){
+		Bubble b = bubbleBank.get(availableBubbles.get(0));
+		availableBubbles.remove(0);
+		b.shootFromFish(fish.getX(), fish.getX(), crab.getAngle());
+		bubbles.add(b);
+		
+	}
 	
 	private void addInitialPollutants(){
 		int i=0;
@@ -251,7 +270,7 @@ public class PollutionGame extends Game {
 	private void produceBubbles(){
 		int i=0;
 		while(i<20){
-			bubbleBank.add(new Bubble(0,0));
+			bubbleBank.add(new Bubble());
 			i++;
 		}
 	}
@@ -300,12 +319,20 @@ public class PollutionGame extends Game {
 		// TODO Auto-generated method stub
 		crab.keyPressed(e);
 		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			spacePressed=true;
+		}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		crab.keyReleased(e);
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			spacePressed=false;
+			spaceReleased=true;
+		}
 		
 	}
 
