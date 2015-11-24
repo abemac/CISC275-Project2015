@@ -15,11 +15,16 @@ public class Game3Crab extends Character{
 	
 	private SpriteSheet sprites;
 	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
-	private int spriteNum=1;
+	private int spriteCol=1;
+	private int spriteRow=1;
 	private int spriteTime=0;
 	private ArbitraryLine seaFloor;
 	private double angle=0;
 	private double slope=0;
+	private boolean jump=false;
+	private double yVel=0;;
+	
+	private boolean isHoldingFish=false;
 	/**
 	 * 
 	 */
@@ -36,61 +41,109 @@ public class Game3Crab extends Character{
 	private void loadRes(){
 		BufferedImage crabs = null;
 		try {
-			crabs = Util.loadImage("/crabsprite(150x150).png", this);
+			crabs = Util.loadImage("/crabsprite(150x150)game3.png", this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sprites = new SpriteSheet(crabs, 1, 4, 150, 150);
+		sprites = new SpriteSheet(crabs, 2, 3, 150, 150);
 		
 	}
 	
+	
+	private boolean reachedVertex=false;
 	public void onTick(){
 		slope=seaFloor.getSlopeAt(xPos+150)/1.5;
 		//System.out.println(slope);
-		if(leftPressed){
-			if(spriteNum==1){
-				spriteNum=3;
+		if(!jump){
+			if(leftPressed){
+				if(!isHoldingFish){
+					if(spriteCol==1){
+						spriteCol=3;
+					}
+					if(spriteTime>=6){
+						spriteTime=0;
+						if(spriteCol==2){spriteCol=3;}
+						else if (spriteCol==3){spriteCol=2;}
+					}
+					if(slope>.5)
+						xPos-=3;
+					else
+						xPos-=5;
+				}else{
+					if(slope>.5)
+						xPos-=1;
+					else
+						xPos-=1.5;
+					//DO HOLDING WALKING HERE
+				}
+				
+				xPos=xPos<-Util.getDISTANCE_TO_EDGE()-30?-Util.getDISTANCE_TO_EDGE()-30:xPos;
+				yPos=seaFloor.getYatXPos(xPos+150)-200;
 			}
-			if(spriteTime>=6){
-				spriteTime=0;
-				if(spriteNum==2){spriteNum=3;}
-				else if (spriteNum==3){spriteNum=2;}
+			
+			if(rightPressed){
+				if(!isHoldingFish){
+					if(spriteCol==1){
+						spriteCol=2;
+					}
+					if(spriteTime>=6){
+						spriteTime=0;
+						if(spriteCol==2){spriteCol=3;}
+						else if (spriteCol==3){spriteCol=2;}
+					}
+					if(slope>.5)
+						xPos+=3;
+					else
+						xPos+=5;
+				}else{
+					if(slope>.5)
+						xPos+=1;
+					else
+						xPos+=1.5;
+					//DO WALKING HERE
+				}
+				
+				xPos=xPos>Util.getDISTANCE_TO_EDGE()-250?Util.getDISTANCE_TO_EDGE()-250:xPos;
+				yPos=seaFloor.getYatXPos(xPos+150)-200;
 			}
-			if(slope>.5)
-				xPos-=3;
+			if(upPressed){
+				jump=true;
+				yVel=-50;
+			}
+			if(leftPressed||rightPressed)
+				spriteTime++;
 			else
-				xPos-=5;
-			xPos=xPos<-Util.getDISTANCE_TO_EDGE()-30?-Util.getDISTANCE_TO_EDGE()-30:xPos;
-			yPos=seaFloor.getYatXPos(xPos+150)-200;
-		}
-		if(rightPressed){
-			if(spriteNum==1){
-				spriteNum=2;
-			}
-			if(spriteTime>=6){
 				spriteTime=0;
-				if(spriteNum==2){spriteNum=3;}
-				else if (spriteNum==3){spriteNum=2;}
-			}
-			if(slope>.5)
-				xPos+=3;
-			else
-				xPos+=5;
-			xPos=xPos>Util.getDISTANCE_TO_EDGE()-250?Util.getDISTANCE_TO_EDGE()-250:xPos;
-			yPos=seaFloor.getYatXPos(xPos+150)-200;
+			
+			
+			angle+=(slope-angle)/6f;
+		
 		}
-		
-		if(leftPressed||rightPressed)
-			spriteTime++;
-		else
-			spriteTime=0;
-		
-		
-		angle+=(slope-angle)/6f;
-		
-		
+		if(jump){
+			yPos+=yVel;
+			yVel+=5;
+			if(Math.abs(yVel)<3){
+				reachedVertex=true;
+				isHoldingFish=!isHoldingFish;
+				if(isHoldingFish){
+					spriteRow=2;
+					spriteCol=1;
+				}else{
+					spriteRow=1;
+					spriteCol=1;
+				}
+			}
+			
+			
+			if (reachedVertex && seaFloor.isBelowLine(xPos+150, yPos+200)){
+				yPos=seaFloor.getYatXPos(xPos+150)-200;
+				jump=false;
+				reachedVertex=true;
+			}
+			
+		}
 		
 	}
 	
@@ -98,7 +151,7 @@ public class Game3Crab extends Character{
 	public void render(Graphics2D g) {
 		g.translate(xPos+150,yPos+150);
 		g.rotate(angle);
-		g.drawImage(sprites.getSprite(1, spriteNum),-150, -150,300,300,null);
+		g.drawImage(sprites.getSprite(spriteRow, spriteCol),-150, -150,300,300,null);
 		
 		g.rotate(-angle);
 		g.translate(-xPos-150, -yPos-150);
@@ -112,6 +165,10 @@ public class Game3Crab extends Character{
 	public ArbitraryLine getSeaFloor(){
 		return seaFloor;
 		
+	}
+	
+	public boolean isHoldingFish(){
+		return isHoldingFish;
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -139,19 +196,19 @@ public class Game3Crab extends Character{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			spriteNum=1;
+			spriteCol=1;
 			leftPressed=false;
 		}if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightPressed=false;
-			spriteNum=1;
+			spriteCol=1;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upPressed=false;
-			spriteNum=1;
+			spriteCol=1;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downPressed=false;
-			spriteNum=1;
+			spriteCol=1;
 		}
 		
 	}

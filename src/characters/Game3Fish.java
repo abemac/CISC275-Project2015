@@ -37,7 +37,7 @@ public class Game3Fish extends Character {
 			BufferedImage tmp=null;
 			try {
 					tmp = Util.loadImage("/Goldfish(game3).png", this);
-					fish=new SpriteSheet(tmp,2,3,150,150);
+					fish=new SpriteSheet(tmp,2,5,150,150);
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -49,37 +49,50 @@ public class Game3Fish extends Character {
 	private double slope;
 	
 	public void onTick(){
-		xPos+=( (crab.getX()+50)-xPos)/30.0;
-		yPos+=((crab.getY()-200)-yPos)/30.0;
-		
-
-		
-		if(crab.getX()+50<xPos){
-			swimLeft=true;
-			swimRight=false;
-		}else if (crab.getX()+50>xPos){
-			swimRight=true;
-			swimLeft=false;
+		spriteRow=1;
+		spriteCol=1;
+		if(!crab.isHoldingFish()){
+			xPos+=( (crab.getX()+50)-xPos)/30.0;
+			yPos+=((crab.getY()-200)-yPos)/30.0;
 			
-		}
-		else{
-			swimRight=false;
-			swimLeft=false;
+	
+			
+			if(crab.getX()+50<xPos){
+				swimLeft=true;
+				swimRight=false;
+			}else if (crab.getX()+50>xPos){
+				swimRight=true;
+				swimLeft=false;
+				
+			}
+			else{
+				swimRight=false;
+				swimLeft=false;
+			}
+			
+			swimSpeed=8-(int)(Math.abs( (crab.getX()+50)-xPos)/10.0);
+			
+			
+			slope=(8-swimSpeed)*(crab.getSeaFloor().getSlopeAt(xPos+1)/(1.5*15));
+			slope=slope>.2?.2:slope;
+			swimSpeed=swimSpeed<2?2:swimSpeed;
+			if(swimRight){
+				angle+=(slope-angle)/15f;
+				swimRight();
+			}
+			else if(swimLeft){
+				angle+=(slope-angle)/15f;
+				swimLeft();
+			}
 		}
 		
-		swimSpeed=8-(int)(Math.abs( (crab.getX()+50)-xPos)/10.0);
-		
-		
-		slope=(8-swimSpeed)*(crab.getSeaFloor().getSlopeAt(xPos+1)/(1.5*15));
-		slope=slope>.2?.2:slope;
-		swimSpeed=swimSpeed<2?2:swimSpeed;
-		if(swimRight){
-			angle+=(slope-angle)/15f;
-			swimRight();
-		}
-		else if(swimLeft){
-			angle+=(slope-angle)/15f;
-			swimLeft();
+		if(crab.isHoldingFish()){
+			angle=crab.getAngle();
+			xPos=crab.getX()+54;
+			yPos=crab.getY()-100;
+			spriteRow=2;
+			spriteCol=4;
+			
 		}
 		
 		
@@ -131,11 +144,21 @@ public class Game3Fish extends Character {
 	}
 	@Override
 	public void render(Graphics2D g) {
-		g.translate(xPos+100, yPos+100);
-		g.rotate(angle);
-		g.drawImage(fish.getSprite(spriteRow, spriteCol),-100,-100,200,200,null);
-		g.rotate(-angle);
-		g.translate(-xPos-100, -yPos-100);
+		if(!crab.isHoldingFish()){
+			g.translate(xPos+100, yPos+100);
+			g.rotate(angle);
+			g.drawImage(fish.getSprite(spriteRow, spriteCol),-100,-100,200,200,null);
+			g.rotate(-angle);
+			g.translate(-xPos-100, -yPos-100);
+		}
+		else{
+			g.translate(crab.getX()+150, crab.getY()+150);
+			g.rotate(angle);
+			g.drawImage(fish.getSprite(spriteRow, spriteCol),(int)(xPos-crab.getX()-150),(int)(yPos-crab.getY()-150),200,200,null);
+			g.rotate(-angle);
+			g.translate(-crab.getX()-150, -crab.getY()-150);
+			
+		}
 	}
 	
 	

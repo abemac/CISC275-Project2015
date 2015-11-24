@@ -49,6 +49,11 @@ public class Crab extends Character{
 	private CrabSaveGame csg;
 	private int barLength;
 	
+	private double yVel;
+	private boolean jump,reachedVertex2=false;
+	private double lastScale,scale;
+	private double lastY;
+	
 	
 	
 	/**
@@ -86,7 +91,6 @@ public class Crab extends Character{
 	 * onTick is called 60 times per second and controls the movement of the Crab
 	 */
 	public void onTick(){
-		
 		if(leftPressed){
 			if(spriteNum==1){
 				spriteNum=3;
@@ -160,6 +164,25 @@ public class Crab extends Character{
 				t.setY(t.getY()+40);
 				t.setX(t.getX()+(565-t.getX()-t.getWidth()/2.0)/10.0 );
 			}
+		}
+		
+		scale=400+yPos/2.5;
+		if(jump){
+			yPos+=yVel;
+			yVel+=5;
+			scale=lastScale;
+			if(Math.abs(yVel)<3){
+				reachedVertex2=true;
+			}
+			
+			
+			if (reachedVertex2 &&  lastY<yPos){
+				yPos=lastY;
+				jump=false;
+				reachedVertex2=true;
+				spriteNum=1;
+			}
+			
 		}
 		
 		
@@ -245,7 +268,7 @@ public class Crab extends Character{
 	 */
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(400+yPos/2.5),(int)( 400+yPos/2.5),null);
+		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(scale),(int)( scale),null);
 		for(Trash t: previouslyThrownTrash){
 			t.render(g);
 		}
@@ -286,7 +309,6 @@ public class Crab extends Character{
 		if(!calculatedTrajecory)
 			calculateTrajectory();
 		
-		spriteNum=4;
 		attachedTrash.setX(attachedTrash.getX()+Vx);
 		attachedTrash.setY(attachedTrash.getY()-Vy);
 		Vy-=gravity;
@@ -354,6 +376,12 @@ public class Crab extends Character{
 		calculatedTrajecory=true;
 		isHoldingTrash=false;
 		attachedTrash.setBeingThrown(true);
+		lastY=yPos;
+		lastScale=scale;
+		yVel=-.09*power*scale;
+		spriteNum=4;
+		jump=true;
+		
 		
 		
 		
