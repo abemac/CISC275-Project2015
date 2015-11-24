@@ -183,19 +183,19 @@ public class PollutionGame extends Game {
 		int i=0;
 		while(i<30){
 			switch(i%6){
-				case 0:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE(), 0),
-						new Vector(5,-1), .01, Pollutant.FERTILIZER));break;
-				case 1:pollutants.add(new Pollutant(new Vector(0, -1000),
-						new Vector(-2,2), .01, Pollutant.FERTILIZER));break;
+				case 0:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, -1150),
+						new Vector(3,1), .01, Pollutant.FERTILIZER,seaFloorLine));break;
+				case 1:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, 250),
+						new Vector(2,-1), .01, Pollutant.FERTILIZER,seaFloorLine));break;
 				
-				case 2: pollutants.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE(), 0),
-						new Vector(-5,-1), .01, Pollutant.OIL));break;
-				case 3:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE(), 500),
-						new Vector(5,1), .01, Pollutant.OIL));break;
-				case 4: pollutants.add(new Pollutant(new Vector(500,-1000),
-						new Vector(-2,1), .01, Pollutant.SEWAGE));break;
-				case 5: pollutants.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE(), 500),
-						new Vector(4,1), .01, Pollutant.SEWAGE));break;
+				case 2: pollutants.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE()+150, 0),
+						new Vector(-5,-1), .01, Pollutant.OIL,seaFloorLine));break;
+				case 3:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, 250),
+						new Vector(5,-1), .01, Pollutant.OIL,seaFloorLine));break;
+				case 4: pollutants.add(new Pollutant(new Vector(500,-1150),
+						new Vector(-2,1), .01, Pollutant.SEWAGE,seaFloorLine));break;
+				case 5: pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE()-150, -500),
+						new Vector(4,0), .01, Pollutant.SEWAGE,seaFloorLine));break;
 				default:break;
 			}
 			i++;

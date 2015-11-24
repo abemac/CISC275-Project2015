@@ -178,6 +178,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				pollutionGame = new PollutionGame();
 				view.addMouseListener(pollutionGame);
 				view.addKeyListener(pollutionGame);
+				lastTime=System.nanoTime();
 			}
 			pollutionGame.onTick();
 			if(pollutionGame.isDone()){
@@ -218,6 +219,8 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	public boolean isRunning() {
 		return running;
 	}
+	
+	
 	
 	
 	/////MAIN FUNCTION//////

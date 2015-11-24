@@ -42,8 +42,10 @@ public class Pollutant extends Enemy {
 	private Vector initialPos;
 	private double angle;
 	private double rotationSpeed;
+	private double initX,initY;
 	private static ArbitraryLine seaFloor;
 	private static BufferedImage fertilizer,sewage,oil;
+	private boolean out=false;
 	
 	/**
 	 * Creates a pollutant with initial x,y,and type. The nastiness of the Pollutant is determined by the type
@@ -53,7 +55,6 @@ public class Pollutant extends Enemy {
 	 */
 	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type,ArbitraryLine seaFloor){
 		super(initialPosition.getX(),initialPosition.getY());
-		this.initialPos=initialPosition;
 		this.type = type;
 		this.position = initialPosition;
 		this.velocity = velocity;
@@ -101,8 +102,26 @@ public class Pollutant extends Enemy {
 	 */
 	public void floatDown(){
 		position.add(velocity);
-		if(position.getX()>Util.getDISTANCE_TO_EDGE()){
-			
+		if(out && position.getX()>Util.getDISTANCE_TO_EDGE()+150){
+			position.setX(xPos);
+			position.setY(yPos);
+			out=false;
+		}else if (out && position.getX()<-Util.getDISTANCE_TO_EDGE()-150){
+			position.setX(xPos);
+			position.setY(yPos);
+			out=false;
+		}
+		else if(out &&position.getY()<-1150){
+			position.setX(xPos);
+			position.setY(yPos);
+			out=false;
+		}
+		else if(out && position.getY()>1150){
+			position.setX(xPos);
+			position.setY(yPos);
+			out=false;
+		}else{
+			out=true;
 		}
 		angle+=rotationSpeed;
 	}
