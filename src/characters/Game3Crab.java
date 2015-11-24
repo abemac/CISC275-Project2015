@@ -15,6 +15,9 @@ public class Game3Crab extends Character{
 	
 	private SpriteSheet sprites;
 	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
+	private boolean spacePressed;
+	private long squeezeTimer=0;
+	private boolean squeezingFish=false;
 	private int spriteCol=1;
 	private int spriteRow=1;
 	private int spriteTime=0;
@@ -119,7 +122,20 @@ public class Game3Crab extends Character{
 			
 			
 			angle+=(slope-angle)/6f;
-		
+			
+			
+			if(spacePressed && !squeezingFish && isHoldingFish){
+				squeezingFish=true;
+				spriteRow=2;
+				spriteCol=2;
+				squeezeTimer=0;
+				
+			}else if(squeezeTimer>20 && isHoldingFish && !spacePressed){
+				squeezingFish=false;
+				spriteRow=2;
+				spriteCol=1;
+			}
+			squeezeTimer++;
 		}
 		if(jump){
 			yPos+=yVel;
@@ -170,6 +186,10 @@ public class Game3Crab extends Character{
 	public boolean isHoldingFish(){
 		return isHoldingFish;
 	}
+	
+	public boolean isSqueezingFish(){
+		return squeezingFish;
+	}
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -189,7 +209,9 @@ public class Game3Crab extends Character{
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downPressed=true;
 		}
-		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			spacePressed=true;
+		}
 		
 	}
 
@@ -209,6 +231,9 @@ public class Game3Crab extends Character{
 		if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downPressed=false;
 			spriteCol=1;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			spacePressed=false;
 		}
 		
 	}

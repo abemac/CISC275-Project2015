@@ -90,8 +90,13 @@ public class Game3Fish extends Character {
 			angle=crab.getAngle();
 			xPos=crab.getX()+54;
 			yPos=crab.getY()-100;
-			spriteRow=2;
-			spriteCol=4;
+			if(!crab.isSqueezingFish()){
+				spriteRow=2;
+				spriteCol=4;
+			}else{
+				spriteRow=2;
+				spriteCol=5;
+			}
 			
 		}
 		
