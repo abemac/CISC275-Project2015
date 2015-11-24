@@ -275,7 +275,7 @@ public class Crab extends Character{
 		
 		if(drawPowerBar){
 			g.setColor(barColor);
-			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength,(int)( 10*(1+(yPos+500)/500)), 5, 5);
+			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength,(int)( 10*(1+(yPos+500)/500)), 50, 50);
 			g.setColor(Color.BLACK);
 			g.setStroke(new BasicStroke((float) (8*(1+(yPos+500)/500))));
 			g.drawRect((int)(xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+5), (int)((400+yPos/2.5)*0.2),(int)(18*(1+(yPos+500)/500)));

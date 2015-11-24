@@ -166,7 +166,7 @@ public class PollutionGame extends Game {
 		}
 		
 		
-		if(newPollutantTimer%500==0){
+		if(newPollutantTimer%250==0){
 			addAnotherPollutantIfPossible();
 		}
 		newPollutantTimer++;
@@ -197,6 +197,7 @@ public class PollutionGame extends Game {
 		while (i<10){
 			int choose = (int) (Math.random()*availablePollutants.size());
 			int index = availablePollutants.get(choose);
+			availablePollutants.remove(choose);
 			pollutantBank.get(index).setIndex(index);
 			pollutants.add(pollutantBank.get(index));
 			i++;
@@ -210,6 +211,7 @@ public class PollutionGame extends Game {
 		}
 		int choose = (int) (Math.random()*availablePollutants.size());
 		int index = availablePollutants.get(choose);
+		availablePollutants.remove(choose);
 		pollutantBank.get(index).setIndex(index);
 		pollutants.add(pollutantBank.get(index));
 	
