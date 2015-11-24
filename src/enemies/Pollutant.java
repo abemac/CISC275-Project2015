@@ -158,6 +158,9 @@ public class Pollutant extends Enemy {
 	}
 	
 	
+	public Point getCenterPos(){
+		return null;
+	}
 	
 	/**
 	 * 
