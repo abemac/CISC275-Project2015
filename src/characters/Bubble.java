@@ -22,9 +22,11 @@ public class Bubble extends Character{
 	private static final long serialVersionUID = 3339567082395475772L;
 	private static BufferedImage bubble;
 	private double xVel,yVel;
-	private static final double SHOOT_VELOCITY=20;
+	private double scale=1.0;
 	
 	private boolean hasPollutant;
+	
+	private int index;
 	
 	/**
 	 * Creates a bubbles
@@ -52,13 +54,12 @@ public class Bubble extends Character{
 	public void onTick() {	
 		
 		floatToTop();
-		if(xVel>0){
-			xVel-=1;
-		}else if(xVel<0){
-			xVel+=1;
+		xPos+=xVel;
+		yPos+=yVel;
+		
+		if(scale<1.0){
+			scale+=.04;
 		}
-		
-		
 	}
 	
 	/**
@@ -66,7 +67,7 @@ public class Bubble extends Character{
 	 */
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(bubble,(int) xPos,(int) yPos, null);
+		g.drawImage(bubble,(int) (xPos+(1.0-scale)*100),(int) yPos,(int)(200*scale),-(int)(200*scale), null);
 		
 	}
 	
@@ -76,20 +77,19 @@ public class Bubble extends Character{
 	 * 
 	 */
 	public void shootFromFish(double xPos,double yPos,double angle){
-		this.xVel=SHOOT_VELOCITY*Math.cos(angle);
-		this.yVel=SHOOT_VELOCITY*Math.sin(angle);
+		this.xVel=6*Math.cos(angle-Math.PI/2f-.2);
+		this.yVel=1*Math.sin(angle-Math.PI/2f);
 		this.xPos=xPos;
 		this.yPos=yPos;
+		scale=0.2;
 	}
 	
 	/**
 	 * causes the bubble to float to the top after it surrounds pollution
 	 */
 	public void floatToTop(){
-		if(yVel<-10){
-			yVel+=1;
-		}else if (yVel>10){
-			yVel-=1;
+		if(yVel>-7){
+			yVel-=.1;
 		}
 	}
 	
@@ -100,6 +100,14 @@ public class Bubble extends Character{
 	
 	public void setHasPollutant(boolean hasPollutant) {
 		this.hasPollutant = hasPollutant;
+	}
+	
+	
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	public int getIndex() {
+		return index;
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import characters.Bubble;
 import characters.Game3Crab;
@@ -181,6 +182,8 @@ public class PollutionGame extends Game {
 				shootBubbleFromFish();
 			}
 		}
+		
+		removeOffScreenBubbles();
 	}
 	/**
 	 * defines how to draw the pollution game
@@ -204,11 +207,26 @@ public class PollutionGame extends Game {
 	
 	
 	private void shootBubbleFromFish(){
+		if(availableBubbles.size()==0){
+			return;
+		}
 		Bubble b = bubbleBank.get(availableBubbles.get(0));
+		b.setIndex(availableBubbles.get(0));
 		availableBubbles.remove(0);
-		b.shootFromFish(fish.getX(), fish.getX(), crab.getAngle());
+		b.shootFromFish((fish.getX()-20), (fish.getY()+50), crab.getAngle());
 		bubbles.add(b);
 		
+	}
+	
+	private void removeOffScreenBubbles(){
+		Iterator<Bubble> i = bubbles.iterator();
+		while(i.hasNext()){
+			Bubble b=i.next();
+			if(b.getY()<-1200){
+				i.remove();
+				availableBubbles.add(b.getIndex());
+			}
+		}
 	}
 	
 	private void addInitialPollutants(){
