@@ -25,8 +25,9 @@ public class Bubble extends Character{
 	private double scale=1.0;
 	private double angle=0.0;
 	private boolean hasPollutant;
-	
+	private double scaleVel;
 	private int index;
+	private Pollutant attachedPollutant;
 	
 	/**
 	 * Creates a bubbles
@@ -57,9 +58,15 @@ public class Bubble extends Character{
 		xPos+=xVel;
 		yPos+=yVel;
 		
-		if(scale<1.0){
-			scale+=.03;
+		if(scale>0.2){
+			scaleVel-=.01;
 		}
+		
+		if(scaleVel<=0){
+			scaleVel=0;
+		}
+		scale+=scaleVel;
+		
 	}
 	
 	/**
@@ -81,7 +88,7 @@ public class Bubble extends Character{
 	 * 
 	 */
 	public void shootFromFish(double xPos,double yPos,double angle,double crabX,double crabY){
-		this.xVel=2*Math.cos(angle-Math.PI/2f-.2);
+		this.xVel=3*Math.cos(angle-Math.PI/2f-.2);
 		this.yVel=1*Math.sin(angle-Math.PI/2f);
 		this.angle=angle;
 		double dx=xPos-(crabX);
@@ -90,6 +97,7 @@ public class Bubble extends Character{
 		this.xPos=crabX+polarR*Math.cos(Math.PI/2f-angle);
 		this.yPos=crabY-polarR*Math.sin(Math.PI/2f-angle);
 		scale=0.2;
+		scaleVel=.14;
 	}
 	
 	/**
@@ -106,8 +114,9 @@ public class Bubble extends Character{
 		return hasPollutant;
 	}
 	
-	public void setHasPollutant(boolean hasPollutant) {
-		this.hasPollutant = hasPollutant;
+	public void attacheToPollutant(Pollutant p) {
+		this.hasPollutant = true;
+		this.attachedPollutant=p;
 	}
 	
 	

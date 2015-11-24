@@ -130,7 +130,7 @@ public class Game3Crab extends Character{
 				spriteCol=2;
 				squeezeTimer=0;
 				
-			}else if(squeezeTimer>20 && isHoldingFish && !spacePressed){
+			}else if(squeezeTimer>10 && isHoldingFish && !spacePressed){
 				squeezingFish=false;
 				spriteRow=2;
 				spriteCol=1;
