@@ -8,11 +8,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import characters.Bubble;
 import characters.Game3Crab;
 import characters.Game3Fish;
 import enemies.Pollutant;
 import misc.ArbitraryLine;
 import misc.Util;
+import misc.Vector;
 
 /**
  * Models the Pollution Game
@@ -29,6 +31,9 @@ public class PollutionGame extends Game {
 	private int numCollided;
 	private int numRemoved;
 	private ArrayList<Pollutant> pollutants;
+	private ArrayList<Bubble> bubbles;
+	private ArrayList<Pollutant> pollutantBank;
+	private ArrayList<Bubble> bubbleBank;
 	private Color water = new Color(114,145,215);
 	private BufferedImage seaFloor;
 	private ArbitraryLine seaFloorLine;
@@ -111,6 +116,18 @@ public class PollutionGame extends Game {
 		crab=new Game3Crab(0, 100,seaFloorLine);
 		
 		fish=new Game3Fish(crab);
+		pollutants= new ArrayList<Pollutant>();
+		bubbles=new ArrayList<Bubble>();
+		
+		pollutantBank= new ArrayList<Pollutant>();
+		bubbleBank=new ArrayList<Bubble>();
+		
+		producePollutants();
+		produceBubbles();
+		
+		
+		
+		
 	}
 	
 	private void loadRes(){
@@ -130,6 +147,13 @@ public class PollutionGame extends Game {
 		
 		crab.onTick();
 		fish.onTick();
+		
+		for(Pollutant p : pollutants){
+			p.act();
+		}
+		for(Bubble b: bubbles){
+			b.onTick();
+		}
 	}
 	/**
 	 * defines how to draw the pollution game
@@ -141,6 +165,54 @@ public class PollutionGame extends Game {
 		crab.render(g);
 		//seaFloorLine.testRender(g);//GOOD
 		fish.render(g);
+		
+		for(Pollutant p : pollutants){
+			p.render(g);
+		}
+		for(Bubble b: bubbles){
+			b.render(g);
+		}
+		
+	}
+	
+	
+	/**
+	 * produces pollutants for the pollutant bank;
+	 */
+	private void producePollutants(){
+		int i=0;
+		while(i<30){
+			switch(i%6){
+				case 0:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE(), 0),
+						new Vector(5,-1), .01, Pollutant.FERTILIZER));break;
+				case 1:pollutants.add(new Pollutant(new Vector(0, -1000),
+						new Vector(-2,2), .01, Pollutant.FERTILIZER));break;
+				
+				case 2: pollutants.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE(), 0),
+						new Vector(-5,-1), .01, Pollutant.OIL));break;
+				case 3:pollutants.add(new Pollutant(new Vector(-Util.getDISTANCE_TO_EDGE(), 500),
+						new Vector(5,1), .01, Pollutant.OIL));break;
+				case 4: pollutants.add(new Pollutant(new Vector(500,-1000),
+						new Vector(-2,1), .01, Pollutant.SEWAGE));break;
+				case 5: pollutants.add(new Pollutant(new Vector(Util.getDISTANCE_TO_EDGE(), 500),
+						new Vector(4,1), .01, Pollutant.SEWAGE));break;
+				default:break;
+			}
+			i++;
+		}
+		
+		
+	}
+	
+	/**
+	 * produces bubbles for the bubble bank
+	 */
+	private void produceBubbles(){
+		int i=0;
+		while(i<20){
+			bubbleBank.add(new Bubble(0,0));
+			i++;
+		}
 	}
 	
 	/**

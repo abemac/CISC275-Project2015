@@ -83,8 +83,8 @@ public class CharacterTests extends TestCase {
 	 */
 	public void testBubble(){
 		Bubble b = new Bubble(0,0);
-		Pollutant p = new Pollutant(0,0,0);
-		b.shootFromFish(p);
+		//Pollutant p = new Pollutant(0,0,0);
+		//b.shootFromFish(p);
 		double y = b.getY();
 		assertEquals(b.getY(),y+2);
 		double x = b.getX();

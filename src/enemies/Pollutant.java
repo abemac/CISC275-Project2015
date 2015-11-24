@@ -1,6 +1,11 @@
 package enemies;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import misc.Util;
+import misc.Vector;
 
 /**
  * The Pollutant class is used to model different types of pollutants
@@ -31,9 +36,13 @@ public class Pollutant extends Enemy {
 	 * stores the type of Pollutant.  Either Pollutant.OIL, Pollutant.SEWAGE, or Pollutant.FERTILIZER
 	 */
 	private int type;
-	private boolean isRemoved; // Make true if user has cleaned up the pollutatn
-	private int nastiness;
-	private double sourcePos; // Position of the pollutant
+	private boolean isRemoved;
+	private Vector position,velocity;
+	private Vector initialPos;
+	private double angle;
+	private double rotationSpeed;
+	
+	private static BufferedImage fertilizer,sewage,oil;
 	
 	/**
 	 * Creates a pollutant with initial x,y,and type. The nastiness of the Pollutant is determined by the type
@@ -41,33 +50,70 @@ public class Pollutant extends Enemy {
 	 * @param yPos the initial y position
 	 * @param type the type.  One of the static constants defined in Pollutant
 	 */
-	public Pollutant(double xPos,double yPos,int type){
-		super(xPos,yPos);
+	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type){
+		super(initialPosition.getX(),initialPosition.getY());
+		this.initialPos=initialPosition;
 		this.type = type;
+		this.position = initialPosition;
+		this.velocity = velocity;
+		this.rotationSpeed=rotationSpeed;
+		loadRes();
 	}
 	
+	
+	private void loadRes(){
+		if(type==FERTILIZER && fertilizer==null){
+			try {
+				fertilizer=Util.loadImage("/fertilizer.png", this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if(type == OIL && oil==null){
+			try {
+				oil=Util.loadImage("/oilspill.png", this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	/**
 	 *  Implements act() from Enemy 
 	 */
+	
 	@Override
 	public void act() {
 		floatDown();
 		
 	}
 	/**
-	 * renders graphics
-	 */
-	public void render(Graphics2D g){
-		
-	}
-	
-	/**
 	 *  defines the the way in which the pollutant floats down from the top of the screen
 	 * 
 	 */
 	public void floatDown(){
-		
+		position.add(velocity);
+		angle+=rotationSpeed;
 	}
+	
+	
+	/**
+	 * renders graphics
+	 */
+	public void render(Graphics2D g){
+		g.translate(position.getX(),position.getY());
+		g.rotate(angle);
+		
+		if(type==FERTILIZER){
+			g.drawImage(fertilizer, 0,0, null);
+		}else if(type==OIL){
+			g.drawImage(oil, 0,0, null);
+		}
+		
+		g.rotate(-angle);	
+		g.translate(-position.getX(), -position.getY());
+	}
+	
+	
 	
 	/**
 	 * 
