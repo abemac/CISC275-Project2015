@@ -133,7 +133,7 @@ public class PollutionGame extends Game {
 		availablePollutants= new ArrayList<Integer>();
 		for(int i=0;i<30;i++){availablePollutants.add(i);}
 		availableBubbles=new ArrayList<Integer>();
-		for(int i=0;i<20;i++){availableBubbles.add(i);}
+		for(int i=0;i<5;i++){availableBubbles.add(i);}
 		
 		producePollutants();
 		produceBubbles();
@@ -237,11 +237,12 @@ public class PollutionGame extends Game {
 			Bubble b=i.next();
 			if(b.getY()<-1200){
 				availableBubbles.add(b.getIndex());
+				i.remove();
 				if(b.hasPollutant()){
 					b.getAttachedPollutant().reset();
 				}
 				b.reset();
-				i.remove();
+				
 			}
 		}
 	}
@@ -304,7 +305,7 @@ public class PollutionGame extends Game {
 	 */
 	private void produceBubbles(){
 		int i=0;
-		while(i<20){
+		while(i<5){
 			bubbleBank.add(new Bubble());
 			i++;
 		}

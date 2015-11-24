@@ -46,7 +46,7 @@ public class Pollutant extends Enemy {
 	
 	private boolean fixedToBubble=false;
 	private Bubble cleanMe;
-	
+	private double initVx,initVy;
 	private int index;
 	
 	/**
@@ -60,6 +60,9 @@ public class Pollutant extends Enemy {
 		this.type = type;
 		this.position = initialPosition;
 		this.velocity = velocity;
+		initVx=velocity.getX();
+		initVy=velocity.getY();
+		
 		this.rotationSpeed=rotationSpeed;
 		loadRes();
 	}
@@ -203,6 +206,9 @@ public class Pollutant extends Enemy {
 		cleanMe=null;
 		position.setX(xPos);
 		position.setY(yPos);
+		velocity.setX(initVx);
+		velocity.setY(initVy);
+		out=false;
 		
 	}
 }
