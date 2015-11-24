@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import misc.ArbitraryLine;
 import misc.Util;
 import misc.Vector;
 
@@ -41,7 +42,7 @@ public class Pollutant extends Enemy {
 	private Vector initialPos;
 	private double angle;
 	private double rotationSpeed;
-	
+	private static ArbitraryLine seaFloor;
 	private static BufferedImage fertilizer,sewage,oil;
 	
 	/**
@@ -50,13 +51,14 @@ public class Pollutant extends Enemy {
 	 * @param yPos the initial y position
 	 * @param type the type.  One of the static constants defined in Pollutant
 	 */
-	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type){
+	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type,ArbitraryLine seaFloor){
 		super(initialPosition.getX(),initialPosition.getY());
 		this.initialPos=initialPosition;
 		this.type = type;
 		this.position = initialPosition;
 		this.velocity = velocity;
 		this.rotationSpeed=rotationSpeed;
+		this.seaFloor=seaFloor;
 		loadRes();
 	}
 	
@@ -72,6 +74,13 @@ public class Pollutant extends Enemy {
 		if(type == OIL && oil==null){
 			try {
 				oil=Util.loadImage("/oilspill.png", this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if(type == SEWAGE && sewage==null){
+			try {
+				sewage=Util.loadImage("/sewagefornow.png", this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -92,6 +101,9 @@ public class Pollutant extends Enemy {
 	 */
 	public void floatDown(){
 		position.add(velocity);
+		if(position.getX()>Util.getDISTANCE_TO_EDGE()){
+			
+		}
 		angle+=rotationSpeed;
 	}
 	
@@ -107,6 +119,9 @@ public class Pollutant extends Enemy {
 			g.drawImage(fertilizer, 0,0, null);
 		}else if(type==OIL){
 			g.drawImage(oil, 0,0, null);
+		}
+		else if(type==SEWAGE){
+			g.drawImage(sewage, 0,0, null);
 		}
 		
 		g.rotate(-angle);	
