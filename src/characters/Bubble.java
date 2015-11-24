@@ -24,10 +24,9 @@ public class Bubble extends Character{
 	private double xVel,yVel;
 	private double scale=1.0;
 	private double angle=0.0;
-	private boolean hasPollutant;
 	private double scaleVel;
 	private int index;
-	private Pollutant attachedPollutant;
+	
 	
 	/**
 	 * Creates a bubbles
@@ -67,6 +66,8 @@ public class Bubble extends Character{
 		}
 		scale+=scaleVel;
 		
+		
+		
 	}
 	
 	/**
@@ -80,6 +81,8 @@ public class Bubble extends Character{
 		
 		g.rotate(-angle);
 		g.translate(-xPos, -yPos);
+		
+		
 	}
 	
 	
@@ -110,14 +113,8 @@ public class Bubble extends Character{
 	}
 	
 	
-	public boolean hasPollutant(){
-		return hasPollutant;
-	}
 	
-	public void attacheToPollutant(Pollutant p) {
-		this.hasPollutant = true;
-		this.attachedPollutant=p;
-	}
+	
 	
 	
 	public void setIndex(int index) {
@@ -190,6 +187,26 @@ public class Bubble extends Character{
 	public void move(double dx, double dy) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private Pollutant attachedPollutant;
+	public void setAttachedPollutant(Pollutant p){
+		if(p!=null){hasPollutant=true;}else{hasPollutant=false;}
+		this.attachedPollutant=p;
+	}
+	
+	public Pollutant getAttachedPollutant() {
+		return attachedPollutant;
+	}
+	
+	private boolean hasPollutant=false;
+	public boolean hasPollutant(){
+		return hasPollutant;
+	}
+	
+	public void reset(){
+		hasPollutant=false;
+		attachedPollutant=null;
 	}
 	
 	

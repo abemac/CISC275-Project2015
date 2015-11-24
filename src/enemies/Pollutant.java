@@ -4,7 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import misc.ArbitraryLine;
+import characters.Bubble;
+import misc.Point;
 import misc.Util;
 import misc.Vector;
 
@@ -37,14 +38,14 @@ public class Pollutant extends Enemy {
 	 * stores the type of Pollutant.  Either Pollutant.OIL, Pollutant.SEWAGE, or Pollutant.FERTILIZER
 	 */
 	private int type;
-	private boolean isRemoved;
 	private Vector position,velocity;
-	private Vector initialPos;
 	private double angle;
 	private double rotationSpeed;
-	private double initX,initY;
 	private static BufferedImage fertilizer,sewage,oil;
 	private boolean out=false;
+	
+	private boolean fixedToBubble=false;
+	private Bubble cleanMe;
 	
 	private int index;
 	
@@ -93,7 +94,13 @@ public class Pollutant extends Enemy {
 	
 	@Override
 	public void act() {
-		floatDown();
+		if(!fixedToBubble)
+			floatDown();
+		else if (fixedToBubble){
+			velocity.setX((cleanMe.getX()-200-position.getX())/20.0);
+			velocity.setY((cleanMe.getY()-200-position.getY())/20.0);
+			position.add(velocity);
+		}
 		
 	}
 	/**
@@ -131,6 +138,7 @@ public class Pollutant extends Enemy {
 	 * renders graphics
 	 */
 	public void render(Graphics2D g){
+		
 		g.translate(position.getX(),position.getY());
 		g.rotate(angle);
 		
@@ -145,6 +153,8 @@ public class Pollutant extends Enemy {
 		
 		g.rotate(-angle);	
 		g.translate(-position.getX(), -position.getY());
+		
+		
 	}
 	
 	
@@ -163,5 +173,33 @@ public class Pollutant extends Enemy {
 
 	public void setIndex(int i){
 		this.index = i;
+	}
+	
+	public void fixToBubble(Bubble b){
+		cleanMe=b;
+		fixedToBubble=true;
+		
+	}
+	
+	
+	private double dx,dy;
+	public boolean isIn(Bubble b){
+		dx = (b.getX()-100)-(75+position.getX());
+		dy=(b.getY()+100)-(75+position.getY());
+		
+		return (Math.sqrt(dx*dx+dy*dy)<200);
+		
+	}
+	
+	public boolean isInBubble(){
+		return fixedToBubble;
+	}
+	
+	public void reset(){
+		fixedToBubble=false;
+		cleanMe=null;
+		position.setX(xPos);
+		position.setY(yPos);
+		
 	}
 }

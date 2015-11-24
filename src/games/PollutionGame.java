@@ -163,7 +163,7 @@ public class PollutionGame extends Game {
 		fish.onTick();
 		
 		for(Pollutant p : pollutants){
-			p.act();
+				p.act();
 		}
 		for(Bubble b: bubbles){
 			b.onTick();
@@ -184,7 +184,19 @@ public class PollutionGame extends Game {
 		}
 		
 		removeOffScreenBubbles();
+		checkForPollutantsInBubbles();
 	}
+	private void checkForPollutantsInBubbles(){
+		for(Pollutant p : pollutants){
+			for(Bubble b : bubbles){
+				if(p.isIn(b) && !b.hasPollutant() && !p.isInBubble()){
+					p.fixToBubble(b);
+					b.setAttachedPollutant(p);
+				}
+			}
+		}
+	}
+	
 	/**
 	 * defines how to draw the pollution game
 	 */
@@ -197,7 +209,7 @@ public class PollutionGame extends Game {
 		fish.render(g);
 		
 		for(Pollutant p : pollutants){
-			p.render(g);
+				p.render(g);
 		}
 		for(Bubble b: bubbles){
 			b.render(g);
@@ -213,6 +225,7 @@ public class PollutionGame extends Game {
 		Bubble b = bubbleBank.get(availableBubbles.get(0));
 		b.setIndex(availableBubbles.get(0));
 		availableBubbles.remove(0);
+		b.reset();
 		b.shootFromFish((fish.getX()+150), (fish.getY()+55), crab.getAngle(),crab.getX()+150,crab.getY()+150);
 		bubbles.add(b);
 		
@@ -223,8 +236,12 @@ public class PollutionGame extends Game {
 		while(i.hasNext()){
 			Bubble b=i.next();
 			if(b.getY()<-1200){
-				i.remove();
 				availableBubbles.add(b.getIndex());
+				if(b.hasPollutant()){
+					b.getAttachedPollutant().reset();
+				}
+				b.reset();
+				i.remove();
 			}
 		}
 	}
