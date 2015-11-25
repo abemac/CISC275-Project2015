@@ -67,6 +67,7 @@ public class Bubble extends Character{
 			scaleVel=0;
 		}
 		scale+=scaleVel;
+		System.out.println(angle);
 		
 		
 		
@@ -89,6 +90,8 @@ public class Bubble extends Character{
 		
 		g.rotate(-angle);
 		g.translate(-xPos, -yPos);
+		
+		g.drawOval((int)getCenterPoint().x, (int)getCenterPoint().y, 10, 10);
 		
 		
 	}
@@ -121,8 +124,11 @@ public class Bubble extends Character{
 	}
 	
 	
+	public Point centerPoint=new Point(0,0);
 	public Point getCenterPoint(){
-		return null;
+		centerPoint.x=xPos-176.77*Math.cos(angle+Math.PI/4.0);
+		centerPoint.y=yPos-176.77*Math.sin(angle+Math.PI/4.0);
+		return centerPoint;
 	}
 	
 	
