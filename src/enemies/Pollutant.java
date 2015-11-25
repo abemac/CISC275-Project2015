@@ -101,8 +101,10 @@ public class Pollutant extends Enemy {
 		if(!fixedToBubble)
 			floatDown();
 		else if (fixedToBubble){
-			velocity.setX((cleanMe.getX()-200-position.getX())/20.0);
-			velocity.setY((cleanMe.getY()-200-position.getY())/20.0);
+			Point bcenter=cleanMe.getCenterPoint();
+			Point pcenter=this.getCenterPoint();
+			velocity.setX((bcenter.x-pcenter.x)/30.0);
+			velocity.setY((bcenter.y-pcenter.y)/5.0);
 			position.add(velocity);
 		}
 		
@@ -154,20 +156,27 @@ public class Pollutant extends Enemy {
 		else if(type==SEWAGE){
 			g.drawImage(sewage, 0,0, null);
 		}
-		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, 150, 150);
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, 10, 10);
+//		g.setColor(Color.BLACK);
+//		g.drawRect(0, 0, 150, 150);
+//		g.setColor(Color.RED);
+//		g.fillRect(0, 0, 10, 10);
 		
 		g.rotate(-angle);	
 		g.translate(-position.getX(), -position.getY());
+		
+//		g.setColor(Color.RED);
+//		g.fillOval((int)getCenterPoint().x, (int)getCenterPoint().y, 20, 20);
 		
 		
 	}
 	
 	
-	public Point getCenterPos(){
-		return null;
+
+	public Point centerPoint=new Point(0,0);
+	public Point getCenterPoint(){
+		centerPoint.x=position.getX()+106.07*Math.cos(angle+Math.PI/4.0);
+		centerPoint.y=position.getY()+106.07*Math.sin(angle+Math.PI/4.0);
+		return centerPoint;
 	}
 	
 	/**
@@ -195,11 +204,11 @@ public class Pollutant extends Enemy {
 	
 	private double dx,dy;
 	public boolean isIn(Bubble b){
-		dx = (b.getX()-100)-(75+position.getX());
-		dy=(b.getY()+100)-(75+position.getY());
-		
-		//return (Math.sqrt(dx*dx+dy*dy)<200);
-		return false;
+		Point bubbleCenter=b.getCenterPoint();
+		Point pollutantCenter= this.getCenterPoint();
+		dx = bubbleCenter.x-pollutantCenter.x;
+		dy=bubbleCenter.y-pollutantCenter.y;
+		return (Math.sqrt(dx*dx+dy*dy)<165);
 		
 	}
 	

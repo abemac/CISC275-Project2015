@@ -67,7 +67,6 @@ public class Bubble extends Character{
 			scaleVel=0;
 		}
 		scale+=scaleVel;
-		System.out.println(angle);
 		
 		
 		
@@ -83,15 +82,15 @@ public class Bubble extends Character{
 		g.translate((xPos), yPos);
 		g.rotate(angle);
 		g.drawImage(bubble,0,0,-(int)(200*scale),-(int)(200*scale), null);
-		g.setColor(Color.BLACK);
-		g.drawRect(-250, -250, 250, 250);
-		g.setColor(Color.RED);
-		g.fillRect(-20, -20, 20, 20);
+//		g.setColor(Color.BLACK);
+//		g.drawRect(-250, -250, 250, 250);
+//		g.setColor(Color.RED);
+//		g.fillRect(-20, -20, 20, 20);
 		
 		g.rotate(-angle);
 		g.translate(-xPos, -yPos);
 		
-		g.drawOval((int)getCenterPoint().x, (int)getCenterPoint().y, 10, 10);
+		//g.drawOval((int)getCenterPoint().x, (int)getCenterPoint().y, 10, 10);
 		
 		
 	}
