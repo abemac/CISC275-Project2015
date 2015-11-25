@@ -1,16 +1,21 @@
 package games;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
 import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
+import misc.Util;
 import view.EstuaryView;
 
 /**
@@ -46,7 +51,14 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private CrabSaveGame crabSaveGame;
 	private PollutionGame pollutionGame;
 	
-	////////
+	private static final BufferedImage blankImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
+	private static final Cursor blankCursor=
+			Toolkit.getDefaultToolkit().createCustomCursor(blankImage, new java.awt.Point(0, 0), "blank cursor");
+	
+	
+	
+	private static BufferedImage menuCursorImage;
+	private static Cursor menuCursor;
 	/**
 	 * creates the Main Game by calling init()
 	 */
@@ -64,6 +76,14 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		view.setPreferredSize(new Dimension(dm.getWidth(), dm.getHeight()));
 		state = GameState.MENU_SCREEN;
 		view.addKeyListener(this);
+		
+		try {
+			menuCursorImage=Util.loadImage("/menu-cursor.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		menuCursor=Toolkit.getDefaultToolkit().createCustomCursor(menuCursorImage, new java.awt.Point(0,0), "menu cursor");
 		
 		
 		
@@ -129,6 +149,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	public void onTick(){
 		if(state == GameState.MENU_SCREEN){
 			if(menu == null){
+				showMenuCursor();
 				menu = new MenuScreen();
 				view.addMouseListener(menu);
 				view.addKeyListener(menu);
@@ -147,6 +168,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				overfishingGame = new OverfishingGame();
 				view.addMouseListener(overfishingGame);
 				view.addKeyListener(overfishingGame);
+				hideCursor();
 			}
 			overfishingGame.onTick();
 			if(overfishingGame.isDone()){
@@ -164,6 +186,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				crabSaveGame = new CrabSaveGame();
 				view.addMouseListener(crabSaveGame);
 				view.addKeyListener(crabSaveGame);
+				hideCursor();
 			}
 			crabSaveGame.onTick();
 			if(crabSaveGame.isDone()){
@@ -179,6 +202,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.addMouseListener(pollutionGame);
 				view.addKeyListener(pollutionGame);
 				lastTime=System.nanoTime();
+				hideCursor();
 			}
 			pollutionGame.onTick();
 			if(pollutionGame.isDone()){
@@ -221,7 +245,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	}
 	
 	
-	
+	private static void hideCursor(){
+		frame.getContentPane().setCursor(blankCursor);
+	}
+	private static void showMenuCursor(){
+		frame.getContentPane().setCursor(menuCursor);
+	}
 	
 	/////MAIN FUNCTION//////
 	
