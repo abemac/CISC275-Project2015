@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import enemies.Pollutant;
 import misc.Point;
@@ -206,14 +207,15 @@ public class Bubble extends Character{
 		
 	}
 	
-	private Pollutant attachedPollutant;
-	public void setAttachedPollutant(Pollutant p){
-		if(p!=null){hasPollutant=true;}else{hasPollutant=false;}
-		this.attachedPollutant=p;
+	private ArrayList<Pollutant> attachedPollutants=new ArrayList<Pollutant>();
+	public void addAttachedPollutant(Pollutant p){
+		if(attachedPollutants.size()<4){
+			attachedPollutants.add(p);
+		}
 	}
 	
-	public Pollutant getAttachedPollutant() {
-		return attachedPollutant;
+	public ArrayList<Pollutant> getAttachedPollutants() {
+		return attachedPollutants;
 	}
 	
 	private boolean hasPollutant=false;
@@ -223,7 +225,7 @@ public class Bubble extends Character{
 	
 	public void reset(){
 		hasPollutant=false;
-		attachedPollutant=null;
+		attachedPollutants.clear();
 	}
 	
 	
