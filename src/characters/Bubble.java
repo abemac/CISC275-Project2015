@@ -1,5 +1,6 @@
 package characters;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -81,6 +82,10 @@ public class Bubble extends Character{
 		g.translate((xPos), yPos);
 		g.rotate(angle);
 		g.drawImage(bubble,0,0,-(int)(200*scale),-(int)(200*scale), null);
+		g.setColor(Color.BLACK);
+		g.drawRect(-250, -250, 250, 250);
+		g.setColor(Color.RED);
+		g.fillRect(-20, -20, 20, 20);
 		
 		g.rotate(-angle);
 		g.translate(-xPos, -yPos);

@@ -1,5 +1,6 @@
 package enemies;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -153,6 +154,10 @@ public class Pollutant extends Enemy {
 		else if(type==SEWAGE){
 			g.drawImage(sewage, 0,0, null);
 		}
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, 150, 150);
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, 10, 10);
 		
 		g.rotate(-angle);	
 		g.translate(-position.getX(), -position.getY());
@@ -193,7 +198,8 @@ public class Pollutant extends Enemy {
 		dx = (b.getX()-100)-(75+position.getX());
 		dy=(b.getY()+100)-(75+position.getY());
 		
-		return (Math.sqrt(dx*dx+dy*dy)<200);
+		//return (Math.sqrt(dx*dx+dy*dy)<200);
+		return false;
 		
 	}
 	
