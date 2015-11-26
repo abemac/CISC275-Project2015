@@ -145,12 +145,14 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				menu = new MenuScreen();
 				view.addMouseListener(menu);
 				view.addKeyListener(menu);
+				view.addMouseMotionListener(menu);
 			}
 			menu.onTick();
 			if(menu.isDone()){
 				state = GameState.OVERFISHING_GAME;
 				view.removeKeyListener(menu);
 				view.removeMouseListener(menu);
+				view.removeMouseMotionListener(menu);
 				menu = null;
 			}
 			
