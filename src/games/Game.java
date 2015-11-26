@@ -16,7 +16,7 @@ import misc.Tickable;
  */
 public abstract class Game implements Serializable,Tickable,Renderable,KeyListener,MouseListener,MouseMotionListener{
 
-	
+	private boolean sendSignal=false;
 	/**
 	 * 
 	 */
@@ -54,7 +54,13 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	 */
 	public void saveGameState(){};
 	
+	protected void sendStopSignal(){
+		sendSignal=true;
+	}
 	
+	public boolean sentStopSignal(){
+		return sendSignal;
+	}
 }
 
 

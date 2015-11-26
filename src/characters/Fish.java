@@ -341,6 +341,11 @@ public class Fish extends Character {
 	public void increaseAngle(double rads){
 		angle+=rads;
 	}
+	
+	public static boolean getBack(){
+		return getBack;
+	}
+	
 	/////*** listeners ***///////
 	@Override
 	public void keyTyped(KeyEvent e) {

@@ -189,9 +189,9 @@ public class PollutionGame extends Game {
 	private void checkForPollutantsInBubbles(){
 		for(Pollutant p : pollutants){
 			for(Bubble b : bubbles){
-				if(p.isIn(b) && !b.hasPollutant() && !p.isInBubble()){
+				if(p.isIn(b) && b.getAttachedPollutants().size()<3 && !p.isInBubble()){
 					p.fixToBubble(b);
-					b.setAttachedPollutant(p);
+					b.addAttachedPollutant(p);
 				}
 			}
 		}
@@ -238,8 +238,8 @@ public class PollutionGame extends Game {
 			if(b.getY()<-1200){
 				availableBubbles.add(b.getIndex());
 				i.remove();
-				if(b.hasPollutant()){
-					b.getAttachedPollutant().reset();
+				for(Pollutant p: b.getAttachedPollutants()){
+					p.reset();
 				}
 				b.reset();
 				

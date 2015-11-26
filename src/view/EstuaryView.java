@@ -34,11 +34,7 @@ public class EstuaryView extends Canvas{
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.fillRect(0, 0, getWidth(), getHeight());
-		Util.setDistanceToEdge(getWidth(), getHeight());
-		Util.setCanvasHeight(getHeight());
-		Util.setCanvasWidth(getWidth());
-		Util.setCurrentScaleFactor(getHeight()/2000.0);
-		
+		storeScreenInfo();
 		g.translate(getWidth()/2.0,getHeight()/2.0);
 		g.scale(getHeight()/(2000.0), getHeight()/2000.0);
 		////// DO RENDERING HERE///////
@@ -51,13 +47,16 @@ public class EstuaryView extends Canvas{
 		g.dispose();//releases resources
 		bs.show(); //shows next available buffer
 		
-		
-
-	
 	}
 	
 	
 	
+	public void storeScreenInfo(){
+		Util.setDistanceToEdge(getWidth(), getHeight());
+		Util.setCanvasHeight(getHeight());
+		Util.setCanvasWidth(getWidth());
+		Util.setCurrentScaleFactor(getHeight()/2000.0);
+	}
 	
 	
 	
