@@ -189,7 +189,7 @@ public class PollutionGame extends Game {
 	private void checkForPollutantsInBubbles(){
 		for(Pollutant p : pollutants){
 			for(Bubble b : bubbles){
-				if(p.isIn(b) && b.getAttachedPollutants().size()<4 && !p.isInBubble()){
+				if(p.isIn(b) && b.getAttachedPollutants().size()<3 && !p.isInBubble()){
 					p.fixToBubble(b);
 					b.addAttachedPollutant(p);
 				}

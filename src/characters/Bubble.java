@@ -209,9 +209,8 @@ public class Bubble extends Character{
 	
 	private ArrayList<Pollutant> attachedPollutants=new ArrayList<Pollutant>();
 	public void addAttachedPollutant(Pollutant p){
-		if(attachedPollutants.size()<4){
 			attachedPollutants.add(p);
-		}
+		
 	}
 	
 	public ArrayList<Pollutant> getAttachedPollutants() {
