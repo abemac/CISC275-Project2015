@@ -72,7 +72,7 @@ public class OverfishingGame extends Game {
 	
 	private void loadRes(){
 		try {
-			tooCloseToEdge = Util.loadImage("/tooclosetoedge.png",Util.getCANVAS_WIDTH_SCALED(),400, this);
+			tooCloseToEdge = Util.loadImage("/tooclosetoedge.png",Util.getCANVAS_WIDTH_SCALED()+50,400, this);
 			dialogBox = Util.loadImage("/DialogBox.png",1450,1200, this);
 			selectedButton = Util.loadImage("/selectedButtonOverlay.png",278,282,this);
 		} catch (IOException e) {
