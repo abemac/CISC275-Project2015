@@ -15,6 +15,7 @@ import enemies.Hook;
 import enemies.Net;
 import misc.Point;
 import misc.SeaBottom;
+import misc.SoundDoer;
 import misc.Util;
 
 /*
@@ -52,6 +53,8 @@ public class OverfishingGame extends Game {
 	private boolean donePlaying=false;
 	
 	private boolean overRightButton,overLeftButton;
+	
+	private SoundDoer soundDoer=new SoundDoer();
 
 	
 	/**
@@ -61,6 +64,8 @@ public class OverfishingGame extends Game {
 		super();
 		isDone = false;
 		loadRes();
+		
+		soundDoer.playSound("/game1song.wav");
 		
 	}
 	

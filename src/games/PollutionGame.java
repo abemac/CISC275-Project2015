@@ -14,6 +14,7 @@ import characters.Game3Crab;
 import characters.Game3Fish;
 import enemies.Pollutant;
 import misc.ArbitraryLine;
+import misc.SoundDoer;
 import misc.Util;
 import misc.Vector;
 
@@ -49,12 +50,16 @@ public class PollutionGame extends Game {
 	
 	private long newPollutantTimer=0;
 	
+	private SoundDoer soundDoer=new SoundDoer();
+	
 	/**
 	 * calls the super constructor
 	 */
 	public PollutionGame(){
 		super();
 		loadRes();
+		soundDoer = new SoundDoer();
+		soundDoer.playSound("/game3song.wav");
 		
 	}
 

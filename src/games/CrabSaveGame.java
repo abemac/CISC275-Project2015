@@ -49,8 +49,7 @@ public class CrabSaveGame extends Game {
 	public CrabSaveGame(){
 		super();
 		loadRes();
-		soundDoer = new SoundDoer();
-		soundDoer.playSound("/game2song.wav");
+		
 		
 	}
 	/**
