@@ -1,11 +1,13 @@
 package games;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -34,8 +36,9 @@ public class OverfishingGame extends Game {
 	 * 
 	 */
 	private static final long serialVersionUID = 6483515886892518982L;
-	private int numFishLost;			//how many fish have been captured
-	private int distance;				// how far the player reached in the level
+	
+	private long distance=0;      // how far the player reached in the level
+	private double timer = 61.0;
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	private SeaBottom seaBottom;
@@ -55,7 +58,10 @@ public class OverfishingGame extends Game {
 	private boolean overRightButton,overLeftButton;
 	
 	private SoundDoer soundDoer=new SoundDoer();
-
+	
+	private Color timerColor=Color.RED;
+	private final Font timerFont = new Font("default",Font.BOLD,200);
+	//private DecimalFormat df = new DecimalFormat("#.##");
 	
 	/**
 	 * Constructor for the overfishing game. calls the super constructor
@@ -173,11 +179,21 @@ public class OverfishingGame extends Game {
 		}
 		
 		
-		checkAndRemoveFish();
 		
+		if(!donePlaying){
+			distance++;
+			checkAndRemoveFish();
+			timer-=1/60.0;
+			
+			if(timer<1){
+				timer=0;
+				donePlaying=true;
+			}
+		}
 		
 		if(donePlaying){
-			
+			if(timer>0)
+				soundDoer.stopSound();
 		}
 		
 	}
@@ -228,6 +244,10 @@ public class OverfishingGame extends Game {
 				g.drawImage(selectedButton, -270, 100, null);
 		}
 		
+		
+		g.setColor(timerColor);
+		g.setFont(timerFont);
+		Util.drawCenteredString(""+(int)timer, -Util.getDISTANCE_TO_EDGE()+200, -800, g);
 		
 		
 	}
@@ -331,8 +351,8 @@ public class OverfishingGame extends Game {
 	 * returns the number of fish lost
 	 * @return the number of fish lost
 	 */
-	public int getNumFishLost() {
-		return numFishLost;
+	public int getNumFish() {
+		return school.size();
 	}
 
 
@@ -341,7 +361,7 @@ public class OverfishingGame extends Game {
 	 * @return the distance traveled
 	 */
 	public int getDistance() {
-		return distance;
+		return (int) (distance/1000);
 	}
 
 

@@ -115,6 +115,10 @@ public class SoundDoer {
 		
 	
 	}
+	
+	public boolean isDone(int index){
+		return !clips.get(index).isActive();
+	}
 
 	
 	
