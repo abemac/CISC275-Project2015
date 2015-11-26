@@ -17,6 +17,7 @@ import misc.Tickable;
 public abstract class Game implements Serializable,Tickable,Renderable,KeyListener,MouseListener,MouseMotionListener{
 
 	private boolean sendSignal=false;
+	private boolean isDone;
 	/**
 	 * 
 	 */
@@ -46,15 +47,19 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	 * returns whether or not the game is Done
 	 * @return boolean representing whether or not the game is done
 	 */
-	public abstract boolean isDone();
+	public boolean isDone(){
+		return isDone;
+	}
 	
-	
+	public void setIsDone(boolean b){
+		isDone=b;
+	}
 	/**
 	 * saves the current game state to a file
 	 */
 	public void saveGameState(){};
 	
-	protected void sendStopSignal(){
+	public void sendStopSignal(){
 		sendSignal=true;
 	}
 	

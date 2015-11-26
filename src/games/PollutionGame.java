@@ -346,14 +346,6 @@ public class PollutionGame extends Game {
 	public ArrayList<Pollutant> getPollutants() {
 		return pollutants;
 	};
-	
-	/**
-	 * returns whether or not this game is done
-	 * @return boolean whether or not game is done
-	 */
-	public boolean isDone(){
-		return false;
-	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {

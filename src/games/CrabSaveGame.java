@@ -201,16 +201,6 @@ public class CrabSaveGame extends Game {
 		return theHuman;
 	};
 	
-	
-	/**
-	 * returns true if this game isDone
-	 * @return boolean showing whether the game is done or not
-	 */
-	public boolean isDone(){
-		return false;
-	}
-
-
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		crab.keyPressed(arg0);

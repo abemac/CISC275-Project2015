@@ -15,9 +15,11 @@ import characters.Fish;
 import enemies.Enemy;
 import enemies.Hook;
 import enemies.Net;
+import misc.DialogBox;
 import misc.Point;
 import misc.SeaBottom;
 import misc.SoundDoer;
+import misc.Tickable;
 import misc.Util;
 
 /*
@@ -42,25 +44,24 @@ public class OverfishingGame extends Game {
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	private SeaBottom seaBottom;
-	private boolean isDone;
 	private final Color blue = new Color(114,145,215);
 	
 	private ArrayList<Enemy> enemyBank;
 	private ArrayList<Integer> enemiesAvailable;
 	
 	private static BufferedImage tooCloseToEdge;
-	private BufferedImage dialogBox,selectedButton;
 	private boolean tooCloseToggle;
 	private long tooCloseTimer;
 	
 	private boolean donePlaying=false;
 	
-	private boolean overRightButton,overLeftButton;
 	
 	private SoundDoer soundDoer=new SoundDoer();
 	
 	private Color timerColor=Color.RED;
 	private final Font timerFont = new Font("default",Font.BOLD,200);
+	
+	private DialogBox dialogBox;
 	//private DecimalFormat df = new DecimalFormat("#.##");
 	
 	/**
@@ -68,10 +69,12 @@ public class OverfishingGame extends Game {
 	 */
 	public OverfishingGame(){	
 		super();
-		isDone = false;
+		setIsDone(false);
 		loadRes();
 		
 		soundDoer.playSound("/game1song.wav");
+		
+		dialogBox=new DialogBox(this);
 		
 	}
 	
@@ -79,8 +82,7 @@ public class OverfishingGame extends Game {
 	private void loadRes(){
 		try {
 			tooCloseToEdge = Util.loadImage("/tooclosetoedge.png",Util.getCANVAS_WIDTH_SCALED()+50,400, this);
-			dialogBox = Util.loadImage("/DialogBox.png",1450,1200, this);
-			selectedButton = Util.loadImage("/selectedButtonOverlay.png",278,282,this);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -192,8 +194,14 @@ public class OverfishingGame extends Game {
 		}
 		
 		if(donePlaying){
-			if(timer>0)
+			if(timer>0){
+				EstuaryAdventureMain.showMenuCursor();
 				soundDoer.stopSound();
+				dialogBox.setTitle(DialogBox.TITLE_CAUGHT);
+			}else{
+				EstuaryAdventureMain.showMenuCursor();
+				dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
+			}
 		}
 		
 	}
@@ -234,14 +242,7 @@ public class OverfishingGame extends Game {
 		}
 		
 		if(donePlaying){
-			EstuaryAdventureMain.showMenuCursor();
-			g.drawImage(dialogBox,-700,-700,null);
-			
-			if(overRightButton)
-				g.drawImage(selectedButton,60,100,null);
-			
-			if(overLeftButton)
-				g.drawImage(selectedButton, -270, 100, null);
+			dialogBox.render(g);
 		}
 		
 		
@@ -382,13 +383,6 @@ public class OverfishingGame extends Game {
 		return enemies;
 	};		
 	
-	/**
-	 * returns whether or not the game is done
-	 * @return boolean saying whether or not the game is done
-	 */
-	public boolean isDone(){
-		return isDone;
-	}
 
 
 
@@ -424,13 +418,10 @@ public class OverfishingGame extends Game {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if(overRightButton){
-			isDone=true;
+		if(donePlaying){
+			dialogBox.mouseClicked(e);
 		}
-		if(overLeftButton){
-			super.sendStopSignal();
-		}
+		
 		
 	}
 
@@ -477,20 +468,11 @@ public class OverfishingGame extends Game {
 
 
 	
-	private Point rightBCenter = new Point(180,240);
-	private Point leftBCenter = new Point(-140,240);
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(Util.isInCircle(e, rightBCenter, 130)){
-			overRightButton=true;
-		}else
-			overRightButton=false;
-		
-		if(Util.isInCircle(e, leftBCenter, 130)){
-			overLeftButton=true;
-		}else
-			overLeftButton=false;
-		
+		if(donePlaying){
+			dialogBox.mouseMoved(e);
+		}
 	}
 	
 	
