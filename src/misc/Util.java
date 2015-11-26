@@ -83,6 +83,16 @@ public class Util {
 			
 	}
 	
+	public static boolean isInCircle(MouseEvent e, misc.Point center,double radius){
+		int x = (int) ((e.getX()-CANVAS_WIDTH_UNSCALED/2.0)/SCALE_FACTOR);
+		int y = (int) ((e.getY() - CANVAS_HEIGHT_UNSCALED/2.0)/SCALE_FACTOR);
+		
+		double dx= x-center.x;
+		double dy =y-center.y;
+		
+		return (Math.sqrt(dx*dx+dy*dy)<=radius);
+		
+	}
 	
 	
 	
