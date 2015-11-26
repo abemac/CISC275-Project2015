@@ -13,6 +13,7 @@ import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
 import misc.ArbitraryLine;
+import misc.SoundDoer;
 import misc.TrashCan;
 import misc.Util;
 
@@ -40,12 +41,17 @@ public class CrabSaveGame extends Game {
 	
 	private ArbitraryLine pondLine,skyLine;
 	
+	private SoundDoer soundDoer;
+	
 	/**
 	 * calls the super constructor
 	 */
 	public CrabSaveGame(){
 		super();
 		loadRes();
+		soundDoer = new SoundDoer();
+		soundDoer.playSound("/game2song.wav");
+		
 	}
 	/**
 	 * gets called in the constructor to initialized components of the game
