@@ -89,18 +89,7 @@ public class SoundDoer {
 		
 		clips.clear();
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	
-		
-		
 	
 	}
 	

@@ -164,6 +164,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.addKeyListener(overfishingGame);
 				view.addMouseMotionListener(overfishingGame);
 				hideCursor();
+				lastTime=System.nanoTime();
 			}
 			overfishingGame.onTick();
 			if(overfishingGame.isDone()){
