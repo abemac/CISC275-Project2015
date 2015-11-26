@@ -77,7 +77,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		view.addKeyListener(this);
 		
 		try {
-			menuCursorImage=Util.loadImage("/menu-cursor.png", this);
+			menuCursorImage=Util.loadImage("/menu-cursor3.png", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
