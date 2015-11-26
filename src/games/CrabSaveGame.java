@@ -50,7 +50,7 @@ public class CrabSaveGame extends Game {
 		super();
 		loadRes();
 		soundDoer = new SoundDoer();
-		soundDoer.playSound2("/game 2 song.wav");
+		soundDoer.playSound("/game2song.wav");
 		
 	}
 	/**

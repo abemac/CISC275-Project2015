@@ -136,7 +136,8 @@ public class SoundDoer {
 	
 	public void playSound2(String file){
 		
-		SourceDataLine soundLine = null;
+			System.out.println(file);
+		  SourceDataLine soundLine=null;
 	      int BUFFER_SIZE = 64*1024;  // 64 KB
 	   
 	      // Set up an audio input stream piped from the sound file.
