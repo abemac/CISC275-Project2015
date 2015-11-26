@@ -2,6 +2,7 @@ package misc;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.event.MouseEvent;
@@ -19,8 +20,15 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	private boolean overRightButton,overLeftButton;
 	private Game host;
 	
-	private Stroke stroke = new BasicStroke(20);
+	private String key1,info1,key2,info2,message;
+	private final Font keyFont = new Font("default",Font.BOLD,60);
+	private final Font infoFont = new Font("default",Font.BOLD,60);
+	private final Font messageFont = new Font("default",Font.BOLD,60);
 	
+	private Color keyColor = Color.BLUE;
+	private Color infoColor = Color.RED;
+	private Color messageColor = Color.BLACK;
+	private Stroke stroke = new BasicStroke(20);
 	private Color bgColor= new Color(234,200,63);
 	/**
 	 * 
@@ -81,6 +89,18 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 		}else if(title==TITLE_NICE_JOB){
 			g.drawImage(titleNiceJob, -255, -600, null);
 		}
+		g.setColor(keyColor);
+		g.setFont(keyFont);
+		g.drawString(key1, -490, -325);
+		g.drawString(key2, -490, -190);
+		g.setColor(infoColor);
+		g.setFont(infoFont);
+		Util.drawCenteredString(info1, 350, -325, g);
+		Util.drawCenteredString(info2, 100, -190, g);
+		
+		g.setColor(messageColor);
+		g.setFont(messageFont);
+		Util.drawCenteredString(message, 0, 0, g);
 		
 		
 		
@@ -96,6 +116,33 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	
 	public void setTitle(int title){
 		this.title=title;
+	}
+	
+	
+
+	public void setKey1(String key1) {
+		if (this.key1==null)
+			this.key1 = key1;
+	}
+
+	public void setInfo1(String info1) {
+		if (this.info1==null)
+			this.info1 = info1;
+	}
+
+	public void setKey2(String key2) {
+		if(this.key2==null)
+			this.key2 = key2;
+	}
+
+	public void setInfo2(String info2) {
+		if(this.info2==null)
+			this.info2 = info2;
+	}
+
+	public void setMessage(String message) {
+		if(this.message==null)
+			this.message = message;
 	}
 
 	@Override

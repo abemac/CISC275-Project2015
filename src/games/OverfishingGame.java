@@ -202,6 +202,14 @@ public class OverfishingGame extends Game {
 				EstuaryAdventureMain.showMenuCursor();
 				dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
 			}
+			
+			dialogBox.setKey1("Distance Traveled: ");
+			dialogBox.setInfo1(getDistance()+" ft");
+			dialogBox.setKey2("Fish Left: ");
+			dialogBox.setInfo2(""+school.size());
+			dialogBox.setMessage("message here?");
+			
+			
 		}
 		
 	}
@@ -362,7 +370,7 @@ public class OverfishingGame extends Game {
 	 * @return the distance traveled
 	 */
 	public int getDistance() {
-		return (int) (distance/1000);
+		return (int) (distance/15.0);
 	}
 
 
