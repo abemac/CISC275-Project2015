@@ -102,7 +102,7 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 		g.setFont(messageFont);
 		Util.drawCenteredString(message, 27, -60, g);
 		
-		Util.drawCenteredString(message2, 27, 40, g);
+		Util.drawCenteredString(message2, 27, 40, g); 
 		
 		
 		
