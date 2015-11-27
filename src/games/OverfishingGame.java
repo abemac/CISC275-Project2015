@@ -207,8 +207,8 @@ public class OverfishingGame extends Game {
 			dialogBox.setInfo1(getDistance()+" ft");
 			dialogBox.setKey2("Fish Left: ");
 			dialogBox.setInfo2(""+school.size());
-			dialogBox.setMessage("message here?");
-			
+			dialogBox.setMessageL1("7-15 fish is a healthy percentage.");
+			dialogBox.setMessageL2("Below 7 is overfished!");
 			
 		}
 		

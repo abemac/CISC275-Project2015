@@ -150,11 +150,12 @@ public class CrabSaveGame extends Game {
 		
 		trashCan.render(g);
 		
+		
+		crab.render(g);
+		trashCan.renderOverlay(g);
 		for(Trash t: trash){
 			t.render(g);
 		}
-		crab.render(g);
-		trashCan.renderOverlay(g);
 		crab.renderThrownTrash(g);
 		
 		

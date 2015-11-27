@@ -102,6 +102,9 @@ public class Crab extends Character{
 			}
 			xPos-=10*(yPos+1000)/2000.0;
 			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
+			if(yPos<-490 && xPos < 725 && xPos>370){
+				xPos+=10*(yPos+1000)/2000.0;
+			}
 		}
 		if(rightPressed){
 			if(spriteNum==1){
@@ -114,6 +117,11 @@ public class Crab extends Character{
 			}
 			xPos+=10*(yPos+1000)/2000.0;
 			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0)?Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0):xPos;
+			
+			if(yPos<-490 && xPos > 230 && xPos<370){
+				xPos-=10*(yPos+1000)/2000.0;
+			}
+		
 		}
 		if(upPressed){
 			if(spriteNum==1){
@@ -126,6 +134,11 @@ public class Crab extends Character{
 			}
 			yPos-=6*(yPos+800)/1500.0;
 			xPos+=.5;
+			
+			if(yPos<-490 && xPos>250 && xPos<725){
+				yPos+=6*(yPos+800)/1500.0;
+				xPos-=.5;
+			}
 		}
 		if(downPressed){
 			if(spriteNum==1){
@@ -268,7 +281,7 @@ public class Crab extends Character{
 	 */
 	@Override
 	public void render(Graphics2D g){
-		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(scale),(int)( scale),null);
+		
 		for(Trash t: previouslyThrownTrash){
 			t.render(g);
 		}
@@ -285,6 +298,7 @@ public class Crab extends Character{
 	}
 	
 	public void renderThrownTrash(Graphics2D g){
+		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(scale),(int)( scale),null);
 		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
 			attachedTrash.render(g);
 		}
@@ -313,7 +327,7 @@ public class Crab extends Character{
 		attachedTrash.setY(attachedTrash.getY()-Vy);
 		Vy-=gravity;
 		attachedTrash.act();
-		if(attachedTrash.getY()<-900){
+		if(attachedTrash.getY()<-990){
 			aboveCan=true;
 		}
 		if(reachedVertex==false && Math.abs(Math.abs(Vy)-gravity)<=gravity){

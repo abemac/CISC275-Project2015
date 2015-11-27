@@ -97,7 +97,19 @@ public class Trash extends Enemy {
 	public void act() {
 		// TODO Auto-generated method stub
 		scale = (yPos+1000)/1000f;
-		scale=scale<0.5?0.5:scale;
+		scale=scale<0.4?0.4:scale;
+		
+		if(xPos+getWidth()>Util.getDISTANCE_TO_EDGE()){
+			xPos=Util.getDISTANCE_TO_EDGE()-getWidth();
+		}
+		if(beingThrown){
+			if(xPos<575)
+				angle+=.5;
+			if(xPos>575){
+				angle-=.5;
+			}
+		}
+		
 		
 		
 		
@@ -119,13 +131,7 @@ public class Trash extends Enemy {
 			}
 			g.rotate(-angle);
 			g.translate(-xPos-getWidth()/2f, -yPos-getHeight()/2f);
-			if(beingThrown){
-				if(xPos<575)
-					angle+=.5;
-				if(xPos>575){
-					angle-=.5;
-				}
-			}
+			
 		
 		
 	}

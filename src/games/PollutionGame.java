@@ -175,7 +175,7 @@ public class PollutionGame extends Game {
 		}
 		
 		
-		if(newPollutantTimer%250==0){
+		if(newPollutantTimer%100==0){
 			addAnotherPollutantIfPossible();
 		}
 		newPollutantTimer++;

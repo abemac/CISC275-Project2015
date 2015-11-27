@@ -20,10 +20,10 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	private boolean overRightButton,overLeftButton;
 	private Game host;
 	
-	private String key1,info1,key2,info2,message;
+	private String key1,info1,key2,info2,message,message2;
 	private final Font keyFont = new Font("default",Font.BOLD,60);
 	private final Font infoFont = new Font("default",Font.BOLD,60);
-	private final Font messageFont = new Font("default",Font.BOLD,60);
+	private final Font messageFont = new Font("default",Font.ITALIC,60);
 	
 	private Color keyColor = Color.BLUE;
 	private Color infoColor = Color.RED;
@@ -87,7 +87,7 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 		else if(title==TITLE_GREAT){
 			g.drawImage(titleGreat, -250, -600, null);
 		}else if(title==TITLE_NICE_JOB){
-			g.drawImage(titleNiceJob, -255, -600, null);
+			g.drawImage(titleNiceJob, -295, -600, null);
 		}
 		g.setColor(keyColor);
 		g.setFont(keyFont);
@@ -100,7 +100,9 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 		
 		g.setColor(messageColor);
 		g.setFont(messageFont);
-		Util.drawCenteredString(message, 0, 0, g);
+		Util.drawCenteredString(message, 27, -60, g);
+		
+		Util.drawCenteredString(message2, 27, 40, g);
 		
 		
 		
@@ -140,9 +142,14 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 			this.info2 = info2;
 	}
 
-	public void setMessage(String message) {
+	public void setMessageL1(String message) {
 		if(this.message==null)
 			this.message = message;
+	}
+	public void setMessageL2(String message2){
+		if(this.message2==null){
+			this.message2=message2;
+		}
 	}
 
 	@Override
