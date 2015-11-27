@@ -113,7 +113,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			xPos+=10*(yPos+1000)/2000.0;
-			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400?Util.getDISTANCE_TO_EDGE()-400:xPos;
+			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0)?Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0):xPos;
 		}
 		if(upPressed){
 			if(spriteNum==1){
