@@ -27,7 +27,7 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	
 	private Color keyColor = Color.BLUE;
 	private Color infoColor = Color.RED;
-	private Color messageColor = Color.BLACK;
+	private Color messageColor = new Color(39,135,32);
 	private Stroke stroke = new BasicStroke(20);
 	private Color bgColor= new Color(234,200,63);
 	/**
