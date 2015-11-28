@@ -73,7 +73,7 @@ public class OverfishingGame extends Game {
 		loadRes();
 		
 		soundDoer.loadClip("/game1songv2.wav");
-		soundDoer.loadClip("/loseSound2.wav");
+		soundDoer.loadClip("/losesound2.wav");
 		soundDoer.playLoadedClip(0);
 		
 		dialogBox=new DialogBox(this);

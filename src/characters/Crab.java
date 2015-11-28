@@ -479,6 +479,9 @@ public class Crab extends Character{
 	public boolean isHoldingTrash(){
 		return isHoldingTrash;
 	}
+	public boolean isThrowingTrash() {
+		return isThrowingTrash;
+	}
 	public void setIsHoldingTrash(boolean b){
 		this.isHoldingTrash=b;
 		if(b==false){

@@ -1,6 +1,7 @@
 package games;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -13,6 +14,7 @@ import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
 import misc.ArbitraryLine;
+import misc.DialogBox;
 import misc.SoundDoer;
 import misc.TrashCan;
 import misc.Util;
@@ -28,7 +30,6 @@ public class CrabSaveGame extends Game {
 	 * 
 	 */
 	private static final long serialVersionUID = -1609844265788718695L;
-	private int numTrashPickedup;
 	private ArrayList<Trash> trash;
 	private TheHuman theHuman;
 	private TrashCan trashCan;
@@ -43,12 +44,21 @@ public class CrabSaveGame extends Game {
 	
 	private SoundDoer soundDoer= new SoundDoer();
 	
+	private boolean donePlaying=false;
+	private DialogBox dialogBox;
+	
+	private double timer=61.0;
+	private Color timerColor=Color.RED;
+	private final Font timerFont = new Font("default",Font.BOLD,200);
+	
+	private long dialogBoxWaiter=0;
 	/**
 	 * calls the super constructor
 	 */
 	public CrabSaveGame(){
 		super();
 		loadRes();
+		dialogBox=new DialogBox(this);
 		soundDoer.loadClip("/game2song.wav");
 		soundDoer.playLoadedClip(0);
 		
@@ -95,23 +105,61 @@ public class CrabSaveGame extends Game {
 	 */
 	@Override
 	public void onTick() {
-		
-		crab.onTick();
-		if(pondLine.isBelowLine(crab.getX(), crab.getY()+400)){
-			crab.setY(crab.getY()-6*(crab.getY()+1000)/1500.0);
-			crab.setX(crab.getX()+.5);
+		if(!donePlaying){
+			crab.onTick();
+			if(pondLine.isBelowLine(crab.getX(), crab.getY()+400)){
+				crab.setY(crab.getY()-6*(crab.getY()+1000)/1500.0);
+				crab.setX(crab.getX()+.5);
+				
+			}
+			if(skyLine.isAboveLine(crab.getX(), crab.getY())){
+				crab.setY(crab.getY()+6*(crab.getY()+1000)/1500.0);
+				crab.setX(crab.getX()-.5);
+			}
+			
+			for(Trash t: trash){
+				t.act();
+			}
+			
+			tellCrabToHoldTrash();
+			timer-=1/60.0;
+			if(timer<1){
+				timer=0;
+				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
+					if(dialogBoxWaiter<30){
+						dialogBoxWaiter++;
+					}else{
+						EstuaryAdventureMain.showMenuCursor();
+						donePlaying=true;
+						dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
+						dialogBox.setKey1("Trash Left: ");
+						dialogBox.setInfo1("  "+getNumTrash()+" pieces           ");
+						dialogBox.setKey2("Your Time: ");
+						dialogBox.setInfo2("        60s");
+						dialogBox.setMessageL1("Thanks for helping");
+						dialogBox.setMessageL2("clean up the estuary!");
+					}
+				}
+			}else if(getNumTrash()==0){
+				if(dialogBoxWaiter<30){
+					dialogBoxWaiter++;
+				}else{
+					EstuaryAdventureMain.showMenuCursor();
+					donePlaying=true;
+					soundDoer.stopClip(0);
+					dialogBox.setTitle(DialogBox.TITLE_GREAT);
+					dialogBox.setKey1("Trash Left: ");
+					dialogBox.setInfo1("0 pieces        ");
+					dialogBox.setKey2("Your Time: ");
+					dialogBox.setInfo2("      "+(60-(int)timer)+"s");
+					dialogBox.setMessageL1("Thanks for helping");
+					dialogBox.setMessageL2("clean up the estuary!");
+				}
+			}
+		}
+		if(donePlaying){
 			
 		}
-		if(skyLine.isAboveLine(crab.getX(), crab.getY())){
-			crab.setY(crab.getY()+6*(crab.getY()+1000)/1500.0);
-			crab.setX(crab.getX()-.5);
-		}
-		
-		for(Trash t: trash){
-			t.act();
-		}
-		
-		tellCrabToHoldTrash();
 		
 	}
 	
@@ -160,7 +208,13 @@ public class CrabSaveGame extends Game {
 		}
 		crab.renderThrownTrash(g);
 		
+		g.setColor(timerColor);
+		g.setFont(timerFont);
+		Util.drawCenteredString(""+(int)timer, Util.getDISTANCE_TO_EDGE()-200, -800, g);
 		
+		if(donePlaying){
+			dialogBox.render(g);
+		}
 		
 		//pondLine.testRender(g); //GOOD
 		//skyLine.testRender(g);  //GOOD
@@ -180,10 +234,13 @@ public class CrabSaveGame extends Game {
 
 	/**
 	 * 
-	 * @return the number of Trash the user has cleaned up
+	 * @return the number of Trash the user needs to clean up
 	 */
-	public int getNumTrashPickedup() {
-		return numTrashPickedup;
+	public int getNumTrash() {
+		if(crab.isHoldingTrash() || crab.isThrowingTrash()){
+			return trash.size()+1;
+		}
+		else return trash.size();
 	}
 
 
@@ -227,7 +284,9 @@ public class CrabSaveGame extends Game {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		if(donePlaying){
+			dialogBox.mouseClicked(arg0);
+		}
 		
 	}
 
@@ -269,7 +328,9 @@ public class CrabSaveGame extends Game {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(donePlaying){
+			dialogBox.mouseMoved(e);
+		}
 		
 	}
 	

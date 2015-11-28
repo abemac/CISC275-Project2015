@@ -91,18 +91,23 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 		}
 		g.setColor(keyColor);
 		g.setFont(keyFont);
-		g.drawString(key1, -490, -325);
-		g.drawString(key2, -490, -190);
+		if(key1!=null)
+			g.drawString(key1, -490, -325);
+		if(key2!=null)
+			g.drawString(key2, -490, -190);
 		g.setColor(infoColor);
 		g.setFont(infoFont);
-		Util.drawCenteredString(info1, 350, -325, g);
-		Util.drawCenteredString(info2, 100, -190, g);
+		if(info1!=null)
+			Util.drawCenteredString(info1, 350, -325, g);
+		if(info2!=null)
+			Util.drawCenteredString(info2, 100, -190, g);
 		
 		g.setColor(messageColor);
 		g.setFont(messageFont);
-		Util.drawCenteredString(message, 27, -60, g);
-		
-		Util.drawCenteredString(message2, 27, 40, g); 
+		if(message!=null)
+			Util.drawCenteredString(message, 27, -60, g);
+		if(message2!=null)
+			Util.drawCenteredString(message2, 27, 40, g); 
 		
 		
 		
