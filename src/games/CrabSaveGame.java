@@ -52,6 +52,8 @@ public class CrabSaveGame extends Game {
 	private final Font timerFont = new Font("default",Font.BOLD,200);
 	
 	private long dialogBoxWaiter=0;
+	
+	private boolean faded=false;
 	/**
 	 * calls the super constructor
 	 */
@@ -147,22 +149,22 @@ public class CrabSaveGame extends Game {
 					dialogBoxWaiter++;
 				}else{
 					EstuaryAdventureMain.showMenuCursor();
-					if(soundDoer.fadeOutFast(0)){
-						donePlaying=true;
-						dialogBox.setTitle(DialogBox.TITLE_GREAT);
-						dialogBox.setKey1("Trash Left: ");
-						dialogBox.setInfo1("0 pieces        ");
-						dialogBox.setKey2("Your Time: ");
-						dialogBox.setInfo2("      "+(60-(int)timer)+"s");
-						dialogBox.setMessageL1("Thanks for helping");
-						dialogBox.setMessageL2("clean up the estuary!");
-						//soundDoer.playLoadedClip(1);
-					}
+					dialogBox.setTitle(DialogBox.TITLE_GREAT);
+					dialogBox.setKey1("Trash Left: ");
+					dialogBox.setInfo1("0 pieces        ");
+					dialogBox.setKey2("Your Time: ");
+					dialogBox.setInfo2("      "+(60-(int)timer)+"s");
+					dialogBox.setMessageL1("Thanks for helping");
+					dialogBox.setMessageL2("clean up the estuary!");
+					donePlaying=true;
+					
 				}
 			}
 		}
 		if(donePlaying){
-			
+			if(!faded){
+				faded= soundDoer.fadeOutFast(0);
+			}
 		}
 		
 	}

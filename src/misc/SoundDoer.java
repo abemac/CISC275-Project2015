@@ -76,6 +76,36 @@ public class SoundDoer {
 		return false;
 	}
 	
+	public boolean fadeOutSlow(int index){
+		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
+		
+		Thread t = new Thread(new Runnable() {
+			private long lastTime;
+			private long now;
+			@Override
+			public void run() {
+				while(gain>-70){
+					fc.setValue(gain);
+					gain-=.00001;
+					
+					lastTime=System.nanoTime();
+					lastTime=now;
+					while(now-lastTime<1000){
+						now=System.nanoTime();
+					}
+					
+				}
+				gain=0.0f;
+				stopClip(index);
+				
+			}
+		});
+		
+		t.start();
+		return true;
+		
+	}
+	
 	public void stopClip(int index){
 		loadedClips.get(index).stop();
 	    loadedClips.get(index).flush();
