@@ -206,7 +206,10 @@ public class OverfishingGame extends Game {
 				}
 			}else{
 				EstuaryAdventureMain.showMenuCursor();
-				dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
+				if(getNumFish()>=7)
+					dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
+				else 
+					dialogBox.setTitle(DialogBox.TITLE_CAUGHT);
 			}
 			
 			dialogBox.setKey1("Distance Traveled: ");
