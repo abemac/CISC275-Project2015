@@ -62,7 +62,7 @@ public class CrabSaveGame extends Game {
 		loadRes();
 		dialogBox=new DialogBox(this);
 		soundDoer.loadClip("/game2song.wav");
-		soundDoer.loadClip("/losesound2.wav");
+		soundDoer.loadClip("/winsound.wav");
 		soundDoer.playLoadedClip(0);
 		
 		
@@ -164,6 +164,9 @@ public class CrabSaveGame extends Game {
 		if(donePlaying){
 			if(!faded){
 				faded= soundDoer.fadeOutFast(0);
+				if(faded){
+					soundDoer.playLoadedClip(1);
+				}
 			}
 		}
 		
