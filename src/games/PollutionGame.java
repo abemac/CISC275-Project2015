@@ -59,7 +59,8 @@ public class PollutionGame extends Game {
 		super();
 		loadRes();
 		soundDoer = new SoundDoer();
-		soundDoer.playSound("/game3song.wav");
+		soundDoer.loadClip("/game3song.wav");
+		soundDoer.playLoadedClip(0);
 		
 	}
 

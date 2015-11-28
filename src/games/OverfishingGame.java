@@ -45,7 +45,7 @@ public class OverfishingGame extends Game {
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	private SeaBottom seaBottom;
 	private final Color blue = new Color(114,145,215);
-	
+	private boolean playedSound=false;
 	private ArrayList<Enemy> enemyBank;
 	private ArrayList<Integer> enemiesAvailable;
 	
@@ -72,7 +72,9 @@ public class OverfishingGame extends Game {
 		setIsDone(false);
 		loadRes();
 		
-		soundDoer.playSound("/game1song.wav");
+		soundDoer.loadClip("/game1songv2.wav");
+		soundDoer.loadClip("/loseSound.wav");
+		soundDoer.playLoadedClip(0);
 		
 		dialogBox=new DialogBox(this);
 		
@@ -196,8 +198,12 @@ public class OverfishingGame extends Game {
 		if(donePlaying){
 			if(timer>0){
 				EstuaryAdventureMain.showMenuCursor();
-				soundDoer.stopSound();
 				dialogBox.setTitle(DialogBox.TITLE_CAUGHT);
+				if(!playedSound){
+					soundDoer.stopClip(0);
+					soundDoer.playLoadedClip(1);
+					playedSound=true;
+				}
 			}else{
 				EstuaryAdventureMain.showMenuCursor();
 				dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);

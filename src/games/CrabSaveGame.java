@@ -41,7 +41,7 @@ public class CrabSaveGame extends Game {
 	
 	private ArbitraryLine pondLine,skyLine;
 	
-	private SoundDoer soundDoer;
+	private SoundDoer soundDoer= new SoundDoer();
 	
 	/**
 	 * calls the super constructor
@@ -49,6 +49,8 @@ public class CrabSaveGame extends Game {
 	public CrabSaveGame(){
 		super();
 		loadRes();
+		soundDoer.loadClip("/game2song.wav");
+		soundDoer.playLoadedClip(0);
 		
 		
 	}
