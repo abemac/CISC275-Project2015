@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class SoundDoer {
 	
 	private ArrayList<Clip>loadedClips;
+	private float gain=0.0f;
 	
 	public SoundDoer(){
 		loadedClips = new ArrayList<Clip>();
@@ -50,12 +52,29 @@ public class SoundDoer {
 	
 	}
 	
-//	public void decreaseClipVolume(int index){
-//		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
-//		for(int i=0;i<20;i++){
-//			fc.setValue(-i);
-//		}
-//	}
+	public void setClipVolume(int index,float amt){
+		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
+		fc.setValue(amt);
+	}
+	
+	
+	/**
+	 * returns true if the fade has completed, false otherwise.  Only fade out 1 clip at a time! (or change this method)
+	 * @param index
+	 * @return
+	 */
+	public boolean fadeOutFast(int index){
+		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
+		if(gain>-70){
+			gain-=10;
+			fc.setValue(gain);
+		}else{
+			stopClip(index);
+			gain=0.0f;
+			return true;
+		}
+		return false;
+	}
 	
 	public void stopClip(int index){
 		loadedClips.get(index).stop();

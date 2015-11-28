@@ -168,6 +168,9 @@ public class Game3Crab extends Character{
 		if(xPos>-900){
 			leftPressed=true;
 			upPressed=false;
+			if(isHoldingFish){
+				upPressed=true;
+			}
 		}else{
 			upPressed=true;
 			leftPressed=false;

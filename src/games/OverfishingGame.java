@@ -49,6 +49,7 @@ public class OverfishingGame extends Game {
 	private ArrayList<Enemy> enemyBank;
 	private ArrayList<Integer> enemiesAvailable;
 	
+	
 	private static BufferedImage tooCloseToEdge;
 	private boolean tooCloseToggle;
 	private long tooCloseTimer;
@@ -181,8 +182,7 @@ public class OverfishingGame extends Game {
 			removeNotNeeded();
 			limiter=0;
 		}
-		
-		
+	
 		
 		if(!donePlaying){
 			distance++;
@@ -192,6 +192,8 @@ public class OverfishingGame extends Game {
 			if(timer<1){
 				timer=0;
 				donePlaying=true;
+				
+				
 			}
 		}
 		
@@ -200,9 +202,10 @@ public class OverfishingGame extends Game {
 				EstuaryAdventureMain.showMenuCursor();
 				dialogBox.setTitle(DialogBox.TITLE_CAUGHT);
 				if(!playedSound){
-					soundDoer.stopClip(0);
-					soundDoer.playLoadedClip(1);
-					playedSound=true;
+					if(soundDoer.fadeOutFast(0)){
+						soundDoer.playLoadedClip(1);
+						playedSound=true;
+					}
 				}
 			}else{
 				EstuaryAdventureMain.showMenuCursor();
