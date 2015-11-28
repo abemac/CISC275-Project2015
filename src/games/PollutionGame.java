@@ -1,6 +1,7 @@
 package games;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,7 @@ import characters.Game3Crab;
 import characters.Game3Fish;
 import enemies.Pollutant;
 import misc.ArbitraryLine;
+import misc.DialogBox;
 import misc.SoundDoer;
 import misc.Util;
 import misc.Vector;
@@ -42,15 +44,23 @@ public class PollutionGame extends Game {
 	private BufferedImage seaFloor;
 	private ArbitraryLine seaFloorLine;
 	
+	private int bubblesBlown;
 	public boolean spacePressed=false;
 	public boolean spaceReleased=true;
 	
 	private Game3Crab crab;
 	private Game3Fish fish;
-	
+	private Color timerColor=Color.RED;
+	private final Font timerFont = new Font("default",Font.BOLD,200);
 	private long newPollutantTimer=0;
 	
 	private SoundDoer soundDoer=new SoundDoer();
+	
+	private DialogBox dialogBox;
+	
+	private boolean donePlaying=false;
+	
+	private double timer = 61.0;
 	
 	/**
 	 * calls the super constructor
@@ -58,6 +68,7 @@ public class PollutionGame extends Game {
 	public PollutionGame(){
 		super();
 		loadRes();
+		dialogBox=new DialogBox(this);
 		soundDoer = new SoundDoer();
 		soundDoer.loadClip("/game3song.wav");
 		soundDoer.playLoadedClip(0);
@@ -165,32 +176,71 @@ public class PollutionGame extends Game {
 	@Override
 	public void onTick() {
 		
-		crab.onTick();
-		fish.onTick();
-		
-		for(Pollutant p : pollutants){
-				p.act();
-		}
-		for(Bubble b: bubbles){
-			b.onTick();
-		}
-		
-		
-		if(newPollutantTimer%60==0){
-			addAnotherPollutantIfPossible();
-		}
-		newPollutantTimer++;
-		
-		
-		if(crab.isHoldingFish()){
-			if(spacePressed && spaceReleased){
-				spaceReleased=false;
-				shootBubbleFromFish();
+		if(!donePlaying){
+			crab.onTick();
+			fish.onTick();
+			
+			for(Pollutant p : pollutants){
+					p.act();
 			}
+			for(Bubble b: bubbles){
+				b.onTick();
+			}
+			
+			
+			if(newPollutantTimer%60==0){
+				addAnotherPollutantIfPossible();
+			}
+			newPollutantTimer++;
+			
+			
+			if(crab.isHoldingFish()){
+				if(spacePressed && spaceReleased){
+					spaceReleased=false;
+					shootBubbleFromFish();
+				}
+			}
+			
+			removeOffScreenBubbles();
+			checkForPollutantsInBubbles();
+		
+			timer-=1/60.0;
+			
+			if(timer<1){
+				timer=0;
+				if(bubbles.size()==0){
+					donePlaying=true;
+					EstuaryAdventureMain.showMenuCursor();
+					dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
+					dialogBox.setKey1("Pollutants Removed: ");
+					dialogBox.setInfo1(" "+numRemoved);
+					dialogBox.setKey2("Bubbles Blown:");
+					dialogBox.setInfo2("        "+bubblesBlown);
+					dialogBox.setMessageL1("You have helped clean");
+					dialogBox.setMessageL2("up the estuary");
+				}
+				
+			}
+		
 		}
 		
-		removeOffScreenBubbles();
-		checkForPollutantsInBubbles();
+		else if (donePlaying){
+			crab.jump();
+			crab.onTick();
+			fish.onTick();
+			
+			for(Pollutant p : pollutants){
+					p.act();
+			}
+			
+			if(crab.isHoldingFish()){
+				if(spacePressed && spaceReleased){
+					spaceReleased=false;
+				}
+			}
+			
+		}
+		
 	}
 	private void checkForPollutantsInBubbles(){
 		for(Pollutant p : pollutants){
@@ -221,11 +271,19 @@ public class PollutionGame extends Game {
 			b.render(g);
 		}
 		
+		g.setColor(timerColor);
+		g.setFont(timerFont);
+		Util.drawCenteredString(""+(int)timer, Util.getDISTANCE_TO_EDGE()-200, 875, g);
+		
+		if(donePlaying){
+			dialogBox.render(g);
+		}
+		
 	}
 	
 	
 	private void shootBubbleFromFish(){
-		if(availableBubbles.size()==0){
+		if(availableBubbles.size()==0 || timer==0){
 			return;
 		}
 		Bubble b = bubbleBank.get(availableBubbles.get(0));
@@ -234,6 +292,7 @@ public class PollutionGame extends Game {
 		b.reset();
 		b.shootFromFish((fish.getX()+150), (fish.getY()+55), crab.getAngle(),crab.getX()+150,crab.getY()+150);
 		bubbles.add(b);
+		bubblesBlown++;
 		
 	}
 	
@@ -246,6 +305,7 @@ public class PollutionGame extends Game {
 				i.remove();
 				for(Pollutant p: b.getAttachedPollutants()){
 					p.reset();
+					numRemoved++;
 				}
 				b.reset();
 				
@@ -378,7 +438,9 @@ public class PollutionGame extends Game {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(donePlaying){
+			dialogBox.mouseClicked(e);
+		}
 		
 	}
 
@@ -414,7 +476,9 @@ public class PollutionGame extends Game {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(donePlaying){
+			dialogBox.mouseMoved(e);
+		}
 		
 	}
 

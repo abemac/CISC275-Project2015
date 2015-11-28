@@ -163,6 +163,16 @@ public class Game3Crab extends Character{
 		
 	}
 	
+	
+	public void jump(){
+		if(xPos>-900){
+			leftPressed=true;
+			upPressed=false;
+		}else{
+			upPressed=true;
+			leftPressed=false;
+		}
+	}
 	@Override
 	public void render(Graphics2D g) {
 		g.translate(xPos+150,yPos+150);
