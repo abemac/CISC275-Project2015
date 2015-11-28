@@ -1,17 +1,10 @@
 package misc;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundDoer {
 	
@@ -21,11 +14,7 @@ public class SoundDoer {
 		loadedClips = new ArrayList<Clip>();
 	}
 	
-	
-	
-	
-	
-	
+
 	public void loadClip(String path){
 		try{
 			
@@ -61,9 +50,18 @@ public class SoundDoer {
 	
 	}
 	
+//	public void decreaseClipVolume(int index){
+//		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
+//		for(int i=0;i<20;i++){
+//			fc.setValue(-i);
+//		}
+//	}
+	
 	public void stopClip(int index){
 		loadedClips.get(index).stop();
-		loadedClips.get(index).flush();
+	    loadedClips.get(index).flush();
+		
+		
 	
 	}
 	
@@ -73,4 +71,5 @@ public class SoundDoer {
 
 	
 	
+
 }
