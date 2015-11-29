@@ -164,7 +164,7 @@ public class CrabSaveGame extends Game {
 		if(donePlaying){
 			if(!faded){
 				faded= soundDoer.fadeOutFast(0);
-				if(faded){
+				if(faded && getNumTrash()==0){
 					soundDoer.playLoadedClip(1);
 				}
 			}
