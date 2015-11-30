@@ -76,6 +76,8 @@ public class SoundDoer {
 		return false;
 	}
 	
+	
+	/*
 	public boolean fadeOutSlow(int index){
 		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
 		
@@ -105,7 +107,7 @@ public class SoundDoer {
 		return true;
 		
 	}
-	
+	*/
 	public void stopClip(int index){
 		loadedClips.get(index).stop();
 	    loadedClips.get(index).flush();
