@@ -123,7 +123,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			lastTime = now;
 			if (deltaNs >= nanosPerTick) {
 				onTick();
-				deltaNs = nanosPerTick;// possible set it to 0 alternatively,
+				deltaNs -= nanosPerTick;// possible set it to 0 alternatively,
 				updateView();			// depending on certain factors
 			}
 			

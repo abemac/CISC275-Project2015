@@ -112,8 +112,6 @@ public class SoundDoer {
 		loadedClips.get(index).stop();
 	    loadedClips.get(index).flush();
 		
-		
-	
 	}
 	
 	public boolean isDone(int index){
