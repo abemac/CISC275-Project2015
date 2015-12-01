@@ -103,10 +103,13 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    	}
 	    }
 	    
+	    if(fadedIn && finalSlide){
+	    	EstuaryAdventureMain.showMenuCursor();
+	    }
+	    
 	    else if (fadeOut && timeDisplayed >= time-fade_time_out){
 	    	if(finalSlide){
 	    		paused=true;
-	    		EstuaryAdventureMain.showMenuCursor();
 	    	}else{
 		    	alpha-=1/fade_time_out;
 		    	if(alpha<=0){
