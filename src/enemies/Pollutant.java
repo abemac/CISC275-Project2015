@@ -165,8 +165,8 @@ public class Pollutant extends Enemy {
 		g.rotate(-angle);	
 		g.translate(-position.getX(), -position.getY());
 		
-//		g.setColor(Color.RED);
-//		g.fillOval((int)getCenterPoint().x, (int)getCenterPoint().y, 20, 20);
+		//g.setColor(Color.RED);
+		//g.fillOval((int)getCenterPoint().x, (int)getCenterPoint().y, 20, 20);
 		
 		
 	}
