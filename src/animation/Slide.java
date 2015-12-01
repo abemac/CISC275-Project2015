@@ -21,7 +21,7 @@ public class Slide {
 	private final int type;
 	
 	private boolean fadedIn;
-	private double fade_time_in = 150.0;
+	private double fade_time_in = 200.0;
 	private double fade_time_out=150.0;
 	private float alpha=0f;
 	
@@ -42,13 +42,23 @@ public class Slide {
 		this.time=time*60;
 		type=TYPE_IMAGE;
 	}
+	/**
+	 * creates a slide that will display an image
+	 * @param image SCALE the image before you put it in here please
+	 * @param time in seconds
+	 */
+	public Slide(BufferedImage image,double time){
+		this.image=image;
+		this.time=time*60;
+		type=TYPE_IMAGE;
+	}
 	
 	/**
 	 * creates a slide that shows only one color, specified by the color parameter
 	 * @param color in java.awt
 	 * @param time in seconds
 	 */
-	public Slide(java.awt.Color color,int time){
+	public Slide(java.awt.Color color,double time){
 		this.color = color;
 		this.time = time*60;
 		type=TYPE_COLOR;
