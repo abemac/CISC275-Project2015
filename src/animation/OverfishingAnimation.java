@@ -144,7 +144,9 @@ public class OverfishingAnimation extends Animation{
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(currentSlide==slides.size()-1){
+			slides.get(slides.size()-1).mouseMoved(e);
+		}
 		
 	}
 	
