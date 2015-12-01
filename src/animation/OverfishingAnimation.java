@@ -37,7 +37,7 @@ public class OverfishingAnimation extends Animation{
 	
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-		slides.add(new Slide("/menuScreen.png",2){{
+		slides.add(new Slide("/menuScreen.png",1){{
 			setFadeIn(false);
 			setFadeOutTime(1.0);
 		}});
