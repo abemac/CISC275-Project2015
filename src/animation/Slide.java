@@ -21,12 +21,14 @@ public class Slide {
 	private final int type;
 	
 	private boolean fadedIn;
-	private double fade_time_in = 200.0;
-	private double fade_time_out=150.0;
+	private double fade_time_in = 120.0;
+	private double fade_time_out=120.0;
 	private float alpha=0f;
 	
 	private boolean fadeIn=true;
 	private boolean fadeOut=true;
+	
+	private double timeBlackAfterFadeOut=40.0;
 	
 	/**
 	 * creates a slide that will display an image
@@ -103,7 +105,7 @@ public class Slide {
 	    }
 	    
 		timeDisplayed++;
-		return (timeDisplayed>=time);
+		return (timeDisplayed>=time+timeBlackAfterFadeOut);
 	}
 	
 	
@@ -114,6 +116,11 @@ public class Slide {
 		timeDisplayed=0;
 	}
 	
+	
+	
+	public void setTimeBlackAfterFadeOut(double timeBlackAfterFadeOut) {
+		this.timeBlackAfterFadeOut = timeBlackAfterFadeOut;
+	}
 	
 	/**
 	 * sets fade time 
