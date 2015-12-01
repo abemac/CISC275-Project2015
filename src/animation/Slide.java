@@ -4,6 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import misc.Util;
 
@@ -20,8 +21,8 @@ public class Slide {
 	private final int type;
 	
 	private boolean fadedIn;
-	private double fade_time_in = 120.0;
-	private double fade_time_out=120.0;
+	private double fade_time_in = 150.0;
+	private double fade_time_out=150.0;
 	private float alpha=0f;
 	
 	private boolean fadeIn=true;
@@ -32,8 +33,12 @@ public class Slide {
 	 * @param image SCALE the image before you put it in here please
 	 * @param time in seconds
 	 */
-	public Slide(BufferedImage image,double time){
-		this.image=image;
+	public Slide(String image,double time){
+		try {
+			this.image=Util.loadImage(image,Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.time=time*60;
 		type=TYPE_IMAGE;
 	}
