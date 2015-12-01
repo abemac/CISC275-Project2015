@@ -46,10 +46,6 @@ public class OverfishingAnimation extends Animation{
 		slides.add(new Slide("/Game1AnimationSlide4.png", 7){{
 			setFadeOut(false);
 		}});
-		slides.add(new Slide(Color.WHITE, .1){{
-			setFadeIn(false);
-			setFadeOut(false);
-		}});
 		slides.add(new Slide("/Game1AnimationSlide5.png", 6){{
 			setFadeIn(false);
 		}});
