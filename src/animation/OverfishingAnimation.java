@@ -37,13 +37,21 @@ public class OverfishingAnimation extends Animation{
 	
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-		slides.add(new Slide(Color.BLACK, 4));
+		slides.add(new Slide(Util.loadImage("/menuScreen.png",Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this),2){{
+			setFadeIn(false);
+			setFadeOutTime(1.0);
+		}});
+		slides.add(new Slide(Util.loadImage("/Black.png", Util.getCANVAS_WIDTH_SCALED(), Util.getCANVAS_HEIGHT_SCALED(), this), 3));
 		slides.add(new Slide(Util.loadImage("/Game1AnimationSlide3.png",
-				Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this), 6));
+				Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this), 7));
 		slides.add(new Slide(Util.loadImage("/Game1AnimationSlide4.png",
-				Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this), 6));
+				Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this), 7){{
+					setFadeOut(false);
+				}});
 		slides.add(new Slide(Util.loadImage("/Game1AnimationSlide5.png",
-				Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this), 6));
+				Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this), 4){{
+					setFadeIn(false);
+				}});
 		
 	}
 	

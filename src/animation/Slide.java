@@ -11,7 +11,7 @@ public class Slide {
 
 	
 	private BufferedImage image;
-	private int time;
+	private double time;
 	private long timeDisplayed=0;
 	private java.awt.Color color;
 	
@@ -20,15 +20,19 @@ public class Slide {
 	private final int type;
 	
 	private boolean fadedIn;
-	private double fade_time = 120.0;
+	private double fade_time_in = 120.0;
+	private double fade_time_out=120.0;
 	private float alpha=0f;
+	
+	private boolean fadeIn=true;
+	private boolean fadeOut=true;
 	
 	/**
 	 * creates a slide that will display an image
 	 * @param image SCALE the image before you put it in here please
 	 * @param time in seconds
 	 */
-	public Slide(BufferedImage image,int time){
+	public Slide(BufferedImage image,double time){
 		this.image=image;
 		this.time=time*60;
 		type=TYPE_IMAGE;
@@ -68,16 +72,16 @@ public class Slide {
 		}
 		
 	    
-	    if(!fadedIn){
-	    	alpha+=1/fade_time;
+	    if(fadeIn && !fadedIn){
+	    	alpha+=1/fade_time_in;
 	    	if(alpha>=1.0){
 	    		alpha=1.0f;
 	    		fadedIn=true;
 	    	}
 	    }
 	    
-	    else if (timeDisplayed >= time-fade_time){
-	    	alpha-=1/fade_time;
+	    else if (fadeOut && timeDisplayed >= time-fade_time_out){
+	    	alpha-=1/fade_time_out;
 	    	if(alpha<=0){
 	    		alpha=0f;
 	    	}
@@ -100,9 +104,31 @@ public class Slide {
 	 * sets fade time 
 	 * @param d in secondds
 	 */
-	public void setFadeTime(double d ){	
-		this.fade_time=d*60.0;
+	public void setFadeInTime(double d ){	
+		this.fade_time_in=d*60.0;
+		if(fade_time_in==0){
+			fadeIn=false;
+		}
 	}
 	
+	/**
+	 * 
+	 * @param d in seconds
+	 */
+	public void setFadeOutTime(double d){
+		this.fade_time_out=d*60.0;
+		if(fade_time_out==0){
+			fadeOut=false;
+		}
+	}
+	
+	
+	public void setFadeIn(boolean fadeIn) {
+		this.fadeIn = fadeIn;
+		alpha=1f;
+	}
+	public void setFadeOut(boolean fadeOut) {
+		this.fadeOut = fadeOut;
+	}
 	
 }
