@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import animation.OverfishingAnimation;
 import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
@@ -47,6 +48,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	
 	///////
 	private MenuScreen menu;
+	private OverfishingAnimation overfishingAnimation;
 	private OverfishingGame overfishingGame;
 	private CrabSaveGame crabSaveGame;
 	private PollutionGame pollutionGame;
@@ -149,12 +151,34 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 			menu.onTick();
 			if(menu.isDone()){
-				state = GameState.OVERFISHING_GAME;
+				state = GameState.OVERFISHING_GAME_ANIMATION;
 				view.removeKeyListener(menu);
 				view.removeMouseListener(menu);
 				view.removeMouseMotionListener(menu);
 				menu = null;
 			}
+			
+		}
+		else if (state == GameState.OVERFISHING_GAME_ANIMATION){
+			if(overfishingAnimation==null){
+				overfishingAnimation = new OverfishingAnimation();
+				view.addMouseListener(overfishingAnimation);
+				view.addKeyListener(overfishingAnimation);
+				view.addMouseMotionListener(overfishingAnimation);
+				hideCursor();
+				lastTime=System.nanoTime();
+			}
+			overfishingAnimation.onTick();
+			if(overfishingAnimation.isDone()){
+				state = GameState.OVERFISHING_GAME;
+				view.removeKeyListener(overfishingAnimation);
+				view.removeMouseListener(overfishingAnimation);
+				view.removeMouseMotionListener(overfishingAnimation);
+				overfishingAnimation=null;
+			}else if(overfishingAnimation.sentStopSignal()){
+				stop(false);
+			}
+			
 			
 		}
 		else if (state == GameState.OVERFISHING_GAME){
@@ -228,6 +252,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		if(state==GameState.MENU_SCREEN && menu!=null){
 			view.render(menu);	
 			
+		}
+		else if (state ==GameState.OVERFISHING_GAME_ANIMATION && overfishingAnimation!=null){
+			view.render(overfishingAnimation);
 		}
 		else if (state == GameState.OVERFISHING_GAME && overfishingGame!=null){
 			view.render(overfishingGame);

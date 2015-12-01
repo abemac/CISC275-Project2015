@@ -33,6 +33,7 @@ public class EstuaryView extends Canvas{
 			return;
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		storeScreenInfo();
 		g.translate(getWidth()/2.0,getHeight()/2.0);

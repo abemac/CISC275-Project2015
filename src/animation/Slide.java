@@ -1,6 +1,8 @@
 package animation;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import misc.Util;
@@ -16,6 +18,10 @@ public class Slide {
 	private static final int TYPE_COLOR=0;
 	private static final int TYPE_IMAGE=1;
 	private final int type;
+	
+	private boolean fadedIn;
+	private double fade_time = 120.0;
+	private float alpha=0f;
 	
 	/**
 	 * creates a slide that will display an image
@@ -49,8 +55,11 @@ public class Slide {
 	 * @return true if it has displayed for its amount of time, false otherwise
 	 */
 	public boolean display(Graphics2D g){
+		g.setComposite(AlphaComposite.getInstance(
+	            AlphaComposite.SRC_OVER, alpha));
+	    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 		
-		if(type==TYPE_IMAGE){
+	    if(type==TYPE_IMAGE){
 			g.drawImage(image, -Util.getDISTANCE_TO_EDGE(),-1000,null);
 		}
 		else if (type==TYPE_COLOR){
@@ -58,6 +67,22 @@ public class Slide {
 			g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), Util.getCANVAS_HEIGHT_SCALED());
 		}
 		
+	    
+	    if(!fadedIn){
+	    	alpha+=1/fade_time;
+	    	if(alpha>=1.0){
+	    		alpha=1.0f;
+	    		fadedIn=true;
+	    	}
+	    }
+	    
+	    else if (timeDisplayed >= time-fade_time){
+	    	alpha-=1/fade_time;
+	    	if(alpha<=0){
+	    		alpha=0f;
+	    	}
+	    }
+	    
 		timeDisplayed++;
 		return (timeDisplayed>=time);
 	}
@@ -71,6 +96,13 @@ public class Slide {
 	}
 	
 	
+	/**
+	 * sets fade time 
+	 * @param d in secondds
+	 */
+	public void setFadeTime(double d ){	
+		this.fade_time=d*60.0;
+	}
 	
 	
 }
