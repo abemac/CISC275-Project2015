@@ -18,6 +18,7 @@ public class Slide {
 	
 	private static final int TYPE_COLOR=0;
 	private static final int TYPE_IMAGE=1;
+	private boolean finalSlide=false;
 	private final int type;
 	
 	private boolean fadedIn;
@@ -144,6 +145,9 @@ public class Slide {
 		}
 	}
 	
+	public void setFinalSlide(boolean finalSlide) {
+		this.finalSlide = finalSlide;
+	}
 	
 	public void setFadeIn(boolean fadeIn) {
 		this.fadeIn = fadeIn;
