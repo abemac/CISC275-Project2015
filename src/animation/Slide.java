@@ -15,27 +15,27 @@ public class Slide {
 	
 	private static final int TYPE_COLOR=0;
 	private static final int TYPE_IMAGE=1;
-	private int type;
+	private final int type;
 	
 	/**
 	 * creates a slide that will display an image
 	 * @param image SCALE the image before you put it in here please
-	 * @param time
+	 * @param time in seconds
 	 */
 	public Slide(BufferedImage image,int time){
 		this.image=image;
-		this.time=time;
+		this.time=time*60;
 		type=TYPE_IMAGE;
 	}
 	
 	/**
 	 * creates a slide that shows only one color, specified by the color parameter
-	 * @param color
-	 * @param time
+	 * @param color in java.awt
+	 * @param time in seconds
 	 */
 	public Slide(java.awt.Color color,int time){
 		this.color = color;
-		this.time = time;
+		this.time = time*60;
 		type=TYPE_COLOR;
 	}
 	
@@ -43,9 +43,10 @@ public class Slide {
 	/**
 	 * displays this slide to the graphics2d g, and returns true after it has been displayed for its time
 	 * you can only display once.  If you want to display again, you must call reset() on a slide.
-	 * However, if you call this function after it returns false, it will still draw to the screen.  So handle it. 
+	 * However, if you call this function after it returns false, it will still draw to the screen. But it returned false so you 
+	 * would know not to call it anymore.
 	 * @param g
-	 * @return
+	 * @return true if it has displayed for its amount of time, false otherwise
 	 */
 	public boolean display(Graphics2D g){
 		
@@ -62,6 +63,9 @@ public class Slide {
 	}
 	
 	
+	/**
+	 * resets the timer on this slide.  Don't use it really
+	 */
 	public void reset(){
 		timeDisplayed=0;
 	}
