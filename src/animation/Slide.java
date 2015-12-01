@@ -3,12 +3,16 @@ package animation;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import games.EstuaryAdventureMain;
 import misc.Util;
 
-public class Slide {
+public class Slide implements MouseListener,MouseMotionListener {
 
 	
 	private BufferedImage image;
@@ -18,6 +22,8 @@ public class Slide {
 	
 	private static final int TYPE_COLOR=0;
 	private static final int TYPE_IMAGE=1;
+	private boolean finalSlide=false;
+	private boolean paused=false;
 	private final int type;
 	
 	private boolean fadedIn;
@@ -98,13 +104,19 @@ public class Slide {
 	    }
 	    
 	    else if (fadeOut && timeDisplayed >= time-fade_time_out){
-	    	alpha-=1/fade_time_out;
-	    	if(alpha<=0){
-	    		alpha=0f;
+	    	if(finalSlide){
+	    		paused=true;
+	    		EstuaryAdventureMain.showMenuCursor();
+	    	}else{
+		    	alpha-=1/fade_time_out;
+		    	if(alpha<=0){
+		    		alpha=0f;
+		    	}
 	    	}
 	    }
 	    
-		timeDisplayed++;
+	    if(!paused)
+	    	timeDisplayed++;
 		return (timeDisplayed>=time+timeBlackAfterFadeOut);
 	}
 	
@@ -144,6 +156,9 @@ public class Slide {
 		}
 	}
 	
+	public void setFinalSlide(boolean finalSlide) {
+		this.finalSlide = finalSlide;
+	}
 	
 	public void setFadeIn(boolean fadeIn) {
 		this.fadeIn = fadeIn;
@@ -151,6 +166,43 @@ public class Slide {
 	}
 	public void setFadeOut(boolean fadeOut) {
 		this.fadeOut = fadeOut;
+	}
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		finalSlide=false;
+		paused=false;
+		
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
