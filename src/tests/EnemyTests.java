@@ -1,9 +1,7 @@
 package tests;
 
-import characters.Crab;
 import enemies.Hook;
 import enemies.Net;
-import enemies.Pollutant;
 import enemies.TheHuman;
 import enemies.Trash;
 import junit.framework.TestCase;
@@ -30,7 +28,6 @@ public class EnemyTests extends TestCase{
 		double y = hook.getY();
 		hook.act();
 		assertFalse(y==hook.getY());
-		
 		
 	}
 	
