@@ -43,6 +43,7 @@ public class OverfishingAnimation extends Animation{
 		}});
 		slides.add(new Slide("/Black.png", 1));
 		slides.add(new Slide("/Game1AnimationSlide1.png", 9));
+		slides.add(new Slide("/Game1AnimationSlide2.png", 9));
 		slides.add(new Slide("/Game1AnimationSlide3.png", 9));
 		slides.add(new Slide("/Game1AnimationSlide4.png", 7){{
 		}});
@@ -52,6 +53,7 @@ public class OverfishingAnimation extends Animation{
 		slides.add(new Slide("/Game1AnimationInstructionSlide.png",4){{
 			setFinalSlide(true);
 		}});
+		
 		
 	}
 	
