@@ -42,6 +42,7 @@ public class OverfishingAnimation extends Animation{
 			setFadeOutTime(1.0);
 		}});
 		slides.add(new Slide("/Black.png", 2));
+		slides.add(new Slide("/Game1AnimationSlide1.png", 9));
 		slides.add(new Slide("/Game1AnimationSlide3.png", 9));
 		slides.add(new Slide("/Game1AnimationSlide4.png", 9){{
 			//setFadeOut(false);
