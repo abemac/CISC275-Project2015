@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import animation.SpriteSheet;
 import characters.Fish;
-import misc.SpriteSheet;
 import misc.Util;
 
 /**

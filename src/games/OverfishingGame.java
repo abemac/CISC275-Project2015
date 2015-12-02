@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import animation.ClockTimer;
 import characters.Fish;
 import enemies.Enemy;
 import enemies.Hook;
@@ -56,6 +57,7 @@ public class OverfishingGame extends Game {
 	
 	private boolean donePlaying=false;
 	
+	private ClockTimer clock = new ClockTimer(-Util.getDISTANCE_TO_EDGE()+100, -900);
 	
 	private SoundDoer soundDoer=new SoundDoer();
 	

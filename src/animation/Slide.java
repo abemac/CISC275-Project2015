@@ -28,15 +28,15 @@ public class Slide implements MouseListener,MouseMotionListener {
 	private final int type;
 	
 	private boolean fadedIn;
-	private double fade_time_in = 120.0;
-	private double fade_time_out=120.0;
+	private double fade_time_in = 60.0;
+	private double fade_time_out=60.0;
 	private float alpha=0f;
 	
 	private boolean fadeIn=true;
 	private boolean fadeOut=true;
 	private BufferedImage selectedStart=null;
 	private boolean showSelectedStart=false;
-	private double timeBlackAfterFadeOut=40.0;
+	private double timeBlackAfterFadeOut=10.0;
 	
 	/**
 	 * creates a slide that will display an image
@@ -128,6 +128,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    }
 	    
 		return (timeDisplayed>=time+timeBlackAfterFadeOut);
+		
 	}
 	
 	

@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import misc.SpriteSheet;
+import animation.SpriteSheet;
 import misc.Util;
 
 /**
