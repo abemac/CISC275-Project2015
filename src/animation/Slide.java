@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import games.EstuaryAdventureMain;
+import misc.RectBounds;
 import misc.Util;
 
 public class Slide implements MouseListener,MouseMotionListener {
@@ -33,7 +34,8 @@ public class Slide implements MouseListener,MouseMotionListener {
 	
 	private boolean fadeIn=true;
 	private boolean fadeOut=true;
-	
+	private BufferedImage selectedStart=null;
+	private boolean showSelectedStart=false;
 	private double timeBlackAfterFadeOut=40.0;
 	
 	/**
@@ -49,6 +51,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 		}
 		this.time=time*60;
 		type=TYPE_IMAGE;
+		
 	}
 	/**
 	 * creates a slide that will display an image
@@ -93,7 +96,10 @@ public class Slide implements MouseListener,MouseMotionListener {
 			g.setColor(color);
 			g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), Util.getCANVAS_HEIGHT_SCALED());
 		}
-		
+	    if(fadedIn && finalSlide){
+	    	EstuaryAdventureMain.showMenuCursor();
+	    }
+	    
 	    
 	    if(fadeIn && !fadedIn){
 	    	alpha+=1/fade_time_in;
@@ -101,10 +107,6 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    		alpha=1.0f;
 	    		fadedIn=true;
 	    	}
-	    }
-	    
-	    if(fadedIn && finalSlide){
-	    	EstuaryAdventureMain.showMenuCursor();
 	    }
 	    
 	    else if (fadeOut && timeDisplayed >= time-fade_time_out){
@@ -120,6 +122,11 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    
 	    if(!paused)
 	    	timeDisplayed++;
+	    
+	    if(showSelectedStart && fadedIn){
+	    	g.drawImage(selectedStart, 1000, 520,800,500, null);
+	    }
+	    
 		return (timeDisplayed>=time+timeBlackAfterFadeOut);
 	}
 	
@@ -161,6 +168,11 @@ public class Slide implements MouseListener,MouseMotionListener {
 	
 	public void setFinalSlide(boolean finalSlide) {
 		this.finalSlide = finalSlide;
+		try {
+			selectedStart = Util.loadImage("/Game1AnimationInstructionSlide(selected).png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setFadeIn(boolean fadeIn) {
@@ -177,14 +189,18 @@ public class Slide implements MouseListener,MouseMotionListener {
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(Util.isInBox(e, new RectBounds(1200, 800, 1000, 1000))){
+			showSelectedStart=true;
+		}else
+			showSelectedStart=false;
 		
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		finalSlide=false;
-		paused=false;
-		
+		if(Util.isInBox(e, new RectBounds(1200, 800, 1000, 1000))){
+				finalSlide=false;
+				paused=false;
+		}
 		
 	}
 	@Override
