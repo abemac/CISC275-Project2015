@@ -87,7 +87,7 @@ public class Pollutant extends Enemy {
 		}
 		if(type == SEWAGE && sewage==null){
 			try {
-				sewage=Util.loadImage("/sewagefornow.png", this);
+				sewage=Util.loadImage("/sewage.png", this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
