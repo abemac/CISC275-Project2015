@@ -42,13 +42,18 @@ public class OverfishingAnimation extends Animation{
 			setFadeOutTime(1.0);
 		}});
 		slides.add(new Slide("/Black.png", 1));
+		slides.add(new Slide("/Game1AnimationText1.png", 4));
+		slides.add(new Slide("/Game1AnimationText2.png", 6));
+		slides.add(new Slide("/Game1AnimationText3.png", 4));
+		slides.add(new Slide("/Black.png", 1));
 		slides.add(new Slide("/Game1AnimationSlide1.png", 4));
 		slides.add(new Slide("/Game1AnimationSlide2.png", 4));
 		slides.add(new Slide("/Game1AnimationSlide3.png", 4));
 		slides.add(new Slide("/Game1AnimationSlide4.png", 4){{
 		}});
-		slides.add(new Slide("/Game1AnimationSlide5.png", 4){{
+		slides.add(new Slide("/Game1AnimationSlide5.png", 6){{
 		}});
+		slides.add(new Slide("/Black.png", 1));
 		slides.add(new Slide("/Game1AnimationInstructionSlide.png",4){{
 			setFinalSlide(true);
 		}});
