@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import animation.SpriteSheet;
 import misc.ArbitraryLine;
-import misc.SpriteSheet;
 import misc.Util;
 
 public class Game3Crab extends Character{

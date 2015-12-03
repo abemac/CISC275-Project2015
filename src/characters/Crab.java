@@ -10,12 +10,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import animation.SpriteSheet;
 import enemies.TheHuman;
 import enemies.Trash;
 import games.CrabSaveGame;
 import misc.ArbitraryLine;
 import misc.Point;
-import misc.SpriteSheet;
 import misc.Util;
 
 /**

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import animation.ClockTimer;
 import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
@@ -47,7 +48,7 @@ public class CrabSaveGame extends Game {
 	private boolean donePlaying=false;
 	private DialogBox dialogBox;
 	
-	private double timer=61.0;
+	private ClockTimer clock = new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
 	private Color timerColor=Color.RED;
 	private final Font timerFont = new Font("default",Font.BOLD,200);
 	
@@ -64,6 +65,7 @@ public class CrabSaveGame extends Game {
 		soundDoer.loadClip("/game2song.wav");
 		soundDoer.loadClip("/winsound.wav");
 		soundDoer.playLoadedClip(0);
+		clock.setInitialAngle(Math.PI/18f);
 		
 		
 		
@@ -126,9 +128,9 @@ public class CrabSaveGame extends Game {
 			}
 			
 			tellCrabToHoldTrash();
-			timer-=1/60.0;
-			if(timer<1){
-				timer=0;
+			clock.onTick();
+			if(clock.getTimer()<1){
+				clock.setTimer(0);
 				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
 					if(dialogBoxWaiter<30){
 						dialogBoxWaiter++;
@@ -153,7 +155,7 @@ public class CrabSaveGame extends Game {
 					dialogBox.setKey1("Trash Left: ");
 					dialogBox.setInfo1("0 pieces        ");
 					dialogBox.setKey2("Your Time: ");
-					dialogBox.setInfo2("      "+(60-(int)timer)+"s");
+					dialogBox.setInfo2("      "+(60-(int)clock.getTimer())+"s");
 					dialogBox.setMessageL1("Thanks for helping");
 					dialogBox.setMessageL2("clean up the estuary!");
 					donePlaying=true;
@@ -219,8 +221,9 @@ public class CrabSaveGame extends Game {
 		
 		g.setColor(timerColor);
 		g.setFont(timerFont);
-		Util.drawCenteredString(""+(int)timer, Util.getDISTANCE_TO_EDGE()-200, -800, g);
+		//Util.drawCenteredString(""+(int)timer, Util.getDISTANCE_TO_EDGE()-200, -800, g);
 		
+		clock.render(g);
 		if(donePlaying){
 			dialogBox.render(g);
 		}

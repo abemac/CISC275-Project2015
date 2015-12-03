@@ -28,31 +28,41 @@ public class Slide implements MouseListener,MouseMotionListener {
 	private final int type;
 	
 	private boolean fadedIn;
-	private double fade_time_in = 120.0;
-	private double fade_time_out=120.0;
+	private double fade_time_in = 60.0;
+	private double fade_time_out=60.0;
 	private float alpha=0f;
 	
 	private boolean fadeIn=true;
 	private boolean fadeOut=true;
 	private BufferedImage selectedStart=null;
 	private boolean showSelectedStart=false;
-	private double timeBlackAfterFadeOut=40.0;
-	
+	private double timeBlackAfterFadeOut=10.0;
+	private String imageString;
 	/**
 	 * creates a slide that will display an image
 	 * @param image SCALE the image before you put it in here please
 	 * @param time in seconds
 	 */
 	public Slide(String image,double time){
-		try {
-			this.image=Util.loadImage(image,Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.imageString = image;
 		this.time=time*60;
 		type=TYPE_IMAGE;
 		
 	}
+	
+	
+	private boolean loaded=false;
+	public void load(){
+		if(!loaded){
+			try {
+				this.image=Util.loadImage(imageString,Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this);
+				loaded=true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/**
 	 * creates a slide that will display an image
 	 * @param image SCALE the image before you put it in here please
@@ -128,6 +138,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    }
 	    
 		return (timeDisplayed>=time+timeBlackAfterFadeOut);
+		
 	}
 	
 	
@@ -173,6 +184,10 @@ public class Slide implements MouseListener,MouseMotionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isFinalSlide() {
+		return finalSlide;
 	}
 	
 	public void setFadeIn(boolean fadeIn) {

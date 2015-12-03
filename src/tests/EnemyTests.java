@@ -1,10 +1,13 @@
 package tests;
 
+import characters.Crab;
 import enemies.Hook;
 import enemies.Net;
+import enemies.Pollutant;
 import enemies.TheHuman;
 import enemies.Trash;
 import junit.framework.TestCase;
+import misc.Vector;
 
 /**
  * Tests all subclasses of Enemy, and therefore tests the abstract class Enemy itself
@@ -24,7 +27,7 @@ public class EnemyTests extends TestCase{
 	 */
 	public void testHook(){
 		Hook hook = new Hook(0,0,50);
-		//assertEquals(hook.getSize(),50);
+		assertEquals(hook.getType(),50);
 		double y = hook.getY();
 		hook.act();
 		assertFalse(y==hook.getY());
@@ -54,11 +57,11 @@ public class EnemyTests extends TestCase{
 	 * tests the basic functions of Pollutant
 	 */
 	public void testPollutant(){
-		//Pollutant p = new Pollutant(0,0,Pollutant.FERTILIZER);
-		//assertEquals(p.getType(),Pollutant.FERTILIZER);
-		//double y = p.getY();
-		//p.act(); // tests float down also, since float down is called in act()
-		//assertFalse(y<p.getY());//pollutant should float down the screen
+		Pollutant p = new Pollutant(new Vector(0, 0), new Vector(0, -1), .1, Pollutant.SEWAGE);
+		assertEquals(p.getType(),Pollutant.SEWAGE);
+		double y = p.getY();
+		p.act(); // tests float down also, since float down is called in act()
+		assertFalse(y<p.getY());//pollutant should float down the screen
 		
 		
 		
@@ -77,12 +80,12 @@ public class EnemyTests extends TestCase{
 		double health = h.getHealth();
 		h.decreaseHealth(-4);;
 		assertEquals(health+4,h.getHealth());
-//		
-//		Crab crab = new Crab(0,0,0);
-//		TheHuman human = new TheHuman(0, 0);
-//		boolean b = human.hasFish();
-//		crab.pinchHumanToGetFish(human);
-//		assertFalse(human.hasFish());
+		
+		Crab crab = new Crab(0,0,0,null);
+		TheHuman human = new TheHuman(0, 0);
+		boolean b = human.hasFish();
+		crab.pinchHumanToGetFish(human);
+		assertFalse(human.hasFish());
 		
 		
 		
@@ -93,7 +96,6 @@ public class EnemyTests extends TestCase{
 	public void testTrash(){
 		Trash trash = new Trash(0,0,Trash.BANANA);
 		assertEquals(trash.getType(),Trash.BANANA);
-		
 		//no other tests for trash.  Trash is a passive object. 
 		
 	
