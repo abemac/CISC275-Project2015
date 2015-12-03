@@ -58,16 +58,18 @@ public class OverfishingAnimation extends Animation{
 			setFinalSlide(true);
 		}});
 		
+		slides.get(0).load();
+		
 		
 	}
 	
-	
-	
-
 	@Override
 	public void render(Graphics2D g) {
 		if(slides.get(currentSlide).display(g)){
 			currentSlide++;
+			if(currentSlide<slides.size())
+				slides.get(currentSlide).load();
+			
 		}
 		if(currentSlide>=slides.size()){
 			setIsDone(true);
