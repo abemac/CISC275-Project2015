@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import animation.ClockTimer;
 import characters.Bubble;
 import characters.Game3Crab;
 import characters.Game3Fish;
@@ -60,7 +61,7 @@ public class PollutionGame extends Game {
 	
 	private boolean donePlaying=false;
 	
-	private double timer = 61.0;
+	private ClockTimer clock = new ClockTimer(-Util.getDISTANCE_TO_EDGE()+15, -980);
 	
 	/**
 	 * calls the super constructor
@@ -204,10 +205,10 @@ public class PollutionGame extends Game {
 			removeOffScreenBubbles();
 			checkForPollutantsInBubbles();
 		
-			timer-=1/60.0;
+			clock.onTick();
 			
-			if(timer<1){
-				timer=0;
+			if(clock.getTimer()<1){
+				clock.setTimer(0);
 				if(bubbles.size()==0){
 					donePlaying=true;
 					EstuaryAdventureMain.showMenuCursor();
@@ -273,7 +274,8 @@ public class PollutionGame extends Game {
 		
 		g.setColor(timerColor);
 		g.setFont(timerFont);
-		Util.drawCenteredString(""+(int)timer, Util.getDISTANCE_TO_EDGE()-200, 875, g);
+		//Util.drawCenteredString(""+(int)clock, Util.getDISTANCE_TO_EDGE()-200, 875, g);
+		clock.render(g);
 		
 		if(donePlaying){
 			dialogBox.render(g);
@@ -283,7 +285,7 @@ public class PollutionGame extends Game {
 	
 	
 	private void shootBubbleFromFish(){
-		if(availableBubbles.size()==0 || timer==0){
+		if(availableBubbles.size()==0 || clock.getTimer()==0){
 			return;
 		}
 		Bubble b = bubbleBank.get(availableBubbles.get(0));

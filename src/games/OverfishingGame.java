@@ -41,7 +41,6 @@ public class OverfishingGame extends Game {
 	private static final long serialVersionUID = 6483515886892518982L;
 	
 	private long distance=0;      // how far the player reached in the level
-	private double timer = 61.0;
 	private ArrayList<Fish> school;		// an array list of fish that the player guides through the level
 	private ArrayList<Enemy> enemies;	// an array list of Enemy that try to capture the fish
 	private SeaBottom seaBottom;
@@ -57,7 +56,7 @@ public class OverfishingGame extends Game {
 	
 	private boolean donePlaying=false;
 	
-	private ClockTimer clock = new ClockTimer(-Util.getDISTANCE_TO_EDGE()+100, -900);
+	private ClockTimer clock = new ClockTimer(-Util.getDISTANCE_TO_EDGE()+15, -980);
 	
 	private SoundDoer soundDoer=new SoundDoer();
 	
@@ -189,10 +188,10 @@ public class OverfishingGame extends Game {
 		if(!donePlaying){
 			distance++;
 			checkAndRemoveFish();
-			timer-=1/60.0;
+			clock.onTick();
 			
-			if(timer<1){
-				timer=0;
+			if(clock.getTimer()<1){
+				clock.setTimer(0);
 				donePlaying=true;
 				
 				
@@ -200,7 +199,7 @@ public class OverfishingGame extends Game {
 		}
 		
 		if(donePlaying){
-			if(timer>0){
+			if(clock.getTimer()>0){
 				EstuaryAdventureMain.showMenuCursor();
 				dialogBox.setTitle(DialogBox.TITLE_CAUGHT);
 				if(!playedSound){
@@ -225,6 +224,7 @@ public class OverfishingGame extends Game {
 			dialogBox.setMessageL2("Below 7 is overfished!");
 			
 		}
+		
 		
 	}
 	
@@ -270,9 +270,9 @@ public class OverfishingGame extends Game {
 		
 		g.setColor(timerColor);
 		g.setFont(timerFont);
-		Util.drawCenteredString(""+(int)timer, -Util.getDISTANCE_TO_EDGE()+200, -800, g);
+		//Util.drawCenteredString(""+(int)timer, -Util.getDISTANCE_TO_EDGE()+200, -800, g);
 		
-		
+		clock.render(g);
 	}
 	
 	

@@ -17,19 +17,22 @@ public class ClockTimer implements Tickable,Renderable{
 	private double initialAngle;
 	private double handAngle;
 	
-	private Point centerPoint = new Point(100,100);
+	private boolean smooth=false;
+	
+	private Point centerPoint = new Point(168,147);
 	
 	private int xPos,yPos;
 	public ClockTimer(int xPos,int yPos){
 		this.xPos=xPos;
 		this.yPos=yPos;
 		loadRes();
+		initialAngle=-Math.PI/18f;
 	}
 	
 	
 	private void loadRes(){
 		try {
-			image = Util.loadImage("/Clock.png", this);
+			image = Util.loadImage("/Clock.png",300,300, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,7 +47,7 @@ public class ClockTimer implements Tickable,Renderable{
 		
 		g.rotate(handAngle);
 		g.setColor(Color.BLACK);
-		g.fillRoundRect(0, 0, 10, 50, 10, 10);
+		g.fillRoundRect(-5, -70, 10, 70, 10, 10);
 		
 		g.rotate(-handAngle);
 		
@@ -55,8 +58,23 @@ public class ClockTimer implements Tickable,Renderable{
 
 	@Override
 	public void onTick() {
-		// TODO Auto-generated method stub
-		
+		timer-=1/60.0;
+		if(smooth)
+			handAngle+=2*Math.PI/(60*60);
+		else{
+			handAngle=(1-((int)(timer))/60.0)*(2*Math.PI);
+		}
+	}
+	
+	public void setTimer(double d){
+		this.timer=d;
+	}
+	public double getTimer(){
+		return timer;
+	}
+	
+	public void setInitialAngle(double initialAngle) {
+		this.initialAngle = initialAngle;
 	}
 
 }
