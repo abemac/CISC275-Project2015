@@ -30,10 +30,10 @@ public class CrabSaveAnimation extends Animation{
 	}
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-//		slides.add(new Slide("/Black.png", 1));
-//		slides.add(new Slide("/Game2AnimationSlide1.png", 5));
-//		slides.add(new Slide("/Game2AnimationSlide2.png", 5));
-//		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 7));
+		slides.add(new Slide("/Black.png", 1));
+		slides.add(new Slide("/Game2AnimationSlide1.png", 5));
+		slides.add(new Slide("/Game2AnimationSlide2.png", 5));
+		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 7));
 		slides.add(new Slide("/Game2AnimationInstructionSlide2.png", 4){{
 			setFinalSlide(true);
 		}});
