@@ -32,6 +32,9 @@ public class AnimationCrabPIckUpTrash extends Character{
 	private static final long serialVersionUID = 2918553662290310728L;	
 	
 	private SpriteSheet sprites;
+	private SpriteSheet keyboard;
+	private int keyNumTop=1;
+	
 	private int spriteNum=1;
 	private int spriteTime=0;
 	
@@ -73,8 +76,10 @@ public class AnimationCrabPIckUpTrash extends Character{
 	 */
 	private void loadRes(){
 		BufferedImage crabs = null;
+		BufferedImage keyboards = null;
 		try {
 			crabs = Util.loadImage("/crabsprite(150x150)ANIMATION.png", this);
+			keyboards=Util.loadImage("/Keyboard.png", this);
 			greenArrow = Util.loadImage("/greenarrow.png", this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -82,6 +87,8 @@ public class AnimationCrabPIckUpTrash extends Character{
 		}
 		
 		sprites = new SpriteSheet(crabs, 1, 4, 150, 150);
+		keyboard = new SpriteSheet(keyboards, 1, 7, 150, 150);
+		
 		
 	}
 	
@@ -211,7 +218,9 @@ public class AnimationCrabPIckUpTrash extends Character{
 			
 			if(waitTime>60){
 				leftPressed=true;
+				keyNumTop=2;
 			}else{
+				keyNumTop=1;
 				waitTime++;
 			}
 			if(xPos<Util.getDISTANCE_TO_EDGE()-1200){
@@ -224,6 +233,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 		}
 		else if(state==MOVE_TOWARDS_TRASH_RIGHT){
 			rightPressed=true;
+			keyNumTop=5;
 			if(xPos>Util.getDISTANCE_TO_EDGE()-700){
 				if(attachedTrash==null){
 					attachedTrash=trash2;
@@ -232,6 +242,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 				else{ attachedTrash=null;
 					trash2.setY(trash2.getY()+230);
 					state=WIDE_EYES;
+					keyNumTop=1;
 				
 				}
 				holdTrash();
@@ -385,6 +396,11 @@ public class AnimationCrabPIckUpTrash extends Character{
 		
 		renderThrownTrash(g);
 		trash2.render(g);
+		
+		g.drawImage(keyboard.getSprite(1, keyNumTop), 150,-800,500,500,null);
+		
+	
+		
 		
 	}
 	

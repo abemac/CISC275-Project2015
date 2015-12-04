@@ -34,7 +34,9 @@ public class AnimationCrabThrowTrash extends Character{
 	private SpriteSheet sprites;
 	private int spriteNum=1;
 	private int spriteTime=0;
-	
+	private SpriteSheet keyboard;
+	private int keyNumBottom=1;
+	private int spaceKeyBottom=6;
 	private Trash attachedTrash;
 	private boolean isHoldingTrash;
 	private boolean drawPowerBar=false;
@@ -71,9 +73,10 @@ public class AnimationCrabThrowTrash extends Character{
 	 * loads the crab image used to represent the Crab character
 	 */
 	private void loadRes(){
-		BufferedImage crabs = null;
+		BufferedImage crabs=null,keyboards = null;
 		try {
 			crabs = Util.loadImage("/crabsprite(150x150)ANIMATION.png", this);
+			keyboards=Util.loadImage("/Keyboard.png", this);
 			greenArrow = Util.loadImage("/greenarrow.png", this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -81,7 +84,7 @@ public class AnimationCrabThrowTrash extends Character{
 		}
 		
 		sprites = new SpriteSheet(crabs, 1, 4, 150, 150);
-		
+		keyboard = new SpriteSheet(keyboards,1,7,150,150);
 	}
 	
 
@@ -211,6 +214,8 @@ public class AnimationCrabThrowTrash extends Character{
 	private void executeAnimationSequence() {
 		if(state==MOVE_TOWARDS_TRASH){
 			leftPressed=true;
+			keyNumBottom=2;
+			spaceKeyBottom=6;
 			if(isTouchingTrash(trashToThrow)){
 				holdTrash(trashToThrow);
 				setIsHoldingTrash(true);
@@ -225,6 +230,8 @@ public class AnimationCrabThrowTrash extends Character{
 		}
 		else if (state==CHARGE_UP){
 			spacePressed=true;
+			keyNumBottom=1;
+			spaceKeyBottom=7;
 			chargeTime++;
 			
 			if(chargeTime>60 && calculatePowerIfThrown()==1.0){
@@ -232,6 +239,8 @@ public class AnimationCrabThrowTrash extends Character{
 				state = THROW_TRASH;
 			}
 		}else if (state == THROW_TRASH){
+			keyNumBottom=1;
+			spaceKeyBottom=6;
 			if(attachedTrash!=null)
 				throwAttachedTrash();
 			
@@ -240,6 +249,8 @@ public class AnimationCrabThrowTrash extends Character{
 		else if (state == MOVE_TOWARDS_CAN){
 			if(xPos<900){
 				rightPressed=true;
+				keyNumBottom=5;
+				spaceKeyBottom=6;
 			}else{
 				rightPressed=false;
 				spriteNum=1;
@@ -374,6 +385,10 @@ public class AnimationCrabThrowTrash extends Character{
 		renderThrownTrash(g);
 		trashToThrow.render(g);
 		trashCan.renderOverlay(g);
+		
+		g.drawImage(keyboard.getSprite(1, keyNumBottom), -400,550,500,500,null);
+		
+		g.drawImage(keyboard.getSprite(1, spaceKeyBottom), 200, 550, 500,500,null);
 		
 	}
 	
