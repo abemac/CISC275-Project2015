@@ -1,6 +1,11 @@
 package enemies;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import animation.SpriteSheet;
+import misc.Util;
 
 /**
  * TheHuman is a class for modeling the human in the Crab Save game. It is called "TheHuman" for reasons
@@ -10,7 +15,8 @@ import java.awt.Graphics2D;
  */
 public class TheHuman extends Enemy{
 	
-	
+	private SpriteSheet human;
+	private int spriteNum=1;
 	/**
 	 * 
 	 */
@@ -24,6 +30,20 @@ public class TheHuman extends Enemy{
 	 */
 	public TheHuman(double xPos,double yPos){
 		super(xPos,yPos);
+		loadRes();
+		
+	}
+	
+	private void loadRes(){
+		BufferedImage pic = null;
+		
+		try {
+			pic = Util.loadImage("/HumanPicFish.png", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		human = new SpriteSheet(pic, 1, 2, 300, 200);
 		
 	}
 
@@ -41,7 +61,7 @@ public class TheHuman extends Enemy{
 	 * renders graphics
 	 */
 	public void render(Graphics2D g){
-		
+		g.drawImage(human.getSprite(1, spriteNum), (int)xPos, (int)yPos, null);
 	}
 	/**
 	 * performs  a check to see if it is attacked by the crab.  It then will let got of the fish

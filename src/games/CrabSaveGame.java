@@ -42,7 +42,8 @@ public class CrabSaveGame extends Game {
 	private BufferedImage sun,bg,pond;
 	
 	private ArbitraryLine pondLine,skyLine;
-	
+	private boolean doneAnimationSequence1=false;
+	private TheHuman human;
 	private SoundDoer soundDoer= new SoundDoer();
 	
 	private boolean donePlaying=false;
@@ -66,6 +67,8 @@ public class CrabSaveGame extends Game {
 		soundDoer.loadClip("/winsound.wav");
 		soundDoer.playLoadedClip(0);
 		clock.setInitialAngle(Math.PI/18f);
+		
+		human = new TheHuman(-Util.getDISTANCE_TO_EDGE()-300, -500);
 		
 		
 		
