@@ -330,7 +330,7 @@ public class AnimationCrabThrowTrash extends Character{
 	
 	private double calculatePowerIfThrown(){
 		double percetange = timeHeld/NANOS_MAX;
-		if (percetange>.65 && percetange<.7){
+		if (percetange>.68 && percetange<.73){
 			return 1.0;//Optimal
 		}
 		else return -1;
