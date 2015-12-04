@@ -330,18 +330,8 @@ public class AnimationCrabThrowTrash extends Character{
 	
 	private double calculatePowerIfThrown(){
 		double percetange = timeHeld/NANOS_MAX;
-		if(percetange>.8){
-			return POWER_MAX;
-		}else if (percetange>.6){
+		if (percetange>.65 && percetange<.7){
 			return 1.0;//Optimal
-		}else if (percetange > .4){
-			return 0.8;
-		}
-		else if (percetange > .2){
-			return 0.6;
-		}
-		else if (percetange > 0){
-			return 0.4;
 		}
 		else return -1;
 	}
@@ -364,7 +354,7 @@ public class AnimationCrabThrowTrash extends Character{
 		
 		if(drawPowerBar){
 			g.setColor(barColor);
-			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength+40,(int)( 10*(1+(yPos+500)/500)), 50, 50);
+			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength,(int)( 10*(1+(yPos+500)/500)), 50, 50);
 			g.setColor(Color.RED);
 			g.setStroke(new BasicStroke((float) (8*(1+(yPos+500)/500))));
 			g.drawRect((int)(xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+5), (int)((400+yPos/2.5)*0.2),(int)(18*(1+(yPos+500)/500)));
