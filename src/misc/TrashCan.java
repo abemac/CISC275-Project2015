@@ -30,7 +30,16 @@ public class TrashCan implements Tickable,Renderable,Serializable{
 		this.yPos=yPos;
 		loadRes();
 	}
-	
+	public TrashCan (double xPos,double yPos, int xScale,int yScale){
+		this.xPos=xPos;
+		this.yPos=yPos;
+		try {
+			trashCan=Util.loadImage("/RubbishBin.png",xScale,yScale, this);
+			trashCanOverlay=Util.loadImage("/RubbishBinOverlay.png",xScale,yScale, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * loads the resources need for a trash can. Gets called in the constructor
 	 */

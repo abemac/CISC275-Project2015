@@ -15,6 +15,7 @@ import enemies.Trash;
 import games.CrabSaveGame;
 import misc.ArbitraryLine;
 import misc.Point;
+import misc.TrashCan;
 import misc.Util;
 
 /**
@@ -39,8 +40,9 @@ public class AnimationCrabThrowTrash extends Character{
 	private boolean drawPowerBar=false;
 	private boolean leftPressed,rightPressed,upPressed,downPressed=false;
 	
+	private BufferedImage greenArrow;
 	private Color barColor=Color.GREEN;
-	private Point trashPoint= new Point(575,-320);
+	
 	private double lowestYThrowingTrash=0.0;
 	
 	private int barLength;
@@ -58,8 +60,8 @@ public class AnimationCrabThrowTrash extends Character{
 	 * @param yPos the initial y position
 	 * @param angriness the initial angriness
 	 */
-	public AnimationCrabThrowTrash(double xPos, double yPos) {
-		super(xPos, yPos, 100);
+	public AnimationCrabThrowTrash() {
+		super(900, 110, 100);
 		loadRes();
 	
 		
@@ -71,7 +73,8 @@ public class AnimationCrabThrowTrash extends Character{
 	private void loadRes(){
 		BufferedImage crabs = null;
 		try {
-			crabs = Util.loadImage("/crabsprite(150x150).png", this);
+			crabs = Util.loadImage("/crabsprite(150x150)ANIMATION.png", this);
+			greenArrow = Util.loadImage("/greenarrow.png", this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,7 +99,7 @@ public class AnimationCrabThrowTrash extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			xPos-=10*(yPos+1000)/2000.0;
+			xPos-=20*(yPos+1000)/2000.0;
 			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
 			if(yPos<-490 && xPos < 725 && xPos>370){
 				xPos+=10*(yPos+1000)/2000.0;
@@ -111,7 +114,7 @@ public class AnimationCrabThrowTrash extends Character{
 				if(spriteNum==2){spriteNum=3;}
 				else if (spriteNum==3){spriteNum=2;}
 			}
-			xPos+=10*(yPos+1000)/2000.0;
+			xPos+=20*(yPos+1000)/2000.0;
 			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0)?Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0):xPos;
 			
 			if(yPos<-490 && xPos > 230 && xPos<370){
@@ -169,14 +172,13 @@ public class AnimationCrabThrowTrash extends Character{
 		
 		
 		for(Trash t : previouslyThrownTrash){
-			if(t.getY()<-600){
-				t.setY(t.getY()+40);
-				t.setX(t.getX()+(565-t.getX()-t.getWidth()/2.0)/10.0 );
-			}
+			
 		}
 		
 		scale=400+yPos/2.5;
 		if(jump){
+			drawPowerBar=false;
+			chargeTime=0;
 			yPos+=yVel;
 			yVel+=5;
 			scale=lastScale;
@@ -194,17 +196,60 @@ public class AnimationCrabThrowTrash extends Character{
 			
 		}
 		
+		trashToThrow.act();
+
 		
 	}
 	
 	
 	private static final int MOVE_TOWARDS_TRASH=0;
-	private static final int THROW_TRASH_SLOW=1;
-	private static final int MOVE_TOWARDS_CAN=2;
+	private static final int CHARGE_UP=1;
+	private static final int THROW_TRASH=2;
+	private static final int MOVE_TOWARDS_CAN=3;
 	private int state=MOVE_TOWARDS_TRASH;
-	
+	private int chargeTime=0;
 	private void executeAnimationSequence() {
-		
+		if(state==MOVE_TOWARDS_TRASH){
+			leftPressed=true;
+			if(isTouchingTrash(trashToThrow)){
+				holdTrash(trashToThrow);
+				setIsHoldingTrash(true);
+				state=CHARGE_UP;
+				leftPressed=false;
+				spriteNum=1;
+				timeSpacePressed=-1;
+				timeHeld=0;
+				drawPowerBar=true;
+			}
+			
+		}
+		else if (state==CHARGE_UP){
+			spacePressed=true;
+			chargeTime++;
+			
+			if(chargeTime>40 && calculatePowerIfThrown()==1.0){
+				spacePressed=false;
+				state = THROW_TRASH;
+			}
+		}else if (state == THROW_TRASH){
+			if(attachedTrash!=null)
+				throwAttachedTrash();
+			
+			else state = MOVE_TOWARDS_CAN;
+		}
+		else if (state == MOVE_TOWARDS_CAN){
+			if(xPos<900){
+				rightPressed=true;
+			}else{
+				rightPressed=false;
+				spriteNum=1;
+				previouslyThrownTrash.clear();
+				trashToThrow.setAngle(0);
+				trashToThrow.setX(300);
+				trashToThrow.setY(220);
+				state=MOVE_TOWARDS_TRASH;
+			}
+		}
 		
 	}
 
@@ -282,6 +327,31 @@ public class AnimationCrabThrowTrash extends Character{
 				(timeHeld/NANOS_MAX));
 	}
 	
+	
+	private double calculatePowerIfThrown(){
+		double percetange = timeHeld/NANOS_MAX;
+		if(percetange>.8){
+			return POWER_MAX;
+		}else if (percetange>.6){
+			return 1.0;//Optimal
+		}else if (percetange > .4){
+			return 0.8;
+		}
+		else if (percetange > .2){
+			return 0.6;
+		}
+		else if (percetange > 0){
+			return 0.4;
+		}
+		else return -1;
+	}
+	private TrashCan trashCan = new TrashCan(Util.getDISTANCE_TO_EDGE()-500, 0,300,500);
+	private Trash trashToThrow = new Trash(300, 220, Trash.SODA_CAN);
+	
+	private double yPosArrow=630;
+	private double yVelArrow=0;
+	private double yAccArrow=3;
+	private boolean down=true;
 	/**
 	 * @param g renders the graphics
 	 */
@@ -294,16 +364,30 @@ public class AnimationCrabThrowTrash extends Character{
 		
 		if(drawPowerBar){
 			g.setColor(barColor);
-			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength,(int)( 10*(1+(yPos+500)/500)), 50, 50);
-			g.setColor(Color.BLACK);
+			g.fillRoundRect((int)xPos,(int)( yPos+400+yPos/2.5+10),barLength+40,(int)( 10*(1+(yPos+500)/500)), 50, 50);
+			g.setColor(Color.RED);
 			g.setStroke(new BasicStroke((float) (8*(1+(yPos+500)/500))));
 			g.drawRect((int)(xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+5), (int)((400+yPos/2.5)*0.2),(int)(18*(1+(yPos+500)/500)));
+			g.drawImage(greenArrow, 530, (int)yPosArrow, null);
+			yVelArrow+=yAccArrow;
+			yPosArrow+=yVelArrow;
+			if(down &&yPosArrow>650){
+				yAccArrow=-yAccArrow;
+				down=false;
+			}else if (!down && yPosArrow<650){
+				yAccArrow=-yAccArrow;
+				down=true;
+			}
 		}
 		
-		//throwLine.testRender(g);
+		trashCan.render(g);
+		renderThrownTrash(g);
+		trashToThrow.render(g);
+		trashCan.renderOverlay(g);
+		
 	}
 	
-	public void renderThrownTrash(Graphics2D g){
+	private void renderThrownTrash(Graphics2D g){
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(scale),(int)( scale),null);
 		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
 			attachedTrash.render(g);
@@ -333,30 +417,13 @@ public class AnimationCrabThrowTrash extends Character{
 		attachedTrash.setY(attachedTrash.getY()-Vy);
 		Vy-=gravity;
 		attachedTrash.act();
-		if(attachedTrash.getY()<-990){
-			aboveCan=true;
-		}
 		if(reachedVertex==false && Math.abs(Math.abs(Vy)-gravity)<=gravity){
 			reachedVertex=true;
 		}
 		
 		
-		if(reachedVertex && (attachedTrash.getY()>lowestYThrowingTrash)){
-			
-			isThrowingTrash=false;
-			calculatedTrajecory=false;
-			attachedTrash.setBeingThrown(false);
-			isHoldingTrash=false;
-			attachedTrash.setAngle(0);
-			attachedTrash=null;
-			reachedVertex=false;
-			aboveCan=false;
-			spriteNum=1;
-			
-		}
 		
-		else if(aboveCan && attachedTrash.getX()>trashX-200 && attachedTrash.getX()+attachedTrash.getWidth()<trashX+250 &&
-				attachedTrash.getY()+attachedTrash.getHeight()>trashY && reachedVertex){
+		if(reachedVertex && attachedTrash.getY()>150){
 			isThrowingTrash=false;
 			isHoldingTrash=false;
 			calculatedTrajecory=false;
@@ -374,21 +441,18 @@ public class AnimationCrabThrowTrash extends Character{
 	
 	
 	private int gravity=3;
-	private double trashX=575;
-	private double trashY=-800;
+	private double trashX=Util.getDISTANCE_TO_EDGE()-330;
+	private double trashY=500;
 	private double Vy;
 	private double Vx;
 	private double power=1.0;//1.0 is optimal
 	private void calculateTrajectory(){
 		double Xinit=attachedTrash.getX();
 		double Yinit=attachedTrash.getY();
-		Vy=power*Math.sqrt(2*gravity*(Yinit+1100));
-		double Tt = ((Vy/gravity)+(Math.sqrt((2200+2*trashY)/gravity)));
+		Vy=power*Math.sqrt(2*gravity*(Yinit+400));
+		double Tt = ((Vy/gravity)+(Math.sqrt((800+2*trashY)/gravity)));
 		Vx = power*(trashX-Xinit)/Tt;
-		if(power<=1.0)
-			lowestYThrowingTrash=-power*300;
-		else
-			lowestYThrowingTrash=-300;
+		lowestYThrowingTrash=1000;
 		calculatedTrajecory=true;
 		isHoldingTrash=false;
 		attachedTrash.setBeingThrown(true);

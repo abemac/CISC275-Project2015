@@ -18,7 +18,7 @@ public class CrabSaveAnimation extends Animation{
 	private int currentSlide=0;
 	private SoundDoer soundDoer = new SoundDoer();
 	
-	private AnimationCrabThrowTrash throwAnimation = new AnimationCrabThrowTrash(0, 0);
+	private AnimationCrabThrowTrash throwAnimation = new AnimationCrabThrowTrash();
 	
 	public CrabSaveAnimation() {
 		try {
@@ -29,8 +29,8 @@ public class CrabSaveAnimation extends Animation{
 	}
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-		slides.add(new Slide("/Black.png", 1));
-		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 8));
+		//slides.add(new Slide("/Black.png", 1));
+		//slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 8));
 		slides.add(new Slide("/Game2AnimationInstructionSlide2.png", 4){{
 			setFinalSlide(true);
 		}});
