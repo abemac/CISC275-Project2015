@@ -386,9 +386,9 @@ public class AnimationCrabThrowTrash extends Character{
 		trashToThrow.render(g);
 		trashCan.renderOverlay(g);
 		
-		g.drawImage(keyboard.getSprite(1, keyNumBottom), -400,550,500,500,null);
+		g.drawImage(keyboard.getSprite(1, keyNumBottom), -Util.getDISTANCE_TO_EDGE()+400,200,500,500,null);
 		
-		g.drawImage(keyboard.getSprite(1, spaceKeyBottom), 200, 550, 500,500,null);
+		g.drawImage(keyboard.getSprite(1, spaceKeyBottom), -Util.getDISTANCE_TO_EDGE()+1000, 200, 500,500,null);
 		
 	}
 	

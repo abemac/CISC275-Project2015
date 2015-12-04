@@ -64,7 +64,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 	 * @param angriness the initial angriness
 	 */
 	public AnimationCrabPIckUpTrash() {
-		super(900, -800, 100);
+		super(-100, -500, 100);
 		loadRes();
 		trash2.setScale(1);
 	
@@ -207,7 +207,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 		
 	}
 	
-	private Trash trash2 = new Trash(Util.getDISTANCE_TO_EDGE()-250,-800,Trash.BOTTLE);
+	private Trash trash2 = new Trash(135,-600,Trash.BOTTLE);
 	private static final int MOVE_TOWARDS_TRASH_LEFT=0;
 	private static final int MOVE_TOWARDS_TRASH_RIGHT=1;
 	private static final int WIDE_EYES=2;
@@ -223,7 +223,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 				keyNumTop=1;
 				waitTime++;
 			}
-			if(xPos<Util.getDISTANCE_TO_EDGE()-950){
+			if(xPos<-600){
 				state=MOVE_TOWARDS_TRASH_RIGHT;
 				leftPressed=false;
 				spriteNum=1;
@@ -234,7 +234,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 		else if(state==MOVE_TOWARDS_TRASH_RIGHT){
 			rightPressed=true;
 			keyNumTop=5;
-			if(xPos>Util.getDISTANCE_TO_EDGE()-450){
+			if(xPos>100){
 				if(attachedTrash==null){
 					attachedTrash=trash2;
 					state=MOVE_TOWARDS_TRASH_LEFT;
@@ -397,7 +397,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 		renderThrownTrash(g);
 		trash2.render(g);
 		
-		g.drawImage(keyboard.getSprite(1, keyNumTop), 300,-800,500,500,null);
+		g.drawImage(keyboard.getSprite(1, keyNumTop), -Util.getDISTANCE_TO_EDGE()+400,-500,500,500,null);
 		
 	
 		
