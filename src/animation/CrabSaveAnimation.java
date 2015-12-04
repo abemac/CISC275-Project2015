@@ -33,8 +33,10 @@ public class CrabSaveAnimation extends Animation{
 		slides.add(new Slide("/Black.png", 1));
 		slides.add(new Slide("/Game2AnimationSlide1.png", 5));
 		slides.add(new Slide("/Game2AnimationSlide2.png", 5));
-		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 7));
-		slides.add(new Slide("/Game2AnimationInstructionSlide2.png", 4){{
+		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 5));
+		slides.add(new Slide("/Game2AnimationSlide3.png", 5));
+		slides.add(new Slide("/Game2AnimationInstructionSlide2.png", 5));
+		slides.add(new Slide("/Game2AnimationInstructionSlide3.png", 4){{
 			setFinalSlide(true);
 		}});
 		
