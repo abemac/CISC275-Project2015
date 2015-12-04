@@ -227,7 +227,7 @@ public class AnimationCrabThrowTrash extends Character{
 			spacePressed=true;
 			chargeTime++;
 			
-			if(chargeTime>40 && calculatePowerIfThrown()==1.0){
+			if(chargeTime>60 && calculatePowerIfThrown()==1.0){
 				spacePressed=false;
 				state = THROW_TRASH;
 			}
