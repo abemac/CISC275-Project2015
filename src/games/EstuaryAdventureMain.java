@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import animation.CrabSaveAnimation;
 import animation.OverfishingAnimation;
 import misc.GameState;
 import misc.MenuScreen;
@@ -50,6 +51,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private MenuScreen menu;
 	private OverfishingAnimation overfishingAnimation;
 	private OverfishingGame overfishingGame;
+	private CrabSaveAnimation crabSaveAnimation;
 	private CrabSaveGame crabSaveGame;
 	private PollutionGame pollutionGame;
 	
@@ -192,12 +194,34 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 			overfishingGame.onTick();
 			if(overfishingGame.isDone()){
-				state = GameState.CRAB_SAVE_GAME;
+				state = GameState.CRAB_SAVE_GAME_ANIMATION;
 				view.removeKeyListener(overfishingGame);
 				view.removeMouseListener(overfishingGame);
 				view.removeMouseMotionListener(overfishingGame);
 				overfishingGame=null;
 			}else if(overfishingGame.sentStopSignal()){
+				stop(false);
+			}
+			
+			
+		}
+		else if (state == GameState.CRAB_SAVE_GAME_ANIMATION){
+			if(crabSaveAnimation==null){
+				crabSaveAnimation = new CrabSaveAnimation();
+				view.addMouseListener(crabSaveAnimation);
+				view.addKeyListener(crabSaveAnimation);
+				view.addMouseMotionListener(crabSaveAnimation);
+				hideCursor();
+				lastTime=System.nanoTime();
+			}
+			crabSaveAnimation.onTick();
+			if(crabSaveAnimation.isDone()){
+				state = GameState.CRAB_SAVE_GAME;
+				view.removeKeyListener(crabSaveAnimation);
+				view.removeMouseListener(crabSaveAnimation);
+				view.removeMouseMotionListener(crabSaveAnimation);
+				crabSaveAnimation=null;
+			}else if(crabSaveAnimation.sentStopSignal()){
 				stop(false);
 			}
 			
@@ -259,6 +283,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		else if (state == GameState.OVERFISHING_GAME && overfishingGame!=null){
 			view.render(overfishingGame);
 			
+		}
+		else if (state==GameState.CRAB_SAVE_GAME_ANIMATION && crabSaveAnimation!=null){
+			view.render(crabSaveAnimation);
 		}
 		else if (state==GameState.CRAB_SAVE_GAME && crabSaveGame!=null){
 			view.render(crabSaveGame);
@@ -327,7 +354,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			state=GameState.OVERFISHING_GAME;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
-			state=GameState.CRAB_SAVE_GAME;
+			state=GameState.CRAB_SAVE_GAME_ANIMATION;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_3){
 			state=GameState.POLLUTION_GAME;
