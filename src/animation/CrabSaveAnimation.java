@@ -19,6 +19,7 @@ public class CrabSaveAnimation extends Animation{
 	private SoundDoer soundDoer = new SoundDoer();
 	
 	private AnimationCrabThrowTrash throwAnimation = new AnimationCrabThrowTrash();
+	private AnimationCrabPIckUpTrash pickUpAnimation = new AnimationCrabPIckUpTrash();
 	
 	public CrabSaveAnimation() {
 		try {
@@ -29,8 +30,10 @@ public class CrabSaveAnimation extends Animation{
 	}
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-		//slides.add(new Slide("/Black.png", 1));
-		//slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 8));
+		slides.add(new Slide("/Black.png", 1));
+		slides.add(new Slide("/Game2AnimationSlide1.png", 5));
+		slides.add(new Slide("/Game2AnimationSlide2.png", 5));
+		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 7));
 		slides.add(new Slide("/Game2AnimationInstructionSlide2.png", 4){{
 			setFinalSlide(true);
 		}});
@@ -43,6 +46,7 @@ public class CrabSaveAnimation extends Animation{
 	public void onTick() {
 		if(isOnFinalSlide()){
 			throwAnimation.onTick();
+			pickUpAnimation.onTick();
 		}
 		
 	}
@@ -65,6 +69,7 @@ public class CrabSaveAnimation extends Animation{
 		
 		if(isOnFinalSlide()){
 			throwAnimation.render(g);
+			pickUpAnimation.render(g);
 		}
 		
 	}

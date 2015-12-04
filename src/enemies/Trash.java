@@ -160,6 +160,10 @@ public class Trash extends Enemy {
 		this.beingThrown=b;
 	}
 	
+	public void setScale(double d){
+		this.scale =d;
+	}
+	
 	public double getHeight(){
 		switch(type){
 			case BANANA: return(200*scale);
