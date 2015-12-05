@@ -170,14 +170,14 @@ public class CrabSaveGame extends Game {
 					}
 					else{
 						EstuaryAdventureMain.showMenuCursor();
-						donePlaying=true;
-						dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
+						dialogBox.setTitle(DialogBox.TITLE_GREAT);
 						dialogBox.setKey1("Trash Left: ");
-						dialogBox.setInfo1("  "+getNumTrash()+" pieces           ");
+						dialogBox.setInfo1("0 pieces        ");
 						dialogBox.setKey2("Your Time: ");
-						dialogBox.setInfo2("        60s");
+						dialogBox.setInfo2("      "+((int)clock.getTimer())+"s");
 						dialogBox.setMessageL1("Thanks for helping");
 						dialogBox.setMessageL2("clean up the estuary!");
+						donePlaying=true;
 					}
 				}
 			}else if(getNumTrash()==0){
@@ -193,7 +193,7 @@ public class CrabSaveGame extends Game {
 					dialogBox.setKey1("Trash Left: ");
 					dialogBox.setInfo1("0 pieces        ");
 					dialogBox.setKey2("Your Time: ");
-					dialogBox.setInfo2("      "+(60-(int)clock.getTimer())+"s");
+					dialogBox.setInfo2("      "+((int)clock.getTimer())+"s");
 					dialogBox.setMessageL1("Thanks for helping");
 					dialogBox.setMessageL2("clean up the estuary!");
 					donePlaying=true;
@@ -301,6 +301,7 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==FISH_FLY){
+			human.setNoFishInBag(true);
 			crabControl=false;
 			fishX+=fishxVel;
 			fishY+=fishyVel;
@@ -312,6 +313,10 @@ public class CrabSaveGame extends Game {
 				fishAngle=-Math.PI/2f;
 				state=CELEBRATE;
 			}
+		}
+		if(state==CELEBRATE){
+			doingEndAnimation=false;
+			doneAnimationSequence2=true;
 		}
 	}
 	private void tellCrabToHoldTrash(){
@@ -340,7 +345,7 @@ public class CrabSaveGame extends Game {
 		g.drawImage(bg2,(int)(Util.getDISTANCE_TO_EDGE()+screenPos),-1000,null);
 		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
 		g.drawImage(pond, (int)(screenPos-Util.getDISTANCE_TO_EDGE()), 500, null);
-		if(doingEndAnimation)
+		if(doingEndAnimation || doneAnimationSequence2)
 			g.drawImage(pond2, (int)(screenPos+Util.getDISTANCE_TO_EDGE()), -1000, null);
 		trashCan.render(g,screenPos);
 		
@@ -360,6 +365,11 @@ public class CrabSaveGame extends Game {
 		clock.render(g);
 		if(donePlaying){
 			dialogBox.render(g);
+			g.translate(fishX+100, fishY+100);
+			g.rotate(fishAngle);
+			g.drawImage(fish, -100, -100, null);
+			g.rotate(-fishAngle);
+			g.translate(-fishX-100, -fishY-100);
 		}
 		
 		
