@@ -12,18 +12,13 @@ public class CrabSaveScore extends GameScore {
 	public int getCalculatedScore(){
 		int trashScore = 0;
 		int timeScore=0;
+		double timeLeft = 60-time;
 		trashScore = ((6-getNumTrash)*12);
-		if(time <= 60){
+		if(timeLeft >= 32){
 			timeScore = 28;
 		}
-		else if(time > 60 && time <= 80){
-			timeScore = 21;
-		}
-		else if(time > 80 && time <= 100){
-			timeScore = 14;
-		}
 		else{
-			timeScore = 7;
+			timeScore = (int) timeLeft;
 		}
 		return timeScore+trashScore;
 	}
