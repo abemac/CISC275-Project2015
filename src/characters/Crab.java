@@ -35,7 +35,7 @@ public class Crab extends Character{
 	private SpriteSheet sprites;
 	private int spriteNum=1;
 	private int spriteTime=0;
-	
+	private double screenPos=0;
 	private Trash attachedTrash;
 	private boolean isHoldingTrash;
 	private boolean drawPowerBar=false;
@@ -101,7 +101,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			xPos-=10*(yPos+1000)/2000.0;
-			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5?-Util.getDISTANCE_TO_EDGE()+5:xPos;
+			xPos=xPos<-Util.getDISTANCE_TO_EDGE()+5-screenPos?-Util.getDISTANCE_TO_EDGE()+5-screenPos:xPos;
 			if(yPos<-490 && xPos < 725 && xPos>370){
 				xPos+=10*(yPos+1000)/2000.0;
 			}
@@ -116,7 +116,7 @@ public class Crab extends Character{
 				else if (spriteNum==3){spriteNum=2;}
 			}
 			xPos+=10*(yPos+1000)/2000.0;
-			xPos=xPos>Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0)?Util.getDISTANCE_TO_EDGE()-400*((1000+yPos)/1000.0):xPos;
+			xPos=xPos>Util.getDISTANCE_TO_EDGE()-screenPos-400*((1000+yPos)/1000.0)?Util.getDISTANCE_TO_EDGE()-screenPos-400*((1000+yPos)/1000.0):xPos;
 			
 			if(yPos<-490 && xPos > 230 && xPos<370){
 				xPos-=10*(yPos+1000)/2000.0;
@@ -296,6 +296,22 @@ public class Crab extends Character{
 		
 		//throwLine.testRender(g);
 	}
+	public void render(Graphics2D g,double screenPos){
+		
+		for(Trash t: previouslyThrownTrash){
+			t.render(g,screenPos);
+		}
+		
+		if(drawPowerBar){
+			g.setColor(barColor);
+			g.fillRoundRect((int)(xPos+screenPos),(int)( yPos+400+yPos/2.5+10),barLength,(int)( 10*(1+(yPos+500)/500)), 50, 50);
+			g.setColor(Color.BLACK);
+			g.setStroke(new BasicStroke((float) (8*(1+(yPos+500)/500))));
+			g.drawRect((int)(screenPos+xPos+(400+yPos/2.5)*.6), (int)( yPos+400+yPos/2.5+5), (int)((400+yPos/2.5)*0.2),(int)(18*(1+(yPos+500)/500)));
+		}
+		
+		//throwLine.testRender(g);
+	}
 	
 	public void renderThrownTrash(Graphics2D g){
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(scale),(int)( scale),null);
@@ -309,6 +325,17 @@ public class Crab extends Character{
 		
 	}
 	
+	public void renderThrownTrash(Graphics2D g,double screenPos){
+		g.drawImage(sprites.getSprite(1, spriteNum), (int)(xPos+screenPos), (int)yPos, (int)(scale),(int)( scale),null);
+		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
+			attachedTrash.render(g,screenPos);
+		}
+		
+		//g.drawLine(-1000, (int)lowestYThrowingTrash, 1000,(int)lowestYThrowingTrash);
+		
+		
+		
+	}
 	
 	private boolean isThrowingTrash=false;
 	private boolean calculatedTrajecory=false;
@@ -492,7 +519,9 @@ public class Crab extends Character{
 		attachedTrash=t;
 	}
 	
-	
+	public void setScreenPos(double screenPos) {
+		this.screenPos = screenPos;
+	}
 	
 	
 	

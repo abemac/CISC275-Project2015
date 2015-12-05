@@ -62,6 +62,11 @@ public class TrashCan implements Tickable,Renderable,Serializable{
 		g.drawImage(trashCan, (int)xPos, (int)yPos, null);
 		
 	}
+	
+	public void render(Graphics2D g,double screenPos) {
+		g.drawImage(trashCan, (int)(xPos+screenPos), (int)yPos, null);
+		
+	}
 	/**
 	 * defines how to render the overlay for the trash can to give the illusion of things going 
 	 * into the trash
@@ -69,6 +74,9 @@ public class TrashCan implements Tickable,Renderable,Serializable{
 	 */
 	public void renderOverlay(Graphics2D g){
 		g.drawImage(trashCanOverlay, (int)xPos, (int)yPos, null);
+	}
+	public void renderOverlay(Graphics2D g,double screenPos){
+		g.drawImage(trashCanOverlay, (int)(screenPos+xPos), (int)yPos, null);
 	}
 
 	

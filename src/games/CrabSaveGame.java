@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.sun.org.apache.xml.internal.resolver.readers.XCatalogReader;
+
 import animation.ClockTimer;
 import characters.Crab;
 import enemies.TheHuman;
@@ -39,7 +41,7 @@ public class CrabSaveGame extends Game {
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
-	private BufferedImage sun,bg,pond,greenArrow;
+	private BufferedImage sun,bg,bg2,pond,greenArrow,pond2;
 	
 	private ArbitraryLine pondLine,skyLine;
 	private boolean doneAnimationSequence1=false;
@@ -69,6 +71,7 @@ public class CrabSaveGame extends Game {
 		clock= new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
 		clock.setInitialAngle(Math.PI/18f);
 		clock.pause();
+		screenPos=0;
 		human = new TheHuman(400, -500);
 		
 		
@@ -104,7 +107,9 @@ public class CrabSaveGame extends Game {
 		try {
 			sun = Util.loadImage("/sun.png", this);
 			bg= Util.loadImage("/Game2Background(smaller).png",Util.getCANVAS_WIDTH_SCALED(),800, this);
+			bg2= Util.loadImage("/Game2Background(smaller-flipped).png",Util.getCANVAS_WIDTH_SCALED(),800, this);
 			pond = Util.loadImage("/game2water.png",Util.getCANVAS_WIDTH_SCALED(),500, this);
+			pond2 = Util.loadImage("/game2water2.png",Util.getCANVAS_WIDTH_SCALED(),2000, this);
 			greenArrow = Util.loadImage("/greenarrowright.png",150,150, this);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -132,12 +137,12 @@ public class CrabSaveGame extends Game {
 		}
 		if(!donePlaying){
 			crab.onTick();
-			if(pondLine.isBelowLine(crab.getX(), crab.getY()+400)){
+			if(!doingEndAnimation && pondLine.isBelowLine(crab.getX(), crab.getY()+400)){
 				crab.setY(crab.getY()-6*(crab.getY()+1000)/1500.0);
 				crab.setX(crab.getX()+.5);
 				
 			}
-			if(skyLine.isAboveLine(crab.getX(), crab.getY())){
+			if(!doingEndAnimation && skyLine.isAboveLine(crab.getX(), crab.getY())){
 				crab.setY(crab.getY()+6*(crab.getY()+1000)/1500.0);
 				crab.setX(crab.getX()-.5);
 			}
@@ -216,11 +221,15 @@ public class CrabSaveGame extends Game {
 	private double xAccArrow=3;
 	private boolean right=true;
 	private boolean doingEndAnimation=false;
-	private final int SHOW_ARROW=0;
-	private int state;
+	private static final int SHOW_ARROW=0;
+	private static final int SLIDE_SCREEN=1;
+	private double screenPos=0;
+	private double screenPosVel=0;
+	private int state=SHOW_ARROW;
+	private boolean slowDown=false;
 	private void doEndAnimation(){
 		doingEndAnimation=true;
-		if(crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
+		if(state==SHOW_ARROW&&crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
 			state=SHOW_ARROW;
 			
 			xVelArrow+=xAccArrow;
@@ -232,7 +241,25 @@ public class CrabSaveGame extends Game {
 				xAccArrow=-xAccArrow;
 				right=true;
 			}
+		}else if (state == SHOW_ARROW){
+			state=SLIDE_SCREEN;
 		}
+		if(state==SLIDE_SCREEN){
+			screenPos+=screenPosVel;
+			if(!slowDown)
+				screenPosVel-=3;
+			else {screenPosVel+=3;
+				if(screenPosVel>=0){
+					screenPosVel=0;
+				}
+			
+			}
+			if(screenPos<=-Util.getDISTANCE_TO_EDGE()/1.5){
+				slowDown=true;
+			}
+			crab.setScreenPos(screenPos);
+		}
+		
 	}
 	private void tellCrabToHoldTrash(){
 		Iterator<Trash> i = trash.iterator();
@@ -256,19 +283,21 @@ public class CrabSaveGame extends Game {
 		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 2000);
 		g.setColor(sky);
 		g.fillRect(-Util.getDISTANCE_TO_EDGE(), -1000, Util.getCANVAS_WIDTH_SCALED(), 600);
-		g.drawImage(bg,-Util.getDISTANCE_TO_EDGE(),-1000,null);	
+		g.drawImage(bg,(int)(-Util.getDISTANCE_TO_EDGE()+screenPos),-1000,null);
+		g.drawImage(bg2,(int)(Util.getDISTANCE_TO_EDGE()+screenPos),-1000,null);
 		g.drawImage(sun, -Util.getDISTANCE_TO_EDGE()-400,-1600,1000,1300,null);
-		g.drawImage(pond, -Util.getDISTANCE_TO_EDGE(), 500, null);
+		g.drawImage(pond, (int)(screenPos-Util.getDISTANCE_TO_EDGE()), 500, null);
+		if(doingEndAnimation)
+			g.drawImage(pond2, (int)(screenPos+Util.getDISTANCE_TO_EDGE()), -1000, null);
+		trashCan.render(g,screenPos);
 		
-		trashCan.render(g);
 		
-		
-		crab.render(g);
-		trashCan.renderOverlay(g);
+		crab.render(g,screenPos);
+		trashCan.renderOverlay(g,screenPos);
 		for(Trash t: trash){
-			t.render(g);
+			t.render(g,screenPos);
 		}
-		crab.renderThrownTrash(g);
+		crab.renderThrownTrash(g,screenPos);
 		
 		g.setColor(timerColor);
 		g.setFont(timerFont);
@@ -279,7 +308,7 @@ public class CrabSaveGame extends Game {
 			dialogBox.render(g);
 		}
 		
-		human.render(g);
+		human.render(g,screenPos);
 		
 		if(doingEndAnimation){
 			if(state==SHOW_ARROW){

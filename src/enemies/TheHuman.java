@@ -101,6 +101,25 @@ public class TheHuman extends Enemy{
 			}
 		}
 	}
+	public void render(Graphics2D g,double screenPos){
+		g.drawImage(human.getSprite(1, spriteNum), (int)(xPos+screenPos), (int)yPos,400,600, null);
+		if(outOfScreen() && timer-lastTime<60){
+			g.drawImage(go, -500, -100,800,400, null);
+		}
+		
+		if(!outOfScreen()){
+			g.drawImage(greenArrow, (int)(xPos+200+screenPos), (int)yPosArrow, null);
+			yVelArrow+=yAccArrow;
+			yPosArrow+=yVelArrow;
+			if(down &&yPosArrow>-450){
+				yAccArrow=-yAccArrow;
+				down=false;
+			}else if (!down && yPosArrow<-450){
+				yAccArrow=-yAccArrow;
+				down=true;
+			}
+		}
+	}
 	/**
 	 * performs  a check to see if it is attacked by the crab.  It then will let got of the fish
 	 */

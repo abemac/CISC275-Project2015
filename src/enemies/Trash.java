@@ -135,6 +135,24 @@ public class Trash extends Enemy {
 		
 		
 	}
+	public void render(Graphics2D g,double screenPos){
+
+		g.translate(xPos+screenPos+getWidth()/2f, yPos+getHeight()/2f);
+		g.rotate(angle);
+		switch(type){
+			case BANANA: g.drawImage(banana, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(340*scale),(int)(200*scale), null);break;
+			case SODA_CAN: g.drawImage(sodaCan,(int)( -getWidth()/2f),(int)( -getHeight()/2f),(int)(200*scale),(int)(250*scale), null);break;
+			case BOTTLE: g.drawImage(bottle, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(200*scale),(int)(375*scale), null);break;
+			case MILK_JUG: g.drawImage(milkJug, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(500*scale),(int)(500*scale), null);break;
+			case SHOPPING_BAG: g.drawImage(shoppingBag, (int)(-getWidth()/2f),(int)( -getHeight()/2f),(int)(395*scale),(int)(450*scale), null);break;
+			case ROPE: g.drawImage(rope, (int)(-getWidth()/2f), (int)(-getHeight()/2f),(int)(500*scale),(int)(500*scale), null);break;
+		}
+		g.rotate(-angle);
+		g.translate(-xPos-screenPos-getWidth()/2f, -yPos-getHeight()/2f);
+		
+	
+	
+}
 
 	 /**
 	  * 
