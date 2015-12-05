@@ -285,7 +285,6 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==ATTACK_HUMAN){
-			crabControl=false;
 			crab.setX(human.getX()+Math.random()*200-100);
 			crab.setY(human.getY()+200+Math.random()*400-200);
 			crab.setSpriteNum(4);
@@ -302,6 +301,7 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==FISH_FLY){
+			crabControl=false;
 			fishX+=fishxVel;
 			fishY+=fishyVel;
 			
