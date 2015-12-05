@@ -77,7 +77,7 @@ public class AnimationCrabThrowTrash extends Character{
 		try {
 			crabs = Util.loadImage("/crabsprite(150x150)ANIMATION.png", this);
 			keyboards=Util.loadImage("/Keyboard.png", this);
-			greenArrow = Util.loadImage("/greenarrow.png", this);
+			greenArrow = Util.loadImage("/greenarrow.png", 150,150,this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

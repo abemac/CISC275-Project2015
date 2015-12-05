@@ -39,17 +39,18 @@ public class CrabSaveGame extends Game {
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
-	private BufferedImage sun,bg,pond;
+	private BufferedImage sun,bg,pond,greenArrow;
 	
 	private ArbitraryLine pondLine,skyLine;
 	private boolean doneAnimationSequence1=false;
+	private boolean doneAnimationSequence2=false;
 	private TheHuman human;
 	private SoundDoer soundDoer= new SoundDoer();
 	
 	private boolean donePlaying=false;
 	private DialogBox dialogBox;
 	
-	private ClockTimer clock = new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
+	private ClockTimer clock ;
 	private Color timerColor=Color.RED;
 	private final Font timerFont = new Font("default",Font.BOLD,200);
 	
@@ -65,10 +66,10 @@ public class CrabSaveGame extends Game {
 		dialogBox=new DialogBox(this);
 		soundDoer.loadClip("/game2song.wav");
 		soundDoer.loadClip("/winsound.wav");
-		soundDoer.playLoadedClip(0);
+		clock= new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
 		clock.setInitialAngle(Math.PI/18f);
-		
-		human = new TheHuman(-Util.getDISTANCE_TO_EDGE()-300, -500);
+		clock.pause();
+		human = new TheHuman(400, -500);
 		
 		
 		
@@ -104,6 +105,7 @@ public class CrabSaveGame extends Game {
 			sun = Util.loadImage("/sun.png", this);
 			bg= Util.loadImage("/Game2Background(smaller).png",Util.getCANVAS_WIDTH_SCALED(),800, this);
 			pond = Util.loadImage("/game2water.png",Util.getCANVAS_WIDTH_SCALED(),500, this);
+			greenArrow = Util.loadImage("/greenarrowright.png",150,150, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -114,6 +116,20 @@ public class CrabSaveGame extends Game {
 	 */
 	@Override
 	public void onTick() {
+		
+		
+		if(!doneAnimationSequence1){
+			human.onTick();
+			if(human.outOfScreen()){
+				doneAnimationSequence1=true;
+				soundDoer.playLoadedClip(0);
+				clock.run();
+			}
+		}
+		
+		else{
+			human.onTick();
+		}
 		if(!donePlaying){
 			crab.onTick();
 			if(pondLine.isBelowLine(crab.getX(), crab.getY()+400)){
@@ -134,10 +150,15 @@ public class CrabSaveGame extends Game {
 			clock.onTick();
 			if(clock.getTimer()<1){
 				clock.setTimer(0);
+				clock.pause();
 				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
 					if(dialogBoxWaiter<30){
 						dialogBoxWaiter++;
-					}else{
+					}
+					else if(!doneAnimationSequence2){
+						doEndAnimation();
+					}
+					else{
 						EstuaryAdventureMain.showMenuCursor();
 						donePlaying=true;
 						dialogBox.setTitle(DialogBox.TITLE_NICE_JOB);
@@ -150,9 +171,13 @@ public class CrabSaveGame extends Game {
 					}
 				}
 			}else if(getNumTrash()==0){
+				clock.pause();
 				if(dialogBoxWaiter<30){
 					dialogBoxWaiter++;
-				}else{
+				}else if(!doneAnimationSequence2){
+					doEndAnimation();
+				}
+				else{
 					EstuaryAdventureMain.showMenuCursor();
 					dialogBox.setTitle(DialogBox.TITLE_GREAT);
 					dialogBox.setKey1("Trash Left: ");
@@ -185,7 +210,30 @@ public class CrabSaveGame extends Game {
 		trash.add(t);
 	}
 	
-	
+	private double xPosArrow=Util.getDISTANCE_TO_EDGE()-300;
+	private double yPosArrow=-250;
+	private double xVelArrow=0;
+	private double xAccArrow=3;
+	private boolean right=true;
+	private boolean doingEndAnimation=false;
+	private final int SHOW_ARROW=0;
+	private int state;
+	private void doEndAnimation(){
+		doingEndAnimation=true;
+		if(crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
+			state=SHOW_ARROW;
+			
+			xVelArrow+=xAccArrow;
+			xPosArrow+=xVelArrow;
+			if(right &&xPosArrow>Util.getDISTANCE_TO_EDGE()-290){
+				xAccArrow=-xAccArrow;
+				right=false;
+			}else if (!right && xPosArrow<Util.getDISTANCE_TO_EDGE()-290){
+				xAccArrow=-xAccArrow;
+				right=true;
+			}
+		}
+	}
 	private void tellCrabToHoldTrash(){
 		Iterator<Trash> i = trash.iterator();
 		while(i.hasNext()){
@@ -229,6 +277,14 @@ public class CrabSaveGame extends Game {
 		clock.render(g);
 		if(donePlaying){
 			dialogBox.render(g);
+		}
+		
+		human.render(g);
+		
+		if(doingEndAnimation){
+			if(state==SHOW_ARROW){
+				g.drawImage(greenArrow, (int)xPosArrow, (int)yPosArrow, null);
+			}
 		}
 		
 		//pondLine.testRender(g); //GOOD
@@ -278,14 +334,16 @@ public class CrabSaveGame extends Game {
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		crab.keyPressed(arg0);
+		if(doneAnimationSequence1)
+			crab.keyPressed(arg0);
 		
 	}
 
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		crab.keyReleased(arg0);
+		if(doneAnimationSequence1)
+			crab.keyReleased(arg0);
 		
 	}
 

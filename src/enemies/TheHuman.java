@@ -22,6 +22,10 @@ public class TheHuman extends Enemy{
 	 */
 	private static final long serialVersionUID = -410465131603543966L;
 	private boolean hasFish;
+	private BufferedImage greenArrow;
+	private long timer=0;
+	
+	private BufferedImage go;
 	
 	/**
 	 * Creates a human with an initial x and y
@@ -39,6 +43,8 @@ public class TheHuman extends Enemy{
 		
 		try {
 			pic = Util.loadImage("/HumanPicFish.png", this);
+			greenArrow = Util.loadImage("/greenarrowflipped.png",150,150, this);
+			go = Util.loadImage("/GO.png", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,21 +53,53 @@ public class TheHuman extends Enemy{
 		
 	}
 
+	private long lastTime=0;
 	/**
 	 * implements act() from enemy
 	 */
 	@Override
-	public void act() {		
-		walk();
+	public void act() {	
+		if(timer>70)
+			walk();
+		
+		if(outOfScreen()){
+			if(lastTime==0)
+				lastTime=timer;
+			
+		}
+		
+		
 		letGoOfFishIfAttackedByCrab();
 		
-		
+		timer++;
 	}
+	
+	private double xPosArrow=xPos+200;
+	private double yPosArrow=-500;
+	private double yVelArrow=0;
+	private double yAccArrow=3;
+	private boolean down=true;
 	/**
 	 * renders graphics
 	 */
 	public void render(Graphics2D g){
-		g.drawImage(human.getSprite(1, spriteNum), (int)xPos, (int)yPos, null);
+		g.drawImage(human.getSprite(1, spriteNum), (int)xPos, (int)yPos,400,600, null);
+		if(outOfScreen() && timer-lastTime<60){
+			g.drawImage(go, -500, -100,800,400, null);
+		}
+		
+		if(!outOfScreen()){
+			g.drawImage(greenArrow, (int)(xPos+200), (int)yPosArrow, null);
+			yVelArrow+=yAccArrow;
+			yPosArrow+=yVelArrow;
+			if(down &&yPosArrow>-450){
+				yAccArrow=-yAccArrow;
+				down=false;
+			}else if (!down && yPosArrow<-450){
+				yAccArrow=-yAccArrow;
+				down=true;
+			}
+		}
 	}
 	/**
 	 * performs  a check to see if it is attacked by the crab.  It then will let got of the fish
@@ -74,7 +112,13 @@ public class TheHuman extends Enemy{
 	 * defines the walking behavior of the human
 	 */
 	public void walk(){
-		
+		if(xPos<Util.getDISTANCE_TO_EDGE()+500){
+			xPos+=10;
+			if(timer%6==0){
+				if(spriteNum==1){spriteNum=2;}
+				else if (spriteNum==2){spriteNum=1;}
+			}
+		}
 	}
 	
 	/**
@@ -83,6 +127,10 @@ public class TheHuman extends Enemy{
 	 */
 	public boolean hasFish(){
 		return hasFish;
+	}
+	
+	public boolean outOfScreen(){
+		return xPos>=Util.getDISTANCE_TO_EDGE();
 	}
 
 }

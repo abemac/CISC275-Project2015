@@ -55,10 +55,21 @@ public class ClockTimer implements Tickable,Renderable{
 		g.translate(-xPos-centerPoint.x, -yPos-centerPoint.y);
 		
 	}
+	
+	private boolean going=true;
+	
+	public void pause(){
+		going=false;
+	}
+	public void run(){
+		going=true;
+	}
 
 	@Override
 	public void onTick() {
-		timer-=1/60.0;
+		if(going){
+			timer-=1/60.0;
+		}
 		if(smooth)
 			handAngle+=2*Math.PI/(60*60);
 		else{
