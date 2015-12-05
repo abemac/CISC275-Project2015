@@ -13,9 +13,9 @@ public class CrabSaveScore extends GameScore {
 		int trashScore = 0;
 		int timeScore=0;
 		double timeLeft = 60-time;
-		trashScore = ((6-getNumTrash)*12);
-		if(timeLeft >= 32){
-			timeScore = 28;
+		trashScore = ((6-getNumTrash)*11);
+		if(timeLeft >= 34){
+			timeScore = 34;
 		}
 		else{
 			timeScore = (int) timeLeft;
