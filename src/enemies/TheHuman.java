@@ -24,6 +24,7 @@ public class TheHuman extends Enemy{
 	private boolean hasFish;
 	private BufferedImage greenArrow;
 	private long timer=0;
+	private double angle=0;
 	
 	private BufferedImage go;
 	
@@ -102,11 +103,16 @@ public class TheHuman extends Enemy{
 		}
 	}
 	public void render(Graphics2D g,double screenPos){
-		g.drawImage(human.getSprite(1, spriteNum), (int)(xPos+screenPos), (int)yPos,400,600, null);
+		g.translate(xPos+screenPos+200, yPos+300);
+		g.rotate(angle);
+		g.drawImage(human.getSprite(1, spriteNum), -200, -300,400,600, null);
+		
+		g.rotate(-angle);
+		g.translate(-xPos-screenPos-200, -yPos-300);
+		
 		if(outOfScreen() && timer-lastTime<60){
 			g.drawImage(go, -500, -100,800,400, null);
 		}
-		
 		if(!outOfScreen()){
 			g.drawImage(greenArrow, (int)(xPos+200+screenPos), (int)yPosArrow, null);
 			yVelArrow+=yAccArrow;
@@ -148,6 +154,12 @@ public class TheHuman extends Enemy{
 		return hasFish;
 	}
 	
+	public double getAngle() {
+		return angle;
+	}
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
 	public boolean outOfScreen(){
 		return xPos>=Util.getDISTANCE_TO_EDGE();
 	}
