@@ -25,8 +25,8 @@ public class TheHuman extends Enemy{
 	private BufferedImage greenArrow;
 	private long timer=0;
 	private double angle=0;
-	
-	private BufferedImage go;
+	private boolean noFishInBag=false;
+	private BufferedImage go,noFish;
 	
 	/**
 	 * Creates a human with an initial x and y
@@ -46,6 +46,7 @@ public class TheHuman extends Enemy{
 			pic = Util.loadImage("/HumanPicFish.png", this);
 			greenArrow = Util.loadImage("/greenarrowflipped.png",150,150, this);
 			go = Util.loadImage("/GO.png", this);
+			noFish=Util.loadImage("/HumanNoFish.png", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,8 +106,10 @@ public class TheHuman extends Enemy{
 	public void render(Graphics2D g,double screenPos){
 		g.translate(xPos+screenPos+200, yPos+300);
 		g.rotate(angle);
-		g.drawImage(human.getSprite(1, spriteNum), -200, -300,400,600, null);
-		
+		if(!noFishInBag)
+			g.drawImage(human.getSprite(1, spriteNum), -200, -300,400,600, null);
+		else
+			g.drawImage(noFish, -200, -300,400,600, null);
 		g.rotate(-angle);
 		g.translate(-xPos-screenPos-200, -yPos-300);
 		
@@ -164,4 +167,7 @@ public class TheHuman extends Enemy{
 		return xPos>=Util.getDISTANCE_TO_EDGE();
 	}
 
+	public void setNoFishInBag(boolean noFishInBag) {
+		this.noFishInBag = noFishInBag;
+	}
 }
