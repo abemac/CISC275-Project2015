@@ -235,12 +235,12 @@ public class CrabSaveGame extends Game {
 	private boolean slowDown=false;
 	private long attackTimer=0;
 	private double rotateVel=0;
-	private boolean drawFish=false;
 	private double fishX;
 	private double fishY;
 	private double fishxVel=20;
 	private double fishyVel=-150;
 	private double fishAngle=0;
+	private boolean crabControl=true;
 	private void doEndAnimation(){
 		doingEndAnimation=true;
 		if(state==SHOW_ARROW&&crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
@@ -282,6 +282,7 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==ATTACK_HUMAN){
+			crabControl=false;
 			crab.setX(human.getX()+Math.random()*200-100);
 			crab.setY(human.getY()+200+Math.random()*400-200);
 			crab.setSpriteNum(4);
@@ -421,7 +422,7 @@ public class CrabSaveGame extends Game {
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		if(doneAnimationSequence1)
+		if(doneAnimationSequence1 && crabControl)
 			crab.keyPressed(arg0);
 		
 	}
@@ -429,7 +430,7 @@ public class CrabSaveGame extends Game {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		if(doneAnimationSequence1)
+		if(doneAnimationSequence1 && crabControl)
 			crab.keyReleased(arg0);
 		
 	}
