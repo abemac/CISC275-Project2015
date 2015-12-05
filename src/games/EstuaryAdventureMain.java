@@ -279,6 +279,11 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				stop(false);
 			}
 		}
+		else if (state==GameState.SHOW_STATS){
+			System.out.println(scoreKeeper.getOverfishingScore().getCalculatedScore());
+			System.out.println(scoreKeeper.getCrabSaveScore().getCalculatedScore());
+			System.out.println(scoreKeeper.getPollutionScore().getCalculatedScore());
+		}
 	}
 	
 	/**

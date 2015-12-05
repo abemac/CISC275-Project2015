@@ -27,4 +27,7 @@ public class CrabSaveScore extends GameScore {
 		}
 		return timeScore+trashScore;
 	}
+	
+	
+	
 }
