@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import scorekeeping.GameScore;
+import scorekeeping.OverfishingScore;
+import scorekeeping.PollutionScore;
 import animation.ClockTimer;
 import characters.Bubble;
 import characters.Game3Crab;
@@ -482,6 +485,12 @@ public class PollutionGame extends Game {
 			dialogBox.mouseMoved(e);
 		}
 		
+	}
+
+
+	@Override
+	public GameScore getScore() {
+		return new PollutionScore(getNumRemoved());
 	}
 
 }

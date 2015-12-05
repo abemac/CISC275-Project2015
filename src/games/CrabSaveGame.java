@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import scorekeeping.CrabSaveScore;
+import scorekeeping.GameScore;
+
 import com.sun.org.apache.xml.internal.resolver.readers.XCatalogReader;
 
 import animation.ClockTimer;
@@ -41,7 +44,7 @@ public class CrabSaveGame extends Game {
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
-	private BufferedImage sun,bg,bg2,pond,greenArrow,pond2;
+	private BufferedImage sun,bg,bg2,pond,greenArrow,pond2,fish;
 	
 	private ArbitraryLine pondLine,skyLine;
 	private boolean doneAnimationSequence1=false;
@@ -71,6 +74,7 @@ public class CrabSaveGame extends Game {
 		clock= new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
 		clock.setInitialAngle(Math.PI/18f);
 		clock.pause();
+		clock.setCountUp(true);
 		screenPos=0;
 		human = new TheHuman(400, -500);
 		
@@ -111,6 +115,7 @@ public class CrabSaveGame extends Game {
 			pond = Util.loadImage("/game2water.png",Util.getCANVAS_WIDTH_SCALED(),500, this);
 			pond2 = Util.loadImage("/game2water2.png",Util.getCANVAS_WIDTH_SCALED(),2000, this);
 			greenArrow = Util.loadImage("/greenarrowright.png",150,150, this);
+			fish = Util.loadImage("/goldfish.png",200,200, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -153,7 +158,7 @@ public class CrabSaveGame extends Game {
 			
 			tellCrabToHoldTrash();
 			clock.onTick();
-			if(clock.getTimer()<1){
+			if(clock.getTimer()>120){
 				//clock.setTimer(0);
 				//clock.pause();
 				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
@@ -223,10 +228,22 @@ public class CrabSaveGame extends Game {
 	private boolean doingEndAnimation=false;
 	private static final int SHOW_ARROW=0;
 	private static final int SLIDE_SCREEN=1;
+	private static final int WAIT_FOR_CRAB_TO_ATTACK_FISH=2;
+	private static final int ATTACK_HUMAN=3;
+	private static final int FISH_FLY=4;
+	private static final int CELEBRATE=5;
 	private double screenPos=0;
 	private double screenPosVel=0;
 	private int state=SHOW_ARROW;
 	private boolean slowDown=false;
+	private long attackTimer=0;
+	private double rotateVel=0;
+	private double fishX;
+	private double fishY;
+	private double fishxVel=20;
+	private double fishyVel=-150;
+	private double fishAngle=0;
+	private boolean crabControl=true;
 	private void doEndAnimation(){
 		doingEndAnimation=true;
 		if(state==SHOW_ARROW&&crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
@@ -251,6 +268,7 @@ public class CrabSaveGame extends Game {
 			else {screenPosVel+=3;
 				if(screenPosVel>=0){
 					screenPosVel=0;
+					state=WAIT_FOR_CRAB_TO_ATTACK_FISH;
 				}
 			
 			}
@@ -260,6 +278,41 @@ public class CrabSaveGame extends Game {
 			crab.setScreenPos(screenPos);
 		}
 		
+		if(state==WAIT_FOR_CRAB_TO_ATTACK_FISH){
+			if(crab.getX()>human.getX()-150){
+				state=ATTACK_HUMAN;
+			}
+		}
+		
+		if(state==ATTACK_HUMAN){
+			crabControl=false;
+			crab.setX(human.getX()+Math.random()*200-100);
+			crab.setY(human.getY()+200+Math.random()*400-200);
+			crab.setSpriteNum(4);
+			attackTimer++;
+			if(attackTimer>30 && human.getAngle()>-Math.PI/2f){
+				crab.setX(-500);
+				crab.setY(250);
+				human.setAngle(human.getAngle()-rotateVel);
+				rotateVel+=.8;
+				
+			}else if (attackTimer>31){
+				state=FISH_FLY;
+			}
+		}
+		
+		if(state==FISH_FLY){
+			fishX+=fishxVel;
+			fishY+=fishyVel;
+			
+			fishyVel+=10;
+			fishAngle+=2;
+			
+			if(fishY>600){
+				fishAngle=-Math.PI/2f;
+				state=CELEBRATE;
+			}
+		}
 	}
 	private void tellCrabToHoldTrash(){
 		Iterator<Trash> i = trash.iterator();
@@ -297,6 +350,7 @@ public class CrabSaveGame extends Game {
 		for(Trash t: trash){
 			t.render(g,screenPos);
 		}
+		human.render(g,screenPos);
 		crab.renderThrownTrash(g,screenPos);
 		
 		g.setColor(timerColor);
@@ -308,13 +362,21 @@ public class CrabSaveGame extends Game {
 			dialogBox.render(g);
 		}
 		
-		human.render(g,screenPos);
+		
 		
 		if(doingEndAnimation){
 			if(state==SHOW_ARROW){
 				g.drawImage(greenArrow, (int)xPosArrow, (int)yPosArrow, null);
 			}
+			if(state==FISH_FLY || state==CELEBRATE){
+				g.translate(fishX+100, fishY+100);
+				g.rotate(fishAngle);
+				g.drawImage(fish, -100, -100, null);
+				g.rotate(-fishAngle);
+				g.translate(-fishX-100, -fishY-100);
+			}
 		}
+		
 		
 		//pondLine.testRender(g); //GOOD
 		//skyLine.testRender(g);  //GOOD
@@ -343,7 +405,11 @@ public class CrabSaveGame extends Game {
 		else return trash.size();
 	}
 
-
+	@Override
+	public GameScore getScore() {
+		
+		return new CrabSaveScore(getNumTrash(), clock.getTimer());
+	}
 	/**
 	 * 
 	 * @return the arrayList of all current Trash objects
@@ -363,7 +429,7 @@ public class CrabSaveGame extends Game {
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		if(doneAnimationSequence1)
+		if(doneAnimationSequence1 && crabControl)
 			crab.keyPressed(arg0);
 		
 	}
@@ -371,7 +437,7 @@ public class CrabSaveGame extends Game {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		if(doneAnimationSequence1)
+		if(doneAnimationSequence1 && crabControl)
 			crab.keyReleased(arg0);
 		
 	}

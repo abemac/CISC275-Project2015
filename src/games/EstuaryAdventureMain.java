@@ -12,13 +12,17 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import animation.CrabSaveAnimation;
-import animation.OverfishingAnimation;
 import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
 import misc.Util;
+import scorekeeping.OverfishingScore;
+import scorekeeping.PollutionScore;
+import scorekeeping.CrabSaveScore;
+import scorekeeping.ScoreKeeper;
 import view.EstuaryView;
+import animation.CrabSaveAnimation;
+import animation.OverfishingAnimation;
 
 /**
  * This main control structure of this game is very similar to an online 
@@ -39,6 +43,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private Thread thread;
 	private EstuaryView view;
 	private GameState state;
+	private ScoreKeeper scoreKeeper = new ScoreKeeper();
 		
 	//Variables used to control updating frequency in run()
 	private long lastTime,now;
@@ -195,7 +200,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			overfishingGame.onTick();
 			if(overfishingGame.isDone()){
 				
-				///**** save GAME 1 stuff here ******/////
+				scoreKeeper.addOverfishingScore((OverfishingScore) overfishingGame.getScore());
 				
 				state = GameState.CRAB_SAVE_GAME_ANIMATION;
 				view.removeKeyListener(overfishingGame);
@@ -243,7 +248,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			crabSaveGame.onTick();
 			if(crabSaveGame.isDone()){
 				
-				///**** save GAME 2 stuff here ******/////
+				scoreKeeper.addCrabSaveScore((CrabSaveScore) crabSaveGame.getScore());
 				state = GameState.POLLUTION_GAME;
 				view.removeKeyListener(crabSaveGame);
 				view.removeMouseListener(crabSaveGame);
@@ -264,7 +269,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 			pollutionGame.onTick();
 			if(pollutionGame.isDone()){
-				///**** save GAME 3 stuff here ******/////
+				scoreKeeper.addPollutionScore((PollutionScore) pollutionGame.getScore());
 				state = GameState.SHOW_STATS;
 				view.removeKeyListener(pollutionGame);
 				view.removeMouseListener(pollutionGame);
