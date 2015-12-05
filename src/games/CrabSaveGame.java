@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import scorekeeping.CrabSaveScore;
+import scorekeeping.GameScore;
+
 import com.sun.org.apache.xml.internal.resolver.readers.XCatalogReader;
 
 import animation.ClockTimer;
@@ -343,7 +346,11 @@ public class CrabSaveGame extends Game {
 		else return trash.size();
 	}
 
-
+	@Override
+	public GameScore getScore() {
+		
+		return new CrabSaveScore(getNumTrash(), clock.getTimer());
+	}
 	/**
 	 * 
 	 * @return the arrayList of all current Trash objects

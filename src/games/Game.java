@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import misc.Renderable;
 import misc.Tickable;
+import scorekeeping.GameScore;
 
 /**
  * Game is an overarching class that implements main loop control the game. It handles calling updates 
@@ -66,6 +67,8 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	public boolean sentStopSignal(){
 		return sendSignal;
 	}
+	
+	public abstract GameScore getScore();
 	
 }
 
