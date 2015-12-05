@@ -41,7 +41,7 @@ public class CrabSaveGame extends Game {
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
-	private BufferedImage sun,bg,bg2,pond,greenArrow,pond2;
+	private BufferedImage sun,bg,bg2,pond,greenArrow,pond2,fish;
 	
 	private ArbitraryLine pondLine,skyLine;
 	private boolean doneAnimationSequence1=false;
@@ -112,6 +112,7 @@ public class CrabSaveGame extends Game {
 			pond = Util.loadImage("/game2water.png",Util.getCANVAS_WIDTH_SCALED(),500, this);
 			pond2 = Util.loadImage("/game2water2.png",Util.getCANVAS_WIDTH_SCALED(),2000, this);
 			greenArrow = Util.loadImage("/greenarrowright.png",150,150, this);
+			fish = Util.loadImage("/goldfish.png",150,150, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -234,6 +235,11 @@ public class CrabSaveGame extends Game {
 	private boolean slowDown=false;
 	private long attackTimer=0;
 	private double rotateVel=0;
+	private boolean drawFish=false;
+	private double fishX;
+	private double fishY;
+	private double fishxVel;
+	private double fishyVel;
 	private void doEndAnimation(){
 		doingEndAnimation=true;
 		if(state==SHOW_ARROW&&crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
