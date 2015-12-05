@@ -77,7 +77,11 @@ public class ClockTimer implements Tickable,Renderable{
 		if(smooth)
 			handAngle+=2*Math.PI/(60*60);
 		else{
-			handAngle=(1-((int)(timer))/60.0)*(2*Math.PI);
+			if(!countUp)
+				handAngle=(1-((int)(timer))/60.0)*(2*Math.PI);
+			else{
+				handAngle=-(1-((int)(timer))/60.0)*(2*Math.PI);
+			}
 		}
 	}
 	

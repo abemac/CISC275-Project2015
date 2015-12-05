@@ -525,7 +525,9 @@ public class Crab extends Character{
 	
 	
 	
-	
+	public void setSpriteNum(int spriteNum) {
+		this.spriteNum = spriteNum;
+	}
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
