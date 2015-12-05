@@ -40,7 +40,7 @@ public class CrabSaveGame extends Game {
 	private TheHuman theHuman;
 	private TrashCan trashCan;
 	
-	
+	private boolean canPickUpTrash=true;
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
@@ -74,7 +74,7 @@ public class CrabSaveGame extends Game {
 		clock= new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
 		clock.setInitialAngle(Math.PI/18f);
 		clock.pause();
-		clock.setCountUp(true);
+		//clock.setCountUp(true);
 		screenPos=0;
 		human = new TheHuman(400, -500);
 		
@@ -156,11 +156,13 @@ public class CrabSaveGame extends Game {
 				t.act();
 			}
 			
-			tellCrabToHoldTrash();
+			if(canPickUpTrash)
+				tellCrabToHoldTrash();
 			clock.onTick();
-			if(clock.getTimer()>120){
-				//clock.setTimer(0);
-				//clock.pause();
+			if(clock.getTimer()<=0){
+				canPickUpTrash=false;
+				clock.setTimer(0);
+				clock.pause();
 				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
 					if(dialogBoxWaiter<30){
 						dialogBoxWaiter++;
@@ -172,16 +174,16 @@ public class CrabSaveGame extends Game {
 						EstuaryAdventureMain.showMenuCursor();
 						dialogBox.setTitle(DialogBox.TITLE_GREAT);
 						dialogBox.setKey1("Trash Left: ");
-						dialogBox.setInfo1("0 pieces        ");
+						dialogBox.setInfo1(getNumTrash()+" pieces        ");
 						dialogBox.setKey2("Your Time: ");
-						dialogBox.setInfo2("      "+((int)clock.getTimer())+"s");
+						dialogBox.setInfo2("      "+(60-(int)clock.getTimer())+"s");
 						dialogBox.setMessageL1("Thanks for helping");
 						dialogBox.setMessageL2("clean up the estuary!");
 						donePlaying=true;
 					}
 				}
 			}else if(getNumTrash()==0){
-				//clock.pause();
+				clock.pause();
 				if(dialogBoxWaiter<30){
 					dialogBoxWaiter++;
 				}else if(!doneAnimationSequence2){
@@ -193,7 +195,7 @@ public class CrabSaveGame extends Game {
 					dialogBox.setKey1("Trash Left: ");
 					dialogBox.setInfo1("0 pieces        ");
 					dialogBox.setKey2("Your Time: ");
-					dialogBox.setInfo2("      "+((int)clock.getTimer())+"s");
+					dialogBox.setInfo2("      "+(60-(int)clock.getTimer())+"s");
 					dialogBox.setMessageL1("Thanks for helping");
 					dialogBox.setMessageL2("clean up the estuary!");
 					donePlaying=true;
