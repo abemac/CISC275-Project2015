@@ -112,7 +112,7 @@ public class CrabSaveGame extends Game {
 			pond = Util.loadImage("/game2water.png",Util.getCANVAS_WIDTH_SCALED(),500, this);
 			pond2 = Util.loadImage("/game2water2.png",Util.getCANVAS_WIDTH_SCALED(),2000, this);
 			greenArrow = Util.loadImage("/greenarrowright.png",150,150, this);
-			fish = Util.loadImage("/goldfish.png",150,150, this);
+			fish = Util.loadImage("/goldfish.png",200,200, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -238,8 +238,9 @@ public class CrabSaveGame extends Game {
 	private boolean drawFish=false;
 	private double fishX;
 	private double fishY;
-	private double fishxVel;
-	private double fishyVel;
+	private double fishxVel=20;
+	private double fishyVel=-150;
+	private double fishAngle=0;
 	private void doEndAnimation(){
 		doingEndAnimation=true;
 		if(state==SHOW_ARROW&&crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
@@ -297,7 +298,16 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==FISH_FLY){
+			fishX+=fishxVel;
+			fishY+=fishyVel;
 			
+			fishyVel+=10;
+			fishAngle+=2;
+			
+			if(fishY>600){
+				fishAngle=-Math.PI/2f;
+				state=CELEBRATE;
+			}
 		}
 	}
 	private void tellCrabToHoldTrash(){
@@ -354,7 +364,15 @@ public class CrabSaveGame extends Game {
 			if(state==SHOW_ARROW){
 				g.drawImage(greenArrow, (int)xPosArrow, (int)yPosArrow, null);
 			}
+			if(state==FISH_FLY || state==CELEBRATE){
+				g.translate(fishX+100, fishY+100);
+				g.rotate(fishAngle);
+				g.drawImage(fish, -100, -100, null);
+				g.rotate(-fishAngle);
+				g.translate(-fishX-100, -fishY-100);
+			}
 		}
+		
 		
 		//pondLine.testRender(g); //GOOD
 		//skyLine.testRender(g);  //GOOD
