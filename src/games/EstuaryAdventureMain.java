@@ -23,6 +23,7 @@ import scorekeeping.ScoreKeeper;
 import view.EstuaryView;
 import animation.CrabSaveAnimation;
 import animation.OverfishingAnimation;
+import animation.PollutionGameAnimation;
 
 /**
  * This main control structure of this game is very similar to an online 
@@ -59,6 +60,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private CrabSaveAnimation crabSaveAnimation;
 	private CrabSaveGame crabSaveGame;
 	private PollutionGame pollutionGame;
+	private PollutionGameAnimation pollutionGameAnimation;
 	
 	private static final BufferedImage blankImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
 	private static final Cursor blankCursor=
@@ -249,12 +251,32 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			if(crabSaveGame.isDone()){
 				
 				scoreKeeper.addCrabSaveScore((CrabSaveScore) crabSaveGame.getScore());
-				state = GameState.POLLUTION_GAME;
+				state = GameState.POLLUTION_GAME_ANIMATION;
 				view.removeKeyListener(crabSaveGame);
 				view.removeMouseListener(crabSaveGame);
 				view.removeMouseMotionListener(crabSaveGame);
 				crabSaveGame=null;
 			}else if(crabSaveGame.sentStopSignal()){
+				stop(false);
+			}
+		}
+		else if (state==GameState.POLLUTION_GAME_ANIMATION){
+			if(pollutionGameAnimation==null){
+				pollutionGameAnimation = new PollutionGameAnimation();
+				view.addMouseListener(pollutionGameAnimation);
+				view.addKeyListener(pollutionGameAnimation);
+				view.addMouseMotionListener(pollutionGameAnimation);
+				lastTime=System.nanoTime();
+				hideCursor();
+			}
+			pollutionGameAnimation.onTick();
+			if(pollutionGameAnimation.isDone()){
+				state = GameState.POLLUTION_GAME;
+				view.removeKeyListener(pollutionGameAnimation);
+				view.removeMouseListener(pollutionGameAnimation);
+				view.removeMouseListener(pollutionGameAnimation);
+				pollutionGameAnimation=null;
+			}else if(pollutionGameAnimation.sentStopSignal()){
 				stop(false);
 			}
 		}
@@ -306,6 +328,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		}
 		else if (state==GameState.CRAB_SAVE_GAME && crabSaveGame!=null){
 			view.render(crabSaveGame);
+		}
+		else if (state==GameState.POLLUTION_GAME_ANIMATION && pollutionGameAnimation!=null){
+			view.render(pollutionGameAnimation);
 		}
 		else if (state==GameState.POLLUTION_GAME && pollutionGame!=null){
 			view.render(pollutionGame);
@@ -377,14 +402,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			state=GameState.CRAB_SAVE_GAME;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_4){
-			state=GameState.POLLUTION_GAME;
+			state=GameState.POLLUTION_GAME_ANIMATION;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_5){
 			state=GameState.POLLUTION_GAME;
 		}
-		if(e.getKeyCode()==KeyEvent.VK_6){
-			state=GameState.POLLUTION_GAME;
-		}
+		
 		
 	}
 
