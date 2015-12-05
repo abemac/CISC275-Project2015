@@ -7,21 +7,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import misc.DialogBox;
+import misc.SeaBottom;
+import misc.SoundDoer;
+import misc.Util;
+import scorekeeping.GameScore;
+import scorekeeping.OverfishingScore;
 import animation.ClockTimer;
 import characters.Fish;
 import enemies.Enemy;
 import enemies.Hook;
 import enemies.Net;
-import misc.DialogBox;
-import misc.Point;
-import misc.SeaBottom;
-import misc.SoundDoer;
-import misc.Tickable;
-import misc.Util;
 
 /*
  * The first game played.  Demonstrates the effects of over-fishing.  Very educational.
@@ -498,6 +497,14 @@ public class OverfishingGame extends Game {
 	}
 	
 	
+
+	@Override
+	public GameScore getScore() {
+		
+		return new OverfishingScore(getDistance(), getNumFish());
+	}
 	
 
 }
+
+
