@@ -234,8 +234,8 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.addMouseListener(crabSaveGame);
 				view.addKeyListener(crabSaveGame);
 				view.addMouseMotionListener(crabSaveGame);
-				lastTime=System.nanoTime();
 				hideCursor();
+				lastTime=System.nanoTime();
 			}
 			crabSaveGame.onTick();
 			if(crabSaveGame.isDone()){
