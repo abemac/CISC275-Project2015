@@ -194,6 +194,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 			overfishingGame.onTick();
 			if(overfishingGame.isDone()){
+				
+				///**** save GAME 1 stuff here ******/////
+				
 				state = GameState.CRAB_SAVE_GAME_ANIMATION;
 				view.removeKeyListener(overfishingGame);
 				view.removeMouseListener(overfishingGame);
@@ -239,6 +242,8 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 			crabSaveGame.onTick();
 			if(crabSaveGame.isDone()){
+				
+				///**** save GAME 2 stuff here ******/////
 				state = GameState.POLLUTION_GAME;
 				view.removeKeyListener(crabSaveGame);
 				view.removeMouseListener(crabSaveGame);
@@ -259,6 +264,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 			pollutionGame.onTick();
 			if(pollutionGame.isDone()){
+				///**** save GAME 3 stuff here ******/////
 				state = GameState.SHOW_STATS;
 				view.removeKeyListener(pollutionGame);
 				view.removeMouseListener(pollutionGame);

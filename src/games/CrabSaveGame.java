@@ -154,8 +154,8 @@ public class CrabSaveGame extends Game {
 			tellCrabToHoldTrash();
 			clock.onTick();
 			if(clock.getTimer()<1){
-				clock.setTimer(0);
-				clock.pause();
+				//clock.setTimer(0);
+				//clock.pause();
 				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
 					if(dialogBoxWaiter<30){
 						dialogBoxWaiter++;
@@ -176,7 +176,7 @@ public class CrabSaveGame extends Game {
 					}
 				}
 			}else if(getNumTrash()==0){
-				clock.pause();
+				//clock.pause();
 				if(dialogBoxWaiter<30){
 					dialogBoxWaiter++;
 				}else if(!doneAnimationSequence2){

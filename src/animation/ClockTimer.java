@@ -20,7 +20,7 @@ public class ClockTimer implements Tickable,Renderable{
 	private boolean smooth=false;
 	
 	private Point centerPoint = new Point(168,147);
-	
+	private boolean countUp=false;
 	private int xPos,yPos;
 	public ClockTimer(int xPos,int yPos){
 		this.xPos=xPos;
@@ -68,7 +68,11 @@ public class ClockTimer implements Tickable,Renderable{
 	@Override
 	public void onTick() {
 		if(going){
-			timer-=1/60.0;
+			if(!countUp)
+				timer-=1/60.0;
+			else{
+				timer+=1/60.0;
+			}
 		}
 		if(smooth)
 			handAngle+=2*Math.PI/(60*60);
@@ -82,6 +86,11 @@ public class ClockTimer implements Tickable,Renderable{
 	}
 	public double getTimer(){
 		return timer;
+	}
+	
+	public void setCountUp(boolean countUp) {
+		this.countUp = countUp;
+		timer=0;
 	}
 	
 	public void setInitialAngle(double initialAngle) {

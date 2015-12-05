@@ -66,6 +66,7 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	public boolean sentStopSignal(){
 		return sendSignal;
 	}
+	
 }
 
 
