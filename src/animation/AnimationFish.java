@@ -137,7 +137,7 @@ public class AnimationFish extends Character {
 				
 		}
 		if(upPressed && !getBack && controllable){
-			yVel=-5;
+			yVel=-6;
 			if(angle>-Math.PI/10.0f)
 				angleVel=-.01;
 			swimSpeed=2;
@@ -271,7 +271,7 @@ public class AnimationFish extends Character {
 	public void render(Graphics2D g){
 		g.translate(getX(), getY());
 		g.rotate(angle);
-		g.drawImage(fish.getSprite(1, spriteNum),0,0,200,200,null);
+		g.drawImage(fish.getSprite(1, spriteNum),0,0,300,300,null);
 		g.rotate(-angle);
 		g.translate(-getX(), -getY());
 	}
@@ -296,6 +296,48 @@ public class AnimationFish extends Character {
 		return hasCollided;
 	}
 	
+	
+	public void stop(){
+		leftPressed=false;
+		rightPressed=false;
+		upPressed=false;
+		downPressed=false;
+		rightReleased=true;
+		leftReleased=true;
+	}
+	
+	public void moveRight(){
+		rightReleased=false;
+		leftReleased=true;
+		rightPressed=true;
+		leftPressed=false;
+		upPressed=false;
+		downPressed=false;
+	}
+	public void moveLeft(){
+		rightReleased=true;
+		leftReleased=false;
+		rightPressed=false;
+		leftPressed=true;
+		upPressed=false;
+		downPressed=false;
+	}
+	public void moveUp(){
+		rightReleased=true;
+		leftReleased=true;
+		rightPressed=false;
+		leftPressed=false;
+		upPressed=true;
+		downPressed=false;
+	}
+	public void moveDown(){
+		rightReleased=true;
+		leftReleased=true;
+		rightPressed=false;
+		leftPressed=false;
+		upPressed=false;
+		downPressed=true;
+	}
 	
 	public boolean isControllable(){
 		return controllable;

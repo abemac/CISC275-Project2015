@@ -64,6 +64,7 @@ public class OverfishingAnimation extends Animation{
 		}});
 		slides.add(new Slide("/Game1AnimationInstructionSlide.png",4){{
 			setFinalSlide(true);
+			setFadeEverything(true);
 		}});
 		
 		crabFish=Util.loadImage("/menuCrabFish.png",Util.getCANVAS_WIDTH_SCALED(),2000, this);
@@ -72,14 +73,21 @@ public class OverfishingAnimation extends Animation{
 		
 		
 	}
-	
+	private boolean finalSlide=false;
 	@Override
 	public void render(Graphics2D g) {
+		if(isOnFinalSlide()){
+			finalSlide=true;
+		}
 		if(slides.get(currentSlide).display(g)){
+			
 			currentSlide++;
 			if(currentSlide<slides.size())
 				slides.get(currentSlide).load();
 			
+		}
+		if(finalSlide){
+			fishAvoidNet.render(g);
 		}
 		if(currentSlide>=slides.size()){
 			setIsDone(true);
@@ -87,9 +95,7 @@ public class OverfishingAnimation extends Animation{
 		if(currentSlide<=3)
 			g.drawImage(crabFish, -Util.getDISTANCE_TO_EDGE(), -1000, null);
 		
-		if(isOnFinalSlide()){
-			fishAvoidNet.render(g);
-		}
+		
 		
 	}
 

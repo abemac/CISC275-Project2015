@@ -38,6 +38,8 @@ public class Slide implements MouseListener,MouseMotionListener {
 	private boolean showSelectedStart=false;
 	private double timeBlackAfterFadeOut=10.0;
 	private String imageString;
+	
+	private boolean fadeEverything=false;
 	/**
 	 * creates a slide that will display an image
 	 * @param image SCALE the image before you put it in here please
@@ -137,7 +139,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    	g.drawImage(selectedStart, 1000, 520,800,500, null);
 	    }
 	    
-	    if(!fadeEveryThingOut || timeDisplayed < time-fade_time_out ){
+	    if(!fadeEverything && (!fadeEveryThingOut || timeDisplayed < time-fade_time_out) ){
 		    g.setComposite(AlphaComposite.getInstance(
 		            AlphaComposite.SRC_OVER, 1.0f));
 	    }
@@ -151,6 +153,9 @@ public class Slide implements MouseListener,MouseMotionListener {
 	 */
 	public void reset(){
 		timeDisplayed=0;
+	}
+	public void setFadeEverything(boolean fadeEverything) {
+		this.fadeEverything = fadeEverything;
 	}
 	
 	private boolean fadeEveryThingOut=false;
