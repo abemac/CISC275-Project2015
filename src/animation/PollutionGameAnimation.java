@@ -15,7 +15,9 @@ public class PollutionGameAnimation extends Animation{
 	private static final long serialVersionUID = -4268209084988036700L;
 	private int currentSlide=0;
 	
+	private AnimationBlowBubble blowBubble;
 	public PollutionGameAnimation(){
+		blowBubble=new AnimationBlowBubble();
 		try {
 			init();
 		} catch (IOException e) {
@@ -45,8 +47,7 @@ public class PollutionGameAnimation extends Animation{
 	@Override
 	public void onTick() {
 		if(isOnFinalSlide()){
-			//throwAnimation.onTick();
-			//pickUpAnimation.onTick();
+			blowBubble.onTick();
 		}
 		
 	}
@@ -57,8 +58,12 @@ public class PollutionGameAnimation extends Animation{
 	}
 	
 	
+	private boolean onLastSlide=false;
 	@Override
 	public void render(Graphics2D g) {
+		if(isOnFinalSlide()){
+			onLastSlide=true;
+		}
 		if(slides.get(currentSlide).display(g)){
 			currentSlide++;
 			if(currentSlide<slides.size())
@@ -69,9 +74,8 @@ public class PollutionGameAnimation extends Animation{
 			setIsDone(true);
 		}
 		
-		if(isOnFinalSlide()){
-			//throwAnimation.render(g);
-			//pickUpAnimation.render(g);
+		if(onLastSlide){
+			blowBubble.render(g);
 		}
 		
 	}
