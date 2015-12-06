@@ -287,6 +287,8 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==ATTACK_HUMAN){
+			crabControl=false;
+			crab.stopMoving();
 			crab.setX(human.getX()+Math.random()*200-100);
 			crab.setY(human.getY()+200+Math.random()*400-200);
 			crab.setSpriteNum(4);
@@ -304,6 +306,8 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==FISH_FLY){
+			crabControl=false;
+			crab.stopMoving();
 			human.setNoFishInBag(true);
 			crabControl=false;
 			
@@ -327,6 +331,8 @@ public class CrabSaveGame extends Game {
 			}
 		}
 		if(state==CELEBRATE){
+			crabControl=false;
+			crab.stopMoving();
 			if(attackTimer>60){
 				doingEndAnimation=false;
 				doneAnimationSequence2=true;
