@@ -137,6 +137,10 @@ public class Slide implements MouseListener,MouseMotionListener {
 	    	g.drawImage(selectedStart, 1000, 520,800,500, null);
 	    }
 	    
+	    if(!fadeEveryThingOut || timeDisplayed < time-fade_time_out ){
+		    g.setComposite(AlphaComposite.getInstance(
+		            AlphaComposite.SRC_OVER, 1.0f));
+	    }
 		return (timeDisplayed>=time+timeBlackAfterFadeOut);
 		
 	}
@@ -149,7 +153,10 @@ public class Slide implements MouseListener,MouseMotionListener {
 		timeDisplayed=0;
 	}
 	
-	
+	private boolean fadeEveryThingOut=false;
+	public void setFadeEveryThingOut(boolean fadeEveryThing) {
+		this.fadeEveryThingOut = fadeEveryThing;
+	}
 	
 	public void setTimeBlackAfterFadeOut(double timeBlackAfterFadeOut) {
 		this.timeBlackAfterFadeOut = timeBlackAfterFadeOut;

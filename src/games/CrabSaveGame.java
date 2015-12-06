@@ -299,26 +299,39 @@ public class CrabSaveGame extends Game {
 				
 			}else if (attackTimer>31){
 				state=FISH_FLY;
+				attackTimer=0;
 			}
 		}
 		
 		if(state==FISH_FLY){
 			human.setNoFishInBag(true);
 			crabControl=false;
-			fishX+=fishxVel;
-			fishY+=fishyVel;
 			
-			fishyVel+=10;
-			fishAngle+=2;
+			if(fishY<300){
+				fishX+=fishxVel;
+				fishY+=fishyVel;
+				
+				fishyVel+=10;
+				fishAngle+=1;
+			}else{
+				fishX+=fishxVel;
+				fishY+=fishyVel;
+				
+				fishyVel-=80;
+				fishAngle+=1;
+			}
 			
 			if(fishY>600){
-				fishAngle=-Math.PI/2f;
+				fishAngle=0;
 				state=CELEBRATE;
 			}
 		}
 		if(state==CELEBRATE){
-			doingEndAnimation=false;
-			doneAnimationSequence2=true;
+			if(attackTimer>60){
+				doingEndAnimation=false;
+				doneAnimationSequence2=true;
+			}
+			attackTimer++;
 		}
 	}
 	private void tellCrabToHoldTrash(){

@@ -1,16 +1,13 @@
 package animation;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import misc.Renderable;
 import misc.SoundDoer;
-import misc.Tickable;
 import misc.Util;
 
 public class OverfishingAnimation extends Animation{
@@ -25,8 +22,12 @@ public class OverfishingAnimation extends Animation{
 	private ArrayList<Slide> slides;
 	private int currentSlide=0;
 	private SoundDoer soundDoer = new SoundDoer();
+	private BufferedImage crabFish;
+	
+	private AnimationFishAvoidNet fishAvoidNet;
 	
 	public OverfishingAnimation(){
+		fishAvoidNet = new AnimationFishAvoidNet();
 		try {
 			init();
 		} catch (IOException e) {
@@ -41,22 +42,31 @@ public class OverfishingAnimation extends Animation{
 			setFadeIn(false);
 			setFadeOutTime(1.0);
 		}});
-		slides.add(new Slide("/Black.png", 1));
+		//slides.add(new Slide("/Black.png", 1));
 		slides.add(new Slide("/Game1AnimationText1.png", 4));
 		slides.add(new Slide("/Game1AnimationText2.png", 4));
-		slides.add(new Slide("/Game1AnimationText3.png", 4));
-		slides.add(new Slide("/Black.png", 1));
+		slides.add(new Slide("/Game1AnimationText3.png", 4){{
+			setFadeEveryThingOut(true);
+		}});
+		slides.add(new Slide("/Black.png", 1){{
+			
+		}});
 		slides.add(new Slide("/Game1AnimationSlide1.png", 4));
 		slides.add(new Slide("/Game1AnimationSlide2.png", 4));
 		slides.add(new Slide("/Game1AnimationSlide3.png", 4));
 		slides.add(new Slide("/Game1AnimationSlide4.png", 4){{
+			
 		}});
 		//slides.add(new Slide("/Game1AnimationSlide5.png", 6){{
 		//}});
-		slides.add(new Slide("/Black.png", 1));
+		slides.add(new Slide("/Black.png", 1){{
+			
+		}});
 		slides.add(new Slide("/Game1AnimationInstructionSlide.png",4){{
 			setFinalSlide(true);
 		}});
+		
+		crabFish=Util.loadImage("/menuCrabFish.png",Util.getCANVAS_WIDTH_SCALED(),2000, this);
 		
 		slides.get(0).load();
 		
@@ -74,13 +84,21 @@ public class OverfishingAnimation extends Animation{
 		if(currentSlide>=slides.size()){
 			setIsDone(true);
 		}
+		if(currentSlide<=3)
+			g.drawImage(crabFish, -Util.getDISTANCE_TO_EDGE(), -1000, null);
+		
+		if(isOnFinalSlide()){
+			fishAvoidNet.render(g);
+		}
 		
 	}
 
 
 	@Override
 	public void onTick() {
-		
+		if(isOnFinalSlide()){
+			fishAvoidNet.onTick();
+		}
 		
 	}
 
@@ -94,6 +112,9 @@ public class OverfishingAnimation extends Animation{
 	}
 
 
+	private boolean isOnFinalSlide(){
+		return currentSlide==slides.size()-1;
+	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
