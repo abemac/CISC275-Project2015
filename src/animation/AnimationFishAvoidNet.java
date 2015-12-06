@@ -26,7 +26,7 @@ public class AnimationFishAvoidNet implements Tickable,Renderable {
 		int baseY=200;
 		animationFish = new AnimationFish(100+baseX, -100+baseY, 0, 3);
 		animationFish2 = new AnimationFish(250+baseX, baseY, 0, 0);
-		animationFish3 = new AnimationFish(50+baseX, 50+baseY, 0, 7);
+		animationFish3 = new AnimationFish(50+baseX, 50+baseY, 0, 5);
 		hook = new AnimationHook(Util.getDISTANCE_TO_EDGE()-800, -1500, Hook.DOUBLE_2);
 		
 		BufferedImage keyboards = null;
@@ -68,6 +68,9 @@ public class AnimationFishAvoidNet implements Tickable,Renderable {
 	public void onTick() {
 		
 		if(state==WAIT_0){
+			animationFish.stop();
+			animationFish2.stop();
+			animationFish3.stop();
 			keyNum=1;
 			if(timer>60){state=MOVE_RIGHT;timer=0;
 			animationFish.stop();
