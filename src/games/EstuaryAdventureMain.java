@@ -320,6 +320,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseListener(stats);
 				view.removeMouseListener(stats);
 				stats=null;
+				showMenuCursor();
 			}
 		}
 	}
