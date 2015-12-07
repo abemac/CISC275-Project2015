@@ -173,10 +173,17 @@ public class AnimationGame3Crab extends Character{
 		rightPressed=false;
 		upPressed=false;
 		downPressed=false;
+		spriteCol=1;
+		spriteRow=1;
 		//rightReleased=true;
 		//leftReleased=true;
 	}
-	
+	public void pressSpace(){
+		spacePressed=true;
+	}
+	public void releaseSpace(){
+		spacePressed=false;
+	}
 	public void moveRight(){
 		//rightReleased=false;
 		//leftReleased=true;
@@ -191,6 +198,12 @@ public class AnimationGame3Crab extends Character{
 		rightPressed=false;
 		leftPressed=true;
 		upPressed=false;
+		downPressed=false;
+	}
+	public void pressUp(){
+		rightPressed=false;
+		leftPressed=false;
+		upPressed=true;
 		downPressed=false;
 	}
 	public void jump(){

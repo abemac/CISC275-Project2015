@@ -28,9 +28,16 @@ public class PollutionGameAnimation extends Animation{
 	
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-		slides.add(new Slide("/Game3Animation1.png", 4));
-		slides.add(new Slide("/Game3Animation2.png", 6));
-		slides.add(new Slide("/Game3Animation3.png", 4));
+		slides.add(new Slide("/Game3Animation1.png", 4){{
+			setFadeOut(false);
+		}});
+		slides.add(new Slide("/Game3Animation2.png", 6){{
+			setFadeIn(false);
+			setFadeOut(false);
+		}});
+		slides.add(new Slide("/Game3Animation3.png", 4){{
+			setFadeIn(false);
+		}});
 		slides.add(new Slide("/Game3AnimationInstructionSlide.png", 4){{
 			setFinalSlide(true);
 			setFadeEverything(true);
