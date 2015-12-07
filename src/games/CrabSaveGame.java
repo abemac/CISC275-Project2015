@@ -40,7 +40,7 @@ public class CrabSaveGame extends Game {
 	private TheHuman theHuman;
 	private TrashCan trashCan;
 	
-	
+	private boolean canPickUpTrash=true;
 	private Crab crab;
 	private Color sand = new Color(255,237,108);
 	private Color sky = new Color(130,202,255);
@@ -74,7 +74,7 @@ public class CrabSaveGame extends Game {
 		clock= new ClockTimer(Util.getDISTANCE_TO_EDGE()-330, -990);
 		clock.setInitialAngle(Math.PI/18f);
 		clock.pause();
-		clock.setCountUp(true);
+		//clock.setCountUp(true);
 		screenPos=0;
 		human = new TheHuman(400, -500);
 		
@@ -156,11 +156,13 @@ public class CrabSaveGame extends Game {
 				t.act();
 			}
 			
-			tellCrabToHoldTrash();
+			if(canPickUpTrash)
+				tellCrabToHoldTrash();
 			clock.onTick();
-			if(clock.getTimer()>120){
-				//clock.setTimer(0);
-				//clock.pause();
+			if(clock.getTimer()<=0){
+				canPickUpTrash=false;
+				clock.setTimer(0);
+				clock.pause();
 				if(!(crab.isHoldingTrash()|| crab.isThrowingTrash())){
 					if(dialogBoxWaiter<30){
 						dialogBoxWaiter++;
@@ -172,16 +174,16 @@ public class CrabSaveGame extends Game {
 						EstuaryAdventureMain.showMenuCursor();
 						dialogBox.setTitle(DialogBox.TITLE_GREAT);
 						dialogBox.setKey1("Trash Left: ");
-						dialogBox.setInfo1("0 pieces        ");
+						dialogBox.setInfo1(getNumTrash()+" pieces        ");
 						dialogBox.setKey2("Your Time: ");
-						dialogBox.setInfo2("      "+((int)clock.getTimer())+"s");
+						dialogBox.setInfo2("      "+(60-(int)clock.getTimer())+"s");
 						dialogBox.setMessageL1("Thanks for helping");
 						dialogBox.setMessageL2("clean up the estuary!");
 						donePlaying=true;
 					}
 				}
 			}else if(getNumTrash()==0){
-				//clock.pause();
+				clock.pause();
 				if(dialogBoxWaiter<30){
 					dialogBoxWaiter++;
 				}else if(!doneAnimationSequence2){
@@ -193,7 +195,7 @@ public class CrabSaveGame extends Game {
 					dialogBox.setKey1("Trash Left: ");
 					dialogBox.setInfo1("0 pieces        ");
 					dialogBox.setKey2("Your Time: ");
-					dialogBox.setInfo2("      "+((int)clock.getTimer())+"s");
+					dialogBox.setInfo2("      "+(60-(int)clock.getTimer())+"s");
 					dialogBox.setMessageL1("Thanks for helping");
 					dialogBox.setMessageL2("clean up the estuary!");
 					donePlaying=true;
@@ -285,6 +287,8 @@ public class CrabSaveGame extends Game {
 		}
 		
 		if(state==ATTACK_HUMAN){
+			crabControl=false;
+			crab.stopMoving();
 			crab.setX(human.getX()+Math.random()*200-100);
 			crab.setY(human.getY()+200+Math.random()*400-200);
 			crab.setSpriteNum(4);
@@ -297,26 +301,43 @@ public class CrabSaveGame extends Game {
 				
 			}else if (attackTimer>31){
 				state=FISH_FLY;
+				attackTimer=0;
 			}
 		}
 		
 		if(state==FISH_FLY){
+			crabControl=false;
+			crab.stopMoving();
 			human.setNoFishInBag(true);
 			crabControl=false;
-			fishX+=fishxVel;
-			fishY+=fishyVel;
 			
-			fishyVel+=10;
-			fishAngle+=2;
+			if(fishY<300){
+				fishX+=fishxVel;
+				fishY+=fishyVel;
+				
+				fishyVel+=10;
+				fishAngle+=1;
+			}else{
+				fishX+=fishxVel;
+				fishY+=fishyVel;
+				
+				fishyVel-=80;
+				fishAngle+=1;
+			}
 			
 			if(fishY>600){
-				fishAngle=-Math.PI/2f;
+				fishAngle=0;
 				state=CELEBRATE;
 			}
 		}
 		if(state==CELEBRATE){
-			doingEndAnimation=false;
-			doneAnimationSequence2=true;
+			crabControl=false;
+			crab.stopMoving();
+			if(attackTimer>60){
+				doingEndAnimation=false;
+				doneAnimationSequence2=true;
+			}
+			attackTimer++;
 		}
 	}
 	private void tellCrabToHoldTrash(){

@@ -30,7 +30,7 @@ public class CrabSaveAnimation extends Animation{
 	}
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
-		slides.add(new Slide("/Black.png", 1));
+		//slides.add(new Slide("/Black.png", 1));
 		slides.add(new Slide("/Game2AnimationSlide1.png", 5));
 		slides.add(new Slide("/Game2AnimationSlide2.png", 5));
 		slides.add(new Slide("/Game2AnimationInstructionSlide1.png", 5));
@@ -38,6 +38,7 @@ public class CrabSaveAnimation extends Animation{
 		slides.add(new Slide("/Game2AnimationInstructionSlide2.png", 5));
 		slides.add(new Slide("/Game2AnimationInstructionSlide3.png", 4){{
 			setFinalSlide(true);
+			setFadeEverything(true);
 		}});
 		
 		slides.get(0).load();
@@ -57,8 +58,12 @@ public class CrabSaveAnimation extends Animation{
 		return currentSlide==slides.size()-1;
 	}
 	
+	private boolean onFinalSlide=false;
 	@Override
 	public void render(Graphics2D g) {
+		if(isOnFinalSlide()){
+			onFinalSlide=true;
+		}
 		if(slides.get(currentSlide).display(g)){
 			currentSlide++;
 			if(currentSlide<slides.size())
@@ -69,7 +74,7 @@ public class CrabSaveAnimation extends Animation{
 			setIsDone(true);
 		}
 		
-		if(isOnFinalSlide()){
+		if(onFinalSlide){
 			throwAnimation.render(g);
 			pickUpAnimation.render(g);
 		}

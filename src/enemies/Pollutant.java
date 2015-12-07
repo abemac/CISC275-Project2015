@@ -27,6 +27,7 @@ public class Pollutant extends Enemy {
 	 * constant for oil
 	 */
 	public static final int OIL = 0;
+	public static final int OIL_ANIMATION = -1;
 	/**
 	 * constant for sewage
 	 */
@@ -81,6 +82,13 @@ public class Pollutant extends Enemy {
 		if(type == OIL && oil==null){
 			try {
 				oil=Util.loadImage("/oilspill.png", this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if(type == OIL_ANIMATION && oil==null){
+			try {
+				oil=Util.loadImage("/oilspillANIMATION.png", this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -151,7 +159,7 @@ public class Pollutant extends Enemy {
 		
 		if(type==FERTILIZER){
 			g.drawImage(fertilizer, 0,0, null);
-		}else if(type==OIL){
+		}else if(type==OIL || type==OIL_ANIMATION){
 			g.drawImage(oil, 0,0, null);
 		}
 		else if(type==SEWAGE){

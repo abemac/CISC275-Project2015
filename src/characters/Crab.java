@@ -271,6 +271,13 @@ public class Crab extends Character{
 	}
 	
 	
+	public void stopMoving(){
+		leftPressed=false;
+		upPressed=false;
+		downPressed=false;
+		rightPressed=false;
+	}
+	
 	private void calculateBarLength(){
 		barLength=(int)((400+yPos/2.5)*
 				(timeHeld/NANOS_MAX));
