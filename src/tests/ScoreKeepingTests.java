@@ -2,6 +2,7 @@ package tests;
 
 import junit.framework.TestCase;
 
-public class AnimationTests extends TestCase {
+public class ScoreKeepingTests extends TestCase{
 
+	
 }
