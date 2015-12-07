@@ -1,5 +1,7 @@
 package tests;
 
-public class ScoreKeepingTests {
+import junit.framework.TestCase;
+
+public class ScoreKeepingTests extends TestCase{
 
 }
