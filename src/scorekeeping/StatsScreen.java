@@ -26,18 +26,18 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	private int CSScore;
 	private int PScore;
 	private int avg;
-	private Color barColor = Color.BLUE;
-	private Color timerColor=Color.BLUE;
+	private Color barColor = new Color(125,112,165);
+	private Color timerColor=new Color(178,170,236);
 	private final Font timerFont = new Font("default",Font.BOLD,70);
 	
 	public StatsScreen(ScoreKeeper scorekeeper) {
 		loadRes();
-		OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
-		CSScore = scorekeeper.getCrabSaveScore().getCalculatedScore();
-		PScore = scorekeeper.getPollutionScore().getCalculatedScore();
-//		OFScore=75;
-//		CSScore = 50;
-//		PScore = 100;
+//		OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
+//		CSScore = scorekeeper.getCrabSaveScore().getCalculatedScore();
+//		PScore = scorekeeper.getPollutionScore().getCalculatedScore();
+		OFScore=75;
+		CSScore = 50;
+		PScore = 100;
 		avg=(OFScore+CSScore+PScore)/3;
 		bar1Pos=-xAxisPos;
 		bar2Pos=-xAxisPos;
@@ -64,9 +64,6 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	public void render(Graphics2D g) {
 		g.drawImage(bg, -Util.getDISTANCE_TO_EDGE(), -1000, null);
 		
-		g.setComposite(AlphaComposite.getInstance(
-	            AlphaComposite.SRC_OVER, 0.5f));
-	    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 	    g.setColor(barColor);
 	    g.fillRect((int)(-Util.getDISTANCE_TO_EDGE()/1.4f),(int)( xAxisPos-bar1Pos),350,(int)( xAxisPos+bar1Pos));
 	    g.fillRect((int)(-Util.getDISTANCE_TO_EDGE()/3.5f),(int)( xAxisPos-bar2Pos),350,(int)( xAxisPos+bar2Pos));
@@ -75,7 +72,7 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	    
 	    
 	    g.setFont(timerFont);
-	    g.setColor(timerColor);
+	 //   g.setColor(timerColor);
 	    Util.drawCenteredString(""+(int)((bar1Pos+xAxisPos)/scale+1),(int)(-Util.getDISTANCE_TO_EDGE()/1.4f+170),(int)(xAxisPos-bar1Pos)-20,g);
 	    Util.drawCenteredString(""+(int)((bar2Pos+xAxisPos)/scale+1),(int)(-Util.getDISTANCE_TO_EDGE()/3.5f+170),(int)(xAxisPos-bar2Pos)-20,g);
 	    Util.drawCenteredString(""+(int)((bar3Pos+xAxisPos)/scale+1),(int)(Util.getDISTANCE_TO_EDGE()/7f+170),(int)(xAxisPos-bar3Pos)-20,g);
