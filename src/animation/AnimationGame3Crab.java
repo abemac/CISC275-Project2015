@@ -173,8 +173,8 @@ public class AnimationGame3Crab extends Character{
 		rightPressed=false;
 		upPressed=false;
 		downPressed=false;
-		spriteCol=1;
-		spriteRow=1;
+		//spriteCol=1;
+		//spriteRow=1;
 		//rightReleased=true;
 		//leftReleased=true;
 	}

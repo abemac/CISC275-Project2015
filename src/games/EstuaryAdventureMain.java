@@ -157,6 +157,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.addMouseListener(menu);
 				view.addKeyListener(menu);
 				view.addMouseMotionListener(menu);
+				lastTime=System.nanoTime();
 			}
 			menu.onTick();
 			if(menu.isDone()){
