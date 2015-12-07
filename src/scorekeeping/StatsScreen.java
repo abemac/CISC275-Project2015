@@ -2,6 +2,7 @@ package scorekeeping;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
@@ -26,15 +27,17 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	private int PScore;
 	private int avg;
 	private Color barColor = Color.BLUE;
+	private Color timerColor=Color.GREEN;
+	private final Font timerFont = new Font("default",Font.BOLD,200);
 	
 	public StatsScreen(ScoreKeeper scorekeeper) {
 		loadRes();
-		OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
-		CSScore = scorekeeper.getCrabSaveScore().getCalculatedScore();
-		PScore = scorekeeper.getPollutionScore().getCalculatedScore();
-		//OFScore=100;
-		//CSScore = 100;
-		//PScore = 100;
+//		OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
+//		CSScore = scorekeeper.getCrabSaveScore().getCalculatedScore();
+//		PScore = scorekeeper.getPollutionScore().getCalculatedScore();
+		OFScore=75;
+		CSScore = 50;
+		PScore = 100;
 		avg=(OFScore+CSScore+PScore)/3;
 		bar1Pos=-xAxisPos;
 		bar2Pos=-xAxisPos;
@@ -69,6 +72,11 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	    g.fillRect((int)(-Util.getDISTANCE_TO_EDGE()/3.5f),(int)( xAxisPos-bar2Pos),350,(int)( xAxisPos+bar2Pos));
 	    g.fillRect((int)(Util.getDISTANCE_TO_EDGE()/7f),(int)( xAxisPos-bar3Pos),350,(int)( xAxisPos+bar3Pos));
 	    g.fillRect((int)(Util.getDISTANCE_TO_EDGE()/1.85f),(int)( xAxisPos-bar4Pos),350,(int)( xAxisPos+bar4Pos));
+	    
+	    
+	    g.setFont(timerFont);
+	    g.setColor(timerColor);
+	    g.drawString(""+(int)(bar1Pos/scale),(int)(-Util.getDISTANCE_TO_EDGE()/1.4f+200),(int)bar1Pos);
 	}
 	@Override
 	public void onTick() {
