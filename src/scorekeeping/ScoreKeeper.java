@@ -6,6 +6,17 @@ public class ScoreKeeper {
 	private PollutionScore pollutionScore;
 	private CrabSaveScore crabSaveScore;
 	
+	public boolean hasOverfishingScore(){
+		return overfishingScore!=null;
+	}
+	
+	public boolean hasPollutionScore(){
+		return pollutionScore!=null;
+	}
+	public boolean hasCrabSaveScore(){
+		return crabSaveScore!=null;
+	}
+	
 	public void addOverfishingScore(OverfishingScore score){
 		this.overfishingScore = score;
 	}

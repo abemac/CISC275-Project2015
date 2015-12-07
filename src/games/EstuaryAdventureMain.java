@@ -20,6 +20,7 @@ import scorekeeping.OverfishingScore;
 import scorekeeping.PollutionScore;
 import scorekeeping.CrabSaveScore;
 import scorekeeping.ScoreKeeper;
+import scorekeeping.StatsScreen;
 import view.EstuaryView;
 import animation.CrabSaveAnimation;
 import animation.OverfishingAnimation;
@@ -61,6 +62,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	private CrabSaveGame crabSaveGame;
 	private PollutionGame pollutionGame;
 	private PollutionGameAnimation pollutionGameAnimation;
+	private StatsScreen stats;
 	
 	private static final BufferedImage blankImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
 	private static final Cursor blankCursor=
@@ -303,9 +305,22 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			}
 		}
 		else if (state==GameState.SHOW_STATS){
-			System.out.println(scoreKeeper.getOverfishingScore().getCalculatedScore());
-			System.out.println(scoreKeeper.getCrabSaveScore().getCalculatedScore());
-			System.out.println(scoreKeeper.getPollutionScore().getCalculatedScore());
+			if(stats==null){
+				stats = new StatsScreen(scoreKeeper);
+				view.addMouseListener(stats);
+				view.addKeyListener(stats);
+				view.addMouseMotionListener(stats);
+				lastTime=System.nanoTime();
+				hideCursor();
+			}
+			stats.onTick();
+			if(stats.isDone()){
+				state = GameState.MENU_SCREEN;
+				view.removeKeyListener(stats);
+				view.removeMouseListener(stats);
+				view.removeMouseListener(stats);
+				stats=null;
+			}
 		}
 	}
 	
@@ -335,6 +350,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		}
 		else if (state==GameState.POLLUTION_GAME && pollutionGame!=null){
 			view.render(pollutionGame);
+		}
+		else if (state==GameState.SHOW_STATS && stats!=null){
+			view.render(stats);
 		}
 		
 	}
@@ -407,8 +425,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		}
 		if(e.getKeyCode()==KeyEvent.VK_5){
 			state=GameState.POLLUTION_GAME;
+		}if(e.getKeyCode()==KeyEvent.VK_6){
+			state=GameState.SHOW_STATS;
 		}
-		
 		
 	}
 
