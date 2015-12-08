@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.junit.Ignore;
+
 import misc.DialogBox;
 import misc.SeaBottom;
 import misc.SoundDoer;
@@ -21,6 +23,7 @@ import characters.Fish;
 import enemies.Enemy;
 import enemies.Hook;
 import enemies.Net;
+import main.EstuaryAdventureMain;
 
 /*
  * The first game played.  Demonstrates the effects of over-fishing.  Very educational.
@@ -349,6 +352,7 @@ public class OverfishingGame extends Game {
 	/**
 	 * checks for a collision between fish and enemy and adds 1 to numFishLost if true
 	 */
+	@Ignore
 	private void checkAndRemoveFish(){
 		for(Enemy e : enemies){
 			Iterator<Fish> i = school.iterator();

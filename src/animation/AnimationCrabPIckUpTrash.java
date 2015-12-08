@@ -64,7 +64,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 	 * @param angriness the initial angriness
 	 */
 	public AnimationCrabPIckUpTrash() {
-		super(-100, -500, 100);
+		super(-100, -500);
 		loadRes();
 		trash2.setScale(1);
 	

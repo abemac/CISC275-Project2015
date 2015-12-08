@@ -37,8 +37,8 @@ public class AnimationGame3Crab extends Character{
 	 */
 	private static final long serialVersionUID = -8431818079245300953L;
 
-	public AnimationGame3Crab(double xPos, int health,int yPos) {
-		super(xPos, yPos, health);
+	public AnimationGame3Crab(double xPos,int yPos) {
+		super(xPos, yPos);
 		initialYPos=yPos;
 		loadRes();
 		

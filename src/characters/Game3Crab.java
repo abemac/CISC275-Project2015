@@ -33,8 +33,8 @@ public class Game3Crab extends Character{
 	 */
 	private static final long serialVersionUID = -8431818079245300953L;
 
-	public Game3Crab(double xPos, int health,ArbitraryLine seaFloor) {
-		super(xPos, seaFloor.getYatXPos(xPos+150)-200, health);
+	public Game3Crab(double xPos,ArbitraryLine seaFloor) {
+		super(xPos, seaFloor.getYatXPos(xPos+150)-200);
 		loadRes();
 		this.seaFloor=seaFloor;
 	}

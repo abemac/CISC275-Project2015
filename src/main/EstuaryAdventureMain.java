@@ -1,4 +1,4 @@
-package games;
+package main;
 
 import java.awt.AWTException;
 import java.awt.Cursor;
@@ -17,6 +17,9 @@ import javax.swing.JFrame;
 import animation.CrabSaveAnimation;
 import animation.OverfishingAnimation;
 import animation.PollutionGameAnimation;
+import games.CrabSaveGame;
+import games.OverfishingGame;
+import games.PollutionGame;
 import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;

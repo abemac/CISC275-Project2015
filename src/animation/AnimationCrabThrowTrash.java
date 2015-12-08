@@ -63,7 +63,7 @@ public class AnimationCrabThrowTrash extends Character{
 	 * @param angriness the initial angriness
 	 */
 	public AnimationCrabThrowTrash() {
-		super(900, 110, 100);
+		super(900, 110);
 		loadRes();
 	
 		

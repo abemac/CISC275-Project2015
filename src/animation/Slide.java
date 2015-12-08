@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import games.EstuaryAdventureMain;
+import main.EstuaryAdventureMain;
 import misc.RectBounds;
 import misc.Util;
 

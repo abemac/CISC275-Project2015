@@ -55,10 +55,6 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 	public void setIsDone(boolean b){
 		isDone=b;
 	}
-	/**
-	 * saves the current game state to a file
-	 */
-	public void saveGameState(){};
 	
 	public void sendStopSignal(){
 		sendSignal=true;
