@@ -213,7 +213,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 	private static final int WIDE_EYES=2;
 	private int state=MOVE_TOWARDS_TRASH_LEFT;
 	private int waitTime=0;
-	private void executeAnimationSequence() {
+	public void executeAnimationSequence() {
 		if(state==MOVE_TOWARDS_TRASH_LEFT){
 			
 			if(waitTime>60){
@@ -268,7 +268,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 		
 	}
 
-	private void accumulateTime(){
+	public void accumulateTime(){
 		
 			if(timeSpacePressed==-1){
 				timeSpacePressed=System.nanoTime();
