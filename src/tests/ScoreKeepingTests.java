@@ -2,6 +2,7 @@ package tests;
 
 import scorekeeping.CrabSaveScore;
 import scorekeeping.OverfishingScore;
+import scorekeeping.PollutionScore;
 import junit.framework.TestCase;
 
 public class ScoreKeepingTests extends TestCase{
@@ -29,6 +30,29 @@ public class ScoreKeepingTests extends TestCase{
 		assertTrue(overfishingScore4.getDistance()==260);
 		assertTrue(overfishingScore4.getnumFishLeft()==15);
 		assertTrue(overfishingScore4.getCalculatedScore()==100);
+	}
+	
+	public void testPollutionScore(){
+		PollutionScore pollutionScore = new PollutionScore(1);
+		PollutionScore pollutionScore0 = new PollutionScore(9);
+		PollutionScore pollutionScore1 = new PollutionScore(18);
+		PollutionScore pollutionScore2 = new PollutionScore(27);
+		PollutionScore pollutionScore3 = new PollutionScore(36);
+		PollutionScore pollutionScore4 = new PollutionScore(45);
+		PollutionScore pollutionScore5 = new PollutionScore(54);
+		PollutionScore pollutionScore6 = new PollutionScore(63);
+		PollutionScore pollutionScore7 = new PollutionScore(72);
+		PollutionScore pollutionScore8 = new PollutionScore(81);
+		assertEquals(pollutionScore.getCalculatedScore(), 10);
+		assertEquals(pollutionScore0.getCalculatedScore(), 20);
+		assertEquals(pollutionScore1.getCalculatedScore(), 30);
+		assertEquals(pollutionScore2.getCalculatedScore(), 40);
+		assertEquals(pollutionScore3.getCalculatedScore(), 50);
+		assertEquals(pollutionScore4.getCalculatedScore(), 60);
+		assertEquals(pollutionScore5.getCalculatedScore(), 70);
+		assertEquals(pollutionScore6.getCalculatedScore(), 80);
+		assertEquals(pollutionScore7.getCalculatedScore(), 90);
+		assertEquals(pollutionScore8.getCalculatedScore(), 100);
 	}
 	
 	
