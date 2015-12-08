@@ -70,7 +70,9 @@ public class Pollutant extends Enemy {
 		loadRes();
 	}
 	
-	
+	public boolean getOut(){
+		return out;
+	}
 	private void loadRes(){
 		if(type==FERTILIZER && fertilizer==null){
 			try {
