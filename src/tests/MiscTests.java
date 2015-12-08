@@ -3236,6 +3236,7 @@ public class MiscTests extends TestCase{
 	
 	
 	public void testUtil(){
+		Util.reset();
 		assertEquals(Util.getDISTANCE_TO_EDGE(),-1);
 		assertEquals(Util.getCANVAS_HEIGHT_UNSCALED(),-1.0);
 		assertEquals(Util.getCANVAS_WIDTH_SCALED(),-1);
@@ -3252,7 +3253,7 @@ public class MiscTests extends TestCase{
 		
 		assertEquals(Util.getExtraDistance(),0);
 		assertEquals(Util.getSCALE_FACTOR(),0.5);
-		assertEquals(Util.getCANVAS_HEIGHT_SCALED(),2000);
+		assertEquals(Util.getCANVAS_HEIGHT_SCALED(),-1);
 		
 		
 		

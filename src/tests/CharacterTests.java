@@ -1812,6 +1812,11 @@ public class CharacterTests extends TestCase {
 		Pollutant p = new Pollutant(new Vector(0, 0),new Vector(1, 1),.1,Pollutant.FERTILIZER);
 		double y = b.getY();
 		assertFalse(b.getY()==y+2);
+		b.onTick();
+		b.shootFromFish(0, 0, 0, 0, 0);
+		b.floatToTop();
+		b.setIndex(0);
+		assertEquals(b.getIndex(), 0);
 		double x = b.getX();
 		assertNotSame(b.getX(),x-1);
 		assertNotSame(b.getX(),0);

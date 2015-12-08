@@ -161,7 +161,11 @@ public class Util {
 	 * @param g2d the graphics ojbect to use to draw
 	 */
 	public static void drawCenteredString(String s, int xPos, int yPos,Graphics2D g2d){
-		len = (int) g2d.getFontMetrics().stringWidth(s);
+		if(g2d.getFontMetrics()==null){
+			len=10;
+		}else{
+			len = (int) g2d.getFontMetrics().stringWidth(s);
+		}
 		g2d.drawString(s, xPos-len/2, yPos);
 	}
 	
@@ -196,6 +200,26 @@ public class Util {
 		return returnImage;
 		
 		
+	}
+	
+	public static void reset(){
+		DISTANCE_TO_EDGE=-1;
+		CANVAS_HEIGHT_SCALED=-1;
+		CANVAS_HEIGHT_UNSCALED=-1;
+		CANVAS_WIDTH_SCALED=-1;
+		CANVAS_WIDTH_UNSCALED=-1;
+		DISTANCE_TO_EDGE=-1;
+		SCALE_FACTOR=-1;
+	}
+	
+	public static void fakeDims(){
+		DISTANCE_TO_EDGE=1000;
+		CANVAS_HEIGHT_SCALED=1000;
+		CANVAS_HEIGHT_UNSCALED=1000;
+		CANVAS_WIDTH_SCALED=1000;
+		CANVAS_WIDTH_UNSCALED=1000;
+		DISTANCE_TO_EDGE=1000;
+		SCALE_FACTOR=1;
 	}
 	
 }

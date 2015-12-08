@@ -32,6 +32,7 @@ import java.text.AttributedCharacterIterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
+import misc.Util;
 
 public class ScoreKeepingTests extends TestCase{
 	
@@ -88,10 +89,21 @@ public class ScoreKeepingTests extends TestCase{
 	
 	
 	public void testStatScreen(){
+		Util.setDistanceToEdge(1000, 1000);
+		Util.setCanvasHeight(1000);
+		Util.setCanvasWidth(1000);
+		Util.setCurrentScaleFactor(1000/2000.0);
+		Util.fakeDims();
 		ScoreKeeper sc = new ScoreKeeper();
 		sc.addCrabSaveScore(new CrabSaveScore(5, 5));
 		sc.addPollutionScore(new PollutionScore(5));
 		sc.addOverfishingScore(new OverfishingScore(50, 5));
+		assertNotNull(sc.getCrabSaveScore());
+		assertNotNull(sc.getOverfishingScore());
+		assertNotNull(sc.getPollutionScore());
+		assertTrue(sc.hasCrabSaveScore());
+		assertTrue(sc.hasOverfishingScore());
+		assertTrue(sc.hasPollutionScore());
 		StatsScreen s = new StatsScreen(sc);
 		
 		assertFalse(s.isDone());
