@@ -485,9 +485,14 @@ public class EnemyTests extends TestCase{
 		Fish fishman = new Fish(200,1200,0);
 		assertTrue(hook.isIn(fishman));
 		hook.act();
-		Hook hook2 = new Hook(500, 0, Hook.DOUBLE_1);
-		Fish fish2 = new Fish(600, 1200,0);
-		assertFalse(hook2.isIn(fish2));
+		Hook hook2 = new Hook(0, 0, Hook.DOUBLE_1);
+		hook2.act();
+		Fish fish2 = new Fish(100, 1200,0);
+		assertTrue(hook2.isIn(fish2));
+		Hook hook3 = new Hook(0, 0, Hook.DOUBLE_2);
+		hook3.act();
+		Fish fish3 = new Fish(100,1200, 0);
+		assertTrue(hook3.isIn(fish3));
 	}
 	
 	/**
