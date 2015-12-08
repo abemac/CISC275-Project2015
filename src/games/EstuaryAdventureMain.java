@@ -1,9 +1,11 @@
 package games;
 
+import java.awt.AWTException;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,19 +14,19 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import animation.CrabSaveAnimation;
+import animation.OverfishingAnimation;
+import animation.PollutionGameAnimation;
 import misc.GameState;
 import misc.MenuScreen;
 import misc.Tickable;
 import misc.Util;
+import scorekeeping.CrabSaveScore;
 import scorekeeping.OverfishingScore;
 import scorekeeping.PollutionScore;
-import scorekeeping.CrabSaveScore;
 import scorekeeping.ScoreKeeper;
 import scorekeeping.StatsScreen;
 import view.EstuaryView;
-import animation.CrabSaveAnimation;
-import animation.OverfishingAnimation;
-import animation.PollutionGameAnimation;
 
 /**
  * This main control structure of this game is very similar to an online 
@@ -40,7 +42,6 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	 * 
 	 */
 	private static final long serialVersionUID = -4347325551128251031L;
-
 	private boolean running= false;
 	private Thread thread;
 	private EstuaryView view;
@@ -387,7 +388,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	/////MAIN FUNCTION//////
 	
 	private static JFrame frame;
-	
+	private static java.awt.Robot robot=null;
 	public static void main (String[]args){
 		frame = new JFrame("Estuary Adventure!");
 		EstuaryAdventureMain game = new EstuaryAdventureMain();
@@ -397,17 +398,30 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		frame.setUndecorated(true);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+		try {
+			robot=new Robot();
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+		robot.setAutoDelay(0);
+		robot.setAutoWaitForIdle(false);
 		frame.setVisible(true);
 		game.start();
 		
 		
 		
 	}
-
-
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+		if(e.getKeyCode()==KeyEvent.VK_TAB){;
+			robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		
 		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
 			System.exit(0);
 		}
