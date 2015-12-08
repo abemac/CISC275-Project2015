@@ -37,6 +37,7 @@ import misc.Point;
 import misc.RectBounds;
 import misc.SoundDoer;
 import misc.TrashCan;
+import misc.Util;
 import scorekeeping.GameScore;
 
 public class MiscTests extends TestCase{
@@ -3233,6 +3234,29 @@ public class MiscTests extends TestCase{
 		
 	}
 	
+	
+	public void testUtil(){
+		assertEquals(Util.getDISTANCE_TO_EDGE(),-1);
+		assertEquals(Util.getCANVAS_HEIGHT_UNSCALED(),-1.0);
+		assertEquals(Util.getCANVAS_WIDTH_SCALED(),-1);
+		assertEquals(Util.getCANVAS_WIDTH_UNSCALED(),-1.0);
+		Util.setDistanceToEdge(1000, 1000);
+		Util.setCanvasHeight(1000);
+		Util.setCanvasWidth(1000);
+		Util.setCurrentScaleFactor(1000/2000.0);
+		assertEquals(Util.getDISTANCE_TO_EDGE(),1000);
+		assertEquals(Util.getCANVAS_HEIGHT_UNSCALED(),1000.0);
+		assertEquals(Util.getCANVAS_WIDTH_SCALED(),2000);
+		assertEquals(Util.getCANVAS_WIDTH_UNSCALED(),1000.0);
+		
+		
+		assertEquals(Util.getExtraDistance(),0);
+		assertEquals(Util.getSCALE_FACTOR(),0.5);
+		assertEquals(Util.getCANVAS_HEIGHT_SCALED(),2000);
+		
+		
+		
+	}
 	
 	
 	
