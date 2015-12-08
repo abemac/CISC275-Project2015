@@ -143,7 +143,7 @@ public class PollutionGame extends Game {
 	             1477.50,250.50, 1492.50,250.50 ,1500,250.50};
 		seaFloorLine = new ArbitraryLine(pts, Util.getDISTANCE_TO_EDGE()/750.0,750.0/500.0, 250);
 		seaFloorLine.setX(-Util.getDISTANCE_TO_EDGE());
-		crab=new Game3Crab(0, 100,seaFloorLine);
+		crab=new Game3Crab(0,seaFloorLine);
 		
 		fish=new Game3Fish(crab);
 		pollutants= new ArrayList<Pollutant>();

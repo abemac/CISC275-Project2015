@@ -23,7 +23,7 @@ public class AnimationGame3Fish extends Character {
 	private AnimationGame3Crab crab;
 	
 	public AnimationGame3Fish(AnimationGame3Crab crab) {
-		super(crab.getX(), crab.getY()-100, 100);
+		super(crab.getX(), crab.getY()-100);
 		this.crab=crab;
 		loadRes();
 	}

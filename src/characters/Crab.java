@@ -63,7 +63,7 @@ public class Crab extends Character{
 	 * @param angriness the initial angriness
 	 */
 	public Crab(double xPos, double yPos, int health,CrabSaveGame csg) {
-		super(xPos, yPos, health);
+		super(xPos, yPos);
 		loadRes();
 		this.csg=csg;
 		throwLine=new ArbitraryLine(new Point(-1000,1000), new Point(1000,1000));
