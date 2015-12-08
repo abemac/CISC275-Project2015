@@ -61,6 +61,13 @@ public class MiscTests extends TestCase{
 		assertEquals(v2.getX(), 5.0);
 		assertEquals(v2.getY(), 6.0);
 		assertEquals(v2.getZ(), 4.0);
+		v2.setX(0);
+		v2.setY(0);
+		v2.setZ(0);
+		assertEquals(v2.getX(), 0.0);
+		assertEquals(v2.getY(), 0.0);
+		assertEquals(v2.getZ(),0.0);
+		
 		
 		
 	}
