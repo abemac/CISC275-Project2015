@@ -21,6 +21,7 @@ import characters.Fish;
 import enemies.Enemy;
 import enemies.Hook;
 import enemies.Net;
+import main.EstuaryAdventureMain;
 
 /*
  * The first game played.  Demonstrates the effects of over-fishing.  Very educational.

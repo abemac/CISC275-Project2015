@@ -19,6 +19,7 @@ import animation.ClockTimer;
 import characters.Crab;
 import enemies.TheHuman;
 import enemies.Trash;
+import main.EstuaryAdventureMain;
 import misc.ArbitraryLine;
 import misc.DialogBox;
 import misc.SoundDoer;

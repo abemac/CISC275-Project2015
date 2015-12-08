@@ -18,6 +18,7 @@ import characters.Bubble;
 import characters.Game3Crab;
 import characters.Game3Fish;
 import enemies.Pollutant;
+import main.EstuaryAdventureMain;
 import misc.ArbitraryLine;
 import misc.DialogBox;
 import misc.SoundDoer;
