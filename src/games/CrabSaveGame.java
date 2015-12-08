@@ -247,7 +247,7 @@ public class CrabSaveGame extends Game {
 	private double fishyVel=-150;
 	private double fishAngle=0;
 	private boolean crabControl=true;
-	private void doEndAnimation(){
+	public void doEndAnimation(){
 		doingEndAnimation=true;
 		if(state==SHOW_ARROW&&crab.getX()<Util.getDISTANCE_TO_EDGE()-400){
 			state=SHOW_ARROW;

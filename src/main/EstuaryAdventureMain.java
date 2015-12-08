@@ -373,9 +373,15 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	
 	
 	public static void hideCursor(){
+		if(frame==null){
+			return;
+		}
 		frame.getContentPane().setCursor(blankCursor);
 	}
 	public static void showMenuCursor(){
+		if(frame==null){
+			return;
+		}
 		frame.getContentPane().setCursor(menuCursor);
 	}
 	
