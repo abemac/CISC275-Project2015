@@ -2690,6 +2690,9 @@ public class CharacterTests extends TestCase {
 		ArbitraryLine line = new ArbitraryLine(new int[]{1,1,2,2,3,3},1,1,0);
 		Game3Crab c = new Game3Crab(0.0, line);
 		Game3Fish f = new Game3Fish(c);
+		c.jump();
+		c.onTick();
+		f.onTick();
 		c.render(new Graphics2D() {
 			
 			@Override
@@ -3538,6 +3541,7 @@ public class CharacterTests extends TestCase {
 				
 			}
 		});
+		
 		
 	}
 	
