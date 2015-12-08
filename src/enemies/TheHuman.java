@@ -170,4 +170,7 @@ public class TheHuman extends Enemy{
 	public void setNoFishInBag(boolean noFishInBag) {
 		this.noFishInBag = noFishInBag;
 	}
+	public boolean getNoFishInBag(){
+		return this.noFishInBag;
+	}
 }

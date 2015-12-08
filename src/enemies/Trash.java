@@ -202,5 +202,9 @@ public class Trash extends Enemy {
 		this.angle=rads;
 	}
 	
+	public double getAngle(){
+		return this.angle;
+	}
+	
 	
 }
