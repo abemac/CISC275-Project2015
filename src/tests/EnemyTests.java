@@ -1,6 +1,8 @@
 package tests;
 
+import characters.Bubble;
 import characters.Crab;
+import characters.Fish;
 import enemies.Hook;
 import enemies.Net;
 import enemies.Pollutant;
@@ -46,10 +48,14 @@ public class EnemyTests extends TestCase{
 		net.act();
 		assertFalse(y==net.getY());
 		
-		Net net2 = new Net(5,5,Net.LILNET);
-		assertEquals(net2.getType(), Net.LILNET);
-		assertEquals(net2.getX(),5);
-		assertEquals(net2.getY(),5);
+		Net net2 = new Net(5,-2001,Net.LILNET);
+		for (int i = 0; i < 50; i++) {
+			net2.onTick();
+		}
+		Fish fishyy = new Fish(206, 0, 1, 1);
+//		assertEquals(net2.isIn(fishyy), false);
+		net2.addAttachedFish(fishyy);
+//		assertEquals(net2.attachedFish,  )
 	}
 	
 	
@@ -62,7 +68,12 @@ public class EnemyTests extends TestCase{
 		double y = p.getY();
 		p.act(); // tests float down also, since float down is called in act()
 		assertFalse(y<p.getY());//pollutant should float down the screen
-		
+		Bubble bub = new Bubble();
+	//	p.fixToBubble(bub);
+		bub.setX(0);
+		bub.setY(0);
+//		assertTrue(p.fixedToBubble, true)
+//		p.act();
 		
 		
 	}

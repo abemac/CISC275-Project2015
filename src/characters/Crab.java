@@ -62,7 +62,7 @@ public class Crab extends Character{
 	 * @param yPos the initial y position
 	 * @param angriness the initial angriness
 	 */
-	public Crab(double xPos, double yPos, int health,CrabSaveGame csg) {
+	public Crab(double xPos, double yPos,CrabSaveGame csg) {
 		super(xPos, yPos);
 		loadRes();
 		this.csg=csg;
