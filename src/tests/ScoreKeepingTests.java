@@ -22,10 +22,12 @@ public class ScoreKeepingTests extends TestCase{
 		assertEquals(overfishingScore.getCalculatedScore(), 100);
 		OverfishingScore overfishingScore1 = new OverfishingScore(55, 0);
 		assertEquals(overfishingScore1.getCalculatedScore(), 10);
-		OverfishingScore overfishingScore2 = new OverfishingScore(240, 10);
-		assertEquals(overfishingScore2.getCalculatedScore(), 75);
-		OverfishingScore overfishingScore3 = new OverfishingScore(240, 10);
-		assertEquals(overfishingScore3.getCalculatedScore(), 75);
+		OverfishingScore overfishingScore2 = new OverfishingScore(25, 10);
+		assertEquals(overfishingScore2.getCalculatedScore(), 55);
+		OverfishingScore overfishingScore3 = new OverfishingScore(125, 10);
+		assertEquals(overfishingScore3.getCalculatedScore(), 65);
+		OverfishingScore overfishingScore03 = new OverfishingScore(152, 10);
+		assertEquals(overfishingScore03.getCalculatedScore(), 70);
 		OverfishingScore overfishingScore4 = new OverfishingScore(260, 15);
 		assertTrue(overfishingScore4.getDistance()==260);
 		assertTrue(overfishingScore4.getnumFishLeft()==15);
