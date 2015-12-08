@@ -72,20 +72,7 @@ public class EnemyTests extends TestCase{
 	 * tests the basic functions of TheHuman
 	 */
 	public void testTheHuman(){
-		TheHuman h = new TheHuman(0,0);
-		double x = h.getX();
-		h.act();
-		assertFalse(x==h.getX());
 		
-		double health = h.getHealth();
-		h.decreaseHealth(-4);;
-		assertEquals(health+4,h.getHealth());
-		
-		Crab crab = new Crab(0,0,0,null);
-		TheHuman human = new TheHuman(0, 0);
-		boolean b = human.hasFish();
-		crab.pinchHumanToGetFish(human);
-		assertFalse(human.hasFish());
 		
 		
 		
