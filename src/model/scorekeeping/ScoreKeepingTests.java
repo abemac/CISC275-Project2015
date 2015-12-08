@@ -1,4 +1,4 @@
-package zzzTESTS;
+package model.scorekeeping;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -27,11 +27,6 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 import model.misc.Util;
-import model.scorekeeping.CrabSaveScore;
-import model.scorekeeping.OverfishingScore;
-import model.scorekeeping.PollutionScore;
-import model.scorekeeping.ScoreKeeper;
-import model.scorekeeping.StatsScreen;
 
 public class ScoreKeepingTests extends TestCase{
 	

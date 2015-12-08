@@ -1,4 +1,4 @@
-package zzzTESTS;
+package model.games;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -26,9 +26,6 @@ import java.text.AttributedCharacterIterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import model.games.CrabSaveGame;
-import model.games.OverfishingGame;
-import model.games.PollutionGame;
 import model.main.EstuaryAdventureMain;
 import model.misc.Util;
 
