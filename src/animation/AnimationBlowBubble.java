@@ -31,7 +31,7 @@ public class AnimationBlowBubble implements Tickable,Renderable {
 	
 	public AnimationBlowBubble() {
 		
-		crab=new AnimationGame3Crab(0, 100, 150);
+		crab=new AnimationGame3Crab(0, 100);
 		fish = new AnimationGame3Fish(crab);
 		
 		pollutants= new ArrayList<Pollutant>();

@@ -24,7 +24,7 @@ public class Game3Fish extends Character {
 	private Game3Crab crab;
 	
 	public Game3Fish(Game3Crab crab) {
-		super(crab.getX(), crab.getY()-100, 100);
+		super(crab.getX(), crab.getY()-100);
 		this.crab=crab;
 		loadRes();
 	}
