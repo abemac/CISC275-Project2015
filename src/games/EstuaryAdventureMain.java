@@ -388,7 +388,6 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	/////MAIN FUNCTION//////
 	
 	private static JFrame frame;
-	private static java.awt.Robot robot=null;
 	public static void main (String[]args){
 		frame = new JFrame("Estuary Adventure!");
 		EstuaryAdventureMain game = new EstuaryAdventureMain();
@@ -398,13 +397,6 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		frame.setUndecorated(true);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		try {
-			robot=new Robot();
-		} catch (AWTException e) {
-			e.printStackTrace();
-		}
-		robot.setAutoDelay(0);
-		robot.setAutoWaitForIdle(false);
 		frame.setVisible(true);
 		game.start();
 		
@@ -413,35 +405,25 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	}
 	
 	
+	private boolean sPressed,aPressed,mPressed;
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		if(e.getKeyCode()==KeyEvent.VK_TAB){;
-			robot.keyRelease(KeyEvent.VK_TAB);
+		
+		
+		if(e.getKeyCode()== KeyEvent.VK_S){
+			sPressed=true;
+		}
+		if(e.getKeyCode()== KeyEvent.VK_A){
+			aPressed=true;
+		}
+		if(e.getKeyCode()== KeyEvent.VK_M){
+			mPressed=true;
 		}
 		
-		
-		if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+		if(sPressed&& aPressed && mPressed){
 			System.exit(0);
-		}
-		
-		if(e.getKeyCode()==KeyEvent.VK_1){
-			state=GameState.OVERFISHING_GAME;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_2){
-			state=GameState.CRAB_SAVE_GAME_ANIMATION;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_3){
-			state=GameState.CRAB_SAVE_GAME;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_4){
-			state=GameState.POLLUTION_GAME_ANIMATION;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_5){
-			state=GameState.POLLUTION_GAME;
-		}if(e.getKeyCode()==KeyEvent.VK_6){
-			state=GameState.SHOW_STATS;
 		}
 		
 	}
@@ -449,8 +431,15 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getKeyCode()== KeyEvent.VK_S){
+			sPressed=false;
+		}
+		if(e.getKeyCode()== KeyEvent.VK_A){
+			aPressed=false;
+		}
+		if(e.getKeyCode()== KeyEvent.VK_M){
+			mPressed=false;
+		}
 	}
 
 
