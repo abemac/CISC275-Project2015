@@ -96,21 +96,21 @@ public class OverfishingGame extends Game {
 	 */
 	public void init(){
 		school = new ArrayList<Fish>();
-		school.add(new Fish(0, 0,100,2));
-		school.add(new Fish(-100,25,100,4));
-		school.add(new Fish(-200,100,100,5));
-		school.add(new Fish(-150,150,100,3));
-		school.add(new Fish(100,100,100,1));
-		school.add(new Fish(0,100,100,4));
-		school.add(new Fish(50, 100, 100,2));
-		school.add(new Fish(-200,25,100,3));
-		school.add(new Fish(0, 200,100,2));
-		school.add(new Fish(-100,25,100,4));
-		school.add(new Fish(-250,250,100,5));
-		school.add(new Fish(-150,300,100,3));
-		school.add(new Fish(200,200,100,1));
-		school.add(new Fish(0,300,100,4));
-		school.add(new Fish(-250,150,100,4));
+		school.add(new Fish(0, 0,2));
+		school.add(new Fish(-100,25,4));
+		school.add(new Fish(-200,100,5));
+		school.add(new Fish(-150,150,3));
+		school.add(new Fish(100,100,1));
+		school.add(new Fish(0,100,4));
+		school.add(new Fish(50, 100,2));
+		school.add(new Fish(-200,25,3));
+		school.add(new Fish(0, 200,2));
+		school.add(new Fish(-100,25,4));
+		school.add(new Fish(-250,250,5));
+		school.add(new Fish(-150,300,3));
+		school.add(new Fish(200,200,1));
+		school.add(new Fish(0,300,4));
+		school.add(new Fish(-250,150,4));
 		
 		enemies = new ArrayList<Enemy>();
 		generatInitialEnemies();

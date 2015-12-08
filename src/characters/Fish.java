@@ -56,7 +56,7 @@ public class Fish extends Character {
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
 	 */
-	public Fish(double xPos, double yPos,int health,double lag) {
+	public Fish(double xPos, double yPos,double lag) {
 		super(xPos, yPos);
 		loadRes();
 		this.lag = lag;
