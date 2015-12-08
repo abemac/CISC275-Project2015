@@ -8,7 +8,13 @@ public class CrabSaveScore extends GameScore {
 		this.getNumTrash = getNumTrash;
 		this.time = time;
 	}
+	public int getTrashNum(){
+		return getNumTrash;
+	}
 	
+	public double getTime(){
+		return time;
+	}
 	public int getCalculatedScore(){
 		int trashScore = 0;
 		int timeScore=0;
