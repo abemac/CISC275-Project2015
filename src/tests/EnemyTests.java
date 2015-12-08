@@ -52,9 +52,9 @@ public class EnemyTests extends TestCase{
 		for (int i = 0; i < 50; i++) {
 			net2.onTick();
 		}
-		Fish fishyy = new Fish(206, 0, 1, 1);
+//		Fish fishyy = new Fish(206, 0, 1, 1);
 //		assertEquals(net2.isIn(fishyy), false);
-		net2.addAttachedFish(fishyy);
+//		net2.addAttachedFish(fishyy);
 //		assertEquals(net2.attachedFish,  )
 	}
 	
