@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.Vector;
+
 import junit.framework.TestCase;
 import misc.ArbitraryLine;
 import misc.Point;
@@ -36,6 +38,29 @@ public class MiscTests extends TestCase{
 		line3.setY(0);
 		assertTrue(0==line3.getSlopeAt(1500));
 		assertFalse(7==line3.getYatXPos(1500));
+		
+		
+	}
+	
+	
+	
+	public void testVector(){
+		misc.Vector v = new misc.Vector(1, 1);
+		assertEquals(v.getX(), 1.0);
+		assertEquals(v.getY(), 1.0);
+		assertEquals(v.getZ(), 0.0);
+		v.add(new misc.Vector(4,5));
+		assertEquals(v.getX(), 5.0);
+		assertEquals(v.getY(), 6.0);
+		assertEquals(v.getZ(), 0.0);
+		misc.Vector v2 = new misc.Vector(1, 1,3);
+		assertEquals(v2.getX(), 1.0);
+		assertEquals(v2.getY(), 1.0);
+		assertEquals(v2.getZ(), 3.0);
+		v2.add(new misc.Vector(4,5,1));
+		assertEquals(v2.getX(), 5.0);
+		assertEquals(v2.getY(), 6.0);
+		assertEquals(v2.getZ(), 4.0);
 		
 		
 	}
