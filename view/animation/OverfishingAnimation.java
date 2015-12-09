@@ -21,7 +21,6 @@ public class OverfishingAnimation extends Animation{
 	
 	private ArrayList<Slide> slides;
 	private int currentSlide=0;
-	private SoundDoer soundDoer = new SoundDoer();
 	private BufferedImage crabFish;
 	
 	private AnimationFishAvoidNet fishAvoidNet;
@@ -43,9 +42,9 @@ public class OverfishingAnimation extends Animation{
 			setFadeOutTime(1.0);
 		}});
 		//slides.add(new Slide("/Black.png", 1));
-		slides.add(new Slide("/Game1AnimationText1.png", 4));
-		slides.add(new Slide("/Game1AnimationText2.png", 4));
-		slides.add(new Slide("/Game1AnimationText3.png", 4){{
+		slides.add(new Slide("/Game1AnimationText1.png", 2));
+		slides.add(new Slide("/Game1AnimationText2.png", 3));
+		slides.add(new Slide("/Game1AnimationText3.png", 3){{
 			setFadeEveryThingOut(true);
 		}});
 		slides.add(new Slide("/Black.png", 1){{
