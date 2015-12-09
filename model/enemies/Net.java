@@ -99,7 +99,7 @@ public class Net extends Enemy {
 	}
 	/**
 	 * renders net image
-	 * @param g
+	 * @param g the graphics to use to draw
 	 */
 	public void render2(Graphics2D g) {
 		g.drawImage(lilNet, (int)xPos+200,(int) yPos,600,1300, null);

@@ -93,7 +93,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 	 * you can only display once.  If you want to display again, you must call reset() on a slide.
 	 * However, if you call this function after it returns false, it will still draw to the screen. But it returned false so you 
 	 * would know not to call it anymore.
-	 * @param g
+	 * @param g the graphcis to be used for drawing
 	 * @return true if it has displayed for its amount of time, false otherwise
 	 */
 	public boolean display(Graphics2D g){

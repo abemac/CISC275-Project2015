@@ -51,10 +51,11 @@ public class Pollutant extends Enemy {
 	private int index;
 	
 	/**
-	 * Creates a pollutant with initial x,y,and type. The nastiness of the Pollutant is determined by the type
-	 * @param xPos the initial x position
-	 * @param yPos the initial y position
-	 * @param type the type.  One of the static constants defined in Pollutant
+	 * creates a new pollutant
+	 * @param initialPosition the initial position
+	 * @param velocity the velecity
+	 * @param rotationSpeed the rotational speed
+	 * @param type thet type
 	 */
 	public Pollutant(Vector initialPosition,Vector velocity,double rotationSpeed,int type){
 		super(initialPosition.getX(),initialPosition.getY());

@@ -35,7 +35,7 @@ public class Hook extends Enemy {
 	 * Creates a hook with initial x,y,and size
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
-	 * @param size the size of this hook
+	 * @param type the type of this hook
 	 */
 	public Hook(double xPos,double yPos,int type){
 		super (xPos,yPos);

@@ -68,14 +68,14 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	}
 	/**
 	 * set the x posintion
-	 * @param x
+	 * @param x xpos
 	 */
 	public void setX(double x){
 		this.xPos=x;
 	}
 	/**
 	 * set the y position
-	 * @param y
+	 * @param y the ypos
 	 */
 	public void setY(double y){
 		this.yPos=y;
@@ -83,14 +83,14 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 	
 	/**
 	 * used for keeping track of available enemies from the enemy  bank
-	 * @param i
+	 * @param i the index
 	 */
 	public void setIndex(int i){
 		this.myIndex=i;
 	}
 	/**
 	 * used for keeping track of available enemies from the enemy  bank
-	 * @return
+	 * @return the index
 	 */
 	public int getIndex(){
 		return myIndex;
