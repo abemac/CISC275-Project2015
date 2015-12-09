@@ -1,4 +1,4 @@
-package games;
+package tests;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -25,6 +25,9 @@ import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
 import java.util.Map;
 
+import games.CrabSaveGame;
+import games.OverfishingGame;
+import games.PollutionGame;
 import junit.framework.TestCase;
 import main.EstuaryAdventureMain;
 import misc.Util;

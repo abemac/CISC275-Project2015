@@ -1,4 +1,4 @@
-package scorekeeping;
+package tests;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -27,6 +27,11 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 import misc.Util;
+import scorekeeping.CrabSaveScore;
+import scorekeeping.OverfishingScore;
+import scorekeeping.PollutionScore;
+import scorekeeping.ScoreKeeper;
+import scorekeeping.StatsScreen;
 
 public class ScoreKeepingTests extends TestCase{
 	

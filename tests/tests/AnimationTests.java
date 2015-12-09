@@ -1,4 +1,4 @@
-package animation;
+package tests;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -25,6 +25,18 @@ import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
 import java.util.Map;
 
+import animation.AnimationBlowBubble;
+import animation.AnimationCrabPIckUpTrash;
+import animation.AnimationCrabThrowTrash;
+import animation.AnimationFish;
+import animation.AnimationFishAvoidNet;
+import animation.AnimationGame3Crab;
+import animation.AnimationGame3Fish;
+import animation.AnimationHook;
+import animation.ClockTimer;
+import animation.CrabSaveAnimation;
+import animation.OverfishingAnimation;
+import animation.PollutionGameAnimation;
 import characters.Fish;
 import enemies.Hook;
 import enemies.Trash;
