@@ -84,7 +84,9 @@ public class OverfishingGame extends Game {
 		
 	}
 	
-	
+	/**
+	 * loads resources for this class
+	 */
 	private void loadRes(){
 		try {
 			tooCloseToEdge = Util.loadImage("/tooclosetoedge.png",Util.getCANVAS_WIDTH_SCALED()+50,400, this);
@@ -125,6 +127,9 @@ public class OverfishingGame extends Game {
 	 * gets called at 60Hz to generate changes to the game
 	 */
 	boolean oneFishIn,leftEdge,rightEdge,topEdge=false;
+	/**
+	 * implements on tick
+	 */
 	@Override
 	public void onTick() {				
 		for(Enemy e : enemies){
@@ -501,7 +506,9 @@ public class OverfishingGame extends Game {
 	}
 	
 	
-
+	/**
+	 * implements the getScore method to save score for the final screen
+	 */
 	@Override
 	public GameScore getScore() {
 		

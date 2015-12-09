@@ -238,6 +238,9 @@ public class Fish extends Character {
 	private boolean forward;
 	private long limitSwim=0;
 	private int swimSpeed=4;
+	/**
+	 * handles the changing of the spriteNum for swimming animation
+	 */
 	private void swim(){
 		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
 			if(spriteNum==1){
@@ -296,6 +299,10 @@ public class Fish extends Character {
 	}
 	
 	
+	/**
+	 * returns whether or not the game is controllable
+	 * @return
+	 */
 	public boolean isControllable(){
 		return controllable;
 	}

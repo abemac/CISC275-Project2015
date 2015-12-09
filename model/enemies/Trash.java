@@ -71,7 +71,9 @@ public class Trash extends Enemy {
 		loadRes();
 	}
 	
-	
+	/**
+	 * loads resources for his class
+	 */
 	private void loadRes(){
 		if(!loadedImages){
 			try{
@@ -135,6 +137,12 @@ public class Trash extends Enemy {
 		
 		
 	}
+	
+	/**
+	 * renders screen shift 
+ 	 * @param g the graphics to draw
+	 * @param screenPos
+	 */
 	public void render(Graphics2D g,double screenPos){
 
 		g.translate(xPos+screenPos+getWidth()/2f, yPos+getHeight()/2f);
@@ -162,6 +170,10 @@ public class Trash extends Enemy {
 		return type;
 	}
 	
+	/**
+	 * gets the width of this type of trash
+	 * @return
+	 */
 	public double getWidth(){
 		switch(type){
 			case BANANA: return(340*scale);
@@ -174,14 +186,26 @@ public class Trash extends Enemy {
 	}
 	}
 	
+	/**
+	 * sets whether it is being thrown
+	 * @param b
+	 */
 	public void setBeingThrown(boolean b){
 		this.beingThrown=b;
 	}
 	
+	/**
+	 * sets the scale of this trash
+	 * @param d
+	 */
 	public void setScale(double d){
 		this.scale =d;
 	}
 	
+	/**
+	 * gets the height of this trash
+	 * @return
+	 */
 	public double getHeight(){
 		switch(type){
 			case BANANA: return(200*scale);
@@ -193,15 +217,26 @@ public class Trash extends Enemy {
 			default:return -1;
 	}
 	}
-	
+	/**
+	 * gets the scale of this trash
+	 * @return
+	 */
 	public double getScale(){
 		return scale;
 	}
 	
+	/**
+	 * sets the angle of this trash
+	 * @param rads
+	 */
 	public void setAngle(double rads){
 		this.angle=rads;
 	}
 	
+	/**
+	 * gets the angle of this trash
+	 * @return
+	 */
 	public double getAngle(){
 		return this.angle;
 	}

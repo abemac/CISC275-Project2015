@@ -338,6 +338,9 @@ public class CrabSaveGame extends Game {
 			attackTimer++;
 		}
 	}
+	/**
+	 * tells the crab to hold the trash
+	 */
 	private void tellCrabToHoldTrash(){
 		Iterator<Trash> i = trash.iterator();
 		while(i.hasNext()){
@@ -434,6 +437,9 @@ public class CrabSaveGame extends Game {
 		else return trash.size();
 	}
 
+	/**
+	 * returns the score object of this game for the final screen
+	 */
 	@Override
 	public GameScore getScore() {
 		

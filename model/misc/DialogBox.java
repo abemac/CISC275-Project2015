@@ -13,7 +13,11 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import games.Game;
-
+/**
+ * models the dialog box after each game is over
+ * @author abrah
+ *
+ */
 public class DialogBox implements Tickable,Renderable,Serializable,MouseListener,MouseMotionListener {
 	
 	private BufferedImage selectedButton,leftButton,rightButton,titleCaught,titleNiceJob,titleGreat;
@@ -41,13 +45,18 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	
 	private int title;
 	
-	
+	/**
+	 * creates a dialog box
+	 * @param host
+	 */
 	public DialogBox(Game host){
 		this.host= host;
 		loadRes();
 		title=TITLE_CAUGHT;
 	}
-	
+	/**
+	 * loads resouces for the dialog box
+	 */
 	private void loadRes(){
 		try {
 			selectedButton = Util.loadImage("/selectedButtonOverlay.png",278,282,this);
@@ -62,7 +71,9 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	}
 	
 	
-	
+	/**
+	 * defines how to render
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(bgColor);
@@ -112,7 +123,9 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 		
 		
 	}
-
+	/**
+	 * implements on Tick
+	 */
 	@Override
 	public void onTick() {
 		// TODO Auto-generated method stub

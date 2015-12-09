@@ -369,13 +369,18 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		return running;
 	}
 	
-	
+	/**
+	 * hides the cursor
+	 */
 	public static void hideCursor(){
 		if(frame==null){
 			return;
 		}
 		frame.getContentPane().setCursor(blankCursor);
 	}
+	/**
+	 * shows the cursor
+	 */
 	public static void showMenuCursor(){
 		if(frame==null){
 			return;
@@ -383,6 +388,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		frame.getContentPane().setCursor(menuCursor);
 	}
 	
+	/**
+	 * resets the game for looping back to the main screen
+	 */
 	private void reset(){
 		state = GameState.MENU_SCREEN;
 		overfishingGame=null;

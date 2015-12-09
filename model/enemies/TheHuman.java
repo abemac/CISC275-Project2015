@@ -39,6 +39,9 @@ public class TheHuman extends Enemy{
 		
 	}
 	
+	/**
+	 * loads resources used for the human
+	 */
 	private void loadRes(){
 		BufferedImage pic = null;
 		
@@ -103,6 +106,11 @@ public class TheHuman extends Enemy{
 			}
 		}
 	}
+	/**
+	 * renders with a x pos shift
+	 * @param g
+	 * @param screenPos
+	 */
 	public void render(Graphics2D g,double screenPos){
 		g.translate(xPos+screenPos+200, yPos+300);
 		g.rotate(angle);
@@ -156,20 +164,38 @@ public class TheHuman extends Enemy{
 	public boolean hasFish(){
 		return hasFish;
 	}
-	
+	/**
+	 * gets angle
+	 * @return the angle
+	 */
 	public double getAngle() {
 		return angle;
 	}
+	/**
+	 * sets the angle
+	 * @param angle
+	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
 	}
+	/**
+	 * returns whethor or not it is outofscreen
+	 * @return
+	 */
 	public boolean outOfScreen(){
 		return xPos>=Util.getDISTANCE_TO_EDGE();
 	}
-
+	/**
+	 * sets the nofisninbag boolean
+	 * @param noFishInBag
+	 */
 	public void setNoFishInBag(boolean noFishInBag) {
 		this.noFishInBag = noFishInBag;
 	}
+	/**
+	 * gets the no fish in bag boolean
+	 * @return 
+	 */
 	public boolean getNoFishInBag(){
 		return this.noFishInBag;
 	}

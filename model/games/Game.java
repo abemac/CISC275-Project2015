@@ -52,18 +52,33 @@ public abstract class Game implements Serializable,Tickable,Renderable,KeyListen
 		return isDone;
 	}
 	
+	/**
+	 * sets that this game is done
+	 * @param b
+	 */
 	public void setIsDone(boolean b){
 		isDone=b;
 	}
 	
+	/**
+	 * causes the game to send a stop signal to the entire program
+	 */
 	public void sendStopSignal(){
 		sendSignal=true;
 	}
 	
+	/**
+	 * returns wether or not this game has sent the stop signal
+	 * @return
+	 */
 	public boolean sentStopSignal(){
 		return sendSignal;
 	}
 	
+	/**
+	 * gets the score for this game
+	 * @return
+	 */
 	public abstract GameScore getScore();
 	
 }

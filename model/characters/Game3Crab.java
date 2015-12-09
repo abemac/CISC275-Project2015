@@ -10,6 +10,11 @@ import animation.SpriteSheet;
 import misc.ArbitraryLine;
 import misc.Util;
 
+/**
+ * crab used for game 3
+ * @author abrah
+ *
+ */
 public class Game3Crab extends Character{
 
 	
@@ -33,6 +38,11 @@ public class Game3Crab extends Character{
 	 */
 	private static final long serialVersionUID = -8431818079245300953L;
 
+	/**
+	 * creates a game 3 crab
+	 * @param xPos the xpos
+	 * @param seaFloor the seaFloor so that the the crab knows where to stand
+	 */
 	public Game3Crab(double xPos,ArbitraryLine seaFloor) {
 		super(xPos, seaFloor.getYatXPos(xPos+150)-200);
 		loadRes();
@@ -56,6 +66,9 @@ public class Game3Crab extends Character{
 	
 	
 	private boolean reachedVertex=false;
+	/**
+	 * implements the onTick method
+	 */
 	public void onTick(){
 		slope=seaFloor.getSlopeAt(xPos+150)/1.5;
 		//System.out.println(slope);
@@ -163,7 +176,9 @@ public class Game3Crab extends Character{
 		
 	}
 	
-	
+	/**
+	 * causes this crab to jump
+	 */
 	public void jump(){
 		if(xPos>-900){
 			leftPressed=true;
@@ -176,6 +191,9 @@ public class Game3Crab extends Character{
 			leftPressed=false;
 		}
 	}
+	/**
+	 * defines how to render this crab to the screen
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		g.translate(xPos+150,yPos+150);
@@ -187,19 +205,32 @@ public class Game3Crab extends Character{
 		
 	}
 
-	
+	/**
+	 * returns the angle
+	 * @return
+	 */
 	public double getAngle(){
 		return angle;
 	}
+	/**
+	 * returns the seaFloor
+	 * @return the seaFloor
+	 */
 	public ArbitraryLine getSeaFloor(){
 		return seaFloor;
 		
 	}
-	
+	/**
+	 * whether or not is holding fihs
+	 * @return boolean value
+	 */
 	public boolean isHoldingFish(){
 		return isHoldingFish;
 	}
-	
+	/**
+	 * returns whether or not the crab is squeezing the fish
+	 * @return
+	 */
 	public boolean isSqueezingFish(){
 		return squeezingFish;
 	}
@@ -293,6 +324,9 @@ public class Game3Crab extends Character{
 		
 	}
 
+	/**
+	 * not implemented
+	 */
 	@Override
 	public void move(double dx, double dy) {
 		// TODO Auto-generated method stub

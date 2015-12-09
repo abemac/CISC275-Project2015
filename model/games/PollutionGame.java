@@ -79,7 +79,9 @@ public class PollutionGame extends Game {
 		
 	}
 
-	
+	/**
+	 * initializes this class
+	 */
 	public void init(){
 		
 		double[]pts={0.00,217.50, 33.00,208.50, 33.00,208.50,
@@ -165,6 +167,9 @@ public class PollutionGame extends Game {
 		
 	}
 	
+	/**
+	 * loads this class's resources
+	 */
 	private void loadRes(){
 		
 		try {
@@ -246,6 +251,9 @@ public class PollutionGame extends Game {
 		}
 		
 	}
+	/**
+	 * checks for pollutants in bubbles and handles them if they are
+	 */
 	private void checkForPollutantsInBubbles(){
 		for(Pollutant p : pollutants){
 			for(Bubble b : bubbles){
@@ -286,7 +294,9 @@ public class PollutionGame extends Game {
 		
 	}
 	
-	
+	/**
+	 * shoots the bubble from the fish
+	 */
 	private void shootBubbleFromFish(){
 		if(availableBubbles.size()==0 || clock.getTimer()==0){
 			return;
@@ -301,6 +311,9 @@ public class PollutionGame extends Game {
 		
 	}
 	
+	/**
+	 * removes off screen bubbles
+	 */
 	private void removeOffScreenBubbles(){
 		Iterator<Bubble> i = bubbles.iterator();
 		while(i.hasNext()){
@@ -318,6 +331,9 @@ public class PollutionGame extends Game {
 		}
 	}
 	
+	/**
+	 * adds the initial pollutants
+	 */
 	private void addInitialPollutants(){
 		int i=0;
 		while (i<10){
@@ -331,6 +347,9 @@ public class PollutionGame extends Game {
 		
 	}
 	
+	/**
+	 * adds another pollutant if possible
+	 */
 	private void addAnotherPollutantIfPossible(){
 		if(availablePollutants.size()==0){
 			return;

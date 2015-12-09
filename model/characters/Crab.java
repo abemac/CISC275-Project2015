@@ -200,7 +200,9 @@ public class Crab extends Character{
 		
 	}
 	
-	
+	/**
+	 * used for when the user presses sthe space bar and the power bar is going back and forth
+	 */
 	private void accumulateTime(){
 		
 			if(timeSpacePressed==-1){
@@ -239,6 +241,9 @@ public class Crab extends Character{
 		
 	}
 	
+	/**
+	 * causes this crab to hold the crash
+	 */
 	private void holdTrash(){
 		if(isHoldingTrash && attachedTrash!=null){
 			if(attachedTrash.getType()==Trash.SODA_CAN ){
@@ -269,7 +274,9 @@ public class Crab extends Character{
 		}
 	}
 	
-	
+	/**
+	 * causes this crab to stop moving
+	 */
 	public void stopMoving(){
 		leftPressed=false;
 		upPressed=false;
@@ -277,6 +284,9 @@ public class Crab extends Character{
 		rightPressed=false;
 	}
 	
+	/**
+	 * used for calculating the bar length
+	 */
 	private void calculateBarLength(){
 		barLength=(int)((400+yPos/2.5)*
 				(timeHeld/NANOS_MAX));
@@ -302,6 +312,11 @@ public class Crab extends Character{
 		
 		//throwLine.testRender(g);
 	}
+	/**
+	 * renders this class to the screen
+	 * @param g the graphics ojbect to use to draw
+	 * @param screenPos the shift left or right
+	 */
 	public void render(Graphics2D g,double screenPos){
 		
 		for(Trash t: previouslyThrownTrash){
@@ -319,6 +334,10 @@ public class Crab extends Character{
 		//throwLine.testRender(g);
 	}
 	
+	/**
+	 * renders the thrown trash.  requires a separate method for layering
+	 * @param g the graphics ojbect to use to draw
+	 */
 	public void renderThrownTrash(Graphics2D g){
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)xPos, (int)yPos, (int)(scale),(int)( scale),null);
 		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
@@ -330,7 +349,11 @@ public class Crab extends Character{
 		
 		
 	}
-	
+	/**
+	 * renders the thrown trash with a screenPos x change
+	 * @param g
+	 * @param screenPos
+	 */
 	public void renderThrownTrash(Graphics2D g,double screenPos){
 		g.drawImage(sprites.getSprite(1, spriteNum), (int)(xPos+screenPos), (int)yPos, (int)(scale),(int)( scale),null);
 		if(( isThrowingTrash|| isHoldingTrash) && attachedTrash!=null){
@@ -409,6 +432,9 @@ public class Crab extends Character{
 	private double Vy;
 	private double Vx;
 	private double power=1.0;//1.0 is optimal
+	/**
+	 * calculates the trajectory for throwing the attached trash
+	 */
 	private void calculateTrajectory(){
 		double Xinit=attachedTrash.getX();
 		double Yinit=attachedTrash.getY();
@@ -467,6 +493,11 @@ public class Crab extends Character{
 	
 	
 	private double buffer=150;
+	/**
+	 * reutrns true if the crab is touching the given trash
+	 * @param t the Trash t
+	 * @return boolean true or false
+	 */
 	public boolean isTouchingTrash(Trash t){
 		if(isHoldingTrash || isThrowingTrash){
 			return false;
@@ -499,7 +530,7 @@ public class Crab extends Character{
 	
 	
 	/**
-	 * Crab attacks Human, when Human health reaches 0, Crab saves Fish
+	 * Crab attacks Human, when Human health reaches 0, Crab saves Fish. not implemented
 	 * @param human
 	 */
 	public void pinchHumanToGetFish(TheHuman human){
@@ -508,29 +539,51 @@ public class Crab extends Character{
 	
 	
 	
-	
+	/**
+	 * returens true if the crab is holding trash
+	 * @return
+	 */
 	public boolean isHoldingTrash(){
 		return isHoldingTrash;
 	}
+	/**
+	 * returns true the crab is throwing trash
+	 * @return
+	 */
 	public boolean isThrowingTrash() {
 		return isThrowingTrash;
 	}
+	/**
+	 * sets the boolean value for this crab holding trash
+	 * @param b
+	 */
 	public void setIsHoldingTrash(boolean b){
 		this.isHoldingTrash=b;
 		if(b==false){
 			attachedTrash=null;
 		}
 	}
+	/**
+	 * tells the crab to hold the given trash
+	 * @param t the trash to hold
+	 */
 	public void holdTrash(Trash t){
 		attachedTrash=t;
 	}
 	
+	/**
+	 * sets the x shift 
+	 * @param screenPos
+	 */
 	public void setScreenPos(double screenPos) {
 		this.screenPos = screenPos;
 	}
 	
 	
-	
+	/**
+	 * gets the current spriteNum
+	 * @param spriteNum
+	 */
 	public void setSpriteNum(int spriteNum) {
 		this.spriteNum = spriteNum;
 	}

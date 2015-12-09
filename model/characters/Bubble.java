@@ -39,6 +39,9 @@ public class Bubble extends Character{
 		
 	}
 
+	/**
+	 * loads resources for this class
+	 */
 	private void loadRes(){
 		if(bubble==null){
 			try {
@@ -124,6 +127,10 @@ public class Bubble extends Character{
 	
 	
 	public Point centerPoint=new Point(0,0);
+	/**
+	 * calculates and returns the center point of this bubble at its current angle and position
+	 * @return a Point 
+	 */
 	public Point getCenterPoint(){
 		centerPoint.x=xPos-176.77*Math.cos(angle+Math.PI/4.0);
 		centerPoint.y=yPos-176.77*Math.sin(angle+Math.PI/4.0);
@@ -133,13 +140,21 @@ public class Bubble extends Character{
 	
 	
 	
-	
+	/**
+	 * used for bookeeping
+	 * @param index
+	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
+	/**
+	 * used for bookeeping
+	 * @return
+	 */
 	public int getIndex() {
 		return index;
 	}
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -200,6 +215,9 @@ public class Bubble extends Character{
 		
 	}
 
+	/**
+	 * not implemented
+	 */
 	@Override
 	public void move(double dx, double dy) {
 		// TODO Auto-generated method stub
@@ -207,20 +225,34 @@ public class Bubble extends Character{
 	}
 	
 	private ArrayList<Pollutant> attachedPollutants=new ArrayList<Pollutant>();
+	/**
+	 * adds another pollutant to this bubble.
+	 * @param p
+	 */
 	public void addAttachedPollutant(Pollutant p){
 			attachedPollutants.add(p);
 		
 	}
-	
+	/**
+	 * gets the attached pollutant
+	 * @return
+	 */
 	public ArrayList<Pollutant> getAttachedPollutants() {
 		return attachedPollutants;
 	}
 	
 	private boolean hasPollutant=false;
+	/**
+	 * returns true if ths bubble has a pollutant in it
+	 * @return
+	 */
 	public boolean hasPollutant(){
 		return hasPollutant;
 	}
 	
+	/**
+	 * resets this bubble
+	 */
 	public void reset(){
 		hasPollutant=false;
 		attachedPollutants.clear();

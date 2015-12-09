@@ -48,6 +48,10 @@ public abstract class Character implements KeyListener,MouseListener,MouseMotion
 	 * methods. 
 	 */
 	public void onTick(){};
+	
+	/**
+	 * defines the method for rendering to the screen
+	 */
 	public abstract void render(Graphics2D g);
 	
 	

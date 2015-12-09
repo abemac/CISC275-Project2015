@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/**
+ * class for modeling an arbitrary line
+ * @author abrah
+ *
+ */
 public class ArbitraryLine implements Serializable{
 
 	
@@ -123,6 +127,14 @@ public class ArbitraryLine implements Serializable{
 	
 	}
 	
+	/**
+	 * gets y at a certain x position
+	 * @param startx
+	 * @param starty
+	 * @param slope
+	 * @param x
+	 * @return
+	 */
 	private int YAtX(double startx,double starty,double slope,double x){
 		return (int) (starty+slope*(x-startx));
 	}
@@ -186,7 +198,10 @@ public class ArbitraryLine implements Serializable{
 		calculateSlopes();
 	}
 	
-	
+	/**
+	 * uses for test rendering
+	 * @param g
+	 */
 	public void testRender(Graphics2D g){
 		int i=0;
 		while(i<points.size()-1){

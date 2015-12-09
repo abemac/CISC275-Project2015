@@ -9,6 +9,11 @@ import java.io.IOException;
 import animation.SpriteSheet;
 import misc.Util;
 
+/**
+ * fish for game 3
+ * @author abrah
+ *
+ */
 public class Game3Fish extends Character {
 
 	/**
@@ -22,6 +27,10 @@ public class Game3Fish extends Character {
 	private double angle=0;
 	private Game3Crab crab;
 	
+	/**
+	 * creates a fish for game 3
+	 * @param crab the crab to follow
+	 */
 	public Game3Fish(Game3Crab crab) {
 		super(crab.getX(), crab.getY()-100);
 		this.crab=crab;
@@ -47,6 +56,9 @@ public class Game3Fish extends Character {
 	
 	private double slope;
 	
+	/**
+	 * implements the onTick method
+	 */
 	public void onTick(){
 		spriteRow=1;
 		spriteCol=1;
@@ -108,6 +120,9 @@ public class Game3Fish extends Character {
 	private boolean swimRight,swimLeft;
 	private long limitSwim=0;
 	private int swimSpeed=8;
+	/**
+	 * causes this fish to swim right
+	 */
 	private void swimRight(){
 		spriteRow=1;
 		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
@@ -127,6 +142,9 @@ public class Game3Fish extends Character {
 		limitSwim++;
 		
 	}
+	/**
+	 * causes the fish to swim left
+	 */
 	private void swimLeft(){
 		spriteRow=2;
 		if(limitSwim%swimSpeed==0 && swimSpeed<=7){
@@ -146,6 +164,9 @@ public class Game3Fish extends Character {
 		limitSwim++;
 		
 	}
+	/**
+	 * defines rendering
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		if(!crab.isHoldingFish()){
@@ -232,6 +253,9 @@ public class Game3Fish extends Character {
 		
 	}
 
+	/**
+	 * not implemented
+	 */
 	@Override
 	public void move(double dx, double dy) {
 		// TODO Auto-generated method stub

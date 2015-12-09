@@ -48,7 +48,7 @@ public abstract class Enemy implements Serializable,Tickable,Renderable{
 		act();
 	}
 	/**
-	 * 
+	 * defines how to render
 	 */
 	public abstract void render(Graphics2D g);
 	

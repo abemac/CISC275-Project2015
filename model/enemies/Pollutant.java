@@ -68,10 +68,16 @@ public class Pollutant extends Enemy {
 		this.rotationSpeed=rotationSpeed;
 		loadRes();
 	}
-	
+	/**
+	 * returens whether or not this pullutant is showing on the screen
+	 * @return
+	 */
 	public boolean getOut(){
 		return out;
 	}
+	/**
+	 * loads resources for this class
+	 */
 	private void loadRes(){
 		if(type==FERTILIZER && fertilizer==null){
 			try {
@@ -183,6 +189,10 @@ public class Pollutant extends Enemy {
 	
 
 	public Point centerPoint=new Point(0,0);
+	/**
+	 * gets the center point of this pullantant in its current state
+	 * @return 
+	 */
 	public Point getCenterPoint(){
 		centerPoint.x=position.getX()+106.07*Math.cos(angle+Math.PI/4.0);
 		centerPoint.y=position.getY()+106.07*Math.sin(angle+Math.PI/4.0);
@@ -197,14 +207,24 @@ public class Pollutant extends Enemy {
 		return type;
 	}
 	
+	/**
+	 * used for bookeeping
+	 */
 	public int getIndex(){
 		return index;
 	}
 
+	/**
+	 * used for bookkeeping
+	 */
 	public void setIndex(int i){
 		this.index = i;
 	}
 	
+	/**
+	 * fixes this pollutant to the given bubbble b
+	 * @param b the bubble to fix to
+	 */
 	public void fixToBubble(Bubble b){
 		cleanMe=b;
 		fixedToBubble=true;
@@ -213,6 +233,11 @@ public class Pollutant extends Enemy {
 	
 	
 	private double dx,dy;
+	/**
+	 * returns true if the pollutant is in the given bubble
+	 * @param b the bubble
+	 * @return true or false
+	 */
 	public boolean isIn(Bubble b){
 		Point bubbleCenter=b.getCenterPoint();
 		Point pollutantCenter= this.getCenterPoint();
@@ -222,10 +247,16 @@ public class Pollutant extends Enemy {
 		
 	}
 	
+	/**
+	 * returns if this pollutant is in a bubble
+	 * @return
+	 */
 	public boolean isInBubble(){
 		return fixedToBubble;
 	}
-	
+	/**
+	 * resets this bubble
+	 */
 	public void reset(){
 		fixedToBubble=false;
 		cleanMe=null;
