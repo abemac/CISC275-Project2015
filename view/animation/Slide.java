@@ -12,7 +12,11 @@ import java.io.IOException;
 import main.EstuaryAdventureMain;
 import misc.RectBounds;
 import misc.Util;
-
+/**
+ * models a slide used in animations
+ * @author abrah
+ *
+ */
 public class Slide implements MouseListener,MouseMotionListener {
 
 	
@@ -34,7 +38,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 	
 	private boolean fadeIn=true;
 	private boolean fadeOut=true;
-	private BufferedImage selectedStart=null;
+	private static BufferedImage selectedStart=null;
 	private boolean showSelectedStart=false;
 	private double timeBlackAfterFadeOut=10.0;
 	private String imageString;
@@ -54,6 +58,9 @@ public class Slide implements MouseListener,MouseMotionListener {
 	
 	
 	private boolean loaded=false;
+	/**
+	 * loads this slides resources
+	 */
 	public void load(){
 		if(!loaded){
 			try {
@@ -154,15 +161,26 @@ public class Slide implements MouseListener,MouseMotionListener {
 	public void reset(){
 		timeDisplayed=0;
 	}
+	/**
+	 * causes everything drawn after this to fade also
+	 * @param fadeEverything
+	 */
 	public void setFadeEverything(boolean fadeEverything) {
 		this.fadeEverything = fadeEverything;
 	}
 	
 	private boolean fadeEveryThingOut=false;
+	/**
+	 * causes everything drawn after to to fade also, if fading out
+	 * @param fadeEveryThing
+	 */
 	public void setFadeEveryThingOut(boolean fadeEveryThing) {
 		this.fadeEveryThingOut = fadeEveryThing;
 	}
-	
+	/**
+	 * sets how long a black screen is displayed between slides
+	 * @param timeBlackAfterFadeOut
+	 */
 	public void setTimeBlackAfterFadeOut(double timeBlackAfterFadeOut) {
 		this.timeBlackAfterFadeOut = timeBlackAfterFadeOut;
 	}
@@ -179,7 +197,7 @@ public class Slide implements MouseListener,MouseMotionListener {
 	}
 	
 	/**
-	 * 
+	 * sets the fade out time in seconds
 	 * @param d in seconds
 	 */
 	public void setFadeOutTime(double d){
@@ -188,7 +206,10 @@ public class Slide implements MouseListener,MouseMotionListener {
 			fadeOut=false;
 		}
 	}
-	
+	/**
+	 * declares this slide as the final slide, so that it will wait for user input to continue the the game
+	 * @param finalSlide
+	 */
 	public void setFinalSlide(boolean finalSlide) {
 		this.finalSlide = finalSlide;
 		try {
@@ -197,15 +218,25 @@ public class Slide implements MouseListener,MouseMotionListener {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * returns true if this slide is the final slide
+	 * @return
+	 */
 	public boolean isFinalSlide() {
 		return finalSlide;
 	}
-	
+	/**
+	 * sets whether or not this slide fades in
+	 * @param fadeIn
+	 */
 	public void setFadeIn(boolean fadeIn) {
 		this.fadeIn = fadeIn;
 		alpha=1f;
 	}
+	/**
+	 * sets whether or not this slide fades out
+	 * @param fadeOut
+	 */
 	public void setFadeOut(boolean fadeOut) {
 		this.fadeOut = fadeOut;
 	}

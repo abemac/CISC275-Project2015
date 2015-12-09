@@ -6,6 +6,11 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * defines the model of the crab save animation before the second game
+ * @author abrah
+ *
+ */
 public class CrabSaveAnimation extends Animation{
 
 	/**
@@ -18,6 +23,9 @@ public class CrabSaveAnimation extends Animation{
 	private AnimationCrabThrowTrash throwAnimation = new AnimationCrabThrowTrash();
 	private AnimationCrabPIckUpTrash pickUpAnimation = new AnimationCrabPIckUpTrash();
 	
+	/**
+	 * creates the animation
+	 */
 	public CrabSaveAnimation() {
 		try {
 			init();
@@ -25,6 +33,10 @@ public class CrabSaveAnimation extends Animation{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * loads specific Slides needed for the slide show
+	 * @throws IOException
+	 */
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
 		//slides.add(new Slide("/Black.png", 1));
@@ -42,6 +54,9 @@ public class CrabSaveAnimation extends Animation{
 		
 		
 	}
+	/**
+	 * implements on tick
+	 */
 	@Override
 	public void onTick() {
 		if(isOnFinalSlide()){
@@ -50,12 +65,18 @@ public class CrabSaveAnimation extends Animation{
 		}
 		
 	}
-	
+	/**
+	 * returns true if the animation is on the final slide
+	 * @return
+	 */
 	private boolean isOnFinalSlide(){
 		return currentSlide==slides.size()-1;
 	}
 	
 	private boolean onFinalSlide=false;
+	/**
+	 * draws the graphcis using given parameter
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		if(isOnFinalSlide()){

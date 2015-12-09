@@ -15,7 +15,7 @@ import misc.TrashCan;
 import misc.Util;
 
 /**
- * 
+ * animation for the crab throwing the trash before the second game
  * @author abraham
  *
  */
@@ -52,10 +52,7 @@ public class AnimationCrabThrowTrash extends Character{
 	
 	
 	/**
-	 * makes a Character Crab which has xPos, yPos, health
-	 * @param xPos the initial x position
-	 * @param yPos the initial y position
-	 * @param angriness the initial angriness
+	 * creates this animation
 	 */
 	public AnimationCrabThrowTrash() {
 		super(900, 110);
@@ -206,6 +203,9 @@ public class AnimationCrabThrowTrash extends Character{
 	private static final int MOVE_TOWARDS_CAN=3;
 	private int state=MOVE_TOWARDS_TRASH;
 	private int chargeTime=0;
+	/**
+	 * execute the looping animation sequence based on time
+	 */
 	private void executeAnimationSequence() {
 		if(state==MOVE_TOWARDS_TRASH){
 			leftPressed=true;

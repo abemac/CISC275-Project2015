@@ -1,21 +1,42 @@
 package scorekeeping;
 
+/**
+ * holds data relating to the overfishing score
+ * @author abrah
+ *
+ */
 public class OverfishingScore extends GameScore{
 	
 	private int distance;
 	private int numFishLeft;
+	/**
+	 * creates the overfishing score with given parameters
+	 * @param distance
+	 * @param numFishLeft
+	 */
 	public OverfishingScore(int distance,int numFishLeft){
 		this.distance=distance;
 		this.numFishLeft=numFishLeft;
 	}
 	
+	/**
+	 * gets the distance
+	 * @return
+	 */
 	public int getDistance(){
 		return distance;
 	}
 	
+	/**
+	 * gets the num fish left
+	 * @return
+	 */
 	public int getnumFishLeft(){
 		return numFishLeft;
 	}
+	/**
+	 * calculates the score out of 100
+	 */
 	public int getCalculatedScore(){
 		int distanceScore=0;
 		int fishScore=0;

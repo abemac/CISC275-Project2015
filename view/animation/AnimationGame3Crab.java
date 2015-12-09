@@ -10,7 +10,11 @@ import animation.SpriteSheet;
 import characters.Character;
 import misc.ArbitraryLine;
 import misc.Util;
-
+/**
+ * an editing game 3 crab for animation purposes
+ * @author abrah
+ *
+ */
 public class AnimationGame3Crab extends Character{
 
 	

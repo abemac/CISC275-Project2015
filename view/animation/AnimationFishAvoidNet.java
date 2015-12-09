@@ -9,6 +9,11 @@ import misc.Renderable;
 import misc.Tickable;
 import misc.Util;
 
+/**
+ * animation that defines to show the fish avoiding the net before the first game
+ * @author abrah
+ *
+ */
 public class AnimationFishAvoidNet implements Tickable,Renderable {
 
 	private AnimationFish animationFish;
@@ -19,7 +24,9 @@ public class AnimationFishAvoidNet implements Tickable,Renderable {
 	private SpriteSheet keyboard;
 	private int keyNum=1;
 
-	
+	/**
+	 * creates this animation
+	 */
 	public AnimationFishAvoidNet() {
 		int baseX=200;
 		int baseY=200;
@@ -39,6 +46,9 @@ public class AnimationFishAvoidNet implements Tickable,Renderable {
 		keyboard = new SpriteSheet(keyboards, 1, 7, 150, 150);
 	}
 	
+	/**
+	 * draws this animation using the given graphics ojbect
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		animationFish.render(g);
@@ -63,6 +73,9 @@ public class AnimationFishAvoidNet implements Tickable,Renderable {
 	private static final int WAIT_4=7;
 	private long timer=0;
 	
+	/**
+	 * state machine
+	 */
 	@Override
 	public void onTick() {
 		

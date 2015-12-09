@@ -9,7 +9,12 @@ import misc.Point;
 import misc.Renderable;
 import misc.Tickable;
 import misc.Util;
-
+/**
+ * clock timer is a class that handles the counting down/up throughout the game, and also defines how to draw
+ * the clock to the screen. *** It assumes onTick() is being called at 60Hz!***
+ * @author abrah
+ *
+ */
 public class ClockTimer implements Tickable,Renderable{
 
 	private double timer = 61.0;
@@ -22,6 +27,11 @@ public class ClockTimer implements Tickable,Renderable{
 	private Point centerPoint = new Point(168,147);
 	private boolean countUp=false;
 	private int xPos,yPos;
+	/**
+	 * creates the clock timer
+	 * @param xPos the x position
+	 * @param yPos the y position
+	 */
 	public ClockTimer(int xPos,int yPos){
 		this.xPos=xPos;
 		this.yPos=yPos;
@@ -29,7 +39,9 @@ public class ClockTimer implements Tickable,Renderable{
 		initialAngle=-Math.PI/18f;
 	}
 	
-	
+	/**
+	 * loads resources need for the clock
+	 */
 	private void loadRes(){
 		try {
 			image = Util.loadImage("/Clock.png",300,300, this);
@@ -38,6 +50,9 @@ public class ClockTimer implements Tickable,Renderable{
 		}
 	}
 	
+	/**
+	 * draws this clock using the given graphics ojbect
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		g.translate(xPos+centerPoint.x, yPos+centerPoint.y);
@@ -58,13 +73,22 @@ public class ClockTimer implements Tickable,Renderable{
 	
 	private boolean going=true;
 	
+	/**
+	 * pauses this clock
+	 */
 	public void pause(){
 		going=false;
 	}
+	/**
+	 * causes this clock to run.  by default, it starts running
+	 */
 	public void run(){
 		going=true;
 	}
 
+	/**
+	 * implements on tick
+	 */
 	@Override
 	public void onTick() {
 		if(going){
@@ -85,18 +109,33 @@ public class ClockTimer implements Tickable,Renderable{
 		}
 	}
 	
+	/**
+	 * sets the clock to the given value
+	 * @param d
+	 */
 	public void setTimer(double d){
 		this.timer=d;
 	}
+	/**
+	 * gets the value of the clock now
+	 * @return
+	 */
 	public double getTimer(){
 		return timer;
 	}
-	
+	/**
+	 * tells this clock to start at 0 and count up if true
+	 * @param countUp
+	 */
 	public void setCountUp(boolean countUp) {
 		this.countUp = countUp;
-		timer=0;
+		if(countUp)
+			timer=0;
 	}
-	
+	/**
+	 * sets the graphical tilt angle of this clock
+	 * @param initialAngle
+	 */
 	public void setInitialAngle(double initialAngle) {
 		this.initialAngle = initialAngle;
 	}

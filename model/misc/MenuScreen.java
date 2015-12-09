@@ -11,7 +11,11 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
-
+/**
+ * class for modeling the behavoir of the menu screen
+ * @author abrah
+ *
+ */
 public class MenuScreen implements Tickable,Renderable,MouseListener,MouseMotionListener,KeyListener,Serializable{
 
 	/**
@@ -24,11 +28,17 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,MouseMotion
 	private BufferedImage background,startGlow;
 	private boolean overStart=false;
 	
+	/**
+	 * creates the menu screen
+	 */
 	public MenuScreen(){
 		isDone = false;
 		loadRes();
 	}
 	
+	/**
+	 * loads the resources needs for this menus screen
+	 */
 	public void loadRes(){
 		try {
 			background = Util.loadImage("/menuScreen.png", this);
@@ -38,6 +48,9 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,MouseMotion
 		}
 	}
 	
+	/**
+	 * defines how to render this menu screen
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(Color.WHITE);
@@ -50,13 +63,20 @@ public class MenuScreen implements Tickable,Renderable,MouseListener,MouseMotion
 		
 	}
 
+	/**
+	 * does nothing for the menu screen
+	 */
 	@Override
 	public void onTick() {
 		// TODO Auto-generated method stub
 		
 	}
 
-
+	/**
+	 * returns whether or not the menu screen is done, and that the game should 
+	 * move on to the next state
+	 * @return
+	 */
 	public boolean isDone(){
 		return isDone;
 	}

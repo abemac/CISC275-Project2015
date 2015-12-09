@@ -50,7 +50,9 @@ public class EstuaryView extends Canvas{
 	}
 	
 	
-	
+	/**
+	 * stores screen info into the static util class for later use in all other classes
+	 */
 	public void storeScreenInfo(){
 		Util.setDistanceToEdge(getWidth(), getHeight());
 		Util.setCanvasHeight(getHeight());

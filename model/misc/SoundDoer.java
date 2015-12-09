@@ -7,16 +7,26 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
+/**
+ * class used to play sound
+ * @author abrah
+ *
+ */
 public class SoundDoer {
 	
 	private ArrayList<Clip>loadedClips;
 	private float gain=0.0f;
-	
+	/**
+	 * initializes this sound doer
+	 */
 	public SoundDoer(){
 		loadedClips = new ArrayList<Clip>();
 	}
 	
-
+	/**
+	 * loads a clip so that it can be played back quickly
+	 * @param path
+	 */
 	public void loadClip(String path){
 		try{
 			
@@ -32,13 +42,19 @@ public class SoundDoer {
 		}
 	}
 	
+	/**
+	 * plays a loaded clip, with index starting at 0 in order of load
+	 * @param index
+	 */
 	public void playLoadedClip(int index){
 		loadedClips.get(index).setFramePosition(0);
 		loadedClips.get(index).start();
 		
 	}
-
 	
+	/**
+	 * stops all the sound and releases resources
+	 */
 	public void stopAllSoundAndReleaseResources(){
 		for(int i=0; i<loadedClips.size();i++){
 			loadedClips.get(i).stop();
@@ -51,7 +67,11 @@ public class SoundDoer {
 	
 	
 	}
-	
+	/**
+	 * sets a clips volume
+	 * @param index the index of load
+	 * @param amt the volume
+	 */
 	public void setClipVolume(int index,float amt){
 		FloatControl fc = (FloatControl) loadedClips.get(index).getControl(FloatControl.Type.MASTER_GAIN);
 		fc.setValue(amt);
@@ -108,12 +128,21 @@ public class SoundDoer {
 		
 	}
 	*/
+	/**
+	 * stops a specific clip
+	 * @param index the index of loading
+	 */
 	public void stopClip(int index){
 		loadedClips.get(index).stop();
 	    loadedClips.get(index).flush();
 		
 	}
 	
+	/**
+	 * returns whether a specific clip is done playing . may not work
+	 * @param index
+	 * @return boolean
+	 */
 	public boolean isDone(int index){
 		return !loadedClips.get(index).isActive();
 	}

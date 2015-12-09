@@ -14,7 +14,11 @@ import java.io.IOException;
 import misc.Renderable;
 import misc.Tickable;
 import misc.Util;
-
+/**
+ * defines the data for showing the stats screen at the end of the game
+ * @author abrah
+ *
+ */
 public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListener,MouseMotionListener{
 
 	private boolean isDone=false;
@@ -27,7 +31,10 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	private Color barColor = new Color(125,112,165);
 	private Color timerColor=new Color(178,170,236);
 	private final Font timerFont = new Font("default",Font.BOLD,70);
-	
+	/**
+	 * creates the stats screen
+	 * @param scorekeeper the ScoreKeeper object that has been given the GameScores
+	 */
 	public StatsScreen(ScoreKeeper scorekeeper) {
 		loadRes();
 		OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
@@ -43,7 +50,9 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 		bar4Pos=-xAxisPos;
 	}
 	
-	
+	/**
+	 * loads visual resources
+	 */
 	private void loadRes(){
 		try {
 			bg = Util.loadImage("/stats.png",Util.getCANVAS_WIDTH_SCALED(),Util.getCANVAS_HEIGHT_SCALED(), this);
@@ -58,6 +67,9 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	private int xAxisPos=323;
 	private double scale=10;
 	
+	/**
+	 * draws to the screen using parameter g
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		g.drawImage(bg, -Util.getDISTANCE_TO_EDGE(), -1000, null);
@@ -79,6 +91,9 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	}
 	
 	
+	/**
+	 * implements on Tick, calculating bar size based on time to create the growing bars
+	 */
 	@Override
 	public void onTick() {
 		
@@ -88,6 +103,10 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 		bar4Pos+=(avg*scale-(bar4Pos+xAxisPos))/15f;
 	}
 	
+	/**
+	 * returns true if the stats screen is done 
+	 * @return
+	 */
 	public boolean isDone(){
 		return isDone;
 	}

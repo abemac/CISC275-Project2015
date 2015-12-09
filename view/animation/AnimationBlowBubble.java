@@ -13,6 +13,11 @@ import misc.Tickable;
 import misc.Util;
 import misc.Vector;
 
+/**
+ * defines the behavoir of the instructive animation before the pollution game
+ * @author abrah
+ *
+ */
 public class AnimationBlowBubble implements Tickable,Renderable {
 
 	private AnimationGame3Crab crab;
@@ -28,7 +33,9 @@ public class AnimationBlowBubble implements Tickable,Renderable {
 	private SpriteSheet keyboard;
 	private int keyNum=1;
 	private int spaceNum=6;
-	
+	/**
+	 * creates the new animation
+	 */
 	public AnimationBlowBubble() {
 		
 		crab=new AnimationGame3Crab(0, 100);
@@ -50,7 +57,9 @@ public class AnimationBlowBubble implements Tickable,Renderable {
 		addInitialPollutants();
 		loadRes();
 	}
-	
+	/**
+	 * loades the resources
+	 */
 	private void loadRes(){
 		BufferedImage keyboards = null;
 		try {
@@ -63,6 +72,9 @@ public class AnimationBlowBubble implements Tickable,Renderable {
 		
 		
 	}
+	/**
+	 * draws to the screen
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		crab.render(g);
@@ -91,6 +103,10 @@ public class AnimationBlowBubble implements Tickable,Renderable {
 	private static final int WAIT_4=8;
 	private int goToXPos=0;
 	private int blowCount=0;
+	/**
+	 * implements on tick and controls the state of the animation. the animation is a looping 
+	 * state machine
+	 */
 	@Override
 	public void onTick() {
 		

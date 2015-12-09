@@ -59,7 +59,7 @@ public class Crab extends Character{
 	 * makes a Character Crab which has xPos, yPos, health
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
-	 * @param angriness the initial angriness
+	 * @param csg the crab save game
 	 */
 	public Crab(double xPos, double yPos,CrabSaveGame csg) {
 		super(xPos, yPos);

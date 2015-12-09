@@ -5,7 +5,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * defines the animation before the pollution game
+ * @author abrah
+ *
+ */
 public class PollutionGameAnimation extends Animation{
 
 	/**
@@ -16,6 +20,9 @@ public class PollutionGameAnimation extends Animation{
 	private int currentSlide=0;
 	
 	private AnimationBlowBubble blowBubble;
+	/**
+	 * creates this animation
+	 */
 	public PollutionGameAnimation(){
 		blowBubble=new AnimationBlowBubble();
 		try {
@@ -25,7 +32,10 @@ public class PollutionGameAnimation extends Animation{
 		}
 	}
 	
-	
+	/**
+	 * loads the slides needed
+	 * @throws IOException
+	 */
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
 		slides.add(new Slide("/Game3Animation1.png", 4){{
@@ -51,7 +61,9 @@ public class PollutionGameAnimation extends Animation{
 	}
 	
 	
-	
+	/**
+	 * implements on tick
+	 */
 	@Override
 	public void onTick() {
 		if(isOnFinalSlide()){
@@ -67,6 +79,9 @@ public class PollutionGameAnimation extends Animation{
 	
 	
 	private boolean onLastSlide=false;
+	/**
+	 * draws this animation to the screen
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		if(isOnFinalSlide()){

@@ -62,7 +62,11 @@ public class TrashCan implements Tickable,Renderable,Serializable{
 		g.drawImage(trashCan, (int)xPos, (int)yPos, null);
 		
 	}
-	
+	/**
+	 * renders with a shift in screen x position
+	 * @param g the grpahics to use to draw
+	 * @param screenPos the amt to shift x
+	 */
 	public void render(Graphics2D g,double screenPos) {
 		g.drawImage(trashCan, (int)(xPos+screenPos), (int)yPos, null);
 		

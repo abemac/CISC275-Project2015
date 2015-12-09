@@ -1,12 +1,24 @@
 package scorekeeping;
 
+/**
+ * class for holding data for the pollution score
+ * @author abrah
+ *
+ */
 public class PollutionScore extends GameScore {
 
 	private int numRemoved;
+	/**
+	 * creates the pollution score
+	 * @param numRemoved num pollutants removed
+	 */
 	public PollutionScore(int numRemoved){
 		this.numRemoved = numRemoved;
 	}
 	
+	/**
+	 * gets the calculated score out of 100
+	 */
 	public int getCalculatedScore(){
 		int returnScore = 0;
 		if(numRemoved <= 8){

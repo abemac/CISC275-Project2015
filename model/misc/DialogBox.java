@@ -133,37 +133,59 @@ public class DialogBox implements Tickable,Renderable,Serializable,MouseListener
 	}
 	
 	
-	
+	/**
+	 * sets the title for this dialog box, using one of the predifined contant ints in this class
+	 * @param title
+	 */
 	public void setTitle(int title){
 		this.title=title;
 	}
 	
 	
-
+	/**
+	 * sets the label for the first piece of info
+	 * @param key1
+	 */
 	public void setKey1(String key1) {
 		if (this.key1==null)
 			this.key1 = key1;
 	}
-
+	/**
+	 * sets the message for the first piece of info
+	 * @param info1
+	 */
 	public void setInfo1(String info1) {
 		if (this.info1==null)
 			this.info1 = info1;
 	}
-
+	/**
+	 * sets the label for the second piece of info
+	 * @param key2
+	 */
 	public void setKey2(String key2) {
 		if(this.key2==null)
 			this.key2 = key2;
 	}
-
+	/**
+	 * sets the message for the second piece of info
+	 * @param info2
+	 */
 	public void setInfo2(String info2) {
 		if(this.info2==null)
 			this.info2 = info2;
 	}
-
+	/**
+	 * sets the first line of the message at the bottom of the dialog box
+	 * @param message
+	 */
 	public void setMessageL1(String message) {
 		if(this.message==null)
 			this.message = message;
 	}
+	/**
+	 * sets the second line of the message at hte botttom the of dialog box
+	 * @param message2
+	 */
 	public void setMessageL2(String message2){
 		if(this.message2==null){
 			this.message2=message2;

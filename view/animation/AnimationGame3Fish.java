@@ -8,7 +8,11 @@ import java.io.IOException;
 
 import characters.Character;
 import misc.Util;
-
+/**
+ * an edited game 3 fish for animation purposes
+ * @author abrah
+ *
+ */
 public class AnimationGame3Fish extends Character {
 
 	/**

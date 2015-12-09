@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import misc.SoundDoer;
 import misc.Util;
 
+/**
+ * defines the model for the slide show animation before the overfishing game
+ * @author abrah
+ *
+ */
 public class OverfishingAnimation extends Animation{
 
 	
@@ -24,7 +29,9 @@ public class OverfishingAnimation extends Animation{
 	private BufferedImage crabFish;
 	
 	private AnimationFishAvoidNet fishAvoidNet;
-	
+	/**
+	 * creates this overfishing game animation
+	 */
 	public OverfishingAnimation(){
 		fishAvoidNet = new AnimationFishAvoidNet();
 		try {
@@ -34,7 +41,11 @@ public class OverfishingAnimation extends Animation{
 		}
 	}
 	
-	
+	/**
+	 * loads the slides needed. Note: does not load all slides at once.  only loads the first slide. 
+	 * the remaining are then loaded succeslivly as needed
+	 * @throws IOException
+	 */
 	private void init() throws IOException{
 		slides=new ArrayList<Slide>();
 		slides.add(new Slide("/menuScreen.png",1){{
@@ -73,6 +84,9 @@ public class OverfishingAnimation extends Animation{
 		
 	}
 	private boolean finalSlide=false;
+	/**
+	 * draws the animation using the given parameter
+	 */
 	@Override
 	public void render(Graphics2D g) {
 		if(isOnFinalSlide()){
@@ -98,7 +112,9 @@ public class OverfishingAnimation extends Animation{
 		
 	}
 
-
+	/**
+	 *implements on tick 
+	 */
 	@Override
 	public void onTick() {
 		if(isOnFinalSlide()){

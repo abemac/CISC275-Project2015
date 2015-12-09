@@ -10,7 +10,7 @@ import enemies.Enemy;
 import misc.Util;
 
 /**
- * the Hook class is used to model hooks
+ * an edited hook for animation purposes
  * @author abraham
  *
  */
@@ -35,7 +35,7 @@ public class AnimationHook extends Enemy {
 	 * Creates a hook with initial x,y,and size
 	 * @param xPos the initial x position
 	 * @param yPos the initial y position
-	 * @param size the size of this hook
+	 * @param type the type of this hook
 	 */
 	public AnimationHook(double xPos,double yPos,int type){
 		super (xPos,yPos);

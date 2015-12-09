@@ -14,11 +14,10 @@ import enemies.Trash;
 import misc.Util;
 
 /**
- * 
- * @author abraham
+ * animation to show the crab picking up trash before the second game
+ * @author abrah
  *
  */
-
 public class AnimationCrabPIckUpTrash extends Character{
 
 	/**
@@ -52,10 +51,7 @@ public class AnimationCrabPIckUpTrash extends Character{
 	
 	
 	/**
-	 * makes a Character Crab which has xPos, yPos, health
-	 * @param xPos the initial x position
-	 * @param yPos the initial y position
-	 * @param angriness the initial angriness
+	 * creates this animation
 	 */
 	public AnimationCrabPIckUpTrash() {
 		super(-100, -500);
@@ -207,6 +203,9 @@ public class AnimationCrabPIckUpTrash extends Character{
 	private static final int WIDE_EYES=2;
 	private int state=MOVE_TOWARDS_TRASH_LEFT;
 	private int waitTime=0;
+	/**
+	 * executes the animation sequence
+	 */
 	public void executeAnimationSequence() {
 		if(state==MOVE_TOWARDS_TRASH_LEFT){
 			

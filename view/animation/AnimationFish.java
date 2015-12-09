@@ -11,7 +11,7 @@ import characters.Character;
 import misc.Util;
 
 /**
- * Fish is a model class for the fish that the player controls
+ * an editied fish for use in animations
  * @author abraham
  *
  */
