@@ -420,12 +420,26 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	}
 	
 	
-	private boolean sPressed,aPressed,mPressed;
+	private boolean sPressed,aPressed,mPressed,ctrlPressed;
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		
+		if(e.getKeyCode()==KeyEvent.VK_CONTROL){
+			ctrlPressed=true;
+		}
+		if(ctrlPressed && e.getKeyCode()== KeyEvent.VK_1){
+			state=GameState.OVERFISHING_GAME;
+		}
+		if(ctrlPressed && e.getKeyCode()== KeyEvent.VK_2){
+			state=GameState.CRAB_SAVE_GAME;
+		}
+		if(ctrlPressed && e.getKeyCode()== KeyEvent.VK_3){
+			state=GameState.POLLUTION_GAME;
+		}
+		if(ctrlPressed && e.getKeyCode()==KeyEvent.VK_S){
+			state=GameState.SHOW_STATS;
+		}
 		
 		if(e.getKeyCode()== KeyEvent.VK_S){
 			sPressed=true;
@@ -454,6 +468,9 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		}
 		if(e.getKeyCode()== KeyEvent.VK_M){
 			mPressed=false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_CONTROL){
+			ctrlPressed=false;
 		}
 	}
 

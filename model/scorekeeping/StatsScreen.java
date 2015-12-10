@@ -97,10 +97,10 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	@Override
 	public void onTick() {
 		
-		bar1Pos+=(OFScore*scale-(bar1Pos+xAxisPos))/15f;
-		bar2Pos+=(CSScore*scale-(bar2Pos+xAxisPos))/15f;
-		bar3Pos+=(PScore*scale-(bar3Pos+xAxisPos))/15f;
-		bar4Pos+=(avg*scale-(bar4Pos+xAxisPos))/15f;
+		bar1Pos+=(OFScore*scale-(bar1Pos+xAxisPos))/18f;
+		bar2Pos+=(CSScore*scale-(bar2Pos+xAxisPos))/18f;
+		bar3Pos+=(PScore*scale-(bar3Pos+xAxisPos))/18f;
+		bar4Pos+=(avg*scale-(bar4Pos+xAxisPos))/18f;
 	}
 	
 	/**
