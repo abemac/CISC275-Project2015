@@ -617,7 +617,7 @@ public class Crab extends Character{
 		}
 		
 	}
-
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
@@ -640,7 +640,7 @@ public class Crab extends Character{
 			spaceReleased=true;
 		}
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
