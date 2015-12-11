@@ -318,6 +318,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 			stats.onTick();
 			if(stats.isDone()){
 				state = GameState.MENU_SCREEN;
+				reset();
 				view.removeKeyListener(stats);
 				view.removeMouseListener(stats);
 				view.removeMouseListener(stats);
@@ -392,9 +393,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 	 * resets the game for looping back to the main screen
 	 */
 	private void reset(){
-		state = GameState.MENU_SCREEN;
+		menu=null;
+		overfishingAnimation=null;
 		overfishingGame=null;
+		crabSaveAnimation=null;
 		crabSaveGame=null;
+		pollutionGameAnimation=null;
 		pollutionGame=null;
 		
 		
