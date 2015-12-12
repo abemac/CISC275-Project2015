@@ -42,7 +42,7 @@ public class Pollutant extends Enemy {
 	private Vector position,velocity;
 	private double angle;
 	private double rotationSpeed;
-	private static BufferedImage fertilizer,sewage,oil;
+	private static BufferedImage fertilizer,sewage,oil,oil2;
 	private boolean out=false;
 	
 	private boolean fixedToBubble=false;
@@ -93,9 +93,9 @@ public class Pollutant extends Enemy {
 				e.printStackTrace();
 			}
 		}
-		if(type == OIL_ANIMATION && oil==null){
+		if(type == OIL_ANIMATION && oil2==null){
 			try {
-				oil=Util.loadImage("/oilspillANIMATION.png", this);
+				oil2=Util.loadImage("/oilspillANIMATION.png", this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -166,8 +166,10 @@ public class Pollutant extends Enemy {
 		
 		if(type==FERTILIZER){
 			g.drawImage(fertilizer, 0,0, null);
-		}else if(type==OIL || type==OIL_ANIMATION){
+		}else if(type==OIL){
 			g.drawImage(oil, 0,0, null);
+		}else if (type==OIL_ANIMATION){
+			g.drawImage(oil2, 0, 0, null);
 		}
 		else if(type==SEWAGE){
 			g.drawImage(sewage, 0,0, null);
