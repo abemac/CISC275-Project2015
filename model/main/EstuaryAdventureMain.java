@@ -414,6 +414,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setUndecorated(true);
+		try {
+			frame.setIconImage(Util.loadImage("/icon.png", game));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
