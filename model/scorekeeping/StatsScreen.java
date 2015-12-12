@@ -37,9 +37,15 @@ public class StatsScreen implements Tickable,Renderable,KeyListener,MouseListene
 	 */
 	public StatsScreen(ScoreKeeper scorekeeper) {
 		loadRes();
-		OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
-		CSScore = scorekeeper.getCrabSaveScore().getCalculatedScore();
-		PScore = scorekeeper.getPollutionScore().getCalculatedScore();
+		if(scorekeeper.hasOverfishingScore())
+			OFScore=scorekeeper.getOverfishingScore().getCalculatedScore();
+		else OFScore=0;
+		if(scorekeeper.hasCrabSaveScore())
+			CSScore = scorekeeper.getCrabSaveScore().getCalculatedScore();
+		else CSScore=0;
+		if(scorekeeper.hasPollutionScore())
+			PScore = scorekeeper.getPollutionScore().getCalculatedScore();
+		else PScore=0;
 //		OFScore=75;
 //		CSScore = 50;
 //		PScore = 100;

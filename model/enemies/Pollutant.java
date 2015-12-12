@@ -95,7 +95,7 @@ public class Pollutant extends Enemy {
 		}
 		if(type == OIL_ANIMATION && oil2==null){
 			try {
-				oil=Util.loadImage("/oilspillANIMATION.png", this);
+				oil2=Util.loadImage("/oilspillANIMATION.png", this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -169,7 +169,7 @@ public class Pollutant extends Enemy {
 		}else if(type==OIL){
 			g.drawImage(oil, 0,0, null);
 		}else if (type==OIL_ANIMATION){
-			g.drawImage(oil, 0, 0, null);
+			g.drawImage(oil2, 0, 0, null);
 		}
 		else if(type==SEWAGE){
 			g.drawImage(sewage, 0,0, null);
