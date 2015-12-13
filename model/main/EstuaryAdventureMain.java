@@ -190,7 +190,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseMotionListener(overfishingAnimation);
 				overfishingAnimation=null;
 			}else if(overfishingAnimation.sentStopSignal()){
-				stop(false);
+				state=GameState.MENU_SCREEN;
+				view.removeKeyListener(overfishingAnimation);
+				view.removeMouseListener(overfishingAnimation);
+				view.removeMouseMotionListener(overfishingAnimation);
+				overfishingAnimation=null;
+				reset();
 			}
 			
 			
@@ -215,7 +220,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseMotionListener(overfishingGame);
 				overfishingGame=null;
 			}else if(overfishingGame.sentStopSignal()){
-				stop(false);
+				state=GameState.MENU_SCREEN;
+				view.removeKeyListener(overfishingGame);
+				view.removeMouseListener(overfishingGame);
+				view.removeMouseMotionListener(overfishingGame);
+				overfishingGame=null;
+				reset();
 			}
 			
 			
@@ -237,7 +247,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseMotionListener(crabSaveAnimation);
 				crabSaveAnimation=null;
 			}else if(crabSaveAnimation.sentStopSignal()){
-				stop(false);
+				state=GameState.MENU_SCREEN;
+				view.removeKeyListener(crabSaveAnimation);
+				view.removeMouseListener(crabSaveAnimation);
+				view.removeMouseMotionListener(crabSaveAnimation);
+				crabSaveAnimation=null;
+				reset();
 			}
 			
 			
@@ -262,7 +277,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseMotionListener(crabSaveGame);
 				crabSaveGame=null;
 			}else if(crabSaveGame.sentStopSignal()){
-				stop(false);
+				state=GameState.MENU_SCREEN;
+				view.removeKeyListener(crabSaveGame);
+				view.removeMouseListener(crabSaveGame);
+				view.removeMouseMotionListener(crabSaveGame);
+				crabSaveGame=null;
+				reset();
 			}
 		}
 		else if (state==GameState.POLLUTION_GAME_ANIMATION){
@@ -282,7 +302,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseListener(pollutionGameAnimation);
 				pollutionGameAnimation=null;
 			}else if(pollutionGameAnimation.sentStopSignal()){
-				stop(false);
+				state=GameState.MENU_SCREEN;
+				view.removeKeyListener(pollutionGameAnimation);
+				view.removeMouseListener(pollutionGameAnimation);
+				view.removeMouseMotionListener(pollutionGameAnimation);
+				pollutionGameAnimation=null;
+				reset();
 			}
 		}
 		else if (state==GameState.POLLUTION_GAME){
@@ -303,7 +328,12 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 				view.removeMouseListener(pollutionGame);
 				pollutionGame=null;
 			}else if(pollutionGame.sentStopSignal()){
-				stop(false);
+				state=GameState.MENU_SCREEN;
+				view.removeKeyListener(pollutionGame);
+				view.removeMouseListener(pollutionGame);
+				view.removeMouseMotionListener(pollutionGame);
+				pollutionGame=null;
+				reset();
 			}
 		}
 		else if (state==GameState.SHOW_STATS){
