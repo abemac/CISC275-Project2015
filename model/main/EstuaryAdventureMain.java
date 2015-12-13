@@ -8,7 +8,11 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 
@@ -38,7 +42,7 @@ import scorekeeping.StatsScreen;
  * @author Abraham McIlvaine
  *
  */
-public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
+public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener,Serializable {
 	/**
 	 * 
 	 */
@@ -434,6 +438,27 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener {
 		
 	}
 	
+	
+	//WRITE TO FILE//
+	
+	private void saveToFile(){
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("store path here.  we didn't put one "
+					+ "in because we have windows and linux user so they changed as neccesary"));
+			out.writeObject(this);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	////////////////////
 	/////MAIN FUNCTION//////
 	
 	private static JFrame frame;
