@@ -444,7 +444,7 @@ public class EstuaryAdventureMain implements Runnable,Tickable,KeyListener,Seria
 	private void saveToFile(){
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("store path here.  we didn't put one "
-					+ "in because we have windows and linux user so they changed as neccesary"));
+					+ "in because we have windows and linux users so they changed as neccesary"));
 			out.writeObject(this);
 			out.close();
 		} catch (FileNotFoundException e) {
